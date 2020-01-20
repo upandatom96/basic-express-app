@@ -15,15 +15,20 @@ const widgetTwo = {
 };
 
 function getAllWidgets() {
-  return {
-    widgets: [widgetOne, widgetTwo]
-  };
+  return new Promise((resolve, reject) => {
+    const widgets = {
+      widgets: [widgetOne, widgetTwo]
+    };
+    resolve(widgets);
+  });
 }
 
 function getWidgetById(id) {
-  const widgetRequested = widgetOne;
-  widgetRequested.id = id;
-  return widgetRequested;
+  return new Promise((resolve, reject) => {
+    const widgetRequested = widgetOne;
+    widgetRequested.id = id;
+    resolve(widgetRequested);
+  });
 }
 
 module.exports = {

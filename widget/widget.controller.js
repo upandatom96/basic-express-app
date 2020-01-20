@@ -6,14 +6,31 @@ const {
 } = require("./widget.manager");
 
 widgetController.get('/', (req, res) => {
-  const widgets = getAllWidgets();
-  res.send(widgets);
+  getAllWidgets()
+  .then((widgets) => {
+    res.send(widgets);
+  })
+  .catch((err) => {
+    res.statusCode = 500;
+    res.send(err);
+  });
 });
 
 widgetController.get('/:id', (req, res) => {
   const id = req.params.id;
-  const widgets = getWidgetById(id);
-  res.send(widgets);
+  getWidgetById(id)
+  .then((widget) => {
+    res.send(widget);
+  })
+  .catch((err) => {
+    res.statusCode = 500;
+    res.send(err);
+  });
 });
+
+// widgetController.post('/', (req, res) => {
+//   const widget = req.body;
+//   addWidget(widget)
+// })
 
 module.exports = widgetController;
