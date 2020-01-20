@@ -31,7 +31,80 @@ function getWidgetById(id) {
   });
 }
 
+function addWidget(widget) {
+  return new Promise((resolve, reject) => {
+    const errors = checkForWidgetCreateErrors(widget);
+    if (errors.length > 0) {
+      reject({
+        errors: errors
+      });
+    }
+    else {
+      widget.id = "asdfwefaweftr879";
+      resolve(widget);
+    }
+  });
+}
+
+function editWidget(widget) {
+  return new Promise((resolve, reject) => {
+    const errors = checkForWidgetEditErrors(widget);
+    if (errors.length > 0) {
+      reject({
+        errors: errors
+      });
+    }
+    else {
+      resolve(widget);
+    }
+  });
+}
+
+function deleteOneWidget(id) {
+  return new Promise((resolve, reject) => {
+    resolve({
+      message: `Widget with id ${id} deleted or never existed`
+    });
+  });
+}
+
 module.exports = {
   getAllWidgets,
-  getWidgetById
+  getWidgetById,
+  addWidget,
+  editWidget,
+  deleteOneWidget
 }
+
+const checkForWidgetCreateErrors = ((widget) => {
+  const errors = checkForWidgetErrors(widget);
+  if (widget.id) {
+    errors.push({ text: 'New widget cannot have an id.' });
+  }
+  return errors;
+});
+
+const checkForWidgetEditErrors = ((widget) => {
+  const errors = checkForWidgetErrors(widget);
+  if (!widget.id) {
+    errors.push({ text: 'Editing widget must have an id.' });
+  }
+  return errors;
+});
+
+const checkForWidgetErrors = ((widget) => {
+  let errors = [];
+  if (!widget.name) {
+    errors.push({ text: 'Please add a name' });
+  }
+  if (!widget.type) {
+    errors.push({ text: 'Please add a type' });
+  }
+  if (!widget.description) {
+    errors.push({ text: 'Please add a description' });
+  }
+  if (!widget.used || widget.used !== true && widget.used !== false) {
+    errors.push({ text: 'Please add the used attribute' });
+  }
+  return errors;
+});
