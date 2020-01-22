@@ -8,6 +8,9 @@ function setupControllers(app) {
 
   const widgetController = require('./widget/widget.controller');
   app.use('/widget', widgetController);
+
+  const doodadController = require('./doodad/doodad.controller');
+  app.use('/doodad', doodadController);
 }
 
 module.exports = {
