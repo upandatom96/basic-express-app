@@ -7,6 +7,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const { setupCors } = require('./cors-setup');
+setupCors(app);
+
 const { setupControllers } = require('./controller-setup');
 setupControllers(app);
 
