@@ -3,17 +3,17 @@ const express = require('express');
 const app = express();
 
 // connect to mongoose
-// const mongoose = require('mongoose');
-// const {mongoURI} = require('./config/database.config');
-// mongoose.connect(mongoURI, {
-//   useNewUrlParser: true,
-// })
-// .then(() => {
-//   logInfo("mongodb connected...");
-// })
-// .catch((err) => {
-//   logError(err);
-// });
+const mongoose = require('mongoose');
+const { mongoURI } = require('./config/database.config');
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+})
+  .then(() => {
+    console.log("mongodb connected...");
+  })
+  .catch((err) => {
+    console.log("ERROR: " + err);
+  });
 
 // body parser middleware
 const bodyParser = require('body-parser');
