@@ -4,6 +4,8 @@ let mongoUser;
 let mongoPass;
 let mongoCluster;
 
+const port = process.env.PORT || 5000;
+
 if (runningProd) {
   mongoUser = process.env.MONGO_USER;
   mongoPass = process.env.MONGO_PASS;
@@ -31,5 +33,6 @@ if (runningProd) {
 module.exports = {
   mongoUser: mongoUser,
   mongoPass: mongoPass,
-  mongoCluster: mongoCluster
+  mongoCluster: mongoCluster,
+  port: port
 };
