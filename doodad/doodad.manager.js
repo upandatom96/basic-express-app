@@ -42,9 +42,18 @@ function getAllDoodads() {
 
 function getDoodadById(id) {
   return new Promise((resolve, reject) => {
-    const doodadRequested = doodadOne;
-    doodadRequested.id = id;
-    resolve(doodadRequested);
+    Doodad.findOne({
+      _id: id
+    })
+      .then((doodad) => {
+        if (doodad) {
+          resolve(doodad);
+        } else {
+          reject({
+            message: "Failed to find doodad"
+          });
+        }
+      });
   });
 }
 
