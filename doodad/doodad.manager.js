@@ -57,30 +57,33 @@ function editDoodad(doodad) {
   return new Promise((resolve, reject) => {
     const errors = doodadValidator.checkForDoodadEditErrors(doodad);
     if (errors.length > 0) {
-      reject(errors);
-    }
-    const id = doodad._id;
-    Doodad.findOne({
-      _id: id
-    })
-      .then((foundDoodad) => {
-        if (!foundDoodad) {
-          reject({
-            message: `Failed to find doodad`
-          });
-        }
-
-        foundDoodad.name = doodad.name;
-        foundDoodad.type = doodad.type;
-        foundDoodad.description = doodad.description;
-        foundDoodad.age = doodad.age;
-        foundDoodad.used = doodad.used;
-
-        foundDoodad.save()
-          .then((editedDoodad) => {
-            resolve(editedDoodad);
-          });
+      reject({
+        errors: errors
       });
+    } else {
+      const id = doodad._id;
+      Doodad.findOne({
+        _id: id
+      })
+        .then((foundDoodad) => {
+          if (!foundDoodad) {
+            reject({
+              message: `Failed to find doodad`
+            });
+          } else {
+            foundDoodad.name = doodad.name;
+            foundDoodad.type = doodad.type;
+            foundDoodad.description = doodad.description;
+            foundDoodad.age = doodad.age;
+            foundDoodad.used = doodad.used;
+
+            foundDoodad.save()
+              .then((editedDoodad) => {
+                resolve(editedDoodad);
+              });
+          }
+        });
+    }
   });
 }
 
