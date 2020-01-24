@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+require('./Doodad.model');
+const Doodad = mongoose.model('doodad');
+
 const doodadOne = {
   id: "asf1231FASDF324",
   name: "doodad One",
@@ -27,10 +31,12 @@ const doodadThree = {
 
 function getAllDoodads() {
   return new Promise((resolve, reject) => {
-    const doodads = {
-      doodads: [doodadOne, doodadTwo, doodadThree]
-    };
-    resolve(doodads);
+    Doodad.find({})
+      .then((doodads) => {
+        resolve({
+          doodads: doodads
+        });
+      });
   });
 }
 

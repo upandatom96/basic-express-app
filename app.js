@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { mongoURI } = require('./config/database.config');
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
+  useUnifiedTopology: true
 })
   .then(() => {
     console.log("mongodb connected...");
