@@ -1,5 +1,7 @@
+const widgetValidator = require('./widget.validator');
+
 const widgetOne = {
-  id: "asf1231FASDF324",
+  _id: "asf1231FASDF324",
   name: "widget One",
   type: "Automatic Widget",
   description: "Your favorite widget",
@@ -8,7 +10,7 @@ const widgetOne = {
 };
 
 const widgetTwo = {
-  id: "ffsfdf7987",
+  _id: "ffsfdf7987",
   name: "widget Two",
   type: "Diagonal Widget",
   description: "Your less favorite widget",
@@ -17,7 +19,7 @@ const widgetTwo = {
 };
 
 const widgetThree = {
-  id: "aaawerewrewr",
+  _id: "aaawerewrewr",
   name: "widget Three",
   type: "Spiral Widget",
   description: "You don't know this widget",
@@ -44,7 +46,7 @@ function getWidgetById(id) {
 
 function addWidget(widget) {
   return new Promise((resolve, reject) => {
-    const errors = checkForWidgetCreateErrors(widget);
+    const errors = widgetValidator.checkForWidgetCreateErrors(widget);
     if (errors.length > 0) {
       reject({
         errors: errors
@@ -59,7 +61,7 @@ function addWidget(widget) {
 
 function editWidget(widget) {
   return new Promise((resolve, reject) => {
-    const errors = checkForWidgetEditErrors(widget);
+    const errors = widgetValidator.checkForWidgetEditErrors(widget);
     if (errors.length > 0) {
       reject({
         errors: errors
@@ -86,36 +88,3 @@ module.exports = {
   editWidget,
   deleteOneWidget
 }
-
-const checkForWidgetCreateErrors = ((widget) => {
-  const errors = checkForWidgetErrors(widget);
-  if (widget.id) {
-    errors.push({ text: 'New widget cannot have an id.' });
-  }
-  return errors;
-});
-
-const checkForWidgetEditErrors = ((widget) => {
-  const errors = checkForWidgetErrors(widget);
-  if (!widget.id) {
-    errors.push({ text: 'Editing widget must have an id.' });
-  }
-  return errors;
-});
-
-const checkForWidgetErrors = ((widget) => {
-  let errors = [];
-  if (!widget.name) {
-    errors.push({ text: 'Please add a name' });
-  }
-  if (!widget.type) {
-    errors.push({ text: 'Please add a type' });
-  }
-  if (!widget.description) {
-    errors.push({ text: 'Please add a description' });
-  }
-  if (!widget.used || widget.used !== true && widget.used !== false) {
-    errors.push({ text: 'Please add the used attribute' });
-  }
-  return errors;
-});
