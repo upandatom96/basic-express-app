@@ -52,13 +52,20 @@ function addDoodad(doodad) {
   return new Promise((resolve, reject) => {
     const errors = checkForDoodadCreateErrors(doodad);
     if (errors.length > 0) {
-      reject({
-        errors: errors
-      });
+      reject(errors);
     }
     else {
-      doodad.id = "asdfwefaweftr879";
-      resolve(doodad);
+      new Doodad({
+        name: doodad.name,
+        type: doodad.type,
+        description: doodad.description,
+        age: doodad.age,
+        used: doodad.used
+      })
+        .save()
+        .then((resDoodad) => {
+          resolve(resDoodad);
+        });
     }
   });
 }
@@ -93,23 +100,23 @@ module.exports = {
   deleteOneDoodad
 }
 
-const checkForDoodadCreateErrors = ((doodad) => {
+function checkForDoodadCreateErrors(doodad) {
   const errors = checkForDoodadErrors(doodad);
   if (doodad.id) {
     errors.push({ text: 'New doodad cannot have an id.' });
   }
   return errors;
-});
+}
 
-const checkForDoodadEditErrors = ((doodad) => {
+function checkForDoodadEditErrors(doodad) {
   const errors = checkForDoodadErrors(doodad);
   if (!doodad.id) {
     errors.push({ text: 'Editing doodad must have an id.' });
   }
   return errors;
-});
+}
 
-const checkForDoodadErrors = ((doodad) => {
+function checkForDoodadErrors(doodad) {
   let errors = [];
   if (!doodad.name) {
     errors.push({ text: 'Please add a name' });
@@ -120,8 +127,11 @@ const checkForDoodadErrors = ((doodad) => {
   if (!doodad.description) {
     errors.push({ text: 'Please add a description' });
   }
+  if (!doodad.age) {
+    errors.push({ text: 'Please add an age' });
+  }
   if (!doodad.used || doodad.used !== true && doodad.used !== false) {
     errors.push({ text: 'Please add the used attribute' });
   }
   return errors;
-});
+}
