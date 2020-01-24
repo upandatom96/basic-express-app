@@ -83,21 +83,43 @@ function editDoodad(doodad) {
   return new Promise((resolve, reject) => {
     const errors = checkForDoodadEditErrors(doodad);
     if (errors.length > 0) {
-      reject({
-        errors: errors
+      reject(errors);
+    }
+    const id = doodad._id;
+    Doodad.findOne({
+      _id: id
+    })
+      .then((foundDoodad) => {
+        if (!foundDoodad) {
+          reject({
+            message: `Failed to find doodad`
+          });
+        }
+
+        foundDoodad.name = doodad.name;
+        foundDoodad.type = doodad.type;
+        foundDoodad.description = doodad.description;
+        foundDoodad.age = doodad.age;
+        foundDoodad.used = doodad.used;
+
+        foundDoodad.save()
+          .then((editedDoodad) => {
+            resolve(editedDoodad);
+          });
       });
-    }
-    else {
-      resolve(doodad);
-    }
   });
 }
 
 function deleteOneDoodad(id) {
   return new Promise((resolve, reject) => {
-    resolve({
-      message: `Doodad with id ${id} deleted or never existed`
-    });
+    Doodad.deleteOne({
+      _id: id
+    })
+      .then(() => {
+        resolve({
+          message: `Doodad with given id deleted or never existed`
+        });
+      });
   });
 }
 
@@ -111,7 +133,7 @@ module.exports = {
 
 function checkForDoodadCreateErrors(doodad) {
   const errors = checkForDoodadErrors(doodad);
-  if (doodad.id) {
+  if (doodad._id) {
     errors.push({ text: 'New doodad cannot have an id.' });
   }
   return errors;
@@ -119,7 +141,7 @@ function checkForDoodadCreateErrors(doodad) {
 
 function checkForDoodadEditErrors(doodad) {
   const errors = checkForDoodadErrors(doodad);
-  if (!doodad.id) {
+  if (!doodad._id) {
     errors.push({ text: 'Editing doodad must have an id.' });
   }
   return errors;
@@ -139,7 +161,7 @@ function checkForDoodadErrors(doodad) {
   if (!doodad.age) {
     errors.push({ text: 'Please add an age' });
   }
-  if (!doodad.used || doodad.used !== true && doodad.used !== false) {
+  if (doodad.used === null || doodad.used === undefined || doodad.used !== true && doodad.used !== false) {
     errors.push({ text: 'Please add the used attribute' });
   }
   return errors;
