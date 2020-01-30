@@ -1,14 +1,22 @@
 const express = require('express');
 const passport = require('passport');
-const router = express.Router();
+const authController = express.Router();
 const authManager = require('./auth.manager');
+const authUtil = require('../utilities/auth.util');
 require('../user/User.model');
 
-router.post('/login', (req, res, next) => {
+authController.post('/login', (req, res, next) => {
   authManager.loginUser(res, req, next);
 });
 
-module.exports = router;
+authController.get('/loggedIn', authUtil.jwtAuthenticated, (req, res) => {
+  res.send({
+    text: `You are logged in.`,
+    authorized: true
+  });
+});
+
+module.exports = authController;
 
 function loginUser(res, req, next) {
   passport.authenticate('local', (err, user, info) => {
