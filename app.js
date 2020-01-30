@@ -12,6 +12,21 @@ setupBodyParser(app);
 setupCors(app);
 setupControllers(app);
 
+// setup session
+const session = require('express-session');
+const {secret} = require('./config/env.config');
+app.use(session({
+  secret: secret,
+  resave: true,
+  saveUninitialized: true
+}));
+
+// setup passport
+const passport = require('passport');
+require('./config/passport.config')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.listen(port, () => {
   console.log(`server started on port ${port}`);
 });

@@ -1,8 +1,8 @@
 function setupControllers(app) {
   app.get('/', (req, res) => {
-    res.send({message: "basic-express-app is running"});
+    res.send({ message: "basic-express-app is running" });
   });
-  
+
   const actuatorController = require('./actuator/actuator.controller');
   app.use('/actuator', actuatorController);
 
@@ -14,6 +14,9 @@ function setupControllers(app) {
 
   const userController = require('./user/user.controller');
   app.use('/user', userController);
+
+  const authController = require('./auth/auth.controller');
+  app.use('/auth', authController);
 }
 
 module.exports = {
