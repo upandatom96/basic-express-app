@@ -1,9 +1,9 @@
 const express = require('express');
-const { setupMongo } = require('./mongo-setup');
-const { setupBodyParser } = require('./body-parser-setup');
-const { setupCors } = require('./cors-setup');
-const { setupControllers } = require('./controller-setup');
-const { setupAuth } = require('./auth-setup');
+const { setupMongo } = require('./setup/mongo-setup');
+const { setupBodyParser } = require('./setup/body-parser-setup');
+const { setupCors } = require('./setup/cors-setup');
+const { setupControllers } = require('./setup/controller-setup');
+const { setupAuth } = require('./setup/auth-setup');
 const { port } = require("./config/env.config");
 
 setupMongo();

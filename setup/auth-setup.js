@@ -1,5 +1,5 @@
 const session = require('express-session');
-const { secret } = require('./config/env.config');
+const { secret } = require('../config/env.config');
 const passport = require('passport');
 
 function setupAuth(app) {
@@ -16,7 +16,7 @@ function setupSession(app) {
 }
 
 function setupPassport(app) {
-  require('./config/passport.config')(passport);
+  require('../config/passport.config')(passport);
   app.use(passport.initialize());
   app.use(passport.session());
 }
