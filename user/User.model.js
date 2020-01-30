@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -25,5 +26,19 @@ const UserSchema = new Schema({
     default: Date.now
   },
 });
+
+UserSchema.methods.generateJwt = function() {
+  let expiry = new Date();
+  const daysTilExpire = 7;
+  expiry.setDate(expiry.getDate() + daysTilExpire);
+
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    exp: parseInt(expiry.getTime() / 1000),
+    admin: this.admin,
+    specialAccess: this.specialAccess
+  }, jwtSecret);
+};
 
 mongoose.model('user', UserSchema);
