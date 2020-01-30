@@ -11,6 +11,9 @@ function setupControllers(app) {
 
   const doodadController = require('./doodad/doodad.controller');
   app.use('/doodad', doodadController);
+
+  const userController = require('./user/user.controller');
+  app.use('/user', userController);
 }
 
 module.exports = {
