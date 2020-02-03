@@ -22,8 +22,13 @@ function hasBoolValue(value) {
   return value === true || value === false;
 }
 
+function hasNoBoolValue(value) {
+  return !hasBoolValue(value);
+}
+
 module.exports = {
   hasBoolValue,
+  hasNoBoolValue,
   hasNoValue,
   hasValue
 }

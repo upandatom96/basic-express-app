@@ -1,6 +1,8 @@
+const boolUtil = require('../utilities/bool.util');
+
 function checkForDoodadCreateErrors(doodad) {
   const errors = checkForGeneralDoodadErrors(doodad);
-  if (doodad._id) {
+  if (boolUtil.hasValue(doodad._id)) {
     errors.push({ text: 'New doodad cannot have an id.' });
   }
   return errors;
@@ -8,7 +10,7 @@ function checkForDoodadCreateErrors(doodad) {
 
 function checkForDoodadEditErrors(doodad) {
   const errors = checkForGeneralDoodadErrors(doodad);
-  if (!doodad._id) {
+  if (boolUtil.hasNoValue(doodad._id)) {
     errors.push({ text: 'Editing doodad must have an id.' });
   }
   return errors;
@@ -16,19 +18,19 @@ function checkForDoodadEditErrors(doodad) {
 
 function checkForGeneralDoodadErrors(doodad) {
   let errors = [];
-  if (!doodad.name) {
+  if (boolUtil.hasNoValue(doodad.name)) {
     errors.push({ text: 'Please add a name' });
   }
-  if (!doodad.type) {
+  if (boolUtil.hasNoValue(doodad.type)) {
     errors.push({ text: 'Please add a type' });
   }
-  if (!doodad.description) {
+  if (boolUtil.hasNoValue(doodad.description)) {
     errors.push({ text: 'Please add a description' });
   }
-  if (!doodad.age) {
+  if (boolUtil.hasNoValue(doodad.age)) {
     errors.push({ text: 'Please add an age' });
   }
-  if (doodad.used === null || doodad.used === undefined || doodad.used !== true && doodad.used !== false) {
+  if (boolUtil.hasNoBoolValue(doodad.used)) {
     errors.push({ text: 'Please add the used attribute' });
   }
   return errors;

@@ -1,6 +1,8 @@
+const boolUtil = require('../utilities/bool.util');
+
 function checkForWidgetCreateErrors(widget) {
   const errors = checkForWidgetGeneralErrors(widget);
-  if (widget._id) {
+  if (boolUtil.hasValue(widget._id)) {
     errors.push({ text: 'New widget cannot have an id.' });
   }
   return errors;
@@ -8,7 +10,7 @@ function checkForWidgetCreateErrors(widget) {
 
 function checkForWidgetEditErrors(widget) {
   const errors = checkForWidgetGeneralErrors(widget);
-  if (!widget._id) {
+  if (boolUtil.hasNoValue(widget._id)) {
     errors.push({ text: 'Editing widget must have an id.' });
   }
   return errors;
@@ -16,16 +18,16 @@ function checkForWidgetEditErrors(widget) {
 
 function checkForWidgetGeneralErrors(widget) {
   let errors = [];
-  if (!widget.name) {
+  if (boolUtil.hasNoValue(widget.name)) {
     errors.push({ text: 'Please add a name' });
   }
-  if (!widget.type) {
+  if (boolUtil.hasNoValue(widget.type)) {
     errors.push({ text: 'Please add a type' });
   }
-  if (!widget.description) {
+  if (boolUtil.hasNoValue(widget.description)) {
     errors.push({ text: 'Please add a description' });
   }
-  if (widget.used === null || widget.used === undefined || widget.used !== true && widget.used !== false) {
+  if (boolUtil.hasNoBoolValue(widget.used)) {
     errors.push({ text: 'Please add the used attribute' });
   }
   return errors;

@@ -1,5 +1,6 @@
 var jwt = require('express-jwt');
 const { secret } = require('../config/env.config');
+const boolUtil = require('../utilities/bool.util');
 
 module.exports = {
   jwtSecret: secret,
@@ -22,7 +23,7 @@ module.exports = {
   jwtIdentity: ((req, res, next) => {
     const tokenUser = req.userDetails._id;
     const requestedUser = req.body._id;
-    if (!requestedUser) {
+    if (boolUtil.hasNoValue(requestedUser)) {
       res.send(`No user selected.`);
     } else if (tokenUser !== requestedUser) {
       res.send(`Unauthorized for this user.`);
