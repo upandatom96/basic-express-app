@@ -8,22 +8,19 @@ authController.post('/login', (req, res, next) => {
   authManager.loginUser(res, req, next);
 });
 
-authController.get('/loggedIn', authUtil.jwtAuthenticated, (req, res) => {
-  res.send({
-    text: `You are logged in.`,
-    authorized: true
-  });
+authController.get('/checkLogin', authUtil.jwtAuthenticated, (req, res) => {
+  res.send(
+    `You are logged in.`,
+  );
 });
 
 authController.get('/admin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
-  res.send({
-    text: `You are logged in as admin.`,
-    admin: true,
-    authorized: true
-  });
+  res.send(
+    `You are logged in as admin.`,
+  );
 });
 
-authController.get('/userDetails', authUtil.jwtAuthenticated, (req, res) => {
+authController.get('/details', authUtil.jwtAuthenticated, (req, res) => {
   const user = req.userDetails;
   res.send({
     text: `Hello, ${user.email}, you are authenticated.`,
@@ -35,6 +32,13 @@ authController.get('/userDetails', authUtil.jwtAuthenticated, (req, res) => {
     admin: user.admin,
     specialAccess: user.specialAccess
   });
+});
+
+authController.get('/identity', authUtil.jwtAuthenticated, authUtil.jwtIdentity, (req, res) => {
+  const requestedId = req.body._id;
+  res.send(
+    `You have access to user with id ${requestedId}.`
+  );
 });
 
 module.exports = authController;
