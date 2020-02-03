@@ -1,5 +1,5 @@
 var jwt = require('express-jwt');
-const {secret} = require('../config/env.config');
+const { secret } = require('../config/env.config');
 
 module.exports = {
   jwtSecret: secret,
@@ -22,12 +22,10 @@ module.exports = {
   jwtIdentity: ((req, res, next) => {
     const tokenUser = req.userDetails._id;
     const requestedUser = req.body._id;
-    if (tokenUser !== requestedUser) {
-      res.send({
-        text: `Unauthorized for this user.`,
-        admin: req.userDetails.admin,
-        authorized: req.userDetails.authorized
-      });
+    if (!requestedUser) {
+      res.send(`No user selected.`);
+    } else if (tokenUser !== requestedUser) {
+      res.send(`Unauthorized for this user.`);
     } else {
       next();
     }
