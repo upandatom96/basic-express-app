@@ -15,4 +15,26 @@ authController.get('/loggedIn', authUtil.jwtAuthenticated, (req, res) => {
   });
 });
 
+authController.get('/admin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  res.send({
+    text: `You are logged in as admin.`,
+    admin: true,
+    authorized: true
+  });
+});
+
+authController.get('/userDetails', authUtil.jwtAuthenticated, (req, res) => {
+  const user = req.userDetails;
+  res.send({
+    text: `Hello, ${user.email}, you are authenticated.`,
+    userId: user._id,
+    email: user.email,
+    exp: user.exp,
+    iat: user.iat,
+    authorized: true,
+    admin: user.admin,
+    specialAccess: user.specialAccess
+  });
+});
+
 module.exports = authController;
