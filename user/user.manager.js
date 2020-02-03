@@ -45,9 +45,34 @@ function registerUser(user) {
   });
 }
 
+function resetPassword(email) {
+  return new Promise((resolve, reject) => {
+    const newPassword = randomUtil.generateRandomPassword();
+    User.findOne({
+      email: email
+    })
+      .then((foundUser) => {
+        if (!foundUser) {
+          reject(`FAILURE: no user found with id ${id}`);
+        }
+        editPassword(foundUser, newPassword)
+          .then((res) => {
+            resolve({
+              newPassword: newPassword
+            });
+          })
+          .catch((err) => {
+            logError(err);
+            reject(err);
+          });
+      });
+  });
+}
+
 module.exports = {
   getAllUsers,
-  registerUser
+  registerUser,
+  resetPassword
 }
 
 function runRegistration(user) {
@@ -74,3 +99,25 @@ function runRegistration(user) {
   });
 }
 
+function editPassword(user, newPassword) {
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newPassword, salt, (err, hash) => {
+        if (err)
+          throw err;
+        user.password = hash;
+        user.save()
+          .then((editedUser) => {
+            resolve({
+              message: `User ${editedUser.name} password updated.`,
+              email: editedUser.email
+            });
+          })
+          .catch((err) => {
+            logError(err);
+            reject(err);
+          });
+      });
+    });
+  });
+}
