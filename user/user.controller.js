@@ -5,7 +5,7 @@ const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
 const boolUtil = require('../utilities/bool.util');
 
-userController.get('/', (req, res) => {
+userController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   userManager.getAllUsers()
     .then((users) => {
       res.send(users);
