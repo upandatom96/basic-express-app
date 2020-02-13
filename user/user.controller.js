@@ -88,7 +88,7 @@ userController.put('/passwordReset/manual', authUtil.jwtAuthenticated, (req, res
   }
 });
 
-userController.put('/emailUpdate', authUtil.jwtAuthenticated, (req, res) => {
+userController.put('/emailUpdate/self', authUtil.jwtAuthenticated, (req, res) => {
   const user = req.userDetails
   const newEmail = req.body.newEmail;
   if (
@@ -102,6 +102,30 @@ userController.put('/emailUpdate', authUtil.jwtAuthenticated, (req, res) => {
         const recipient = newEmail;
         const subject = "Email Reset (Adam on the Internet)";
         const message = `You have reset your email for adam on the internet.`;
+        mailer.sendEmail(recipient, subject, message);
+        res.send("Email reset");
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        res.send("internal error");
+      });
+  }
+});
+
+userController.put('/emailUpdate/admin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  const newEmail = req.body.newEmail;
+  const userId = req.body.userId;
+  if (
+    boolUtil.hasNoValue(userId) || boolUtil.hasNoValue(newEmail)
+  ) {
+    res.statusCode = 500;
+    res.send("Internal error");
+  } else {
+    userManager.resetEmail(userId, newEmail)
+      .then((response) => {
+        const recipient = newEmail;
+        const subject = "Email Reset (Adam on the Internet)";
+        const message = `We have reset your email for adam on the internet.`;
         mailer.sendEmail(recipient, subject, message);
         res.send("Email reset");
       })
@@ -137,8 +161,6 @@ userController.put('/setAdmin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (r
       });
   }
 });
-
-// admin -> email update
 
 // set special access
 

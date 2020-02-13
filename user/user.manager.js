@@ -87,7 +87,6 @@ function resetEmail(oldId, newEmail) {
       _id: oldId
     })
       .then((originalUser) => {
-        console.log(9);
         if (!originalUser) {
           reject(`FAILURE: user ${oldId} not found`);
         } else {
