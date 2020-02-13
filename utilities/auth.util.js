@@ -10,12 +10,10 @@ module.exports = {
   }),
   jwtAdmin: ((req, res, next) => {
     const user = req.userDetails;
-    if (!user.admin) {
-      res.send({
-        text: `Unauthorized for admin.`,
-        admin: false,
-        authorized: true
-      });
+    if (boolUtil.hasNoValue(user)) {
+      res.send("User invalid.");
+    } else if (!user.admin) {
+      res.send(`Unauthorized for admin.`);
     } else {
       next();
     }

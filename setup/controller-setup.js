@@ -12,6 +12,9 @@ function setupControllers(app) {
   const doodadController = require('../doodad/doodad.controller');
   app.use('/doodad', doodadController);
 
+  const contraptionController = require('../contraption/contraption.controller');
+  app.use('/contraption', contraptionController);
+
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 
