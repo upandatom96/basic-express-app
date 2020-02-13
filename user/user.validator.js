@@ -8,6 +8,15 @@ function checkForUserRegistrationErrors(user) {
   return errors;
 }
 
+function comparePasswords(password, confirmPassword) {
+  let errors = [];
+  if (password !== confirmPassword) {
+    errors.push({ text: 'Passwords do not match' });
+  }
+  return errors;
+}
+
 module.exports = {
-  checkForUserRegistrationErrors
+  checkForUserRegistrationErrors,
+  comparePasswords
 }

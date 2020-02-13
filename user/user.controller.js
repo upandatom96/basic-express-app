@@ -2,6 +2,7 @@ const express = require('express');
 const userController = express.Router();
 const userManager = require('./user.manager');
 const mailer = require('../utilities/mailer.util');
+const authUtil = require('../utilities/auth.util');
 const boolUtil = require('../utilities/bool.util');
 
 userController.get('/', (req, res) => {
@@ -31,14 +32,15 @@ userController.post('/register', (req, res) => {
     });
 });
 
-userController.put('/passwordReset/random', (req, res) => {
+userController.put('/passwordReset/automatic', (req, res) => {
   const email = req.body.email;
   if (boolUtil.hasNoValue(email)) {
     res.statusCode = 500;
     res.send("No email given.");
   } else {
-    userManager.resetPassword(email)
+    userManager.resetPasswordAutomatic(email)
       .then((response) => {
+        console.log("new password: " + response.newPassword);
         const recipient = email;
         const subject = "Password Reset";
         const message = `Your new password is ${response.newPassword}`;
@@ -55,5 +57,41 @@ userController.put('/passwordReset/random', (req, res) => {
       });
   }
 });
+
+userController.put('/passwordReset/manual', authUtil.jwtAuthenticated, (req, res) => {
+  const email = req.userDetails.email;
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
+  if (
+    boolUtil.hasNoValue(password) || boolUtil.hasNoValue(confirmPassword) ||
+    boolUtil.hasNoValue(email)
+  ) {
+    res.statusCode = 500;
+    res.send("Internal error");
+  } else {
+    userManager.resetPasswordManual(email, password, confirmPassword)
+      .then((response) => {
+        const recipient = email;
+        const subject = "Password Reset (Adam on the Internet)";
+        const message = `You have reset your password for adam on the internet.`;
+        mailer.sendEmail(recipient, subject, message);
+        res.send("Password reset");
+      })
+      .catch((err) => {
+        const recipient = email;
+        const subject = "Password Reset Attempted (Adam on the Internet)";
+        const message = `Unable to reset password for adam on the internet. Are you sure this email address is registered?`;
+        mailer.sendEmail(recipient, subject, message);
+        res.statusCode = 500;
+        res.send(err);
+      });
+  }
+});
+
+// change email
+
+// change to admin
+
+// set special access
 
 module.exports = userController;

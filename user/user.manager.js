@@ -45,34 +45,25 @@ function registerUser(user) {
   });
 }
 
-function resetPassword(email) {
-  return new Promise((resolve, reject) => {
-    const newPassword = randomUtil.generateRandomPassword();
-    User.findOne({
-      email: email
-    })
-      .then((foundUser) => {
-        if (!foundUser) {
-          reject(`FAILURE: no user found with id ${id}`);
-        }
-        editPassword(foundUser, newPassword)
-          .then((res) => {
-            resolve({
-              newPassword: newPassword
-            });
-          })
-          .catch((err) => {
-            logError(err);
-            reject(err);
-          });
-      });
-  });
+function resetPasswordAutomatic(email) {
+  const newPassword = randomUtil.generateRandomPassword();
+  return updatePassword(email, newPassword);
+}
+
+function resetPasswordManual(email, newPassword, confirmNewPassword) {
+  const errors = userValidator.comparePasswords(newPassword, confirmNewPassword);
+  if (errors.length === 0) {
+    return updatePassword(email, newPassword);
+  } else {
+    return Promise.reject(errors);
+  }
 }
 
 module.exports = {
   getAllUsers,
   registerUser,
-  resetPassword
+  resetPasswordAutomatic,
+  resetPasswordManual
 }
 
 function runRegistration(user) {
@@ -99,7 +90,30 @@ function runRegistration(user) {
   });
 }
 
-function editPassword(user, newPassword) {
+function updatePassword(email, newPassword) {
+  return new Promise((resolve, reject) => {
+    User.findOne({
+      email: email
+    })
+      .then((foundUser) => {
+        if (!foundUser) {
+          reject(`FAILURE: no user found with email ${email}`);
+        } else {
+          submitPasswordUpdate(foundUser, newPassword)
+            .then((res) => {
+              resolve({
+                newPassword: newPassword
+              });
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        }
+      });
+  });
+}
+
+function submitPasswordUpdate(user, newPassword) {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newPassword, salt, (err, hash) => {
@@ -114,7 +128,6 @@ function editPassword(user, newPassword) {
             });
           })
           .catch((err) => {
-            logError(err);
             reject(err);
           });
       });
