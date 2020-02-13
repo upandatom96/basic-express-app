@@ -59,6 +59,28 @@ function resetPasswordManual(email, newPassword, confirmNewPassword) {
   }
 }
 
+function setToAdmin(email, isAdmin) {
+  return new Promise((resolve, reject) => {
+    User.findOne({
+      email: email
+    })
+      .then((foundUser) => {
+        if (!foundUser) {
+          reject(`FAILURE: found no user ${email}`);
+        } else {
+          foundUser.admin = isAdmin;
+          editUser(foundUser)
+            .then((res) => {
+              resolve();
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        }
+      });
+  });
+}
+
 function resetEmail(oldId, newEmail) {
   return new Promise((resolve, reject) => {
     User.findOne({
@@ -96,7 +118,8 @@ module.exports = {
   registerUser,
   resetPasswordAutomatic,
   resetPasswordManual,
-  resetEmail
+  resetEmail,
+  setToAdmin
 }
 
 function runRegistration(user) {

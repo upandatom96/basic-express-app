@@ -112,7 +112,33 @@ userController.put('/emailUpdate', authUtil.jwtAuthenticated, (req, res) => {
   }
 });
 
-// change to admin
+userController.put('/setAdmin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  const isAdmin = req.body.isAdmin;
+  const email = req.body.email;
+  if (
+    boolUtil.hasNoValue(email) || boolUtil.hasNoBoolValue(isAdmin)
+  ) {
+    res.statusCode = 500;
+    res.send("Internal error");
+  } else {
+    userManager.setToAdmin(email, isAdmin)
+      .then((response) => {
+        if (isAdmin) {
+          const recipient = email;
+          const subject = "Welcome to Admin (Adam on the Internet)";
+          const message = `You are now an admin on adam on the internet.`;
+          mailer.sendEmail(recipient, subject, message);
+        }
+        res.send("update complete");
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        res.send("internal error");
+      });
+  }
+});
+
+// admin -> email update
 
 // set special access
 
