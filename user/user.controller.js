@@ -162,6 +162,24 @@ userController.put('/setAdmin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (r
   }
 });
 
-// set special access
+userController.put('/specialAccess', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  const specialAccess = req.body.specialAccess;
+  const email = req.body.email;
+  if (
+    boolUtil.hasNoValue(email) || boolUtil.hasNoValue(specialAccess)
+  ) {
+    res.statusCode = 500;
+    res.send("Internal error");
+  } else {
+    userManager.setSpecialAccess(email, specialAccess)
+      .then((response) => {
+        res.send("Updated");
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        res.send("internal error");
+      });
+  }
+});
 
 module.exports = userController;

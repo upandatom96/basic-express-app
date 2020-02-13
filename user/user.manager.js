@@ -81,6 +81,28 @@ function setToAdmin(email, isAdmin) {
   });
 }
 
+function setSpecialAccess(email, specialAccess) {
+  return new Promise((resolve, reject) => {
+    User.findOne({
+      email: email
+    })
+      .then((foundUser) => {
+        if (!foundUser) {
+          reject(`FAILURE: found no user ${email}`);
+        } else {
+          foundUser.specialAccess = specialAccess;
+          editUser(foundUser)
+            .then((res) => {
+              resolve();
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        }
+      });
+  });
+}
+
 function resetEmail(oldId, newEmail) {
   return new Promise((resolve, reject) => {
     User.findOne({
@@ -118,7 +140,8 @@ module.exports = {
   resetPasswordAutomatic,
   resetPasswordManual,
   resetEmail,
-  setToAdmin
+  setToAdmin,
+  setSpecialAccess
 }
 
 function runRegistration(user) {
