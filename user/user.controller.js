@@ -88,7 +88,29 @@ userController.put('/passwordReset/manual', authUtil.jwtAuthenticated, (req, res
   }
 });
 
-// change email
+userController.put('/emailUpdate', authUtil.jwtAuthenticated, (req, res) => {
+  const user = req.userDetails
+  const newEmail = req.body.newEmail;
+  if (
+    boolUtil.hasNoValue(user) || boolUtil.hasNoValue(newEmail)
+  ) {
+    res.statusCode = 500;
+    res.send("Internal error");
+  } else {
+    userManager.resetEmail(user._id, newEmail)
+      .then((response) => {
+        const recipient = newEmail;
+        const subject = "Email Reset (Adam on the Internet)";
+        const message = `You have reset your email for adam on the internet.`;
+        mailer.sendEmail(recipient, subject, message);
+        res.send("Email reset");
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        res.send("internal error");
+      });
+  }
+});
 
 // change to admin
 

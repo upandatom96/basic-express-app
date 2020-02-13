@@ -59,11 +59,44 @@ function resetPasswordManual(email, newPassword, confirmNewPassword) {
   }
 }
 
+function resetEmail(oldId, newEmail) {
+  return new Promise((resolve, reject) => {
+    User.findOne({
+      _id: oldId
+    })
+      .then((originalUser) => {
+        console.log(9);
+        if (!originalUser) {
+          reject(`FAILURE: user ${oldId} not found`);
+        } else {
+          User.findOne({
+            email: newEmail
+          })
+            .then((foundUserWithNewEmail) => {
+              if (foundUserWithNewEmail) {
+                reject(`FAILURE: user already exists with email ${newEmail}`);
+              } else {
+                originalUser.email = newEmail;
+                editUser(originalUser)
+                  .then((res) => {
+                    resolve();
+                  })
+                  .catch((err) => {
+                    reject(err);
+                  });
+              }
+            });
+        }
+      });
+  });
+}
+
 module.exports = {
   getAllUsers,
   registerUser,
   resetPasswordAutomatic,
-  resetPasswordManual
+  resetPasswordManual,
+  resetEmail
 }
 
 function runRegistration(user) {
@@ -80,13 +113,25 @@ function runRegistration(user) {
         });
         newUser.save()
           .then((registeredUser) => {
-            resolve(`User ${registeredUser.name} successfully registered.`);
+            resolve(`User ${registeredUser.email} successfully registered.`);
           })
           .catch((err) => {
             reject(err);
           });
       });
     });
+  });
+}
+
+function editUser(user) {
+  return new Promise((resolve, reject) => {
+    user.save()
+      .then((editedUserSaved) => {
+        resolve(`User ${editedUserSaved.email} successfully edited.`);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
@@ -123,7 +168,7 @@ function submitPasswordUpdate(user, newPassword) {
         user.save()
           .then((editedUser) => {
             resolve({
-              message: `User ${editedUser.name} password updated.`,
+              message: `User ${editedUser.name} email.`,
               email: editedUser.email
             });
           })
