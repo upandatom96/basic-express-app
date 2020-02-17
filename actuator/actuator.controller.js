@@ -15,4 +15,8 @@ actuatorController.get('/info', (req, res) => {
   res.send(info);
 });
 
+actuatorController.get('/test', (req, res) => {
+  res.send("test");
+});
+
 module.exports = actuatorController;
