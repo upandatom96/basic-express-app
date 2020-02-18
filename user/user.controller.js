@@ -182,4 +182,16 @@ userController.put('/specialAccess', authUtil.jwtAuthenticated, authUtil.jwtAdmi
   }
 });
 
+userController.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  userManager.deleteOneUser(id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 module.exports = userController;

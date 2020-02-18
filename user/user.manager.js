@@ -134,6 +134,19 @@ function resetEmail(oldId, newEmail) {
   });
 }
 
+function deleteOneUser(id) {
+  return new Promise((resolve, reject) => {
+    User.deleteOne({
+      _id: id
+    })
+      .then(() => {
+        resolve({
+          message: `User with given id deleted or never existed`
+        });
+      });
+  });
+}
+
 module.exports = {
   getAllUsers,
   registerUser,
@@ -141,7 +154,8 @@ module.exports = {
   resetPasswordManual,
   resetEmail,
   setToAdmin,
-  setSpecialAccess
+  setSpecialAccess,
+  deleteOneUser
 }
 
 function runRegistration(user) {
