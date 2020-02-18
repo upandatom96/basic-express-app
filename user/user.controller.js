@@ -153,7 +153,7 @@ userController.put('/setAdmin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (r
           const message = `You are now an admin on adam on the internet.`;
           mailer.sendEmail(recipient, subject, message);
         }
-        res.send("update complete");
+        res.send({message: "Updated"});
       })
       .catch((err) => {
         res.statusCode = 500;
@@ -173,7 +173,7 @@ userController.put('/specialAccess', authUtil.jwtAuthenticated, authUtil.jwtAdmi
   } else {
     userManager.setSpecialAccess(email, specialAccess)
       .then((response) => {
-        res.send("Updated");
+        res.send({message: "Updated"});
       })
       .catch((err) => {
         res.statusCode = 500;
