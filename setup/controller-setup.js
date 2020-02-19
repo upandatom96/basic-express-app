@@ -21,6 +21,9 @@ function setupControllers(app) {
   const witnessController = require('../witness/witness.controller');
   app.use('/witness', witnessController);
 
+  const issueController = require('../issue/issue.controller');
+  app.use('/issue', issueController);
+
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 
