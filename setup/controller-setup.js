@@ -15,6 +15,9 @@ function setupControllers(app) {
   const contraptionController = require('../contraption/contraption.controller');
   app.use('/contraption', contraptionController);
 
+  const evidenceController = require('../evidence/evidence.controller');
+  app.use('/evidence', evidenceController);
+
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 
