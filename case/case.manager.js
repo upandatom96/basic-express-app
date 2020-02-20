@@ -19,13 +19,7 @@ function makeCase(caseOrder) {
       .then((randomIssue) => {
         const witnesses = pickWitnesses(caseOrder.witnessCount);
         const evidence = pickEvidence(caseOrder.evidenceCount);
-        const newCase = {
-          name: caseOrder.name,
-          issue: randomIssue,
-          witnesses,
-          plantiffEvidence: evidence.plantiffEvidence,
-          defendantEvidence: evidence.defendantEvidence
-        };
+        const newCase = buildCase(caseOrder.name, randomIssue, witnesses, evidence);
         resolve(
           newCase
         );
@@ -70,4 +64,14 @@ function pickEvidence(evidenceCount) {
     evidence.defendantEvidence.push(newEvidenceD);
   }
   return evidence;
+}
+
+function buildCase(name, issue, witnesses, evidence) {
+  return {
+    name: name,
+    issue: issue,
+    witnesses,
+    plantiffEvidence: evidence.plantiffEvidence,
+    defendantEvidence: evidence.defendantEvidence
+  };
 }
