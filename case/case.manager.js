@@ -30,6 +30,7 @@ function makeCase(caseOrder) {
           .then((randomEvidence) => {
             const newCase = buildCase(caseOrder.name, randomIssue, randomWitnesses, randomEvidence);
             new Case({
+              name: caseOrder.name,
               issue: randomIssue._id
             })
               .save()
