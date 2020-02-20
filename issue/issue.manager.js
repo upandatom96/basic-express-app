@@ -34,7 +34,7 @@ function getRandomIssue() {
     Issue.aggregate([{ $sample: { size: 1 } }])
       .then((issue) => {
         if (issue) {
-          resolve(issue);
+          resolve(issue[0]);
         } else {
           reject({
             message: "Failed to get issue"

@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+require('./Case.model');
+const Case = mongoose.model('case');
+
 const caseValidator = require('./case.validator');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
@@ -5,9 +9,10 @@ const witnessManager = require('../witness/witness.manager');
 
 function getAllCases() {
   return new Promise((resolve, reject) => {
-    resolve(
-      []
-    );
+    Case.find({})
+      .then((cases) => {
+        resolve(cases);
+      });
   });
 }
 
@@ -24,9 +29,13 @@ function makeCase(caseOrder) {
           evidenceManager.getRandomEvidence(caseOrder.evidenceCount)
           .then((randomEvidence) => {
             const newCase = buildCase(caseOrder.name, randomIssue, randomWitnesses, randomEvidence);
-            resolve(
-              newCase
-            );
+            new Case({
+              issue: randomIssue._id
+            })
+              .save()
+              .then((addedCase) => {
+                resolve(addedCase);
+              });
           })
           .catch((err) => {
             res.statusCode = 500;
