@@ -28,11 +28,12 @@ function makeCase(caseOrder) {
         .then((randomWitnesses) => {
           evidenceManager.getRandomEvidence(caseOrder.evidenceCount)
           .then((randomEvidence) => {
-            const newCase = buildCase(caseOrder.name, randomIssue, randomWitnesses, randomEvidence);
             new Case({
               name: caseOrder.name,
               issue: randomIssue._id,
-              witnesses: randomWitnesses
+              witnesses: randomWitnesses,
+              plantiffEvidence: randomEvidence.plantiffEvidence,
+              defendantEvidence: randomEvidence.defendantEvidence
             })
               .save()
               .then((addedCase) => {
@@ -60,14 +61,4 @@ function makeCase(caseOrder) {
 module.exports = {
   getAllCases,
   makeCase
-}
-
-function buildCase(name, issue, witnesses, evidence) {
-  return {
-    name: name,
-    issue: issue,
-    witnesses,
-    plantiffEvidence: evidence.plantiffEvidence,
-    defendantEvidence: evidence.defendantEvidence
-  };
 }

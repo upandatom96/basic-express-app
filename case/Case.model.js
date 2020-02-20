@@ -11,8 +11,18 @@ const CaseSchema = new Schema({
     ref: 'issue',
     required: true 
   },
-  // plantiffEvidence
-  // defendantEvidence
+  plantiffEvidence:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'evidence'
+    }
+  ],
+  defendantEvidence:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'evidence'
+    }
+  ],
   witnesses:[
     {
       type: mongoose.Schema.Types.ObjectId, 
