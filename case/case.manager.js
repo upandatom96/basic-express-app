@@ -16,12 +16,10 @@ function makeCase(caseOrder) {
     } else {
       const witnesses = pickWitnesses(caseOrder.witnessCount);
       const evidence = pickEvidence(caseOrder.evidenceCount);
+      const issue = pickIssue();
       const newCase = {
         name: caseOrder.name,
-        issue: {
-          name: "issue name",
-          description: "this is the issue description"
-        },
+        issue,
         witnesses,
         plantiffEvidence: evidence.plantiffEvidence,
         defendantEvidence: evidence.defendantEvidence
@@ -65,4 +63,12 @@ function pickEvidence(evidenceCount) {
     evidence.defendantEvidence.push(newEvidenceD);
   }
   return evidence;
+}
+
+function pickIssue() {
+  const issue = {
+    name: "issue name",
+    description: "this is the issue description"
+  };
+  return issue;
 }
