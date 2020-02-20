@@ -14,6 +14,17 @@ issueController.get('/', (req, res) => {
     });
 });
 
+issueController.get('/random', (req, res) => {
+  issueManager.getRandomIssue()
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 issueController.get('/:id', (req, res) => {
   const id = req.params.id;
   issueManager.getIssueById(id)
