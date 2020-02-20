@@ -71,11 +71,3 @@ function pickEvidence(evidenceCount) {
   }
   return evidence;
 }
-
-function pickIssue() {
-  const issue = {
-    name: "issue name",
-    description: "this is the issue description"
-  };
-  return issue;
-}
