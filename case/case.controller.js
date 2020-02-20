@@ -13,10 +13,11 @@ caseController.get('/', (req, res) => {
     });
 });
 
-caseController.get('/random', (req, res) => {
-  caseManager.getRandomCase()
-    .then((randomCase) => {
-      res.send(randomCase);
+caseController.post('/', (req, res) => {
+  const caseOrder = req.body;
+  caseManager.makeCase(caseOrder)
+    .then((addedCase) => {
+      res.send(addedCase);
     })
     .catch((err) => {
       res.statusCode = 500;
