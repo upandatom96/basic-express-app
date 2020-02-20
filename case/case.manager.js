@@ -63,7 +63,21 @@ function makeCase(caseOrder) {
   });
 }
 
+function deleteOneCase(id) {
+  return new Promise((resolve, reject) => {
+    Case.deleteOne({
+      _id: id
+    })
+      .then(() => {
+        resolve({
+          message: `Case with given id deleted or never existed`
+        });
+      });
+  });
+}
+
 module.exports = {
   getAllCases,
-  makeCase
+  makeCase,
+  deleteOneCase
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const caseController = express.Router();
 const caseManager = require('./case.manager');
+const authUtil = require('../utilities/auth.util');
 
 caseController.get('/', (req, res) => {
   caseManager.getAllCases()
@@ -18,6 +19,18 @@ caseController.post('/', (req, res) => {
   caseManager.makeCase(caseOrder)
     .then((addedCase) => {
       res.send(addedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  const id = req.params.id;
+  caseManager.deleteOneCase(id)
+    .then((response) => {
+      res.send(response);
     })
     .catch((err) => {
       res.statusCode = 500;
