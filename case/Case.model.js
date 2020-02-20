@@ -11,7 +11,7 @@ const CaseSchema = new Schema({
     ref: 'issue',
     required: true 
   },
-  plantiffEvidence:[
+  plaintiffEvidence:[
     {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'evidence'

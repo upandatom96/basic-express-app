@@ -11,6 +11,10 @@ function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
     .populate("issue")
+    .populate("witnesses")
+    .populate("plaintiffEvidence")
+    .populate("defendantEvidence")
+    .populate("witnesses")
       .then((cases) => {
         resolve(cases);
       });
