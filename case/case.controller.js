@@ -14,6 +14,18 @@ caseController.get('/', (req, res) => {
     });
 });
 
+caseController.get('/:id', (req, res) => {
+  const id = req.params.id;
+  caseManager.getCaseById(id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.post('/', (req, res) => {
   const caseOrder = req.body;
   caseManager.makeCase(caseOrder)

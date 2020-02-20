@@ -21,6 +21,28 @@ function getAllCases() {
   });
 }
 
+function getCaseById(id) {
+  return new Promise((resolve, reject) => {
+    Case.findOne({
+      _id: id
+    })
+      .populate("issue")
+      .populate("witnesses")
+      .populate("plaintiffEvidence")
+      .populate("defendantEvidence")
+      .populate("witnesses")
+      .then((myCase) => {
+        if (myCase) {
+          resolve(myCase);
+        } else {
+          reject({
+            message: "Failed to find case"
+          });
+        }
+      });
+  });
+}
+
 function makeCase(caseOrder) {
   return new Promise((resolve, reject) => {
     const errors = caseValidator.checkForCaseOrderErrors(caseOrder);
@@ -78,6 +100,7 @@ function deleteOneCase(id) {
 
 module.exports = {
   getAllCases,
+  getCaseById,
   makeCase,
   deleteOneCase
 }
