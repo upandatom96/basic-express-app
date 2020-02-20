@@ -1,5 +1,7 @@
 const caseValidator = require('./case.validator');
 const issueManager = require('../issue/issue.manager');
+const evidenceManager = require('../evidence/evidence.manager');
+const witnessManager = require('../witness/witness.manager');
 
 function getAllCases() {
   return new Promise((resolve, reject) => {
@@ -17,12 +19,18 @@ function makeCase(caseOrder) {
     } else {
       issueManager.getRandomIssue()
       .then((randomIssue) => {
-        const witnesses = pickWitnesses(caseOrder.witnessCount);
-        const evidence = pickEvidence(caseOrder.evidenceCount);
-        const newCase = buildCase(caseOrder.name, randomIssue, witnesses, evidence);
-        resolve(
-          newCase
-        );
+        witnessManager.getRandomWitnesses(caseOrder.witnessCount)
+        .then((getRandomWitnesses) => {
+          const evidence = pickEvidence(caseOrder.evidenceCount);
+          const newCase = buildCase(caseOrder.name, randomIssue, getRandomWitnesses, evidence);
+          resolve(
+            newCase
+          );
+        })
+        .catch((err) => {
+          res.statusCode = 500;
+          res.send(err);
+        });
       })
       .catch((err) => {
         res.statusCode = 500;
@@ -35,17 +43,6 @@ function makeCase(caseOrder) {
 module.exports = {
   getAllCases,
   makeCase
-}
-
-function pickWitnesses(witnessCount) {
-  const witnesses = [];
-  for (i = 0; i < witnessCount; i++) {
-    const newWitness = {
-      "name": "witness " + (i + 1)
-    };
-    witnesses.push(newWitness);
-  }
-  return witnesses;
 }
 
 function pickEvidence(evidenceCount) {
