@@ -37,7 +37,7 @@ function makeCase(caseOrder) {
                     name: caseOrder.name,
                     issue: randomIssue._id,
                     witnesses: randomWitnesses,
-                    plantiffEvidence: randomEvidence.plantiffEvidence,
+                    plaintiffEvidence: randomEvidence.plantiffEvidence,
                     defendantEvidence: randomEvidence.defendantEvidence
                   })
                     .save()
