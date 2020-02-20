@@ -6,7 +6,6 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
-  // issue
   issue: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'issue',
@@ -14,7 +13,12 @@ const CaseSchema = new Schema({
   },
   // plantiffEvidence
   // defendantEvidence
-  // witness
+  witnesses:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'witness'
+    }
+  ],
   date: {
     type: Date,
     default: Date.now
