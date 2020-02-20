@@ -10,6 +10,7 @@ const witnessManager = require('../witness/witness.manager');
 function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
+    .populate("issue")
       .then((cases) => {
         resolve(cases);
       });
