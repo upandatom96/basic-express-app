@@ -18,6 +18,10 @@ function makeCase(caseOrder) {
       const evidence = pickEvidence(caseOrder.evidenceCount);
       const newCase = {
         name: caseOrder.name,
+        issue: {
+          name: "issue name",
+          description: "this is the issue description"
+        },
         witnesses,
         plantiffEvidence: evidence.plantiffEvidence,
         defendantEvidence: evidence.defendantEvidence
