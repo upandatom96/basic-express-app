@@ -12,6 +12,22 @@ function getAllEvidence() {
   });
 }
 
+function getRandomEvidence(evidenceCount) {
+  console.log("here");
+  return new Promise((resolve, reject) => {
+    Evidence.aggregate([{ $sample: { size: evidenceCount } }])
+      .then((evidence) => {
+        if (evidence) {
+          resolve(evidence);
+        } else {
+          reject({
+            message: "Failed to get evidence"
+          });
+        }
+      });
+  });
+}
+
 function getEvidenceById(id) {
   return new Promise((resolve, reject) => {
     Evidence.findOne({
@@ -93,5 +109,6 @@ module.exports = {
   getEvidenceById,
   addEvidence,
   editEvidence,
-  deleteOneEvidence
+  deleteOneEvidence,
+  getRandomEvidence
 }

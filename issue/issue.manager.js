@@ -30,9 +30,7 @@ function getIssueById(id) {
 }
 
 function getRandomIssue() {
-  console.log(111);
   return new Promise((resolve, reject) => {
-    console.log("here");
     Issue.aggregate([{ $sample: { size: 1 } }])
       .then((issue) => {
         if (issue) {

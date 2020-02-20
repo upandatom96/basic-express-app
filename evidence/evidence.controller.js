@@ -14,6 +14,19 @@ evidenceController.get('/', (req, res) => {
     });
 });
 
+evidenceController.get('/random/:count', (req, res) => {
+  const count = Number(req.params.count);
+  evidenceManager.getRandomEvidence(count)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+
 evidenceController.get('/:id', (req, res) => {
   const id = req.params.id;
   evidenceManager.getEvidenceById(id)
