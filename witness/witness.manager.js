@@ -12,6 +12,21 @@ function getAllWitness() {
   });
 }
 
+function getRandomWitnesses(witnessCount) {
+  return new Promise((resolve, reject) => {
+    Witness.aggregate([{ $sample: { size: witnessCount } }])
+      .then((witnesses) => {
+        if (witnesses) {
+          resolve(witnesses);
+        } else {
+          reject({
+            message: "Failed to get witnesses"
+          });
+        }
+      });
+  });
+}
+
 function getWitnessById(id) {
   return new Promise((resolve, reject) => {
     Witness.findOne({
@@ -93,5 +108,6 @@ module.exports = {
   getWitnessById,
   addWitness,
   editWitness,
-  deleteOneWitness
+  deleteOneWitness,
+  getRandomWitnesses
 }

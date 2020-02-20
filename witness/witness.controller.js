@@ -14,6 +14,18 @@ witnessController.get('/', (req, res) => {
     });
 });
 
+witnessController.get('/random/:count', (req, res) => {
+  const count = Number(req.params.count);
+  witnessManager.getRandomWitnesses(count)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 witnessController.get('/:id', (req, res) => {
   const id = req.params.id;
   witnessManager.getWitnessById(id)

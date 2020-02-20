@@ -13,7 +13,6 @@ function getAllEvidence() {
 }
 
 function getRandomEvidence(evidenceCount) {
-  console.log("here");
   return new Promise((resolve, reject) => {
     Evidence.aggregate([{ $sample: { size: evidenceCount } }])
       .then((evidence) => {
