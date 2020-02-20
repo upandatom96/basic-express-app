@@ -20,12 +20,18 @@ function makeCase(caseOrder) {
       issueManager.getRandomIssue()
       .then((randomIssue) => {
         witnessManager.getRandomWitnesses(caseOrder.witnessCount)
-        .then((getRandomWitnesses) => {
-          const evidence = pickEvidence(caseOrder.evidenceCount);
-          const newCase = buildCase(caseOrder.name, randomIssue, getRandomWitnesses, evidence);
-          resolve(
-            newCase
-          );
+        .then((randomWitnesses) => {
+          evidenceManager.getRandomEvidence(caseOrder.evidenceCount)
+          .then((randomEvidence) => {
+            const newCase = buildCase(caseOrder.name, randomIssue, randomWitnesses, randomEvidence);
+            resolve(
+              newCase
+            );
+          })
+          .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+          });
         })
         .catch((err) => {
           res.statusCode = 500;
@@ -43,24 +49,6 @@ function makeCase(caseOrder) {
 module.exports = {
   getAllCases,
   makeCase
-}
-
-function pickEvidence(evidenceCount) {
-  const evidence = {
-    plantiffEvidence: [],
-    defendantEvidence: []
-  };
-  for (i = 0; i < evidenceCount; i++) {
-    const newEvidenceP = {
-      "name": "evidence p " + (i + 1)
-    };
-    evidence.plantiffEvidence.push(newEvidenceP);
-    const newEvidenceD = {
-      "name": "evidence d " + (i + 1)
-    };
-    evidence.defendantEvidence.push(newEvidenceD);
-  }
-  return evidence;
 }
 
 function buildCase(name, issue, witnesses, evidence) {
