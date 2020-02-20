@@ -1,4 +1,5 @@
 const caseValidator = require('./case.validator');
+const issueManager = require('../issue/issue.manager');
 
 function getAllCases() {
   return new Promise((resolve, reject) => {
@@ -14,19 +15,25 @@ function makeCase(caseOrder) {
     if (errors.length > 0) {
       reject(errors);
     } else {
-      const witnesses = pickWitnesses(caseOrder.witnessCount);
-      const evidence = pickEvidence(caseOrder.evidenceCount);
-      const issue = pickIssue();
-      const newCase = {
-        name: caseOrder.name,
-        issue,
-        witnesses,
-        plantiffEvidence: evidence.plantiffEvidence,
-        defendantEvidence: evidence.defendantEvidence
-      };
-      resolve(
-        newCase
-      );
+      issueManager.getRandomIssue()
+      .then((randomIssue) => {
+        const witnesses = pickWitnesses(caseOrder.witnessCount);
+        const evidence = pickEvidence(caseOrder.evidenceCount);
+        const newCase = {
+          name: caseOrder.name,
+          issue: randomIssue,
+          witnesses,
+          plantiffEvidence: evidence.plantiffEvidence,
+          defendantEvidence: evidence.defendantEvidence
+        };
+        resolve(
+          newCase
+        );
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        res.send(err);
+      });
     }
   });
 }
