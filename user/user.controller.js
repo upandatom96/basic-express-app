@@ -24,7 +24,7 @@ userController.post('/register', (req, res) => {
       const subject = "Welcome to Callanan Concepts";
       const message = `Your temporary password is ${registrationResponse.newPassword}. Login to change it.`;
       mailer.sendEmail(recipient, subject, message);
-      res.send("Registered " + user.email);
+      res.send({ message: "Registered " + user.email });
     })
     .catch((err) => {
       res.statusCode = 500;
@@ -153,7 +153,7 @@ userController.put('/setAdmin', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (r
           const message = `You are now an admin on adam on the internet.`;
           mailer.sendEmail(recipient, subject, message);
         }
-        res.send({message: "Updated"});
+        res.send({ message: "Updated" });
       })
       .catch((err) => {
         res.statusCode = 500;
@@ -173,7 +173,7 @@ userController.put('/specialAccess', authUtil.jwtAuthenticated, authUtil.jwtAdmi
   } else {
     userManager.setSpecialAccess(email, specialAccess)
       .then((response) => {
-        res.send({message: "Updated"});
+        res.send({ message: "Updated" });
       })
       .catch((err) => {
         res.statusCode = 500;
