@@ -10,6 +10,7 @@ const witnessManager = require('../witness/witness.manager');
 function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
+      .sort([['date', -1]])
       .populate("issue")
       .populate("witnesses")
       .populate("plaintiffEvidence")
