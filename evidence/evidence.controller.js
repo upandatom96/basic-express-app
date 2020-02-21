@@ -3,7 +3,7 @@ const evidenceController = express.Router();
 const evidenceManager = require("./evidence.manager");
 const authUtil = require('../utilities/auth.util');
 
-evidenceController.get('/', (req, res) => {
+evidenceController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   evidenceManager.getAllEvidence()
     .then((response) => {
       res.send(response);
@@ -14,20 +14,8 @@ evidenceController.get('/', (req, res) => {
     });
 });
 
-evidenceController.get('/random/:count', (req, res) => {
-  const count = Number(req.params.count);
-  evidenceManager.getRandomEvidence(count)
-    .then((response) => {
-      res.send(response);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
 
-
-evidenceController.get('/:id', (req, res) => {
+evidenceController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const id = req.params.id;
   evidenceManager.getEvidenceById(id)
     .then((response) => {

@@ -3,7 +3,7 @@ const issueController = express.Router();
 const issueManager = require("./issue.manager");
 const authUtil = require('../utilities/auth.util');
 
-issueController.get('/', (req, res) => {
+issueController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   issueManager.getAllIssue()
     .then((response) => {
       res.send(response);
@@ -14,18 +14,7 @@ issueController.get('/', (req, res) => {
     });
 });
 
-issueController.get('/random', (req, res) => {
-  issueManager.getRandomIssue()
-    .then((response) => {
-      res.send(response);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
-issueController.get('/:id', (req, res) => {
+issueController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const id = req.params.id;
   issueManager.getIssueById(id)
     .then((response) => {

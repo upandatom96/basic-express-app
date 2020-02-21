@@ -3,7 +3,7 @@ const witnessController = express.Router();
 const witnessManager = require("./witness.manager");
 const authUtil = require('../utilities/auth.util');
 
-witnessController.get('/', (req, res) => {
+witnessController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   witnessManager.getAllWitness()
     .then((response) => {
       res.send(response);
@@ -14,19 +14,7 @@ witnessController.get('/', (req, res) => {
     });
 });
 
-witnessController.get('/random/:count', (req, res) => {
-  const count = Number(req.params.count);
-  witnessManager.getRandomWitnesses(count)
-    .then((response) => {
-      res.send(response);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
-witnessController.get('/:id', (req, res) => {
+witnessController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const id = req.params.id;
   witnessManager.getWitnessById(id)
     .then((response) => {
