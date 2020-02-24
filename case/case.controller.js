@@ -39,6 +39,8 @@ caseController.get('/:id', (req, res) => {
 
 caseController.post('/', (req, res) => {
   const caseOrder = req.body;
+  caseOrder.evidenceCount = Number(caseOrder.evidenceCount);
+  caseOrder.witnessCount = Number(caseOrder.witnessCount);
   caseManager.makeCase(caseOrder)
     .then((addedCase) => {
       res.send(addedCase);
