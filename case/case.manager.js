@@ -22,6 +22,20 @@ function getAllCases() {
   });
 }
 
+function getAllCaseNames() {
+  return new Promise((resolve, reject) => {
+    Case.find({})
+      .select('name')
+      .then((cases) => {
+        const names = [];
+        cases.forEach((myCase) => {
+          names.push(myCase.name);
+        });
+        resolve(names);
+      });
+  });
+}
+
 function getCaseById(id) {
   return new Promise((resolve, reject) => {
     Case.findOne({
@@ -101,6 +115,7 @@ function deleteOneCase(id) {
 
 module.exports = {
   getAllCases,
+  getAllCaseNames,
   getCaseById,
   makeCase,
   deleteOneCase
