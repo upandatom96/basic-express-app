@@ -64,37 +64,44 @@ function makeCase(caseOrder) {
     if (errors.length > 0) {
       reject(errors);
     } else {
-      issueManager.getRandomIssue()
-        .then((randomIssue) => {
-          witnessManager.getRandomWitnesses(caseOrder.witnessCount)
-            .then((randomWitnesses) => {
-              evidenceManager.getRandomEvidence(caseOrder.evidenceCount)
-                .then((randomEvidence) => {
-                  new Case({
-                    name: caseOrder.name,
-                    issue: randomIssue._id,
-                    witnesses: randomWitnesses,
-                    plaintiffEvidence: randomEvidence.plantiffEvidence,
-                    defendantEvidence: randomEvidence.defendantEvidence
+      Case.find({ name: caseOrder.name })
+        .then((foundCase) => {
+          if (foundCase && foundCase.length > 0) {
+            reject({ message: "A case with this name already exists" });
+          } else {
+            issueManager.getRandomIssue()
+              .then((randomIssue) => {
+                witnessManager.getRandomWitnesses(caseOrder.witnessCount)
+                  .then((randomWitnesses) => {
+                    evidenceManager.getRandomEvidence(caseOrder.evidenceCount)
+                      .then((randomEvidence) => {
+                        new Case({
+                          name: caseOrder.name,
+                          issue: randomIssue._id,
+                          witnesses: randomWitnesses,
+                          plaintiffEvidence: randomEvidence.plantiffEvidence,
+                          defendantEvidence: randomEvidence.defendantEvidence
+                        })
+                          .save()
+                          .then((addedCase) => {
+                            resolve(addedCase);
+                          });
+                      })
+                      .catch((err) => {
+                        res.statusCode = 500;
+                        res.send(err);
+                      });
                   })
-                    .save()
-                    .then((addedCase) => {
-                      resolve(addedCase);
-                    });
-                })
-                .catch((err) => {
-                  res.statusCode = 500;
-                  res.send(err);
-                });
-            })
-            .catch((err) => {
-              res.statusCode = 500;
-              res.send(err);
-            });
-        })
-        .catch((err) => {
-          res.statusCode = 500;
-          res.send(err);
+                  .catch((err) => {
+                    res.statusCode = 500;
+                    res.send(err);
+                  });
+              })
+              .catch((err) => {
+                res.statusCode = 500;
+                res.send(err);
+              });
+          }
         });
     }
   });
