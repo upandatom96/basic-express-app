@@ -11,6 +11,9 @@ function checkForCaseOrderErrors(caseOrder) {
   if (boolUtil.hasNoValue(caseOrder.evidenceCount)) {
     errors.push({ text: 'Please add an evidence count' });
   }
+  if (boolUtil.hasValue(caseOrder.evidenceCount) && caseOrder.evidenceCount === 0) {
+    errors.push({ text: 'Evidence count must be more than zero' });
+  }
   return errors;
 }
 
