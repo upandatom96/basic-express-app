@@ -63,6 +63,19 @@ caseController.put('/judge', (req, res) => {
     });
 });
 
+caseController.put('/revealWitness/case/:caseId/witness/:witnessId', (req, res) => {
+  const caseId = req.params.caseId;
+  const witnessId = req.params.witnessId;
+  caseManager.revealWitness(caseId, witnessId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const id = req.params.id;
   caseManager.deleteOneCase(id)

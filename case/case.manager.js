@@ -6,6 +6,7 @@ const caseValidator = require('./case.validator');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
+const boolUtil = require('../utilities/bool.util');
 
 function getAllCases() {
   return new Promise((resolve, reject) => {
@@ -142,6 +143,51 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
   });
 }
 
+function revealWitness(caseId, witnessId) {
+  return new Promise((resolve, reject) => {
+    const hasCaseId = boolUtil.hasValue(caseId);
+    const hasWitnessId = boolUtil.hasValue(witnessId);
+    if (!hasCaseId || !hasWitnessId) {
+      reject("Case id and witness id required.");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("plaintiffEvidence")
+        .populate("defendantEvidence")
+        .populate("witnesses")
+        .populate("revealedWitnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else {
+            const witnessToReveal = foundCase.witnesses.find((witness) => {
+              return witness._id.toString() === witnessId;
+            });
+
+            if (!witnessToReveal) {
+              reject({
+                message: 'Failed to find the witness'
+              });
+            } else {
+              foundCase.revealedWitnesses.push(witnessToReveal);
+              foundCase.witnesses = foundCase.witnesses.filter((witness) => {
+                return witness._id.toString() != witnessId;
+              });
+
+              foundCase.save()
+                .then((updatedCase) => {
+                  resolve(updatedCase);
+                });
+            }
+          }
+        });
+    }
+  });
+}
+
 function deleteOneCase(id) {
   return new Promise((resolve, reject) => {
     Case.deleteOne({
@@ -161,5 +207,6 @@ module.exports = {
   getCaseById,
   makeCase,
   updateJudgeCaseNotes,
+  revealWitness,
   deleteOneCase
 }
