@@ -6,6 +6,18 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
+  plaintiffScore: {
+    type: Number,
+    default: 0
+  },
+  defedantScore: {
+    type: Number,
+    default: 0
+  },
+  notes: {
+    type: String,
+    default: null
+  },
   issue: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'issue',
