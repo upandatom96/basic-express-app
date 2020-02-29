@@ -51,6 +51,18 @@ caseController.post('/', (req, res) => {
     });
 });
 
+caseController.put('/judge', (req, res) => {
+  const judgeCaseNotes = req.body;
+  caseManager.updateJudgeCaseNotes(judgeCaseNotes)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const id = req.params.id;
   caseManager.deleteOneCase(id)

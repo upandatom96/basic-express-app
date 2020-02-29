@@ -107,6 +107,20 @@ function makeCase(caseOrder) {
   });
 }
 
+function updateJudgeCaseNotes(judgeCaseNotes) {
+  return new Promise((resolve, reject) => {
+    const errors = caseValidator.checkForJudgeCaseNotesErrors(judgeCaseNotes);
+    if (errors.length > 0) {
+      reject(errors);
+    } else {
+      Case.find({ _id: judgeCaseNotes._id })
+      .then((foundCase) => {
+        resolve(foundCase);
+      });
+    }
+  });
+}
+
 function deleteOneCase(id) {
   return new Promise((resolve, reject) => {
     Case.deleteOne({
@@ -125,5 +139,6 @@ module.exports = {
   getAllCaseNames,
   getCaseById,
   makeCase,
+  updateJudgeCaseNotes,
   deleteOneCase
 }
