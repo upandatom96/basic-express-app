@@ -113,10 +113,23 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
     if (errors.length > 0) {
       reject(errors);
     } else {
-      Case.find({ _id: judgeCaseNotes._id })
-      .then((foundCase) => {
-        resolve(foundCase);
-      });
+      Case.findOne({ _id: judgeCaseNotes._id })
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else {
+            foundCase.notes = judgeCaseNotes.notes;
+            foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
+            foundCase.defendantScore = judgeCaseNotes.defendantScore;
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
     }
   });
 }

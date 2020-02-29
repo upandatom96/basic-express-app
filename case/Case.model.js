@@ -10,7 +10,7 @@ const CaseSchema = new Schema({
     type: Number,
     default: 0
   },
-  defedantScore: {
+  defendantScore: {
     type: Number,
     default: 0
   },
