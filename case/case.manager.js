@@ -114,6 +114,11 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
       reject(errors);
     } else {
       Case.findOne({ _id: judgeCaseNotes._id })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("plaintiffEvidence")
+        .populate("defendantEvidence")
+        .populate("witnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
