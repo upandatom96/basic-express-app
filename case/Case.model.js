@@ -41,6 +41,12 @@ const CaseSchema = new Schema({
       ref: 'witness'
     }
   ],
+  revealedWitnesses:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'witness'
+    }
+  ],
   date: {
     type: Date,
     default: Date.now

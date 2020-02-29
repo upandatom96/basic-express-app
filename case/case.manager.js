@@ -16,6 +16,7 @@ function getAllCases() {
       .populate("plaintiffEvidence")
       .populate("defendantEvidence")
       .populate("witnesses")
+      .populate("revealedWitnesses")
       .then((cases) => {
         resolve(cases);
       });
@@ -46,6 +47,7 @@ function getCaseById(id) {
       .populate("plaintiffEvidence")
       .populate("defendantEvidence")
       .populate("witnesses")
+      .populate("revealedWitnesses")
       .then((myCase) => {
         if (myCase) {
           resolve(myCase);
@@ -119,6 +121,7 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
         .populate("plaintiffEvidence")
         .populate("defendantEvidence")
         .populate("witnesses")
+        .populate("revealedWitnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
