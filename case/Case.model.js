@@ -29,7 +29,19 @@ const CaseSchema = new Schema({
       ref: 'evidence'
     }
   ],
+  revealedPlaintiffEvidence:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'evidence'
+    }
+  ],
   defendantEvidence:[
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'evidence'
+    }
+  ],
+  revealedDefendantEvidence:[
     {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'evidence'

@@ -15,7 +15,9 @@ function getAllCases() {
       .populate("issue")
       .populate("witnesses")
       .populate("plaintiffEvidence")
+      .populate("revealedPlaintiffEvidence")
       .populate("defendantEvidence")
+      .populate("revealedDefendantEvidence")
       .populate("witnesses")
       .populate("revealedWitnesses")
       .then((cases) => {
@@ -46,7 +48,9 @@ function getCaseById(id) {
       .populate("issue")
       .populate("witnesses")
       .populate("plaintiffEvidence")
+      .populate("revealedPlaintiffEvidence")
       .populate("defendantEvidence")
+      .populate("revealedDefendantEvidence")
       .populate("witnesses")
       .populate("revealedWitnesses")
       .then((myCase) => {
@@ -120,7 +124,9 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
         .populate("issue")
         .populate("witnesses")
         .populate("plaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
         .populate("defendantEvidence")
+        .populate("revealedDefendantEvidence")
         .populate("witnesses")
         .populate("revealedWitnesses")
         .then((foundCase) => {
@@ -188,6 +194,67 @@ function revealWitness(caseId, witnessId) {
   });
 }
 
+function revealEvidence(caseId, evidenceId, isPlaintiff) {
+  return new Promise((resolve, reject) => {
+    const hasCaseId = boolUtil.hasValue(caseId);
+    const hasEvidenceId = boolUtil.hasValue(evidenceId);
+    if (!hasCaseId || !hasEvidenceId) {
+      reject("Case id and evidence id required.");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("plaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("defendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .populate("revealedWitnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else {
+            let evidenceToReveal;
+            if (isPlaintiff) {
+              evidenceToReveal = foundCase.plaintiffEvidence.find((evidence) => {
+                return evidence._id.toString() === evidenceId;
+              });
+            } else {
+              evidenceToReveal = foundCase.defendantEvidence.find((evidence) => {
+                return evidence._id.toString() === evidenceId;
+              });
+            }
+
+            if (!evidenceToReveal) {
+              reject({
+                message: 'Failed to find the evidence'
+              });
+            } else {
+              if (isPlaintiff) {
+                foundCase.revealedPlaintiffEvidence.push(evidenceToReveal);
+                foundCase.plaintiffEvidence = foundCase.plaintiffEvidence.filter((evidence) => {
+                  return evidence._id.toString() != evidenceId;
+                });
+              } else {
+                foundCase.revealedDefendantEvidence.push(evidenceToReveal);
+                foundCase.defendantEvidence = foundCase.defendantEvidence.filter((evidence) => {
+                  return evidence._id.toString() != evidenceId;
+                });
+              }
+
+              foundCase.save()
+                .then((updatedCase) => {
+                  resolve(updatedCase);
+                });
+            }
+          }
+        });
+    }
+  });
+}
+
 function deleteOneCase(id) {
   return new Promise((resolve, reject) => {
     Case.deleteOne({
@@ -208,5 +275,6 @@ module.exports = {
   makeCase,
   updateJudgeCaseNotes,
   revealWitness,
+  revealEvidence,
   deleteOneCase
 }
