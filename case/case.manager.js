@@ -13,12 +13,12 @@ function getAllCases() {
     Case.find({})
       .sort([['date', -1]])
       .populate("issue")
-      .populate("witnesses")
-      .populate("plaintiffEvidence")
+      .populate("unrevealedWitnesses")
+      .populate("unrevealedPlaintiffEvidence")
       .populate("revealedPlaintiffEvidence")
-      .populate("defendantEvidence")
+      .populate("unrevealedDefendantEvidence")
       .populate("revealedDefendantEvidence")
-      .populate("witnesses")
+      .populate("unrevealedWitnesses")
       .populate("revealedWitnesses")
       .then((allCases) => {
         const sortedCases = {
@@ -57,12 +57,12 @@ function getCaseById(id) {
       _id: id
     })
       .populate("issue")
-      .populate("witnesses")
-      .populate("plaintiffEvidence")
+      .populate("unrevealedWitnesses")
+      .populate("unrevealedPlaintiffEvidence")
       .populate("revealedPlaintiffEvidence")
-      .populate("defendantEvidence")
+      .populate("unrevealedDefendantEvidence")
       .populate("revealedDefendantEvidence")
-      .populate("witnesses")
+      .populate("unrevealedWitnesses")
       .populate("revealedWitnesses")
       .then((myCase) => {
         if (myCase) {
@@ -96,9 +96,9 @@ function makeCase(caseOrder) {
                         new Case({
                           name: caseOrder.name,
                           issue: randomIssue._id,
-                          witnesses: randomWitnesses,
-                          plaintiffEvidence: randomEvidence.plantiffEvidence,
-                          defendantEvidence: randomEvidence.defendantEvidence
+                          unrevealedWitnesses: randomWitnesses,
+                          unrevealedPlaintiffEvidence: randomEvidence.plaintiffEvidence,
+                          unrevealedDefendantEvidence: randomEvidence.defendantEvidence
                         })
                           .save()
                           .then((addedCase) => {
@@ -133,12 +133,12 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
     } else {
       Case.findOne({ _id: judgeCaseNotes._id })
         .populate("issue")
-        .populate("witnesses")
-        .populate("plaintiffEvidence")
+        .populate("unrevealedWitnesses")
+        .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
-        .populate("defendantEvidence")
+        .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
+        .populate("unrevealedWitnesses")
         .populate("revealedWitnesses")
         .then((foundCase) => {
           if (!foundCase) {
@@ -172,12 +172,12 @@ function closeCase(caseId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
-        .populate("witnesses")
-        .populate("plaintiffEvidence")
+        .populate("unrevealedWitnesses")
+        .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
-        .populate("defendantEvidence")
+        .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
+        .populate("unrevealedWitnesses")
         .populate("revealedWitnesses")
         .then((foundCase) => {
           if (!foundCase) {
@@ -210,10 +210,10 @@ function revealWitness(caseId, witnessId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
-        .populate("witnesses")
-        .populate("plaintiffEvidence")
-        .populate("defendantEvidence")
-        .populate("witnesses")
+        .populate("unrevealedWitnesses")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("unrevealedWitnesses")
         .populate("revealedWitnesses")
         .then((foundCase) => {
           if (!foundCase) {
@@ -225,7 +225,7 @@ function revealWitness(caseId, witnessId) {
               message: `Cannot edit a closed case`
             });
           } else {
-            const witnessToReveal = foundCase.witnesses.find((witness) => {
+            const witnessToReveal = foundCase.unrevealedWitnesses.find((witness) => {
               return witness._id.toString() === witnessId;
             });
 
@@ -235,7 +235,7 @@ function revealWitness(caseId, witnessId) {
               });
             } else {
               foundCase.revealedWitnesses.push(witnessToReveal);
-              foundCase.witnesses = foundCase.witnesses.filter((witness) => {
+              foundCase.unrevealedWitnesses = foundCase.unrevealedWitnesses.filter((witness) => {
                 return witness._id.toString() != witnessId;
               });
 
@@ -259,12 +259,12 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
-        .populate("witnesses")
-        .populate("plaintiffEvidence")
+        .populate("unrevealedWitnesses")
+        .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
-        .populate("defendantEvidence")
+        .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
+        .populate("unrevealedWitnesses")
         .populate("revealedWitnesses")
         .then((foundCase) => {
           if (!foundCase) {
@@ -278,11 +278,11 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
           } else {
             let evidenceToReveal;
             if (isPlaintiff) {
-              evidenceToReveal = foundCase.plaintiffEvidence.find((evidence) => {
+              evidenceToReveal = foundCase.unrevealedPlaintiffEvidence.find((evidence) => {
                 return evidence._id.toString() === evidenceId;
               });
             } else {
-              evidenceToReveal = foundCase.defendantEvidence.find((evidence) => {
+              evidenceToReveal = foundCase.unrevealedDefendantEvidence.find((evidence) => {
                 return evidence._id.toString() === evidenceId;
               });
             }
@@ -294,12 +294,12 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
             } else {
               if (isPlaintiff) {
                 foundCase.revealedPlaintiffEvidence.push(evidenceToReveal);
-                foundCase.plaintiffEvidence = foundCase.plaintiffEvidence.filter((evidence) => {
+                foundCase.unrevealedPlaintiffEvidence = foundCase.unrevealedPlaintiffEvidence.filter((evidence) => {
                   return evidence._id.toString() != evidenceId;
                 });
               } else {
                 foundCase.revealedDefendantEvidence.push(evidenceToReveal);
-                foundCase.defendantEvidence = foundCase.defendantEvidence.filter((evidence) => {
+                foundCase.unrevealedDefendantEvidence = foundCase.unrevealedDefendantEvidence.filter((evidence) => {
                   return evidence._id.toString() != evidenceId;
                 });
               }

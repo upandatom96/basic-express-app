@@ -115,12 +115,12 @@ module.exports = {
 
 function sort(evidence) {
   const sortedEvidence = {
-    plantiffEvidence: [],
+    plaintiffEvidence: [],
     defendantEvidence: []
   };
   evidence.forEach((item, i) => {
     if (i % 2 === 0) {
-      sortedEvidence.plantiffEvidence.push(item);
+      sortedEvidence.plaintiffEvidence.push(item);
     } else {
       sortedEvidence.defendantEvidence.push(item);
     }

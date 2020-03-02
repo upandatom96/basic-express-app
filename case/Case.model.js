@@ -31,7 +31,7 @@ const CaseSchema = new Schema({
     ref: 'issue',
     required: true 
   },
-  plaintiffEvidence:[
+  unrevealedPlaintiffEvidence:[
     {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'evidence'
@@ -43,7 +43,7 @@ const CaseSchema = new Schema({
       ref: 'evidence'
     }
   ],
-  defendantEvidence:[
+  unrevealedDefendantEvidence:[
     {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'evidence'
@@ -55,7 +55,7 @@ const CaseSchema = new Schema({
       ref: 'evidence'
     }
   ],
-  witnesses:[
+  unrevealedWitnesses:[
     {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'witness'
