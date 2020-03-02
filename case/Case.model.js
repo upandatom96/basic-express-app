@@ -71,7 +71,7 @@ const CaseSchema = new Schema({
     type: Date,
     default: null
   },
-  date: {
+  openedDate: {
     type: Date,
     default: Date.now
   },
