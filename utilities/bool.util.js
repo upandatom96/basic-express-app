@@ -18,6 +18,14 @@ function hasValue(value) {
   return !hasNoValue(value);
 }
 
+function hasNoNumberValue(value) {
+  return hasNoValue(value) || isNaN(value);
+}
+
+function hasNumberValue(value) {
+  return !hasNoNumberValue(value);
+}
+
 function hasBoolValue(value) {
   return value === true || value === false;
 }
@@ -30,5 +38,7 @@ module.exports = {
   hasBoolValue,
   hasNoBoolValue,
   hasNoValue,
-  hasValue
+  hasValue,
+  hasNumberValue,
+  hasNoNumberValue
 }

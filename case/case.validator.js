@@ -5,14 +5,20 @@ function checkForCaseOrderErrors(caseOrder) {
   if (boolUtil.hasNoValue(caseOrder.name)) {
     errors.push({ text: 'Please add a name' });
   }
-  if (boolUtil.hasNoValue(caseOrder.witnessCount)) {
+  if (boolUtil.hasNoNumberValue(caseOrder.witnessCount)) {
     errors.push({ text: 'Please add a witness count' });
   }
-  if (boolUtil.hasNoValue(caseOrder.evidenceCount)) {
+  if (boolUtil.hasNumberValue(caseOrder.witnessCount) && caseOrder.witnessCount > 10) {
+    errors.push({ text: 'Witness count must be less than 10' });
+  }
+  if (boolUtil.hasNoNumberValue(caseOrder.evidenceCount)) {
     errors.push({ text: 'Please add an evidence count' });
   }
-  if (boolUtil.hasValue(caseOrder.evidenceCount) && caseOrder.evidenceCount === 0) {
+  if (boolUtil.hasNumberValue(caseOrder.evidenceCount) && caseOrder.evidenceCount === 0) {
     errors.push({ text: 'Evidence count must be more than zero' });
+  }
+  if (boolUtil.hasNumberValue(caseOrder.evidenceCount) && caseOrder.evidenceCount > 10) {
+    errors.push({ text: 'Evidence count must be less than 10' });
   }
   return errors;
 }
