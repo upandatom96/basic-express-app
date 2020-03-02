@@ -26,47 +26,51 @@ const CaseSchema = new Schema({
     type: String,
     default: null
   },
-  issue: { 
-    type: mongoose.Schema.Types.ObjectId, 
+  issue: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'issue',
-    required: true 
+    required: true
   },
-  unrevealedPlaintiffEvidence:[
+  unrevealedPlaintiffEvidence: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'evidence'
     }
   ],
-  revealedPlaintiffEvidence:[
+  revealedPlaintiffEvidence: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'evidence'
     }
   ],
-  unrevealedDefendantEvidence:[
+  unrevealedDefendantEvidence: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'evidence'
     }
   ],
-  revealedDefendantEvidence:[
+  revealedDefendantEvidence: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'evidence'
     }
   ],
-  unrevealedWitnesses:[
+  unrevealedWitnesses: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'witness'
     }
   ],
-  revealedWitnesses:[
+  revealedWitnesses: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'witness'
     }
   ],
+  verdictDate: {
+    type: Date,
+    default: null
+  },
   date: {
     type: Date,
     default: Date.now

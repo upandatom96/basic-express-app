@@ -190,6 +190,7 @@ function closeCase(caseId) {
             });
           } else {
             foundCase.closed = true;
+            foundCase.verdictDate = new Date().toISOString();
 
             foundCase.save()
               .then((updatedCase) => {
