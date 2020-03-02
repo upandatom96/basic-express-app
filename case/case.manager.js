@@ -134,6 +134,10 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
             reject({
               message: `Failed to find case`
             });
+          } else if (boolUtil.hasValue(foundCase.verdict)) {
+            reject({
+              message: `Cannot edit case with verdict`
+            });
           } else {
             foundCase.notes = judgeCaseNotes.notes;
             foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
@@ -167,6 +171,10 @@ function revealWitness(caseId, witnessId) {
           if (!foundCase) {
             reject({
               message: `Failed to find case`
+            });
+          } else if (boolUtil.hasValue(foundCase.verdict)) {
+            reject({
+              message: `Cannot edit case with verdict`
             });
           } else {
             const witnessToReveal = foundCase.witnesses.find((witness) => {
@@ -214,6 +222,10 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
           if (!foundCase) {
             reject({
               message: `Failed to find case`
+            });
+          } else if (boolUtil.hasValue(foundCase.verdict)) {
+            reject({
+              message: `Cannot edit case with verdict`
             });
           } else {
             let evidenceToReveal;

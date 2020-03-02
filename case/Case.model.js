@@ -18,6 +18,10 @@ const CaseSchema = new Schema({
     type: String,
     default: null
   },
+  verdict: {
+    type: String,
+    default: null
+  },
   issue: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'issue',

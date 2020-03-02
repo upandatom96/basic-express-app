@@ -28,10 +28,13 @@ function checkForJudgeCaseNotesErrors(caseNotes) {
   if (boolUtil.hasNoValue(caseNotes._id)) {
     errors.push({ text: 'Case notes must have a case id' });
   }
-  if (boolUtil.hasNoValue(caseNotes.defendantScore)) {
+  if (boolUtil.hasValue(caseNotes.verdict)) {
+    errors.push({ text: 'Cannot edit a case with a verdict' });
+  }
+  if (boolUtil.hasNoNumberValue(caseNotes.defendantScore)) {
     errors.push({ text: 'Case notes must have a defendant score' });
   }
-  if (boolUtil.hasNoValue(caseNotes.plaintiffScore)) {
+  if (boolUtil.hasNoNumberValue(caseNotes.plaintiffScore)) {
     errors.push({ text: 'Case notes must have a plaintiff score' });
   }
   return errors;
