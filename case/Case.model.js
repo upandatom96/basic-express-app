@@ -18,6 +18,10 @@ const CaseSchema = new Schema({
     type: String,
     default: null
   },
+  closed: {
+    type: Boolean,
+    default: false
+  },
   verdict: {
     type: String,
     default: null

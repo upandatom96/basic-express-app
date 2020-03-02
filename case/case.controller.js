@@ -63,6 +63,18 @@ caseController.put('/judge', (req, res) => {
     });
 });
 
+caseController.put('/:caseId/close', (req, res) => {
+  const caseId = req.params.caseId;
+  caseManager.closeCase(caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.put('/revealWitness/case/:caseId/witness/:witnessId', (req, res) => {
   const caseId = req.params.caseId;
   const witnessId = req.params.witnessId;

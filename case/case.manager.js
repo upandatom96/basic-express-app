@@ -134,11 +134,51 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
             reject({
               message: `Failed to find case`
             });
+          } else if (foundCase.closed) {
+            reject({
+              message: `Cannot edit a closed case`
+            });
           } else {
             foundCase.notes = judgeCaseNotes.notes;
             foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
             foundCase.defendantScore = judgeCaseNotes.defendantScore;
             foundCase.verdict = judgeCaseNotes.verdict;
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
+    }
+  });
+}
+
+function closeCase(caseId) {
+  return new Promise((resolve, reject) => {
+    if (boolUtil.hasNoValue(caseId)) {
+      reject({ message: "need case id" });
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("plaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("defendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .populate("revealedWitnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (boolUtil.hasNoValue(foundCase.verdict)) {
+            reject({
+              message: `Cannot close case without a verdict`
+            });
+          } else {
+            foundCase.closed = true;
 
             foundCase.save()
               .then((updatedCase) => {
@@ -169,9 +209,9 @@ function revealWitness(caseId, witnessId) {
             reject({
               message: `Failed to find case`
             });
-          } else if (boolUtil.hasValue(foundCase.verdict)) {
+          } else if (foundCase.closed) {
             reject({
-              message: `Cannot edit case with verdict`
+              message: `Cannot edit a closed case`
             });
           } else {
             const witnessToReveal = foundCase.witnesses.find((witness) => {
@@ -220,9 +260,9 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
             reject({
               message: `Failed to find case`
             });
-          } else if (boolUtil.hasValue(foundCase.verdict)) {
+          } else if (foundCase.closed) {
             reject({
-              message: `Cannot edit case with verdict`
+              message: `Cannot edit a closed case`
             });
           } else {
             let evidenceToReveal;
@@ -285,5 +325,6 @@ module.exports = {
   updateJudgeCaseNotes,
   revealWitness,
   revealEvidence,
-  deleteOneCase
+  deleteOneCase,
+  closeCase
 }
