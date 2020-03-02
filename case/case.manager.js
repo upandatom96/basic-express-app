@@ -165,10 +165,10 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
   });
 }
 
-function closeCase(caseId) {
+function closeCase(caseId, isDefendantGuilty) {
   return new Promise((resolve, reject) => {
-    if (boolUtil.hasNoValue(caseId)) {
-      reject({ message: "need case id" });
+    if (boolUtil.hasNoValue(caseId) || boolUtil.hasNoBoolValue(isDefendantGuilty)) {
+      reject({ message: "cannot close case" });
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
@@ -190,6 +190,7 @@ function closeCase(caseId) {
             });
           } else {
             foundCase.closed = true;
+            foundCase.isDefendantGuilty = isDefendantGuilty;
             foundCase.closedDate = new Date().toISOString();
 
             foundCase.save()

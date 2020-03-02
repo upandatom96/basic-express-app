@@ -85,9 +85,10 @@ caseController.put('/judge', (req, res) => {
     });
 });
 
-caseController.put('/:caseId/close', (req, res) => {
-  const caseId = req.params.caseId;
-  caseManager.closeCase(caseId)
+caseController.put('/close', (req, res) => {
+  const caseId = req.body.caseId;
+  const isDefendantGuilty = req.body.isDefendantGuilty;
+  caseManager.closeCase(caseId, isDefendantGuilty)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
