@@ -154,6 +154,7 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
             foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
             foundCase.defendantScore = judgeCaseNotes.defendantScore;
             foundCase.verdict = judgeCaseNotes.verdict;
+            foundCase.isDefendantGuilty = judgeCaseNotes.isDefendantGuilty;
 
             foundCase.save()
               .then((updatedCase) => {

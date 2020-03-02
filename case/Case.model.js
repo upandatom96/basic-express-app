@@ -28,7 +28,7 @@ const CaseSchema = new Schema({
   },
   isDefendantGuilty: {
     type: Boolean,
-    default: null
+    default: false
   },
   issue: {
     type: mongoose.Schema.Types.ObjectId,
