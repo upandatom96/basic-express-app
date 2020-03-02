@@ -14,6 +14,28 @@ caseController.get('/', (req, res) => {
     });
 });
 
+caseController.get('/open', (req, res) => {
+  caseManager.getAllCases()
+    .then((cases) => {
+      res.send(cases.openCases);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.get('/closed', (req, res) => {
+  caseManager.getAllCases()
+    .then((cases) => {
+      res.send(cases.closedCases);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.get('/names', (req, res) => {
   caseManager.getAllCaseNames()
     .then((caseNames) => {

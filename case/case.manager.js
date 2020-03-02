@@ -20,8 +20,19 @@ function getAllCases() {
       .populate("revealedDefendantEvidence")
       .populate("witnesses")
       .populate("revealedWitnesses")
-      .then((cases) => {
-        resolve(cases);
+      .then((allCases) => {
+        const sortedCases = {
+          openCases: [],
+          closedCases: [],
+        };
+        allCases.forEach((myCase) => {
+          if (myCase.closed) {
+            sortedCases.closedCases.push(myCase);
+          } else {
+            sortedCases.openCases.push(myCase);
+          }
+        });
+        resolve(sortedCases);
       });
   });
 }
