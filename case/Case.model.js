@@ -67,7 +67,7 @@ const CaseSchema = new Schema({
       ref: 'witness'
     }
   ],
-  verdictDate: {
+  closedDate: {
     type: Date,
     default: null
   },
