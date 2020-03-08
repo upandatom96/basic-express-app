@@ -45,7 +45,7 @@ userController.put('/passwordReset/automatic', (req, res) => {
         const subject = "Password Reset";
         const message = `Your new password is ${response.newPassword}`;
         mailer.sendEmail(recipient, subject, message);
-        res.send("Password reset");
+        res.send({ message: "Password reset" });
       })
       .catch((err) => {
         const recipient = email;
