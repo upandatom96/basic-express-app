@@ -14,6 +14,17 @@ function getAllUsers() {
   });
 }
 
+function getUser(id) {
+  return new Promise((resolve, reject) => {
+    User.findOne({
+      _id: id
+    })
+      .then((user) => {
+        resolve(user);
+      });
+  });
+}
+
 function registerUser(user) {
   return new Promise((resolve, reject) => {
     const errors = userValidator.checkForUserRegistrationErrors(user);
@@ -149,6 +160,7 @@ function deleteOneUser(id) {
 
 module.exports = {
   getAllUsers,
+  getUser,
   registerUser,
   resetPasswordAutomatic,
   resetPasswordManual,

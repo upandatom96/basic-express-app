@@ -16,6 +16,18 @@ userController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res)
     });
 });
 
+userController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  const id = req.params.id;
+  userManager.getUser(id)
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 userController.post('/register', (req, res) => {
   const user = req.body;
   userManager.registerUser(user)
