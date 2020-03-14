@@ -87,7 +87,7 @@ userController.put('/passwordReset/manual', authUtil.jwtAuthenticated, (req, res
         const subject = "Password Reset (Adam on the Internet)";
         const message = `You have reset your password for adam on the internet.`;
         mailer.sendEmail(recipient, subject, message);
-        res.send("Password reset");
+        res.send({ message: "Password reset" });
       })
       .catch((err) => {
         const recipient = email;
@@ -115,7 +115,7 @@ userController.put('/emailUpdate/self', authUtil.jwtAuthenticated, (req, res) =>
         const subject = "Email Reset (Adam on the Internet)";
         const message = `You have reset your email for adam on the internet.`;
         mailer.sendEmail(recipient, subject, message);
-        res.send("Email reset");
+        res.send({ message: "Email reset" });
       })
       .catch((err) => {
         res.statusCode = 500;
