@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 require('./User.model');
 const User = mongoose.model('user');
+const logManager = require('../log/log.manager');
 const userValidator = require('./user.validator');
 const randomUtil = require('../utilities/random.util');
 const bcrypt = require('bcryptjs');
@@ -42,6 +43,11 @@ function registerUser(user) {
             user.password = randomUtil.generateRandomPassword();
             runRegistration(user)
               .then((res) => {
+                logManager.addLog({
+                  message: "registered: " + user.email,
+                  level: "info",
+                  application: "basic-express-app"
+                });
                 resolve({
                   message: res.message,
                   newPassword: user.password
@@ -151,6 +157,11 @@ function deleteOneUser(id) {
       _id: id
     })
       .then(() => {
+        logManager.addLog({
+          message: "deleted: " + id,
+          level: "info",
+          application: "basic-express-app"
+        });
         resolve({
           message: `User with given id deleted or never existed`
         });
