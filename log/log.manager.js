@@ -5,6 +5,7 @@ const Log = mongoose.model('log');
 function getAllLogs() {
   return new Promise((resolve, reject) => {
     Log.find({})
+      .sort([['date', -1]])
       .then((logs) => {
         resolve(logs);
       });
@@ -16,6 +17,7 @@ function getLogsByApp(appName) {
     Log.find({
       application: appName
     })
+      .sort([['date', -1]])
       .then((logs) => {
         resolve(logs);
       });
