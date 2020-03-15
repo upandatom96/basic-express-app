@@ -30,6 +30,9 @@ function setupControllers(app) {
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 
+  const logController = require('../log/log.controller');
+  app.use('/log', logController);
+
   const authController = require('../auth/auth.controller');
   app.use('/auth', authController);
 }
