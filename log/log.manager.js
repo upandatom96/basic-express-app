@@ -24,6 +24,7 @@ function getLogsByApp(appName) {
 
 function addLog(log) {
   return new Promise((resolve, reject) => {
+    console.log(log.message);
     new Log({
       message: log.message,
       level: log.level,

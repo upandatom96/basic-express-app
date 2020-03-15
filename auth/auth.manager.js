@@ -1,4 +1,5 @@
 const passport = require('passport');
+const logManager = require('../log/log.manager');
 
 function loginUser(res, req, next) {
   passport.authenticate('local', (err, user, info) => {
@@ -12,6 +13,11 @@ function loginUser(res, req, next) {
       res.status(200);
       res.json({
         "token": token
+      });
+      logManager.addLog({
+        message: "login: " + user.email,
+        level: "info",
+        application: "basic-express-app"
       });
     }
     else {
