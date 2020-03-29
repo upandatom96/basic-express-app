@@ -11,7 +11,6 @@ const boolUtil = require('../utilities/bool.util');
 function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
-      .sort([['date', 1]])
       .populate("issue")
       .populate("unrevealedWitnesses")
       .populate("unrevealedPlaintiffEvidence")
@@ -31,6 +30,16 @@ function getAllCases() {
           } else {
             sortedCases.openCases.push(myCase);
           }
+        });
+        sortedCases.closedCases.sort(function(a,b){
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.openedDate) - new Date(a.openedDate);
+        });
+        sortedCases.openCases.sort(function(a,b){
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.openedDate) - new Date(a.openedDate);
         });
         resolve(sortedCases);
       });
