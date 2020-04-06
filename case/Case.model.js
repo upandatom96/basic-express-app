@@ -22,10 +22,6 @@ const CaseSchema = new Schema({
     type: Boolean,
     default: false
   },
-  verdict: {
-    type: String,
-    default: null
-  },
   isDefendantGuilty: {
     type: Boolean,
     default: false

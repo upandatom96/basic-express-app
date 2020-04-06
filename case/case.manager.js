@@ -162,7 +162,6 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
             foundCase.notes = judgeCaseNotes.notes;
             foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
             foundCase.defendantScore = judgeCaseNotes.defendantScore;
-            foundCase.verdict = judgeCaseNotes.verdict;
             foundCase.isDefendantGuilty = judgeCaseNotes.isDefendantGuilty;
 
             foundCase.save()
@@ -193,10 +192,6 @@ function closeCase(caseId, isDefendantGuilty) {
           if (!foundCase) {
             reject({
               message: `Failed to find case`
-            });
-          } else if (boolUtil.hasNoValue(foundCase.verdict)) {
-            reject({
-              message: `Cannot close case without a verdict`
             });
           } else {
             foundCase.closed = true;
