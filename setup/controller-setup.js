@@ -27,6 +27,9 @@ function setupControllers(app) {
   const caseController = require('../case/case.controller');
   app.use('/case', caseController);
 
+  const applicationController = require('../application/application.controller');
+  app.use('/application', applicationController);
+
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 

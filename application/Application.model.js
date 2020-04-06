@@ -12,7 +12,7 @@ const ApplicationSchema = new Schema({
   },
   description: {
     type: String,
-    required: false,
+    required: true,
   },
   icon: {
     type: String,
