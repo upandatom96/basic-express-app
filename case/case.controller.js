@@ -66,6 +66,9 @@ caseController.post('/', (req, res) => {
   caseOrder.witnessCount = Number(caseOrder.witnessCount);
   caseManager.makeCase(caseOrder)
     .then((addedCase) => {
+      const caseName = addedCase.name;
+      const message = `<p>The Case Of |${caseName}| was opened</p>.`;
+      mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE OPENED", message);
       res.send(addedCase);
     })
     .catch((err) => {
