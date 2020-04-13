@@ -9,7 +9,8 @@ function sendEmail(recipient, subject, message) {
     to: recipient,
     from: 'adamontheinternet.com@gmail.com',
     subject: subject,
-    text: message
+    text: message,
+    html: message
   };
   sgMail.send(msg);
 }

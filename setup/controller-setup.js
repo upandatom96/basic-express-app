@@ -38,6 +38,9 @@ function setupControllers(app) {
 
   const authController = require('../auth/auth.controller');
   app.use('/auth', authController);
+
+  const contactController = require('../contact/contact.controller');
+  app.use('/contact', contactController);
 }
 
 module.exports = {
