@@ -1,6 +1,7 @@
 const express = require('express');
 const caseController = express.Router();
 const caseManager = require('./case.manager');
+const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
 
 caseController.get('/', (req, res) => {
@@ -90,6 +91,10 @@ caseController.put('/close', (req, res) => {
   const isDefendantGuilty = req.body.isDefendantGuilty;
   caseManager.closeCase(caseId, isDefendantGuilty)
     .then((updatedCase) => {
+      const caseName = updatedCase.name;
+      const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
+      const message = `<p>The Case Of |${caseName}| was closed</p>.<p>The defendant was |${verdict}|</p>`;
+      mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
       res.send(updatedCase);
     })
     .catch((err) => {
