@@ -67,7 +67,7 @@ caseController.post('/', (req, res) => {
   caseManager.makeCase(caseOrder)
     .then((addedCase) => {
       const caseName = addedCase.name;
-      const message = `<p>The Case Of |${caseName}| was opened</p>.`;
+      const message = `<p>The Case Of <strong>${caseName}</strong> was opened.</p>`;
       mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE OPENED", message);
       res.send(addedCase);
     })
@@ -96,7 +96,7 @@ caseController.put('/close', (req, res) => {
     .then((updatedCase) => {
       const caseName = updatedCase.name;
       const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
-      const message = `<p>The Case Of |${caseName}| was closed</p>.<p>The defendant was |${verdict}|</p>`;
+      const message = `<p>The Case Of <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
       mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
       res.send(updatedCase);
     })
