@@ -24,9 +24,6 @@ function checkForGeneralBookmarkErrors(bookmark) {
   if (boolUtil.hasNoValue(bookmark.url)) {
     errors.push({ text: 'Please add a url' });
   }
-  if (boolUtil.hasNoValue(bookmark.type)) {
-    errors.push({ text: 'Please add a type' });
-  }
   return errors;
 }
 
