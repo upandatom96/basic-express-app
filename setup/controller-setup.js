@@ -39,6 +39,9 @@ function setupControllers(app) {
   const authController = require('../auth/auth.controller');
   app.use('/auth', authController);
 
+  const bookmarkController = require('../bookmark/bookmark.controller');
+  app.use('/bookmark', bookmarkController);
+
   const contactController = require('../contact/contact.controller');
   app.use('/contact', contactController);
 }
