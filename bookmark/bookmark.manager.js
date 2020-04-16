@@ -39,7 +39,8 @@ function addBookmark(bookmark) {
       new Bookmark({
         name: bookmark.name,
         url: bookmark.url,
-        type: bookmark.type
+        type: bookmark.type,
+        order: bookmark.order,
       })
         .save()
         .then((resBookmark) => {
@@ -70,6 +71,7 @@ function editBookmark(bookmark) {
             foundBookmark.name = bookmark.name;
             foundBookmark.url = bookmark.url;
             foundBookmark.type = bookmark.type;
+            foundBookmark.order = bookmark.order;
 
             foundBookmark.save()
               .then((editedBookmark) => {

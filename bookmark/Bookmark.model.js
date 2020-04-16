@@ -14,6 +14,10 @@ const BookmarkSchema = new Schema({
     type: String,
     required: false,
   },
+  order: {
+    type: Number,
+    required: false,
+  },
   date: {
     type: Date,
     default: Date.now
