@@ -17,6 +17,7 @@ const BookmarkSchema = new Schema({
   order: {
     type: Number,
     required: false,
+    default: 99
   },
   date: {
     type: Date,
