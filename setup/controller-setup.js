@@ -42,6 +42,9 @@ function setupControllers(app) {
   const bookmarkController = require('../bookmark/bookmark.controller');
   app.use('/bookmark', bookmarkController);
 
+  const spectreCardController = require('../spectre-card/spectreCard.controller');
+  app.use('/spectreCard', spectreCardController);
+
   const contactController = require('../contact/contact.controller');
   app.use('/contact', contactController);
 }
