@@ -46,11 +46,11 @@ function checkForGeneralSpectreCardErrors(spectreCard) {
   if (boolUtil.hasNoValue(spectreCard.valueOne)) {
     errors.push({ text: 'Please add a first value' });
   }
-  const needsTwo = isThink || isHunter || isGenerator;
+  const needsTwo = isOrders || isHunter || isGenerator;
   if (needsTwo && boolUtil.hasNoValue(spectreCard.valueTwo)) {
     errors.push({ text: 'Please add a second value' });
   }
-  const needsThree = isThink;
+  const needsThree = isOrders;
   if (needsThree && boolUtil.hasNoValue(spectreCard.valueThree)) {
     errors.push({ text: 'Please add a third value' });
   }
