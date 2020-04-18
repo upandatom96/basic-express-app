@@ -20,7 +20,7 @@ const SpectreCardSchema = new Schema({
   },
   valueTwo: {
     type: String,
-    required: true,
+    required: false,
   },
   valueThree: {
     type: String,
