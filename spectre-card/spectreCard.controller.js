@@ -2,6 +2,7 @@ const express = require('express');
 const spectreCardController = express.Router();
 const {
   getAllSpectreCards,
+  getAllSpectreDecks,
   getSpectreCardById,
   addSpectreCard,
   editSpectreCard,
@@ -13,6 +14,17 @@ spectreCardController.get('/', (req, res) => {
   getAllSpectreCards()
     .then((spectreCards) => {
       res.send(spectreCards);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+spectreCardController.get('/decks', (req, res) => {
+  getAllSpectreDecks()
+    .then((spectreDecks) => {
+      res.send(spectreDecks);
     })
     .catch((err) => {
       res.statusCode = 500;

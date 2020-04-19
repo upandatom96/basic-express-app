@@ -2,12 +2,46 @@ const mongoose = require('mongoose');
 require('./SpectreCard.model');
 const SpectreCard = mongoose.model('spectreCard');
 const spectreCardValidator = require('./spectreCard.validator');
+const randomUtil = require('../utilities/random.util');
 
 function getAllSpectreCards() {
   return new Promise((resolve, reject) => {
     SpectreCard.find({})
       .then((spectreCards) => {
         resolve(spectreCards);
+      });
+  });
+}
+
+function getAllSpectreDecks() {
+  return new Promise((resolve, reject) => {
+    SpectreCard.find({})
+      .then((spectreCards) => {
+
+        spectreCards = randomUtil.shuffleArray(spectreCards);
+
+        // traps
+        const ordersDeck = [];
+        const thinkDeck = [];
+        const anagramsDeck = [];
+
+        // encounters
+        const hunterDeck = [];
+        const generatorDeck = [];
+
+        spectreCards.forEach((card) => {
+          ordersDeck.push(card);
+        });
+
+        const decks = {
+          ordersDeck,
+          thinkDeck,
+          anagramsDeck,
+          hunterDeck,
+          generatorDeck
+        };
+
+        resolve(decks);
       });
   });
 }
@@ -102,6 +136,7 @@ function deleteOneSpectreCard(id) {
 
 module.exports = {
   getAllSpectreCards,
+  getAllSpectreDecks,
   getSpectreCardById,
   addSpectreCard,
   editSpectreCard,

@@ -1,4 +1,5 @@
 const boolUtil = require('../utilities/bool.util');
+const cardHelper = require('./spectreCard.helper');
 
 function checkForSpectreCardCreateErrors(spectreCard) {
   const errors = checkForGeneralSpectreCardErrors(spectreCard);
@@ -19,26 +20,27 @@ function checkForSpectreCardEditErrors(spectreCard) {
 function checkForGeneralSpectreCardErrors(spectreCard) {
   let errors = [];
 
-  const isTrap = (spectreCard.deckType === "TRAP");
-  const isEncounter = (spectreCard.deckType === "ENCOUNTER");
+  const isTrap = cardHelper.isTrap(spectreCard);
+  const isEncounter = cardHelper.isEncounter(spectreCard);
 
   if (!isTrap && !isEncounter) {
     errors.push({ text: 'Please add a valid deck type' });
   }
 
-  const isAnagrams = (spectreCard.cardType === "ANAGRAMS");
-  const isOrders = (spectreCard.cardType === "ORDERS");
-  const isThink = (spectreCard.cardType === "THINK");
-  const isHunter = (spectreCard.cardType === "HUNTER");
-  const isGenerator = (spectreCard.cardType === "GENERATOR");
+  const isAnagrams = cardHelper.isAnagrams(spectreCard);
+  const isOrders = cardHelper.isOrders(spectreCard);
+  const isThink = cardHelper.isThink(spectreCard);
+  const isHunter = cardHelper.isHunter(spectreCard);
+  const isGenerator = cardHelper.isGenerator(spectreCard);
 
   if (!isAnagrams && !isOrders && !isThink && !isHunter && !isGenerator) {
     errors.push({ text: 'Please add a valid card type' });
   }
 
-  const isAct = (spectreCard.cardSubType === "ACT");
-  const isDraw = (spectreCard.cardSubType === "DRAW");
-  const isImpersonate = (spectreCard.cardSubType === "IMPERSONATE");
+  const isAct = cardHelper.isAct(spectreCard);
+  const isDraw = cardHelper.isDraw(spectreCard);
+  const isImpersonate = cardHelper.isImpersonate(spectreCard);
+
   if (isOrders && (!isAct && !isDraw && !isImpersonate)) {
     errors.push({ text: 'Please add a valid card sub type for ORDERS' });
   }
