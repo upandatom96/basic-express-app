@@ -3,6 +3,7 @@ require('./SpectreCard.model');
 const SpectreCard = mongoose.model('spectreCard');
 const spectreCardValidator = require('./spectreCard.validator');
 const randomUtil = require('../utilities/random.util');
+const cardHelper = require('./spectreCard.helper');
 
 function getAllSpectreCards() {
   return new Promise((resolve, reject) => {
@@ -17,29 +18,9 @@ function getAllSpectreDecks() {
   return new Promise((resolve, reject) => {
     SpectreCard.find({})
       .then((spectreCards) => {
-
         spectreCards = randomUtil.shuffleArray(spectreCards);
 
-        // traps
-        const ordersDeck = [];
-        const thinkDeck = [];
-        const anagramsDeck = [];
-
-        // encounters
-        const hunterDeck = [];
-        const generatorDeck = [];
-
-        spectreCards.forEach((card) => {
-          ordersDeck.push(card);
-        });
-
-        const decks = {
-          ordersDeck,
-          thinkDeck,
-          anagramsDeck,
-          hunterDeck,
-          generatorDeck
-        };
+        const decks = sortDecks(spectreCards);
 
         resolve(decks);
       });
@@ -141,4 +122,34 @@ module.exports = {
   addSpectreCard,
   editSpectreCard,
   deleteOneSpectreCard
+}
+
+function sortDecks(spectreCards) {
+  // traps
+  const ordersDeck = spectreCards.filter((card) => {
+    return cardHelper.isOrders(card);
+  });
+  const thinkDeck = spectreCards.filter((card) => {
+    return cardHelper.isThink(card);
+  });
+  const anagramsDeck = spectreCards.filter((card) => {
+    return cardHelper.isAnagrams(card);
+  });
+
+  // encounters
+  const hunterDeck = spectreCards.filter((card) => {
+    return cardHelper.isHunter(card);
+  });
+  const generatorDeck = spectreCards.filter((card) => {
+    return cardHelper.isGenerator(card);
+  });
+
+  return {
+    allCards: spectreCards,
+    ordersDeck,
+    thinkDeck,
+    anagramsDeck,
+    hunterDeck,
+    generatorDeck
+  };
 }
