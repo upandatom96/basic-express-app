@@ -7,6 +7,7 @@ const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
 const boolUtil = require('../utilities/bool.util');
+const randomManager = require('../random/random.manager');
 
 function getAllCases() {
   return new Promise((resolve, reject) => {
@@ -31,12 +32,12 @@ function getAllCases() {
             sortedCases.openCases.push(myCase);
           }
         });
-        sortedCases.closedCases.sort(function(a,b){
+        sortedCases.closedCases.sort(function (a, b) {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
           return new Date(b.openedDate) - new Date(a.openedDate);
         });
-        sortedCases.openCases.sort(function(a,b){
+        sortedCases.openCases.sort(function (a, b) {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
           return new Date(b.openedDate) - new Date(a.openedDate);
@@ -81,6 +82,51 @@ function getCaseById(id) {
             message: "Failed to find case"
           });
         }
+      });
+  });
+}
+
+function makeCaseAutomatic() {
+  return new Promise((resolve, reject) => {
+    Case.find({})
+      .then((allCases) => {
+        const oldNames = [];
+        allCases.forEach((thisCase) => {
+          oldNames.push(thisCase.name);
+        });
+        const caseName = randomManager.getNewPhrase(oldNames);
+        issueManager.getRandomIssue()
+          .then((randomIssue) => {
+            witnessManager.getRandomWitnesses(5)
+              .then((randomWitnesses) => {
+                evidenceManager.getRandomEvidence(5)
+                  .then((randomEvidence) => {
+                    new Case({
+                      name: caseName,
+                      issue: randomIssue._id,
+                      unrevealedWitnesses: randomWitnesses,
+                      unrevealedPlaintiffEvidence: randomEvidence.plaintiffEvidence,
+                      unrevealedDefendantEvidence: randomEvidence.defendantEvidence
+                    })
+                      .save()
+                      .then((addedCase) => {
+                        resolve(addedCase);
+                      });
+                  })
+                  .catch((err) => {
+                    res.statusCode = 500;
+                    res.send(err);
+                  });
+              })
+              .catch((err) => {
+                res.statusCode = 500;
+                res.send(err);
+              });
+          })
+          .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+          });
       });
   });
 }
@@ -340,6 +386,7 @@ module.exports = {
   getAllCaseNames,
   getCaseById,
   makeCase,
+  makeCaseAutomatic,
   updateJudgeCaseNotes,
   revealWitness,
   revealEvidence,

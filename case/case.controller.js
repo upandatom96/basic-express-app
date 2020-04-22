@@ -77,6 +77,20 @@ caseController.post('/', (req, res) => {
     });
 });
 
+caseController.post('/automatic', (req, res) => {
+  caseManager.makeCaseAutomatic()
+    .then((addedCase) => {
+      const caseName = addedCase.name;
+      const message = `<p>The Case Of <strong>${caseName}</strong> was opened.</p>`;
+      mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE OPENED", message);
+      res.send(addedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.put('/judge', (req, res) => {
   const judgeCaseNotes = req.body;
   caseManager.updateJudgeCaseNotes(judgeCaseNotes)

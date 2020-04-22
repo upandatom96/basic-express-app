@@ -29,7 +29,19 @@ function getWordCount() {
 }
 
 function getPhrase() {
-  return pickAdjective() + " " + pickNoun();;
+  return pickAdjective() + " " + pickNoun();
+}
+
+function getNewPhrase(oldPhrases) {
+  let foundNewPhrase = false;
+  let phrase;
+  while (!foundNewPhrase) {
+    phrase = getPhrase();
+    if (!oldPhrases.includes(phrase)) {
+      foundNewPhrase = true;
+    }
+  }
+  return phrase;
 }
 
 module.exports = {
@@ -37,6 +49,7 @@ module.exports = {
   getOneAdjective,
   getAllWords,
   getPhrase,
+  getNewPhrase,
   getWordCount
 }
 
