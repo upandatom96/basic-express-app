@@ -2,11 +2,11 @@ const words = require("./words");
 const randomUtil = require("../utilities/random.util");
 
 function getOneNoun() {
-  return randomUtil.pickRandom(words.nouns);
+  return pickNoun();
 }
 
 function getOneAdjective() {
-  return randomUtil.pickRandom(words.adjectives);
+  return pickAdjective();
 }
 
 function getAllWords() {
@@ -16,8 +16,21 @@ function getAllWords() {
   };
 }
 
+function getPhrase() {
+  return pickAdjective() + " " + pickNoun();;
+}
+
 module.exports = {
   getOneNoun,
   getOneAdjective,
-  getAllWords
+  getAllWords,
+  getPhrase
+}
+
+function pickNoun() {
+  return randomUtil.pickRandom(words.nouns);
+}
+
+function pickAdjective() {
+  return randomUtil.pickRandom(words.adjectives);
 }

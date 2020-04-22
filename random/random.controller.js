@@ -17,4 +17,9 @@ randomController.get('/all', (req, res) => {
   res.send(words);
 });
 
+randomController.get('/phrase', (req, res) => {
+  const phrase = randomManager.getPhrase();
+  res.send(phrase);
+});
+
 module.exports = randomController;

@@ -1,11 +1,27 @@
 const nouns = [
   "banana",
-  "apple"
+  "apple",
+  "screwdriver",
+  "hammer",
+  "goat",
+  "chicken",
+  "bed",
+  "pillow",
+  "bookcase",
+  "stove",
+  "notebook",
+  "newspaper",
+  "water",
+  "juice"
 ];
 
 const adjectives = [
   "green",
-  "slimy"
+  "slimy",
+  "unbelievable",
+  "impossible",
+  "ancient",
+  "fresh"
 ];
 
 module.exports = {
