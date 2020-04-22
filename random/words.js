@@ -25,6 +25,11 @@ const nouns = [
   "clock",
   "elevator",
   "staircase",
+  "tablet",
+  "mask",
+  "statue",
+  "hat",
+  "bottle",
   "skateboard",
   "night",
   "light",
@@ -33,6 +38,11 @@ const nouns = [
   "diamond",
   "gold",
   "rocket",
+  "map",
+  "bird",
+  "exam",
+  "marriage",
+  "lake",
   "car"
 ];
 
@@ -65,6 +75,18 @@ const adjectives = [
   "electric",
   "secret",
   "hidden",
+  "cerulean",
+  "irksome",
+  "luminous",
+  "nefarious",
+  "turgid",
+  "petulant",
+  "zealous",
+  "withering",
+  "wheedling",
+  "verdant",
+  "incendiary",
+  "feckless",
   "heavy"
 ];
 
