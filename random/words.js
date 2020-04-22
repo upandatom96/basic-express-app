@@ -43,6 +43,11 @@ const nouns = [
   "exam",
   "marriage",
   "lake",
+  "soap",
+  "doorway",
+  "lamp",
+  "chocolate",
+  "guitar",
   "car"
 ];
 
@@ -66,6 +71,7 @@ const adjectives = [
   "evil",
   "holy",
   "cursed",
+  "Noxious",
   "fantastic",
   "classic",
   "modern",
@@ -95,6 +101,16 @@ const adjectives = [
   "verdant",
   "incendiary",
   "feckless",
+  "deafening",
+  "devastating",
+  "gorgeous",
+  "beautiful",
+  "noisy",
+  "miraculous",
+  "ridiculous",
+  "remarkable",
+  "vital",
+  "natural",
   "heavy"
 ];
 
