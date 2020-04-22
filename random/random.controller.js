@@ -22,4 +22,9 @@ randomController.get('/phrase', (req, res) => {
   res.send(phrase);
 });
 
+randomController.get('/wordCount', (req, res) => {
+  const wordCount = randomManager.getWordCount();
+  res.send(wordCount);
+});
+
 module.exports = randomController;

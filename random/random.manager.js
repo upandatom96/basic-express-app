@@ -10,9 +10,21 @@ function getOneAdjective() {
 }
 
 function getAllWords() {
+  const adjectives = words.adjectives;
+  const nouns = words.nouns;
   return {
-    adjectives: words.adjectives,
-    nouns: words.nouns
+    adjectives,
+    nouns,
+  };
+}
+
+function getWordCount() {
+  const adjectives = words.adjectives;
+  const nouns = words.nouns;
+  return {
+    nounCount: nouns.length,
+    adjectiveCount: adjectives.length,
+    phraseCount: nouns.length * adjectives.length
   };
 }
 
@@ -24,7 +36,8 @@ module.exports = {
   getOneNoun,
   getOneAdjective,
   getAllWords,
-  getPhrase
+  getPhrase,
+  getWordCount
 }
 
 function pickNoun() {
