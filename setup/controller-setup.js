@@ -33,6 +33,9 @@ function setupControllers(app) {
   const userController = require('../user/user.controller');
   app.use('/user', userController);
 
+  const randomController = require('../random/random.controller');
+  app.use('/random', randomController);
+
   const logController = require('../log/log.controller');
   app.use('/log', logController);
 
