@@ -1,16 +1,23 @@
+const words = require("./words");
+const randomUtil = require("../utilities/random.util");
+
 function getOneNoun() {
-  return {
-    noun: "banana"
-  };
+  return randomUtil.pickRandom(words.nouns);
 }
 
 function getOneAdjective() {
+  return randomUtil.pickRandom(words.adjectives);
+}
+
+function getAllWords() {
   return {
-    adjective: "slimy"
+    adjectives: words.adjectives,
+    nouns: words.nouns
   };
 }
 
 module.exports = {
   getOneNoun,
-  getOneAdjective
+  getOneAdjective,
+  getAllWords
 }

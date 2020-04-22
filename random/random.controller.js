@@ -12,4 +12,9 @@ randomController.get('/adjective', (req, res) => {
   res.send(adjective);
 });
 
+randomController.get('/all', (req, res) => {
+  const words = randomManager.getAllWords();
+  res.send(words);
+});
+
 module.exports = randomController;
