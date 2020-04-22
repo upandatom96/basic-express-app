@@ -47,6 +47,14 @@ const nouns = [
 ];
 
 const adjectives = [
+  "red",
+  "blue",
+  "yellow",
+  "purple",
+  "blue",
+  "grey",
+  "gold",
+  "silver",
   "green",
   "slimy",
   "unbelievable",
