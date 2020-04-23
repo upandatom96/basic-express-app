@@ -94,7 +94,8 @@ function makeCaseAutomatic() {
         allCases.forEach((thisCase) => {
           oldNames.push(thisCase.name);
         });
-        const caseName = randomManager.getNewPhrase(oldNames);
+        let caseName = randomManager.getNewPhrase(oldNames);
+        caseName = toTitleCase(caseName);
         issueManager.getRandomIssue()
           .then((randomIssue) => {
             witnessManager.getRandomWitnesses(5)
@@ -392,4 +393,13 @@ module.exports = {
   revealEvidence,
   deleteOneCase,
   closeCase
+}
+
+function toTitleCase(str) {
+  return str.replace(
+      /\w\S*/g,
+      function(txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+  );
 }
