@@ -181,10 +181,6 @@ function assignJudgeName(judgeName, caseId) {
             reject({
               message: `CASE CLOSED`
             });
-          } else if (boolUtil.hasValue(foundCase.judgeName)) {
-            reject({
-              message: `HAS JUDGE NAME`
-            });
           } else {
             foundCase.judgeName = judgeName;
 
@@ -223,10 +219,6 @@ function assignPlaintiffName(plaintiffName, caseId) {
             reject({
               message: `CASE CLOSED`
             });
-          } else if (boolUtil.hasValue(foundCase.plaintiffName)) {
-            reject({
-              message: `HAS PLAINTIFF NAME`
-            });
           } else {
             foundCase.plaintiffName = plaintiffName;
 
@@ -264,10 +256,6 @@ function assignDefendantName(defendantName, caseId) {
           } else if (isCaseClosed(foundCase)) {
             reject({
               message: `CASE CLOSED`
-            });
-          } else if (boolUtil.hasValue(foundCase.defendantName)) {
-            reject({
-              message: `HAS DEFENDANT NAME`
             });
           } else {
             foundCase.defendantName = defendantName;
