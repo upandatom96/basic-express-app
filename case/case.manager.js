@@ -45,20 +45,6 @@ function getAllCases() {
   });
 }
 
-function getAllCaseNames() {
-  return new Promise((resolve, reject) => {
-    Case.find({})
-      .select('name')
-      .then((cases) => {
-        const names = [];
-        cases.forEach((myCase) => {
-          names.push(myCase.name);
-        });
-        resolve(names);
-      });
-  });
-}
-
 function getCaseById(id) {
   return new Promise((resolve, reject) => {
     Case.findOne({
@@ -166,6 +152,146 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
   });
 }
 
+function updateJudgeName(judgeName, caseId) {
+  return new Promise((resolve, reject) => {
+    if (!judgeName || !caseId) {
+      reject("cannot update judge name");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (foundCase.closed) {
+            reject({
+              message: `Cannot edit a closed case`
+            });
+          } else {
+            foundCase.judgeName = judgeName;
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
+    }
+  });
+}
+
+function updatePlaintiffName(plaintiffName, caseId) {
+  return new Promise((resolve, reject) => {
+    if (!plaintiffName || !caseId) {
+      reject("cannot update plaintiff name");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (foundCase.closed) {
+            reject({
+              message: `Cannot edit a closed case`
+            });
+          } else {
+            foundCase.plaintiffName = plaintiffName;
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
+    }
+  });
+}
+
+function updateDefendantName(defendantName, caseId) {
+  return new Promise((resolve, reject) => {
+    if (!defendantName || !caseId) {
+      reject("cannot update defendant name");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (foundCase.closed) {
+            reject({
+              message: `Cannot edit a closed case`
+            });
+          } else {
+            foundCase.defendantName = defendantName;
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
+    }
+  });
+}
+
+function addWitnessName(witnessName, caseId) {
+  return new Promise((resolve, reject) => {
+    if (!witnessName || !caseId) {
+      reject("cannot add witness name");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .populate("witnesses")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (foundCase.closed) {
+            reject({
+              message: `Cannot edit a closed case`
+            });
+          } else if (foundCase.witnesses.length < 5) {
+            reject({
+              message: `This case cannot have any more witnesses`
+            });
+          } else {
+            foundCase.witnessNames.push(witnessName);
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          }
+        });
+    }
+  });
+}
+
 function closeCase(caseId, isDefendantGuilty) {
   return new Promise((resolve, reject) => {
     if (boolUtil.hasNoValue(caseId) || boolUtil.hasNoBoolValue(isDefendantGuilty)) {
@@ -179,11 +305,7 @@ function closeCase(caseId, isDefendantGuilty) {
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
         .then((foundCase) => {
-          if (!foundCase) {
-            reject({
-              message: `Failed to find case`
-            });
-          } else {
+          if (foundCase && canCloseCase(foundCase)) {
             foundCase.closed = true;
             foundCase.isDefendantGuilty = isDefendantGuilty;
             foundCase.closedDate = new Date().toISOString();
@@ -192,6 +314,10 @@ function closeCase(caseId, isDefendantGuilty) {
               .then((updatedCase) => {
                 resolve(updatedCase);
               });
+          } else {
+            reject({
+              message: `Failed to close case`
+            });
           }
         });
     }
@@ -276,10 +402,13 @@ function deleteOneCase(id) {
 
 module.exports = {
   getAllCases,
-  getAllCaseNames,
   getCaseById,
   makeCaseAutomatic,
   updateJudgeCaseNotes,
+  updateJudgeName,
+  updatePlaintiffName,
+  updateDefendantName,
+  addWitnessName,
   revealEvidence,
   deleteOneCase,
   closeCase
@@ -287,9 +416,15 @@ module.exports = {
 
 function toTitleCase(str) {
   return str.replace(
-      /\w\S*/g,
-      function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      }
+    /\w\S*/g,
+    function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
   );
+}
+
+function canCloseCase(myCase) {
+  const revealedAllPE = myCase.revealedDefendantEvidence.length === 0;
+  const revealedAllDE = myCase.revealedDefendantEvidence.length === 0;
+  return revealedAllPE && revealedAllDE;
 }

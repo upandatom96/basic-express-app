@@ -37,17 +37,6 @@ caseController.get('/closed', (req, res) => {
     });
 });
 
-caseController.get('/names', (req, res) => {
-  caseManager.getAllCaseNames()
-    .then((caseNames) => {
-      res.send(caseNames);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
 caseController.get('/:id', (req, res) => {
   const id = req.params.id;
   caseManager.getCaseById(id)
@@ -77,6 +66,19 @@ caseController.post('/automatic', (req, res) => {
 caseController.put('/judge', (req, res) => {
   const judgeCaseNotes = req.body;
   caseManager.updateJudgeCaseNotes(judgeCaseNotes)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/judgeName', (req, res) => {
+  const judgeName = req.body.judgeName;
+  const caseId = req.body.caseId;
+  caseManager.assignJudgeName(judgeName, caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
