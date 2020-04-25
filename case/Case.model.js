@@ -6,6 +6,14 @@ const CaseSchema = new Schema({
     type: String,
     required: true,
   },
+  closedDate: {
+    type: Date,
+    default: null
+  },
+  openedDate: {
+    type: Date,
+    default: Date.now
+  },
   plaintiffScore: {
     type: Number,
     default: 0
@@ -55,26 +63,29 @@ const CaseSchema = new Schema({
       ref: 'evidence'
     }
   ],
-  unrevealedWitnesses: [
+  witnesses: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'witness'
     }
   ],
-  revealedWitnesses: [
+  judgeName: {
+    type: String,
+    required: false,
+  },
+  plaintiffName: {
+    type: String,
+    required: false,
+  },
+  witnessName: {
+    type: String,
+    required: false,
+  },
+  witnessNames: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'witness'
+      type: String
     }
   ],
-  closedDate: {
-    type: Date,
-    default: null
-  },
-  openedDate: {
-    type: Date,
-    default: Date.now
-  },
 });
 
 mongoose.model('case', CaseSchema);

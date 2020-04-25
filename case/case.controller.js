@@ -60,23 +60,6 @@ caseController.get('/:id', (req, res) => {
     });
 });
 
-caseController.post('/', (req, res) => {
-  const caseOrder = req.body;
-  caseOrder.evidenceCount = Number(caseOrder.evidenceCount);
-  caseOrder.witnessCount = Number(caseOrder.witnessCount);
-  caseManager.makeCase(caseOrder)
-    .then((addedCase) => {
-      const caseName = addedCase.name;
-      const message = `<p>The Case Of <strong>${caseName}</strong> was opened.</p>`;
-      mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE OPENED", message);
-      res.send(addedCase);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
 caseController.post('/automatic', (req, res) => {
   caseManager.makeCaseAutomatic()
     .then((addedCase) => {
@@ -112,19 +95,6 @@ caseController.put('/close', (req, res) => {
       const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
       const message = `<p>The Case Of <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
       mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
-      res.send(updatedCase);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
-caseController.put('/revealWitness/case/:caseId/witness/:witnessId', (req, res) => {
-  const caseId = req.params.caseId;
-  const witnessId = req.params.witnessId;
-  caseManager.revealWitness(caseId, witnessId)
-    .then((updatedCase) => {
       res.send(updatedCase);
     })
     .catch((err) => {
