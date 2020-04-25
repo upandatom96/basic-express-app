@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 require('./Case.model');
 const Case = mongoose.model('case');
 
-const caseValidator = require('./case.validator');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
@@ -111,48 +110,6 @@ function makeCaseAutomatic() {
             res.send(err);
           });
       });
-  });
-}
-
-function updateJudgeCaseNotes(judgeCaseNotes) {
-  return new Promise((resolve, reject) => {
-    const errors = caseValidator.checkForJudgeCaseNotesErrors(judgeCaseNotes);
-    if (errors.length > 0) {
-      reject(errors);
-    } else {
-      Case.findOne({ _id: judgeCaseNotes._id })
-        .populate("issue")
-        .populate("unrevealedPlaintiffEvidence")
-        .populate("revealedPlaintiffEvidence")
-        .populate("unrevealedDefendantEvidence")
-        .populate("revealedDefendantEvidence")
-        .populate("witnesses")
-        .then((foundCase) => {
-          if (!foundCase) {
-            reject({
-              message: `Failed to find case`
-            });
-          } else if (isCaseUnstarted(foundCase)) {
-            reject({
-              message: `CASE UNSTARTED`
-            });
-          } else if (isCaseClosed(foundCase)) {
-            reject({
-              message: `CASE CLOSED`
-            });
-          } else {
-            foundCase.notes = judgeCaseNotes.notes;
-            foundCase.plaintiffScore = judgeCaseNotes.plaintiffScore;
-            foundCase.defendantScore = judgeCaseNotes.defendantScore;
-            foundCase.isDefendantGuilty = judgeCaseNotes.isDefendantGuilty;
-
-            foundCase.save()
-              .then((updatedCase) => {
-                resolve(updatedCase);
-              });
-          }
-        });
-    }
   });
 }
 
@@ -458,7 +415,6 @@ module.exports = {
   getAllCases,
   getCaseById,
   makeCaseAutomatic,
-  updateJudgeCaseNotes,
   assignJudgeName,
   assignPlaintiffName,
   assignDefendantName,

@@ -14,18 +14,6 @@ const CaseSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  plaintiffScore: {
-    type: Number,
-    default: 0
-  },
-  defendantScore: {
-    type: Number,
-    default: 0
-  },
-  notes: {
-    type: String,
-    default: null
-  },
   status: {
     type: Number,
     default: 0

@@ -63,18 +63,6 @@ caseController.post('/', (req, res) => {
     });
 });
 
-caseController.put('/judge', (req, res) => {
-  const judgeCaseNotes = req.body;
-  caseManager.updateJudgeCaseNotes(judgeCaseNotes)
-    .then((updatedCase) => {
-      res.send(updatedCase);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
-
 caseController.put('/judgeName', (req, res) => {
   const judgeName = req.body.judgeName;
   const caseId = req.body.caseId;
