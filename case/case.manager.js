@@ -491,8 +491,8 @@ function toTitleCase(str) {
 }
 
 function canCloseCase(myCase) {
-  const revealedAllPE = myCase.revealedDefendantEvidence.length === 0;
-  const revealedAllDE = myCase.revealedDefendantEvidence.length === 0;
+  const revealedAllPE = myCase.unrevealedDefendantEvidence.length === 0;
+  const revealedAllDE = myCase.unrevealedDefendantEvidence.length === 0;
   const caseStarted = isCaseStarted(myCase);
   return revealedAllPE && revealedAllDE && caseStarted;
 }
