@@ -156,7 +156,7 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
   });
 }
 
-function updateJudgeName(judgeName, caseId) {
+function assignJudgeName(judgeName, caseId) {
   return new Promise((resolve, reject) => {
     if (!judgeName || !caseId) {
       reject("cannot update judge name");
@@ -181,6 +181,10 @@ function updateJudgeName(judgeName, caseId) {
             reject({
               message: `CASE CLOSED`
             });
+          } else if (boolUtil.hasValue(foundCase.judgeName)) {
+            reject({
+              message: `HAS JUDGE NAME`
+            });
           } else {
             foundCase.judgeName = judgeName;
 
@@ -194,7 +198,7 @@ function updateJudgeName(judgeName, caseId) {
   });
 }
 
-function updatePlaintiffName(plaintiffName, caseId) {
+function assignPlaintiffName(plaintiffName, caseId) {
   return new Promise((resolve, reject) => {
     if (!plaintiffName || !caseId) {
       reject("cannot update plaintiff name");
@@ -219,6 +223,10 @@ function updatePlaintiffName(plaintiffName, caseId) {
             reject({
               message: `CASE CLOSED`
             });
+          } else if (boolUtil.hasValue(foundCase.plaintiffName)) {
+            reject({
+              message: `HAS PLAINTIFF NAME`
+            });
           } else {
             foundCase.plaintiffName = plaintiffName;
 
@@ -232,7 +240,7 @@ function updatePlaintiffName(plaintiffName, caseId) {
   });
 }
 
-function updateDefendantName(defendantName, caseId) {
+function assignDefendantName(defendantName, caseId) {
   return new Promise((resolve, reject) => {
     if (!defendantName || !caseId) {
       reject("cannot update defendant name");
@@ -256,6 +264,10 @@ function updateDefendantName(defendantName, caseId) {
           } else if (isCaseClosed(foundCase)) {
             reject({
               message: `CASE CLOSED`
+            });
+          } else if (boolUtil.hasValue(foundCase.defendantName)) {
+            reject({
+              message: `HAS DEFENDANT NAME`
             });
           } else {
             foundCase.defendantName = defendantName;
@@ -295,7 +307,7 @@ function addWitnessName(witnessName, caseId) {
             reject({
               message: `CASE CLOSED`
             });
-          } else if (foundCase.witnesses.length < 5) {
+          } else if (foundCase.witnessNames.length > 4) {
             reject({
               message: `This case cannot have any more witnesses`
             });
@@ -366,7 +378,7 @@ function startCase(caseId) {
               });
           } else {
             reject({
-              message: `Failed to close case`
+              message: `Failed to start case`
             });
           }
         });
@@ -459,9 +471,9 @@ module.exports = {
   getCaseById,
   makeCaseAutomatic,
   updateJudgeCaseNotes,
-  updateJudgeName,
-  updatePlaintiffName,
-  updateDefendantName,
+  assignJudgeName,
+  assignPlaintiffName,
+  assignDefendantName,
   addWitnessName,
   revealEvidence,
   deleteOneCase,

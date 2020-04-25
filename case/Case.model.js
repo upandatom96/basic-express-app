@@ -71,15 +71,15 @@ const CaseSchema = new Schema({
   ],
   judgeName: {
     type: String,
-    required: false,
+    default: null,
   },
   plaintiffName: {
     type: String,
-    required: false,
+    default: null,
   },
-  witnessName: {
+  defendantName: {
     type: String,
-    required: false,
+    default: null,
   },
   witnessNames: [
     {

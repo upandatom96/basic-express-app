@@ -49,7 +49,7 @@ caseController.get('/:id', (req, res) => {
     });
 });
 
-caseController.post('/automatic', (req, res) => {
+caseController.post('/', (req, res) => {
   caseManager.makeCaseAutomatic()
     .then((addedCase) => {
       const caseName = addedCase.name;
@@ -79,6 +79,45 @@ caseController.put('/judgeName', (req, res) => {
   const judgeName = req.body.judgeName;
   const caseId = req.body.caseId;
   caseManager.assignJudgeName(judgeName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/defendantName', (req, res) => {
+  const defendantName = req.body.defendantName;
+  const caseId = req.body.caseId;
+  caseManager.assignDefendantName(defendantName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/plaintiffName', (req, res) => {
+  const plaintiffName = req.body.plaintiffName;
+  const caseId = req.body.caseId;
+  caseManager.assignPlaintiffName(plaintiffName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/witnessName', (req, res) => {
+  const witnessName = req.body.witnessName;
+  const caseId = req.body.caseId;
+  caseManager.addWitnessName(witnessName, caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
