@@ -88,6 +88,18 @@ caseController.put('/judgeName', (req, res) => {
     });
 });
 
+caseController.put('/start', (req, res) => {
+  const caseId = req.body.caseId;
+  caseManager.startCase(caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.put('/close', (req, res) => {
   const caseId = req.body.caseId;
   const isDefendantGuilty = req.body.isDefendantGuilty;

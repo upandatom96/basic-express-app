@@ -24,7 +24,7 @@ function getAllCases() {
           closedCases: [],
         };
         allCases.forEach((myCase) => {
-          if (myCase.closed) {
+          if (myCase.status === 2) {
             sortedCases.closedCases.push(myCase);
           } else {
             sortedCases.openCases.push(myCase);
@@ -132,9 +132,13 @@ function updateJudgeCaseNotes(judgeCaseNotes) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseUnstarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE UNSTARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else {
             foundCase.notes = judgeCaseNotes.notes;
@@ -169,9 +173,13 @@ function updateJudgeName(judgeName, caseId) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseStarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE STARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else {
             foundCase.judgeName = judgeName;
@@ -203,9 +211,13 @@ function updatePlaintiffName(plaintiffName, caseId) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseStarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE STARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else {
             foundCase.plaintiffName = plaintiffName;
@@ -237,9 +249,13 @@ function updateDefendantName(defendantName, caseId) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseStarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE STARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else {
             foundCase.defendantName = defendantName;
@@ -271,9 +287,13 @@ function addWitnessName(witnessName, caseId) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseStarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE STARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else if (foundCase.witnesses.length < 5) {
             reject({
@@ -306,9 +326,39 @@ function closeCase(caseId, isDefendantGuilty) {
         .populate("revealedDefendantEvidence")
         .then((foundCase) => {
           if (foundCase && canCloseCase(foundCase)) {
-            foundCase.closed = true;
+            foundCase.status = 2;
             foundCase.isDefendantGuilty = isDefendantGuilty;
             foundCase.closedDate = new Date().toISOString();
+
+            foundCase.save()
+              .then((updatedCase) => {
+                resolve(updatedCase);
+              });
+          } else {
+            reject({
+              message: `Failed to close case`
+            });
+          }
+        });
+    }
+  });
+}
+
+function startCase(caseId) {
+  return new Promise((resolve, reject) => {
+    if (boolUtil.hasNoValue(caseId)) {
+      reject({ message: "cannot start case" });
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .then((foundCase) => {
+          if (foundCase && canStartCase(foundCase)) {
+            foundCase.status = 1;
 
             foundCase.save()
               .then((updatedCase) => {
@@ -343,9 +393,13 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
             reject({
               message: `Failed to find case`
             });
-          } else if (foundCase.closed) {
+          } else if (isCaseUnstarted(foundCase)) {
             reject({
-              message: `Cannot edit a closed case`
+              message: `CASE UNSTARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
             });
           } else {
             let evidenceToReveal;
@@ -411,6 +465,7 @@ module.exports = {
   addWitnessName,
   revealEvidence,
   deleteOneCase,
+  startCase,
   closeCase
 }
 
@@ -426,5 +481,30 @@ function toTitleCase(str) {
 function canCloseCase(myCase) {
   const revealedAllPE = myCase.revealedDefendantEvidence.length === 0;
   const revealedAllDE = myCase.revealedDefendantEvidence.length === 0;
-  return revealedAllPE && revealedAllDE;
+  const caseStarted = isCaseStarted(myCase);
+  return revealedAllPE && revealedAllDE && caseStarted;
+}
+
+function canStartCase(myCase) {
+  const hasJudgeName = boolUtil.hasValue(myCase.judgeName);
+  const hasPName = boolUtil.hasValue(myCase.plaintiffName);
+  const hasDName = boolUtil.hasValue(myCase.defendantName);
+  const caseNotStarted = isCaseUnstarted(myCase);
+  return hasJudgeName && hasPName && hasDName && caseNotStarted;
+}
+
+function isCaseUnstarted(myCase) {
+  return myCase.status === 0;
+}
+
+function isCaseStarted(myCase) {
+  return myCase.status === 1;
+}
+
+function isCaseClosed(myCase) {
+  return myCase.status === 2;
+}
+
+function isCaseOpen(myCase) {
+  return isCaseUnstarted(myCase) || isCaseStarted(myCase);
 }
