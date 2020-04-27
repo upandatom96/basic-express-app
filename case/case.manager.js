@@ -12,11 +12,13 @@ function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
       .populate("issue")
+      .populate("witnesses")
+      .populate("poolPlaintiffEvidence")
       .populate("unrevealedPlaintiffEvidence")
       .populate("revealedPlaintiffEvidence")
+      .populate("poolDefendantEvidence")
       .populate("unrevealedDefendantEvidence")
       .populate("revealedDefendantEvidence")
-      .populate("witnesses")
       .then((allCases) => {
         const sortedCases = {
           openCases: [],
@@ -50,11 +52,13 @@ function getCaseById(id) {
       _id: id
     })
       .populate("issue")
+      .populate("witnesses")
+      .populate("poolPlaintiffEvidence")
       .populate("unrevealedPlaintiffEvidence")
       .populate("revealedPlaintiffEvidence")
+      .populate("poolDefendantEvidence")
       .populate("unrevealedDefendantEvidence")
       .populate("revealedDefendantEvidence")
-      .populate("witnesses")
       .then((myCase) => {
         if (myCase) {
           resolve(myCase);
@@ -81,14 +85,14 @@ function makeCaseAutomatic() {
           .then((randomIssue) => {
             witnessManager.getRandomWitnesses(5)
               .then((randomWitnesses) => {
-                evidenceManager.getRandomEvidence(5)
+                evidenceManager.getRandomEvidence(10)
                   .then((randomEvidence) => {
                     new Case({
                       name: caseName,
                       issue: randomIssue._id,
                       witnesses: randomWitnesses,
-                      unrevealedPlaintiffEvidence: randomEvidence.plaintiffEvidence,
-                      unrevealedDefendantEvidence: randomEvidence.defendantEvidence
+                      poolPlaintiffEvidence: randomEvidence.plaintiffEvidence,
+                      poolDefendantEvidence: randomEvidence.defendantEvidence
                     })
                       .save()
                       .then((addedCase) => {
@@ -120,11 +124,13 @@ function assignJudgeName(judgeName, caseId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
+        .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
@@ -158,11 +164,13 @@ function assignPlaintiffName(plaintiffName, caseId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
+        .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
@@ -196,11 +204,13 @@ function assignDefendantName(defendantName, caseId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
+        .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
@@ -234,11 +244,13 @@ function addWitnessName(witnessName, caseId) {
     } else {
       Case.findOne({ _id: caseId })
         .populate("issue")
+        .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
-        .populate("witnesses")
         .then((foundCase) => {
           if (!foundCase) {
             reject({
@@ -277,8 +289,10 @@ function closeCase(caseId, isDefendantGuilty) {
       Case.findOne({ _id: caseId })
         .populate("issue")
         .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
         .then((foundCase) => {
@@ -309,8 +323,10 @@ function startCase(caseId) {
       Case.findOne({ _id: caseId })
         .populate("issue")
         .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
         .then((foundCase) => {
@@ -341,8 +357,10 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
       Case.findOne({ _id: caseId })
         .populate("issue")
         .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
         .populate("unrevealedPlaintiffEvidence")
         .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
         .populate("unrevealedDefendantEvidence")
         .populate("revealedDefendantEvidence")
         .then((foundCase) => {
@@ -398,6 +416,83 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
   });
 }
 
+function selectEvidence(caseId, evidenceId, isPlaintiff) {
+  return new Promise((resolve, reject) => {
+    const hasCaseId = boolUtil.hasValue(caseId);
+    const hasEvidenceId = boolUtil.hasValue(evidenceId);
+    if (!hasCaseId || !hasEvidenceId) {
+      reject("Case id and evidence id required.");
+    } else {
+      Case.findOne({ _id: caseId })
+        .populate("issue")
+        .populate("witnesses")
+        .populate("poolPlaintiffEvidence")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
+        .then((foundCase) => {
+          if (!foundCase) {
+            reject({
+              message: `Failed to find case`
+            });
+          } else if (isCaseUnstarted(foundCase)) {
+            reject({
+              message: `CASE UNSTARTED`
+            });
+          } else if (isCaseClosed(foundCase)) {
+            reject({
+              message: `CASE CLOSED`
+            });
+          } else if (isPlaintiff && isAllPlaintiffEvidenceSelected(foundCase)) {
+            reject({
+              message: `ALL PLAINTIFF EVIDENCE SELECTED`
+            });
+          } else if (!isPlaintiff && isAllDefendantEvidenceSelected(foundCase)) {
+            reject({
+              message: `ALL DEFENDANT EVIDENCE SELECTED`
+            });
+          } else {
+            let evidenceToSelect;
+            if (isPlaintiff) {
+              evidenceToSelect = foundCase.poolPlaintiffEvidence.find((evidence) => {
+                return evidence._id.toString() === evidenceId;
+              });
+            } else {
+              evidenceToSelect = foundCase.poolDefendantEvidence.find((evidence) => {
+                return evidence._id.toString() === evidenceId;
+              });
+            }
+
+            if (!evidenceToSelect) {
+              reject({
+                message: 'Failed to find the evidence'
+              });
+            } else {
+              if (isPlaintiff) {
+                foundCase.unrevealedPlaintiffEvidence.push(evidenceToSelect);
+                foundCase.poolPlaintiffEvidence = foundCase.poolPlaintiffEvidence.filter((evidence) => {
+                  return evidence._id.toString() != evidenceId;
+                });
+              } else {
+                foundCase.unrevealedDefendantEvidence.push(evidenceToSelect);
+                foundCase.poolDefendantEvidence = foundCase.poolDefendantEvidence.filter((evidence) => {
+                  return evidence._id.toString() != evidenceId;
+                });
+              }
+
+              foundCase.save()
+                .then((updatedCase) => {
+                  resolve(updatedCase);
+                });
+            }
+          }
+        });
+    }
+  });
+}
+
 function deleteOneCase(id) {
   return new Promise((resolve, reject) => {
     Case.deleteOne({
@@ -420,6 +515,7 @@ module.exports = {
   assignDefendantName,
   addWitnessName,
   revealEvidence,
+  selectEvidence,
   deleteOneCase,
   startCase,
   closeCase
@@ -445,8 +541,23 @@ function canStartCase(myCase) {
   const hasJudgeName = boolUtil.hasValue(myCase.judgeName);
   const hasPName = boolUtil.hasValue(myCase.plaintiffName);
   const hasDName = boolUtil.hasValue(myCase.defendantName);
+  const evidenceSelected = isAllEvidenceSelected(myCase);
   const caseNotStarted = isCaseUnstarted(myCase);
-  return hasJudgeName && hasPName && hasDName && caseNotStarted;
+  return hasJudgeName && hasPName && hasDName && evidenceSelected && caseNotStarted;
+}
+
+function isAllPlaintiffEvidenceSelected(myCase) {
+  return myCase.unrevealedPlaintiffEvidence === 5;
+}
+
+function isAllDefendantEvidenceSelected(myCase) {
+  return myCase.unrevealedDefendantEvidence === 5;
+}
+
+function isAllEvidenceSelected(myCase) {
+  const pEvidenceSelected = isAllPlaintiffEvidenceSelected(myCase);
+  const dEvidenceSelected = isAllDefendantEvidenceSelected(myCase);
+  return pEvidenceSelected && dEvidenceSelected;
 }
 
 function isCaseUnstarted(myCase) {

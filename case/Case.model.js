@@ -27,6 +27,12 @@ const CaseSchema = new Schema({
     ref: 'issue',
     required: true
   },
+  poolPlaintiffEvidence: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'evidence'
+    }
+  ],
   unrevealedPlaintiffEvidence: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +40,12 @@ const CaseSchema = new Schema({
     }
   ],
   revealedPlaintiffEvidence: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'evidence'
+    }
+  ],
+  poolDefendantEvidence: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'evidence'
