@@ -437,9 +437,9 @@ function selectEvidence(caseId, evidenceId, isPlaintiff) {
             reject({
               message: `Failed to find case`
             });
-          } else if (isCaseUnstarted(foundCase)) {
+          } else if (isCaseStarted(foundCase)) {
             reject({
-              message: `CASE UNSTARTED`
+              message: `CASE STARTED`
             });
           } else if (isCaseClosed(foundCase)) {
             reject({
@@ -547,11 +547,11 @@ function canStartCase(myCase) {
 }
 
 function isAllPlaintiffEvidenceSelected(myCase) {
-  return myCase.unrevealedPlaintiffEvidence === 5;
+  return myCase.unrevealedPlaintiffEvidence.length > 4;
 }
 
 function isAllDefendantEvidenceSelected(myCase) {
-  return myCase.unrevealedDefendantEvidence === 5;
+  return myCase.unrevealedDefendantEvidence.length > 4;
 }
 
 function isAllEvidenceSelected(myCase) {
@@ -570,8 +570,4 @@ function isCaseStarted(myCase) {
 
 function isCaseClosed(myCase) {
   return myCase.status === 2;
-}
-
-function isCaseOpen(myCase) {
-  return isCaseUnstarted(myCase) || isCaseStarted(myCase);
 }
