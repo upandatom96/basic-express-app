@@ -5,8 +5,13 @@ const authUtil = require('../utilities/auth.util');
 
 tweetController.post('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
   const message = req.body.message;
-  tweetManager.makeTweet(message);
-  res.send({ message: "tweeting..." });
+  if (message) {
+    tweetManager.makeTweet(message);
+    res.send({ message: `tweeting message: ${message}` });
+  } else {
+    res.statusCode = 500;
+    res.send("ERR");
+  }
 });
 
 module.exports = tweetController;
