@@ -1,29 +1,20 @@
 const Twit = require('twit');
-const { twitConsumerKey, twitConsumerSecret, twitAccessToken, twitAccessTokenSecret } = require('../config/env.config');
-const twitConnection = new Twit({
-  consumer_key: twitConsumerKey,
-  consumer_secret: twitConsumerSecret,
-  access_token: twitAccessToken,
-  access_token_secret: twitAccessTokenSecret
-});
+const { twitCredentials } = require("../config/twit.config");
+const twitConnection = new Twit(twitCredentials);
 
-function makeTweet(tweet) {
+function makeTweet(message) {
+  console.log(message);
   twitConnection.get('account/verify_credentials', {
     include_entities: false,
     skip_status: true,
     include_email: false
-  }, onAuthenticated)
-
-  return new Promise((resolve, reject) => {
-    resolve("attempting to tweet");
-  });
+  }, afterAuth)
 }
 
-function onAuthenticated(err) {
+function afterAuth(err) {
   if (err) {
     console.log(err)
   } else {
-    console.log('Authentication successful.')
     twitConnection.post('statuses/update', { status: 'hello world' })
   }
 }
