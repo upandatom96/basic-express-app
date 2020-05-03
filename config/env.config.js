@@ -14,6 +14,10 @@ if (runningProd) {
   mongoCluster = process.env.MONGO_CLUSTER;
   secret = process.env.SECRET;
   sendgridApiKey = process.env.SENDGRID_API_KEY;
+  twitConsumerKey = process.env.TWIT_CONSUMER_KEY;
+  twitConsumerSecret = process.env.TWIT_CONSUMER_SECRET;
+  twitAccessToken = process.env.TWIT_ACCESS_TOKEN;
+  twitAccessTokenSecret = process.env.TWIT_ACCESS_TOKEN_SECRET;
 } else {
   try {
     const {
@@ -21,7 +25,11 @@ if (runningProd) {
       MONGO_PASS,
       MONGO_CLUSTER,
       SECRET,
-      SENDGRID_API_KEY
+      SENDGRID_API_KEY,
+      TWIT_CONSUMER_KEY,
+      TWIT_CONSUMER_SECRET,
+      TWIT_ACCESS_TOKEN,
+      TWIT_ACCESS_TOKEN_SECRET
     } = require("../local.env");
 
     mongoUser = MONGO_USER;
@@ -29,6 +37,10 @@ if (runningProd) {
     mongoCluster = MONGO_CLUSTER;
     secret = SECRET;
     sendgridApiKey = SENDGRID_API_KEY;
+    twitConsumerKey = TWIT_CONSUMER_KEY;
+    twitConsumerSecret = TWIT_CONSUMER_SECRET;
+    twitAccessToken = TWIT_ACCESS_TOKEN;
+    twitAccessTokenSecret = TWIT_ACCESS_TOKEN_SECRET;
   }
   catch (e) {
     if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
@@ -44,5 +56,9 @@ module.exports = {
   mongoCluster: mongoCluster,
   port: port,
   secret: secret,
-  sendgridApiKey: sendgridApiKey
+  sendgridApiKey: sendgridApiKey,
+  twitConsumerKey: twitConsumerKey,
+  twitConsumerSecret: twitConsumerSecret,
+  twitAccessToken: twitAccessToken,
+  twitAccessTokenSecret: twitAccessTokenSecret
 };
