@@ -137,7 +137,7 @@ caseController.put('/close', (req, res) => {
       const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
       const message = `<p>The Case of the <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
       mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
-      tweetManager.makeTweet(`Order in the Court! The Case of the ${caseName} has been closed. The defendant ${updatedCase.defendantName} was found ${verdict}. Details added to the Case Archive: https://order-in-the-court-app.herokuapp.com/case-archive`);
+      tweetManager.makeTweet(`Order in the Court! The Case of the ${caseName} has been closed. The defendant ${updatedCase.defendantName} was found ${verdict}. Details in the Case Archive: https://order-in-the-court-app.herokuapp.com/archived-case/${updatedCase._id}`);
       res.send(updatedCase);
     })
     .catch((err) => {
