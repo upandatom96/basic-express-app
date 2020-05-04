@@ -3,6 +3,7 @@ const caseController = express.Router();
 const caseManager = require('./case.manager');
 const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
+const tweetManager = require('../tweet/tweet.manager');
 
 caseController.get('/', (req, res) => {
   caseManager.getAllCases()
@@ -134,8 +135,9 @@ caseController.put('/close', (req, res) => {
     .then((updatedCase) => {
       const caseName = updatedCase.name;
       const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
-      const message = `<p>The Case Of <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
+      const message = `<p>The Case of the <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
       mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
+      tweetManager.makeTweet(`Order in the Court! The Case of the ${caseName} has been closed. The defendant ${updatedCase.defendantName} was found ${verdict}. Details added to the Case Archive: https://order-in-the-court-app.herokuapp.com/case-archive`);
       res.send(updatedCase);
     })
     .catch((err) => {

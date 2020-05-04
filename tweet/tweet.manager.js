@@ -7,13 +7,13 @@ function makeTweet(message) {
     include_entities: false,
     skip_status: true,
     include_email: false
-  }, afterAuth(message))
-}
-
-function afterAuth(message) {
-  twitConnection.post('statuses/update', { status: message });
+  }, tweetAfterAuth(message))
 }
 
 module.exports = {
   makeTweet
+}
+
+function tweetAfterAuth(message) {
+  twitConnection.post('statuses/update', { status: message });
 }
