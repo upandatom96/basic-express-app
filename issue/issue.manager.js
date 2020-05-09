@@ -52,8 +52,7 @@ function addIssue(issue) {
     }
     else {
       new Issue({
-        name: issue.name,
-        description: issue.description
+        name: issue.name
       })
         .save()
         .then((issue) => {
@@ -80,7 +79,6 @@ function editIssue(issue) {
             });
           } else {
             foundIssue.name = issue.name;
-            foundIssue.description = issue.description;
 
             foundIssue.save()
               .then((response) => {

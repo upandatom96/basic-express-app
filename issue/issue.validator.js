@@ -21,9 +21,6 @@ function checkForGeneralErrors(issue) {
   if (boolUtil.hasNoValue(issue.name)) {
     errors.push({ text: 'Please add a name' });
   }
-  if (boolUtil.hasNoValue(issue.description)) {
-    errors.push({ text: 'Please add a description' });
-  }
   return errors;
 }
 
