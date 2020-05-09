@@ -3,7 +3,7 @@ const witnessController = express.Router();
 const witnessManager = require("./witness.manager");
 const authUtil = require('../utilities/auth.util');
 
-witnessController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+witnessController.get('/', (req, res) => {
   witnessManager.getAllWitness()
     .then((response) => {
       res.send(response);

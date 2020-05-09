@@ -3,7 +3,7 @@ const issueController = express.Router();
 const issueManager = require("./issue.manager");
 const authUtil = require('../utilities/auth.util');
 
-issueController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+issueController.get('/', (req, res) => {
   issueManager.getAllIssue()
     .then((response) => {
       res.send(response);

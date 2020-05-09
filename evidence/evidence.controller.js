@@ -3,7 +3,7 @@ const evidenceController = express.Router();
 const evidenceManager = require("./evidence.manager");
 const authUtil = require('../utilities/auth.util');
 
-evidenceController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+evidenceController.get('/', (req, res) => {
   evidenceManager.getAllEvidence()
     .then((response) => {
       res.send(response);
