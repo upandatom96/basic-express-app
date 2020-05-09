@@ -1,20 +1,12 @@
 const express = require('express');
 const caseController = express.Router();
 const caseManager = require('./case.manager');
+const caseStatusManager = require('./caseStatus.manager');
+const caseEvidenceManager = require('./caseEvidence.manager');
+const caseNameManager = require('./caseNames.manager');
 const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
 const tweetManager = require('../tweet/tweet.manager');
-
-caseController.get('/', (req, res) => {
-  caseManager.getAllCases()
-    .then((cases) => {
-      res.send(cases);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
-});
 
 caseController.get('/open', (req, res) => {
   caseManager.getAllCases()
@@ -38,6 +30,17 @@ caseController.get('/closed', (req, res) => {
     });
 });
 
+caseController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+  caseManager.getAllCases()
+    .then((cases) => {
+      res.send(cases);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
 caseController.get('/:id', (req, res) => {
   const id = req.params.id;
   caseManager.getCaseById(id)
@@ -51,7 +54,7 @@ caseController.get('/:id', (req, res) => {
 });
 
 caseController.post('/', (req, res) => {
-  caseManager.makeCaseAutomatic()
+  caseStatusManager.makeCaseAutomatic()
     .then((addedCase) => {
       const caseName = addedCase.name;
       const message = `<p>The Case Of <strong>${caseName}</strong> was opened.</p>`;
@@ -67,7 +70,19 @@ caseController.post('/', (req, res) => {
 caseController.put('/judgeName', (req, res) => {
   const judgeName = req.body.judgeName;
   const caseId = req.body.caseId;
-  caseManager.assignJudgeName(judgeName, caseId)
+  caseNameManager.assignJudgeName(judgeName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.delete('/judgeName', (req, res) => {
+  const caseId = req.body.caseId;
+  caseNameManager.removeJudgeName(caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -80,7 +95,19 @@ caseController.put('/judgeName', (req, res) => {
 caseController.put('/defendantName', (req, res) => {
   const defendantName = req.body.defendantName;
   const caseId = req.body.caseId;
-  caseManager.assignDefendantName(defendantName, caseId)
+  caseNameManager.assignDefendantName(defendantName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.delete('/defendantName', (req, res) => {
+  const caseId = req.body.caseId;
+  caseNameManager.removeDefendantName(caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -93,7 +120,19 @@ caseController.put('/defendantName', (req, res) => {
 caseController.put('/plaintiffName', (req, res) => {
   const plaintiffName = req.body.plaintiffName;
   const caseId = req.body.caseId;
-  caseManager.assignPlaintiffName(plaintiffName, caseId)
+  caseNameManager.assignPlaintiffName(plaintiffName, caseId)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.delete('/plaintiffName', (req, res) => {
+  const caseId = req.body.caseId;
+  caseNameManager.removePlaintiffName(caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -106,7 +145,7 @@ caseController.put('/plaintiffName', (req, res) => {
 caseController.put('/witnessName', (req, res) => {
   const witnessName = req.body.witnessName;
   const caseId = req.body.caseId;
-  caseManager.addWitnessName(witnessName, caseId)
+  caseNameManager.addWitnessName(witnessName, caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -116,9 +155,10 @@ caseController.put('/witnessName', (req, res) => {
     });
 });
 
-caseController.put('/start', (req, res) => {
+caseController.delete('/witnessName', (req, res) => {
+  const witnessName = req.body.witnessName;
   const caseId = req.body.caseId;
-  caseManager.startCase(caseId)
+  caseNameManager.removeWitnessName(witnessName, caseId)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -128,10 +168,84 @@ caseController.put('/start', (req, res) => {
     });
 });
 
-caseController.put('/close', (req, res) => {
-  const caseId = req.body.caseId;
-  const isDefendantGuilty = req.body.isDefendantGuilty;
-  caseManager.closeCase(caseId, isDefendantGuilty)
+caseController.put('/lockRoles/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.lockRoles(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/startFreeTime/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.startFreeTime(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/startOpeningArguments/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.startOpeningArguments(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/startCrossfire/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.startCrossfire(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/startClosingArguments/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.startClosingArguments(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/startVerdictSelection/:id', (req, res) => {
+  const id = req.params.id;
+  caseStatusManager.startVerdictSelection(id)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
+});
+
+caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
+  const id = req.params.id;
+  const isDefendantGuiltyString = req.params.isDefendantGuiltyString;
+  const isDefendantGuilty = isDefendantGuiltyString.toLowerCase() === "true";
+
+  caseStatusManager.makeVerdict(id, isDefendantGuilty)
     .then((updatedCase) => {
       const caseName = updatedCase.name;
       const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
@@ -149,7 +263,7 @@ caseController.put('/close', (req, res) => {
 caseController.put('/selectPlaintiffEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
-  caseManager.selectEvidence(caseId, evidenceId, true)
+  caseEvidenceManager.selectEvidence(caseId, evidenceId, true)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -162,7 +276,7 @@ caseController.put('/selectPlaintiffEvidence/case/:caseId/evidence/:evidenceId',
 caseController.put('/selectDefendantEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
-  caseManager.selectEvidence(caseId, evidenceId, false)
+  caseEvidenceManager.selectEvidence(caseId, evidenceId, false)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -175,7 +289,7 @@ caseController.put('/selectDefendantEvidence/case/:caseId/evidence/:evidenceId',
 caseController.put('/revealPlaintiffEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
-  caseManager.revealEvidence(caseId, evidenceId, true)
+  caseEvidenceManager.revealEvidence(caseId, evidenceId, true)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -188,7 +302,7 @@ caseController.put('/revealPlaintiffEvidence/case/:caseId/evidence/:evidenceId',
 caseController.put('/revealDefendantEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
-  caseManager.revealEvidence(caseId, evidenceId, false)
+  caseEvidenceManager.revealEvidence(caseId, evidenceId, false)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
