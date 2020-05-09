@@ -81,7 +81,7 @@ caseController.put('/judgeName/:id', (req, res) => {
     });
 });
 
-caseController.delete('/judgeName/:id', (req, res) => {
+caseController.put('/removeJudgeName/:id', (req, res) => {
   const id = req.params.id;
   caseNameManager.removeJudgeName(id)
     .then((updatedCase) => {
@@ -106,7 +106,7 @@ caseController.put('/defendantName/:id', (req, res) => {
     });
 });
 
-caseController.delete('/defendantName/:id', (req, res) => {
+caseController.put('/removeDefendantName/:id', (req, res) => {
   const id = req.params.id;
   caseNameManager.removeDefendantName(id)
     .then((updatedCase) => {
@@ -131,7 +131,7 @@ caseController.put('/plaintiffName/:id', (req, res) => {
     });
 });
 
-caseController.delete('/plaintiffName/:id', (req, res) => {
+caseController.put('/removePlaintiffName/:id', (req, res) => {
   const id = req.params.id;
   caseNameManager.removePlaintiffName(id)
     .then((updatedCase) => {
@@ -156,7 +156,7 @@ caseController.put('/witnessName/:id', (req, res) => {
     });
 });
 
-caseController.delete('/witnessName/:id', (req, res) => {
+caseController.put('/removeWitnessName/:id', (req, res) => {
   const witnessName = req.body.name;
   const id = req.params.id;
   caseNameManager.removeWitnessName(witnessName, id)
