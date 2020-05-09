@@ -17,9 +17,16 @@ contactController.post('/', (req, res) => {
     // setup email
     const recipient = "adamontheinternet.com@gmail.com";
     const sender = emailOrder.sender;
-    const subject = `AOTI Contacted`;
+
+    let subject;
+    if (emailOrder.subject) {
+        subject = `AOTI: ${emailOrder.subject}`;
+    } else {
+        subject = `AOTI: Contacted`;
+    }
+
     const d = new Date();
-    const date = d.getHours() + ":" + d.getMinutes() + " on day " + d.getDate() + " of month " + d.getMonth() + ", " + d.getFullYear();
+    const date = d.getTime() + " on day " + d.getDate() + " of month " + (d.getMonth() + 1) + ", " + d.getFullYear();
     const message = `<p>FROM: ${sender}</p><p>ON: ${date}</p><p>MESSAGE: ${emailOrder.message}</p>`;
 
     // send
