@@ -191,6 +191,10 @@ function addWitnessName(witnessName, caseId) {
                         reject({
                             message: `This case cannot have any more witnesses`
                         });
+                    } else if (foundCase.witnessNames.includes(witnessName)) {
+                        reject({
+                            message: `Name already taken`
+                        });
                     } else {
                         foundCase.witnessNames.push(witnessName);
 

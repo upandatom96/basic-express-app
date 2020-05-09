@@ -34,11 +34,21 @@ function hasNoBoolValue(value) {
   return !hasBoolValue(value);
 }
 
+function stringHasBooleanValue(value) {
+  return value.toLowerCase() === "true" || value.toLowerCase() === "false";
+}
+
+function translateBooleanString(value) {
+  return value.toLowerCase() === "true";
+}
+
 module.exports = {
   hasBoolValue,
   hasNoBoolValue,
   hasNoValue,
   hasValue,
   hasNumberValue,
-  hasNoNumberValue
+  hasNoNumberValue,
+  stringHasBooleanValue,
+  translateBooleanString
 }

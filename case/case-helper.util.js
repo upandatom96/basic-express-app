@@ -1,6 +1,7 @@
 const timeUtil = require('../utilities/time.util');
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
+const boolUtil = require('../utilities/bool.util');
 const caseConstants = require('./case.constants');
 
 function orderCasesByDate(cases) {
@@ -15,6 +16,7 @@ function orderSortedCasesByDate(sortedCases) {
     sortedCases.openCases = orderCasesByDate(sortedCases.openCases);
     sortedCases.closedCases = orderCasesByDate(sortedCases.closedCases);
     sortedCases.limboCases = orderCasesByDate(sortedCases.limboCases);
+    return sortedCases
 }
 
 function sortCasesByStatus(cases) {
@@ -72,6 +74,8 @@ function isCaseStatusClosed(myCase) {
 }
 
 function isCaseLimbo(myCase) {
+    // TODO test and use this
+    return false;
     if (isCaseStatusClosed(myCase)) {
         return false;
     }
@@ -126,6 +130,14 @@ function isAllDefendantEvidenceSelected(myCase) {
     return myCase.unrevealedDefendantEvidence.length > 4;
 }
 
+function isAllPlaintiffEvidenceRevealed(myCase) {
+    return myCase.revealedPlaintiffEvidence.length > 4;
+}
+
+function isAllDefendantEvidenceRevealed(myCase) {
+    return myCase.revealedDefendantEvidence.length > 4;
+}
+
 function isAllEvidenceSelected(myCase) {
     const pEvidenceSelected = isAllPlaintiffEvidenceSelected(myCase);
     const dEvidenceSelected = isAllDefendantEvidenceSelected(myCase);
@@ -139,15 +151,14 @@ function isCaseInProgress(myCase) {
 
 function canRevealPlaintiffEvidence(myCase) {
     const caseInProgress = isCaseInProgress(myCase);
-    const isAllPlaintiffEvidenceSelected = isAllPlaintiffEvidenceSelected(myCase);
-
-    return caseInProgress && !isAllPlaintiffEvidenceSelected;
+    const allRevealed = isAllPlaintiffEvidenceRevealed(myCase);
+    return caseInProgress && !allRevealed;
 }
 
 function canRevealDefendantEvidence(myCase) {
     const caseInProgress = isCaseInProgress(myCase);
-    const isAllDefendantEvidenceSelected = isAllDefendantEvidenceSelected(myCase);
-    return caseInProgress && !isAllDefendantEvidenceSelected;
+    const allSelected = isAllDefendantEvidenceRevealed(myCase);
+    return caseInProgress && !allSelected;
 }
 
 function canSelectPlaintiffEvidence(myCase) {

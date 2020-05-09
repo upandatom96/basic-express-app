@@ -6,6 +6,7 @@ const caseEvidenceManager = require('./caseEvidence.manager');
 const caseNameManager = require('./caseNames.manager');
 const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
+const boolUtil = require('../utilities/bool.util');
 const tweetManager = require('../tweet/tweet.manager');
 
 caseController.get('/open', (req, res) => {
@@ -67,10 +68,10 @@ caseController.post('/', (req, res) => {
     });
 });
 
-caseController.put('/judgeName', (req, res) => {
-  const judgeName = req.body.judgeName;
-  const caseId = req.body.caseId;
-  caseNameManager.assignJudgeName(judgeName, caseId)
+caseController.put('/judgeName/:id', (req, res) => {
+  const judgeName = req.body.name;
+  const id = req.params.id;
+  caseNameManager.assignJudgeName(judgeName, id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -80,9 +81,9 @@ caseController.put('/judgeName', (req, res) => {
     });
 });
 
-caseController.delete('/judgeName', (req, res) => {
-  const caseId = req.body.caseId;
-  caseNameManager.removeJudgeName(caseId)
+caseController.delete('/judgeName/:id', (req, res) => {
+  const id = req.params.id;
+  caseNameManager.removeJudgeName(id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -92,10 +93,10 @@ caseController.delete('/judgeName', (req, res) => {
     });
 });
 
-caseController.put('/defendantName', (req, res) => {
-  const defendantName = req.body.defendantName;
-  const caseId = req.body.caseId;
-  caseNameManager.assignDefendantName(defendantName, caseId)
+caseController.put('/defendantName/:id', (req, res) => {
+  const defendantName = req.body.name;
+  const id = req.params.id;
+  caseNameManager.assignDefendantName(defendantName, id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -105,9 +106,9 @@ caseController.put('/defendantName', (req, res) => {
     });
 });
 
-caseController.delete('/defendantName', (req, res) => {
-  const caseId = req.body.caseId;
-  caseNameManager.removeDefendantName(caseId)
+caseController.delete('/defendantName/:id', (req, res) => {
+  const id = req.params.id;
+  caseNameManager.removeDefendantName(id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -117,10 +118,10 @@ caseController.delete('/defendantName', (req, res) => {
     });
 });
 
-caseController.put('/plaintiffName', (req, res) => {
-  const plaintiffName = req.body.plaintiffName;
-  const caseId = req.body.caseId;
-  caseNameManager.assignPlaintiffName(plaintiffName, caseId)
+caseController.put('/plaintiffName/:id', (req, res) => {
+  const plaintiffName = req.body.name;
+  const id = req.params.id;
+  caseNameManager.assignPlaintiffName(plaintiffName, id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -130,9 +131,9 @@ caseController.put('/plaintiffName', (req, res) => {
     });
 });
 
-caseController.delete('/plaintiffName', (req, res) => {
-  const caseId = req.body.caseId;
-  caseNameManager.removePlaintiffName(caseId)
+caseController.delete('/plaintiffName/:id', (req, res) => {
+  const id = req.params.id;
+  caseNameManager.removePlaintiffName(id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -142,10 +143,10 @@ caseController.delete('/plaintiffName', (req, res) => {
     });
 });
 
-caseController.put('/witnessName', (req, res) => {
-  const witnessName = req.body.witnessName;
-  const caseId = req.body.caseId;
-  caseNameManager.addWitnessName(witnessName, caseId)
+caseController.put('/witnessName/:id', (req, res) => {
+  const witnessName = req.body.name;
+  const id = req.params.id;
+  caseNameManager.addWitnessName(witnessName, id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -155,10 +156,10 @@ caseController.put('/witnessName', (req, res) => {
     });
 });
 
-caseController.delete('/witnessName', (req, res) => {
-  const witnessName = req.body.witnessName;
-  const caseId = req.body.caseId;
-  caseNameManager.removeWitnessName(witnessName, caseId)
+caseController.delete('/witnessName/:id', (req, res) => {
+  const witnessName = req.body.name;
+  const id = req.params.id;
+  caseNameManager.removeWitnessName(witnessName, id)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -243,24 +244,30 @@ caseController.put('/startVerdictSelection/:id', (req, res) => {
 caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
   const id = req.params.id;
   const isDefendantGuiltyString = req.params.isDefendantGuiltyString;
-  const isDefendantGuilty = isDefendantGuiltyString.toLowerCase() === "true";
 
-  caseStatusManager.makeVerdict(id, isDefendantGuilty)
-    .then((updatedCase) => {
-      const caseName = updatedCase.name;
-      const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
-      const message = `<p>The Case of the <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
-      mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
-      tweetManager.makeTweet(`Order in the Court! The Case of the ${caseName} has been closed. The defendant ${updatedCase.defendantName} was found ${verdict}. Details in the Case Archive: https://order-in-the-court-app.herokuapp.com/archived-case/${updatedCase._id}`);
-      res.send(updatedCase);
-    })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(err);
-    });
+  if (boolUtil.stringHasBooleanValue(isDefendantGuiltyString)) {
+    const isDefendantGuilty = boolUtil.translateBooleanString(isDefendantGuiltyString);
+
+    caseStatusManager.makeVerdict(id, isDefendantGuilty)
+        .then((updatedCase) => {
+          const caseName = updatedCase.name;
+          const verdict = updatedCase.isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
+          const message = `<p>The Case of the <strong>${caseName}</strong> was closed.</p><p>The defendant was <strong>${verdict}</strong>.</p>`;
+          mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", message);
+          tweetManager.makeTweet(`Order in the Court! The Case of the ${caseName} has been closed. The defendant ${updatedCase.defendantName} was found ${verdict}. Details in the Case Archive: https://order-in-the-court-app.herokuapp.com/archived-case/${updatedCase._id}`);
+          res.send(updatedCase);
+        })
+        .catch((err) => {
+          res.statusCode = 500;
+          res.send(err);
+        });
+  } else {
+    res.statusCode = 500;
+    res.send("Internal Error");
+  }
 });
 
-caseController.put('/selectPlaintiffEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
   caseEvidenceManager.selectEvidence(caseId, evidenceId, true)
@@ -273,7 +280,7 @@ caseController.put('/selectPlaintiffEvidence/case/:caseId/evidence/:evidenceId',
     });
 });
 
-caseController.put('/selectDefendantEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/selectDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
   caseEvidenceManager.selectEvidence(caseId, evidenceId, false)
@@ -286,7 +293,7 @@ caseController.put('/selectDefendantEvidence/case/:caseId/evidence/:evidenceId',
     });
 });
 
-caseController.put('/revealPlaintiffEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/revealPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
   caseEvidenceManager.revealEvidence(caseId, evidenceId, true)
@@ -299,7 +306,7 @@ caseController.put('/revealPlaintiffEvidence/case/:caseId/evidence/:evidenceId',
     });
 });
 
-caseController.put('/revealDefendantEvidence/case/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/revealDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = req.params.evidenceId;
   caseEvidenceManager.revealEvidence(caseId, evidenceId, false)

@@ -26,7 +26,7 @@ function makeCaseAutomatic() {
                                             witnesses: randomWitnesses,
                                             poolPlaintiffEvidence: randomEvidence.plaintiffEvidence,
                                             poolDefendantEvidence: randomEvidence.defendantEvidence,
-                                            status: caseConstants.MAKE_SELECTIONS
+                                            status: caseConstants.ASSIGN_ROLES
                                         })
                                             .save()
                                             .then((addedCase) => {
