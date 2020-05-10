@@ -91,8 +91,8 @@ function getUnusedCaseName(allCases) {
 }
 
 function isAllEvidenceRevealed(myCase) {
-    const revealedAllPE = myCase.unrevealedDefendantEvidence.length === 0;
-    const revealedAllDE = myCase.unrevealedDefendantEvidence.length === 0;
+    const revealedAllPE = myCase.plaintiffEvidenceSelected.length === 0;
+    const revealedAllDE = myCase.defendantEvidenceSelected.length === 0;
     return revealedAllPE && revealedAllDE;
 }
 
