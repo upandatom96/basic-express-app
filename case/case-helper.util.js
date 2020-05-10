@@ -303,7 +303,7 @@ function populatePlaintiffValues(myCase, fullCase) {
     });
 
     fullCase.plaintiffEvidencePool = plaintiffPoolValues;
-    fullCase.plaintifEvidenceSelected = plaintiffSelectedValues;
+    fullCase.plaintiffEvidenceSelected = plaintiffSelectedValues;
     fullCase.plaintiffEvidenceCourt = plaintiffCourtValues;
 }
 
