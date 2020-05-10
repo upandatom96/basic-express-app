@@ -27,17 +27,38 @@ function makeCaseAutomatic() {
                                             witnessNames.push(witness.name);
                                         });
 
+                                        const allPlaintiffEvidence = [];
+                                        const plaintiffEvidencePool = [];
+                                        randomEvidence.plaintiffEvidence.forEach((ev, index) => {
+                                            allPlaintiffEvidence.push(ev.name);
+                                            plaintiffEvidencePool.push(index);
+                                        });
+
+                                        const allDefendantEvidence = [];
+                                        const defendantEvidencePool = [];
+                                        randomEvidence.defendantEvidence.forEach((ev, index) => {
+                                            allDefendantEvidence.push(ev.name);
+                                            defendantEvidencePool.push(index);
+                                        });
+
                                         new Case({
                                             name: caseName,
                                             issue: issueText,
                                             witnesses: witnessNames,
-                                            poolPlaintiffEvidence: randomEvidence.plaintiffEvidence,
-                                            poolDefendantEvidence: randomEvidence.defendantEvidence,
+                                            plaintiffEvidenceValues: allPlaintiffEvidence,
+                                            plaintiffEvidencePool: plaintiffEvidencePool,
+                                            plaintiffEvidenceSelected: [],
+                                            plaintiffEvidenceCourt: [],
+                                            defendantEvidenceValues: allDefendantEvidence,
+                                            defendantEvidencePool: defendantEvidencePool,
+                                            defendantEvidenceSelected: [],
+                                            defendantEvidenceCourt: [],
                                             status: caseConstants.ASSIGN_ROLES,
                                         })
                                             .save()
-                                            .then((addedCase) => {
-                                                resolve(addedCase);
+                                            .then((myCase) => {
+                                                const fullCase = caseUtil.populateValues(myCase);
+                                                resolve(fullCase);
                                             });
                                     })
                                     .catch((err) => {

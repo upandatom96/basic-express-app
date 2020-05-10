@@ -25,40 +25,44 @@ const CaseSchema = new Schema({
   issue: {
     type: String
   },
-  poolPlaintiffEvidence: [
+  plaintiffEvidenceValues: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: String
     }
   ],
-  unrevealedPlaintiffEvidence: [
+  plaintiffEvidencePool: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: Number
     }
   ],
-  revealedPlaintiffEvidence: [
+  plaintiffEvidenceSelected: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: Number
     }
   ],
-  poolDefendantEvidence: [
+  plaintiffEvidenceCourt: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: Number
     }
   ],
-  unrevealedDefendantEvidence: [
+  defendantEvidenceValues: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: String
     }
   ],
-  revealedDefendantEvidence: [
+  defendantEvidencePool: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'evidence'
+      type: Number
+    }
+  ],
+  defendantEvidenceSelected: [
+    {
+      type: Number
+    }
+  ],
+  defendantEvidenceCourt: [
+    {
+      type: Number
     }
   ],
   witnesses: [

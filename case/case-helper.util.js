@@ -220,6 +220,80 @@ function canSelectDefendantEvidence(myCase) {
     return caseInProgress && !allSelected;
 }
 
+function cloneCase(myCase) {
+    return {
+        name: myCase.name,
+        closedDate: myCase.closedDate,
+        openedDate: myCase.openedDate,
+        status: myCase.status,
+        isDefendantGuilty: myCase.isDefendantGuilty,
+        issue: myCase.issue,
+        witnesses: myCase.witnesses,
+        judgeName: myCase.judgeName,
+        plaintiffName: myCase.plaintiffName,
+        defendantName: myCase.defendantName,
+        witnessName2: myCase.witnessName2,
+        witnessName3: myCase.witnessName3,
+        witnessName4: myCase.witnessName4,
+        witnessName5: myCase.witnessName5,
+    };
+}
+
+function populateDefendantEvidence(myCase, fullCase) {
+    const defendantPoolValues = [];
+    myCase.defendantEvidencePool.forEach((evIndex) => {
+        const myEv = myCase.defendantEvidenceValues[evIndex];
+        defendantPoolValues.push(myEv);
+    });
+
+    const defendantSelectedValues = [];
+    myCase.defendantEvidenceSelected.forEach((evIndex) => {
+        const myEv = myCase.defendantEvidenceValues[evIndex];
+        defendantSelectedValues.push(myEv);
+    });
+
+    const defendantCourtValues = [];
+    myCase.defendantEvidenceCourt.forEach((evIndex) => {
+        const myEv = myCase.defendantEvidenceValues[evIndex];
+        defendantCourtValues.push(myEv);
+    });
+
+    fullCase.defendantEvidencePool = defendantPoolValues;
+    fullCase.defendantEvidenceSelected = defendantSelectedValues;
+    fullCase.defendantEvidenceCourt = defendantCourtValues;
+}
+
+function populatePlaintiffValues(myCase, fullCase) {
+    const plaintiffPoolValues = [];
+    myCase.plaintiffEvidencePool.forEach((evIndex) => {
+        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        plaintiffPoolValues.push(myEv);
+    });
+
+    const plaintiffSelectedValues = [];
+    myCase.plaintiffEvidenceSelected.forEach((evIndex) => {
+        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        plaintiffSelectedValues.push(myEv);
+    });
+
+    const plaintiffCourtValues = [];
+    myCase.plaintiffEvidenceCourt.forEach((evIndex) => {
+        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        plaintiffCourtValues.push(myEv);
+    });
+
+    fullCase.plaintiffEvidencePool = plaintiffPoolValues;
+    fullCase.plaintifEvidenceSelected = plaintiffSelectedValues;
+    fullCase.plaintiffEvidenceCourt = plaintiffCourtValues;
+}
+
+function populateValues(myCase) {
+    const fullCase = cloneCase(myCase);
+    populatePlaintiffValues(myCase, fullCase);
+    populateDefendantEvidence(myCase, fullCase);
+    return fullCase;
+}
+
 module.exports = {
     orderSortedCasesByDate,
     sortCasesByStatus,
@@ -238,5 +312,6 @@ module.exports = {
     getUnusedCaseName,
     canLockRoles,
     areSelectionsComplete,
-    canMakeVerdict
+    canMakeVerdict,
+    populateValues
 }
