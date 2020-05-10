@@ -88,7 +88,7 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         if (isPlaintiff) {
                             evidenceIsSelectable = foundCase.plaintiffEvidencePool.includes(evidenceIndex);
                         } else {
-                            evidenceIsSelectable = foundCase.plaintiffEvidencePool.includes(evidenceIndex);
+                            evidenceIsSelectable = foundCase.defendantEvidencePool.includes(evidenceIndex);
                         }
 
                         if (!evidenceIsSelectable) {

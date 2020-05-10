@@ -223,6 +223,7 @@ function canSelectDefendantEvidence(myCase) {
 
 function cloneCase(myCase) {
     return {
+        _id: myCase._id,
         name: myCase.name,
         closedDate: myCase.closedDate,
         openedDate: myCase.openedDate,

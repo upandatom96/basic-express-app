@@ -272,7 +272,7 @@ caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
 
 caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
-  const evidenceId = req.params.evidenceId;
+  const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.selectEvidence(caseId, evidenceId, true)
     .then((updatedCase) => {
       res.send(updatedCase);
@@ -285,7 +285,7 @@ caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req
 
 caseController.put('/selectDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
-  const evidenceId = req.params.evidenceId;
+  const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.selectEvidence(caseId, evidenceId, false)
     .then((updatedCase) => {
       res.send(updatedCase);
@@ -298,7 +298,7 @@ caseController.put('/selectDefendantEvidence/:caseId/evidence/:evidenceId', (req
 
 caseController.put('/revealPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
-  const evidenceId = req.params.evidenceId;
+  const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.revealEvidence(caseId, evidenceId, true)
     .then((updatedCase) => {
       res.send(updatedCase);
@@ -311,7 +311,7 @@ caseController.put('/revealPlaintiffEvidence/:caseId/evidence/:evidenceId', (req
 
 caseController.put('/revealDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
-  const evidenceId = req.params.evidenceId;
+  const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.revealEvidence(caseId, evidenceId, false)
     .then((updatedCase) => {
       res.send(updatedCase);
