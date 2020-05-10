@@ -20,10 +20,17 @@ function makeCaseAutomatic() {
                             .then((randomWitnesses) => {
                                 evidenceManager.getRandomEvidence(10)
                                     .then((randomEvidence) => {
+
+                                        const issueText = randomIssue.name;
+                                        const witnessNames = [];
+                                        randomWitnesses.forEach((witness) => {
+                                            witnessNames.push(witness.name);
+                                        });
+
                                         new Case({
                                             name: caseName,
-                                            issue: randomIssue._id,
-                                            witnesses: randomWitnesses,
+                                            issue: issueText,
+                                            witnesses: witnessNames,
                                             poolPlaintiffEvidence: randomEvidence.plaintiffEvidence,
                                             poolDefendantEvidence: randomEvidence.defendantEvidence,
                                             status: caseConstants.ASSIGN_ROLES,

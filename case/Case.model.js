@@ -23,9 +23,7 @@ const CaseSchema = new Schema({
     default: false
   },
   issue: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'issue',
-    required: true
+    type: String
   },
   poolPlaintiffEvidence: [
     {
@@ -65,8 +63,7 @@ const CaseSchema = new Schema({
   ],
   witnesses: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'witness'
+      type: String
     }
   ],
   judgeName: {

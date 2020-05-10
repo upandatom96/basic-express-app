@@ -7,14 +7,12 @@ const caseUtil = require('./case-helper.util');
 function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
-      .populate("issue")
-      .populate("witnesses")
-      .populate("poolPlaintiffEvidence")
-      .populate("unrevealedPlaintiffEvidence")
-      .populate("revealedPlaintiffEvidence")
-      .populate("poolDefendantEvidence")
-      .populate("unrevealedDefendantEvidence")
-      .populate("revealedDefendantEvidence")
+        .populate("poolPlaintiffEvidence")
+        .populate("unrevealedPlaintiffEvidence")
+        .populate("revealedPlaintiffEvidence")
+        .populate("poolDefendantEvidence")
+        .populate("unrevealedDefendantEvidence")
+        .populate("revealedDefendantEvidence")
       .then((allCases) => {
         let sortedCases = caseUtil.sortCasesByStatus(allCases);
         sortedCases = caseUtil.orderSortedCasesByDate(sortedCases);
@@ -28,8 +26,6 @@ function getCaseById(id) {
     Case.findOne({
       _id: id
     })
-      .populate("issue")
-      .populate("witnesses")
       .populate("poolPlaintiffEvidence")
       .populate("unrevealedPlaintiffEvidence")
       .populate("revealedPlaintiffEvidence")
