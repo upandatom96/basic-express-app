@@ -257,7 +257,7 @@ caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
           const messageArchive = `Details in the Case Archive: https://order-in-the-court-app.herokuapp.com/archived-case/${updatedCase._id}`;
           let closingMessage = `${messageIntro} ${messageVerdict} ${messageArchive}`;
           mailer.sendEmail("adamontheinternet.com@gmail.com", "CASE CLOSED", closingMessage);
-          // tweetManager.makeTweet(closingMessage);
+          tweetManager.makeTweet(closingMessage);
           res.send(updatedCase);
         })
         .catch((err) => {
