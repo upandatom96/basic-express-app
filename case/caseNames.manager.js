@@ -3,6 +3,7 @@ require('./Case.model');
 const Case = mongoose.model('case');
 
 const caseUtil = require('./case-helper.util');
+const boolUtil = require('../utilities/bool.util');
 
 function assignJudgeName(judgeName, caseId) {
     return new Promise((resolve, reject) => {
@@ -187,16 +188,16 @@ function addWitnessName(witnessName, caseId) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
-                    } else if (foundCase.witnessNames.length > 4) {
+                    } else if (caseUtil.hasMaxWitnesses(foundCase)) {
                         reject({
                             message: `This case cannot have any more witnesses`
                         });
-                    } else if (foundCase.witnessNames.includes(witnessName)) {
+                    } else if (caseUtil.hasWitnessNameAlready(foundCase, witnessName)) {
                         reject({
                             message: `Name already taken`
                         });
                     } else {
-                        foundCase.witnessNames.push(witnessName);
+                        caseUtil.addWitness(foundCase, witnessName);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -223,14 +224,12 @@ function removeWitnessName(witnessName, caseId) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
-                    } else if (!foundCase.witnessNames.includes(witnessName)) {
+                    } else if (!caseUtil.hasWitnessNameAlready(foundCase, witnessName)) {
                         reject({
                             message: `CANNOT REMOVE THIS NAME`
                         });
                     } else {
-                        foundCase.witnessNames = foundCase.witnessNames.filter((name) => {
-                            return name !== witnessName;
-                        });
+                        caseUtil.removeWitness(foundCase, witnessName);
 
                         foundCase.save()
                             .then((updatedCase) => {

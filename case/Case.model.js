@@ -81,11 +81,26 @@ const CaseSchema = new Schema({
     type: String,
     default: null,
   },
-  witnessNames: [
-    {
-      type: String
-    }
-  ],
+  witnessName1: {
+    type: String,
+    default: null,
+  },
+  witnessName2: {
+    type: String,
+    default: null,
+  },
+  witnessName3: {
+    type: String,
+    default: null,
+  },
+  witnessName4: {
+    type: String,
+    default: null,
+  },
+  witnessName5: {
+    type: String,
+    default: null,
+  },
 });
 
 mongoose.model('case', CaseSchema);

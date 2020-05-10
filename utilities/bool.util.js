@@ -18,6 +18,12 @@ function hasValue(value) {
   return !hasNoValue(value);
 }
 
+function allHaveValues(values) {
+  return values.every((value) => {
+    return hasValue(value);
+  });
+}
+
 function hasNoNumberValue(value) {
   return hasNoValue(value) || isNaN(value);
 }
@@ -47,6 +53,7 @@ module.exports = {
   hasNoBoolValue,
   hasNoValue,
   hasValue,
+  allHaveValues,
   hasNumberValue,
   hasNoNumberValue,
   stringHasBooleanValue,

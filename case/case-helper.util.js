@@ -95,6 +95,55 @@ function isAllEvidenceRevealed(myCase) {
     return revealedAllPE && revealedAllDE;
 }
 
+function hasMaxWitnesses(myCase) {
+    return boolUtil.allHaveValues(
+        [
+            myCase.witnessName1,
+            myCase.witnessName2,
+            myCase.witnessName3,
+            myCase.witnessName4,
+            myCase.witnessName5
+        ]
+        );
+}
+
+function hasWitnessNameAlready(myCase, witnessName) {
+    const match1 = myCase.witnessName1 === witnessName;
+    const match2 = myCase.witnessName2 === witnessName;
+    const match3 = myCase.witnessName3 === witnessName;
+    const match4 = myCase.witnessName4 === witnessName;
+    const match5 = myCase.witnessName5 === witnessName;
+    return match1 || match2 || match3 || match4 || match5;
+}
+
+function addWitness(myCase, witnessName) {
+    if (boolUtil.hasNoValue(myCase.witnessName1)) {
+        myCase.witnessName1 = witnessName;
+    } else if (boolUtil.hasNoValue(myCase.witnessName2)) {
+        myCase.witnessName2 = witnessName;
+    } else if (boolUtil.hasNoValue(myCase.witnessName3)) {
+        myCase.witnessName3 = witnessName;
+    } else if (boolUtil.hasNoValue(myCase.witnessName4)) {
+        myCase.witnessName4 = witnessName;
+    } else if (boolUtil.hasNoValue(myCase.witnessName5)) {
+        myCase.witnessName5 = witnessName;
+    }
+}
+
+function removeWitness(myCase, witnessName) {
+    if (myCase.witnessName1 === witnessName) {
+        myCase.witnessName1 = null;
+    } else if (myCase.witnessName2 === witnessName) {
+        myCase.witnessName2 = null;
+    } else if (myCase.witnessName3 === witnessName) {
+        myCase.witnessName3 = null;
+    } else if (myCase.witnessName4 === witnessName) {
+        myCase.witnessName4 = null;
+    } else if (myCase.witnessName5 === witnessName) {
+        myCase.witnessName5 = null;
+    }
+}
+
 function canMakeVerdict(myCase) {
     const revealedAllEvidence = isAllEvidenceRevealed(myCase);
     const statusReady = isCaseStatusClosingArguments(myCase) || isCaseStatusFreeTime(myCase);
@@ -174,7 +223,10 @@ function canSelectDefendantEvidence(myCase) {
 module.exports = {
     orderSortedCasesByDate,
     sortCasesByStatus,
-    isCaseOpen,
+    hasMaxWitnesses,
+    addWitness,
+    removeWitness,
+    hasWitnessNameAlready,
     isCaseStatusAssignRoles,
     isCaseStatusOpeningArguments,
     isCaseStatusCrossfire,
