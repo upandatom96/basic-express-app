@@ -6,7 +6,7 @@ function have24HoursPast(previousTime) {
     const elapsed = currentTime - previousTime;
 
     const hoursPast = Math.round(elapsed / msPerHour);
-    return hoursPast > 1;
+    return hoursPast > 24;
 }
 
 module.exports = {
