@@ -7,12 +7,6 @@ const caseUtil = require('./case-helper.util');
 function getAllCases() {
   return new Promise((resolve, reject) => {
     Case.find({})
-        .populate("poolPlaintiffEvidence")
-        .populate("unrevealedPlaintiffEvidence")
-        .populate("revealedPlaintiffEvidence")
-        .populate("poolDefendantEvidence")
-        .populate("unrevealedDefendantEvidence")
-        .populate("revealedDefendantEvidence")
       .then((allCases) => {
         let sortedCases = caseUtil.sortCasesByStatus(allCases);
         sortedCases = caseUtil.orderSortedCasesByDate(sortedCases);
@@ -26,15 +20,10 @@ function getCaseById(id) {
     Case.findOne({
       _id: id
     })
-      .populate("poolPlaintiffEvidence")
-      .populate("unrevealedPlaintiffEvidence")
-      .populate("revealedPlaintiffEvidence")
-      .populate("poolDefendantEvidence")
-      .populate("unrevealedDefendantEvidence")
-      .populate("revealedDefendantEvidence")
       .then((myCase) => {
         if (myCase) {
-          resolve(myCase);
+            const fullCase = caseUtil.populateValues(myCase);
+          resolve(fullCase);
         } else {
           reject({
             message: "Failed to find case"

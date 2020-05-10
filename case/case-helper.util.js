@@ -26,12 +26,13 @@ function sortCasesByStatus(cases) {
         limboCases: [],
     };
     cases.forEach((myCase) => {
-        if (isCaseLimbo(myCase)) {
-            sortedCases.limboCases.push(myCase);
-        } else if (isCaseStatusClosed(myCase)) {
-            sortedCases.closedCases.push(myCase);
+        const fullCase = populateValues(myCase);
+        if (isCaseLimbo(fullCase)) {
+            sortedCases.limboCases.push(fullCase);
+        } else if (isCaseStatusClosed(fullCase)) {
+            sortedCases.closedCases.push(fullCase);
         } else {
-            sortedCases.openCases.push(myCase);
+            sortedCases.openCases.push(fullCase);
         }
     });
     return sortedCases;
@@ -170,19 +171,19 @@ function areSelectionsComplete(myCase) {
 }
 
 function isAllPlaintiffEvidenceSelected(myCase) {
-    return myCase.unrevealedPlaintiffEvidence.length > 4;
+    return myCase.plaintiffEvidenceSelected.length >= 5;
 }
 
 function isAllDefendantEvidenceSelected(myCase) {
-    return myCase.unrevealedDefendantEvidence.length > 4;
+    return myCase.defendantEvidenceSelected.length >= 5;
 }
 
 function isAllPlaintiffEvidenceRevealed(myCase) {
-    return myCase.revealedPlaintiffEvidence.length > 4;
+    return myCase.plaintiffEvidenceCourt.length >= 5;
 }
 
 function isAllDefendantEvidenceRevealed(myCase) {
-    return myCase.revealedDefendantEvidence.length > 4;
+    return myCase.defendantEvidenceCourt.length >= 5;
 }
 
 function isAllEvidenceSelected(myCase) {
@@ -243,19 +244,28 @@ function populateDefendantEvidence(myCase, fullCase) {
     const defendantPoolValues = [];
     myCase.defendantEvidencePool.forEach((evIndex) => {
         const myEv = myCase.defendantEvidenceValues[evIndex];
-        defendantPoolValues.push(myEv);
+        defendantPoolValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     const defendantSelectedValues = [];
     myCase.defendantEvidenceSelected.forEach((evIndex) => {
         const myEv = myCase.defendantEvidenceValues[evIndex];
-        defendantSelectedValues.push(myEv);
+        defendantSelectedValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     const defendantCourtValues = [];
     myCase.defendantEvidenceCourt.forEach((evIndex) => {
         const myEv = myCase.defendantEvidenceValues[evIndex];
-        defendantCourtValues.push(myEv);
+        defendantCourtValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     fullCase.defendantEvidencePool = defendantPoolValues;
@@ -267,19 +277,28 @@ function populatePlaintiffValues(myCase, fullCase) {
     const plaintiffPoolValues = [];
     myCase.plaintiffEvidencePool.forEach((evIndex) => {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
-        plaintiffPoolValues.push(myEv);
+        plaintiffPoolValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     const plaintiffSelectedValues = [];
     myCase.plaintiffEvidenceSelected.forEach((evIndex) => {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
-        plaintiffSelectedValues.push(myEv);
+        plaintiffSelectedValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     const plaintiffCourtValues = [];
     myCase.plaintiffEvidenceCourt.forEach((evIndex) => {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
-        plaintiffCourtValues.push(myEv);
+        plaintiffCourtValues.push({
+            name: myEv,
+            id: evIndex
+        });
     });
 
     fullCase.plaintiffEvidencePool = plaintiffPoolValues;

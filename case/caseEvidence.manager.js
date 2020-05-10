@@ -5,12 +5,12 @@ const Case = mongoose.model('case');
 const boolUtil = require('../utilities/bool.util');
 const caseUtil = require('./case-helper.util');
 
-function revealEvidence(caseId, evidenceId, isPlaintiff) {
+function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
     return new Promise((resolve, reject) => {
         const hasCaseId = boolUtil.hasValue(caseId);
-        const hasEvidenceId = boolUtil.hasValue(evidenceId);
-        if (!hasCaseId || !hasEvidenceId) {
-            reject("Case id and evidence id required.");
+        const hasEvidenceIndex = boolUtil.hasValue(evidenceIndex);
+        if (!hasCaseId || !hasEvidenceIndex) {
+            reject("Case id and evidence index required.");
         } else {
             Case.findOne({ _id: caseId })
                 .then((foundCase) => {
@@ -27,31 +27,27 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
                             message: `CANNOT REVEAL EVIDENCE`
                         });
                     } else {
-                        let evidenceToReveal;
+                        let evidenceIsRevealable;
                         if (isPlaintiff) {
-                            evidenceToReveal = foundCase.unrevealedPlaintiffEvidence.find((evidence) => {
-                                return evidence._id.toString() === evidenceId;
-                            });
+                            evidenceIsRevealable = foundCase.plaintiffEvidenceSelected.includes(evidenceIndex);
                         } else {
-                            evidenceToReveal = foundCase.unrevealedDefendantEvidence.find((evidence) => {
-                                return evidence._id.toString() === evidenceId;
-                            });
+                            evidenceIsRevealable = foundCase.defendantEvidenceSelected.includes(evidenceIndex);
                         }
 
-                        if (!evidenceToReveal) {
+                        if (!evidenceIsRevealable) {
                             reject({
-                                message: 'Failed to find the evidence'
+                                message: 'REVEAL FAILED'
                             });
                         } else {
                             if (isPlaintiff) {
-                                foundCase.revealedPlaintiffEvidence.push(evidenceToReveal);
-                                foundCase.unrevealedPlaintiffEvidence = foundCase.unrevealedPlaintiffEvidence.filter((evidence) => {
-                                    return evidence._id.toString() != evidenceId;
+                                foundCase.plaintiffEvidenceCourt.push(evidenceIndex);
+                                foundCase.plaintiffEvidenceSelected = foundCase.plaintiffEvidenceSelected.filter((evidence) => {
+                                    return evidence !== evidenceIndex;
                                 });
                             } else {
-                                foundCase.revealedDefendantEvidence.push(evidenceToReveal);
-                                foundCase.unrevealedDefendantEvidence = foundCase.unrevealedDefendantEvidence.filter((evidence) => {
-                                    return evidence._id.toString() != evidenceId;
+                                foundCase.defendantEvidenceCourt.push(evidenceIndex);
+                                foundCase.defendantEvidenceSelected = foundCase.defendantEvidenceSelected.filter((evidence) => {
+                                    return evidence !== evidenceIndex;
                                 });
                             }
 
@@ -66,12 +62,12 @@ function revealEvidence(caseId, evidenceId, isPlaintiff) {
     });
 }
 
-function selectEvidence(caseId, evidenceId, isPlaintiff) {
+function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
     return new Promise((resolve, reject) => {
         const hasCaseId = boolUtil.hasValue(caseId);
-        const hasEvidenceId = boolUtil.hasValue(evidenceId);
-        if (!hasCaseId || !hasEvidenceId) {
-            reject("Case id and evidence id required.");
+        const hasEvidenceIndex = boolUtil.hasValue(evidenceIndex);
+        if (!hasCaseId || !hasEvidenceIndex) {
+            reject("Case id and evidence index required.");
         } else {
             Case.findOne({ _id: caseId })
                 .then((foundCase) => {
@@ -88,31 +84,27 @@ function selectEvidence(caseId, evidenceId, isPlaintiff) {
                             message: `CANNOT SELECT EVIDENCE`
                         });
                     } else {
-                        let evidenceToSelect;
+                        let evidenceIsSelectable;
                         if (isPlaintiff) {
-                            evidenceToSelect = foundCase.poolPlaintiffEvidence.find((evidence) => {
-                                return evidence._id.toString() === evidenceId;
-                            });
+                            evidenceIsSelectable = foundCase.plaintiffEvidencePool.includes(evidenceIndex);
                         } else {
-                            evidenceToSelect = foundCase.poolDefendantEvidence.find((evidence) => {
-                                return evidence._id.toString() === evidenceId;
-                            });
+                            evidenceIsSelectable = foundCase.plaintiffEvidencePool.includes(evidenceIndex);
                         }
 
-                        if (!evidenceToSelect) {
+                        if (!evidenceIsSelectable) {
                             reject({
-                                message: 'Failed to find the evidence'
+                                message: 'FAILED TO SELECT'
                             });
                         } else {
                             if (isPlaintiff) {
-                                foundCase.unrevealedPlaintiffEvidence.push(evidenceToSelect);
-                                foundCase.poolPlaintiffEvidence = foundCase.poolPlaintiffEvidence.filter((evidence) => {
-                                    return evidence._id.toString() != evidenceId;
+                                foundCase.plaintiffEvidenceSelected.push(evidenceIndex);
+                                foundCase.plaintiffEvidencePool = foundCase.plaintiffEvidencePool.filter((evidence) => {
+                                    return evidence !== evidenceIndex;
                                 });
                             } else {
-                                foundCase.unrevealedDefendantEvidence.push(evidenceToSelect);
-                                foundCase.poolDefendantEvidence = foundCase.poolDefendantEvidence.filter((evidence) => {
-                                    return evidence._id.toString() != evidenceId;
+                                foundCase.defendantEvidenceSelected.push(evidenceIndex);
+                                foundCase.defendantEvidencePool = foundCase.defendantEvidencePool.filter((evidence) => {
+                                    return evidence !== evidenceIndex;
                                 });
                             }
 
