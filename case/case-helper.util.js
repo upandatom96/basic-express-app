@@ -74,8 +74,6 @@ function isCaseStatusClosed(myCase) {
 }
 
 function isCaseLimbo(myCase) {
-    // TODO test and use this
-    return false;
     if (isCaseStatusClosed(myCase)) {
         return false;
     }
