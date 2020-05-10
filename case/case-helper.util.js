@@ -247,7 +247,7 @@ function populateDefendantEvidence(myCase, fullCase) {
         const myEv = myCase.defendantEvidenceValues[evIndex];
         defendantPoolValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
@@ -256,7 +256,7 @@ function populateDefendantEvidence(myCase, fullCase) {
         const myEv = myCase.defendantEvidenceValues[evIndex];
         defendantSelectedValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
@@ -265,7 +265,7 @@ function populateDefendantEvidence(myCase, fullCase) {
         const myEv = myCase.defendantEvidenceValues[evIndex];
         defendantCourtValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
@@ -280,7 +280,7 @@ function populatePlaintiffValues(myCase, fullCase) {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
         plaintiffPoolValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
@@ -289,7 +289,7 @@ function populatePlaintiffValues(myCase, fullCase) {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
         plaintiffSelectedValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
@@ -298,7 +298,7 @@ function populatePlaintiffValues(myCase, fullCase) {
         const myEv = myCase.plaintiffEvidenceValues[evIndex];
         plaintiffCourtValues.push({
             name: myEv,
-            id: evIndex
+            _id: evIndex
         });
     });
 
