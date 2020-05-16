@@ -108,39 +108,45 @@ function hasMaxWitnesses(myCase) {
     );
 }
 
-function hasWitnessNameAlready(myCase, witnessName) {
-    const match1 = myCase.witnessName1 === witnessName;
-    const match2 = myCase.witnessName2 === witnessName;
-    const match3 = myCase.witnessName3 === witnessName;
-    const match4 = myCase.witnessName4 === witnessName;
-    const match5 = myCase.witnessName5 === witnessName;
-    return match1 || match2 || match3 || match4 || match5;
+function hasWitnessNameAlready(myCase, witnessNumber) {
+    if (witnessNumber === 1) {
+        return myCase.witnessName1 !== null;
+    } else if (witnessNumber === 2) {
+        return myCase.witnessName2 !== null;
+    } else if (witnessNumber === 3) {
+        return myCase.witnessName3 !== null;
+    } else if (witnessNumber === 4) {
+        return myCase.witnessName4 !== null;
+    } else if (witnessNumber === 5) {
+        return myCase.witnessName5 !== null;
+    }
+    return false;
 }
 
-function addWitness(myCase, witnessName) {
-    if (boolUtil.hasNoValue(myCase.witnessName1)) {
+function addWitness(myCase, witnessName, witnessNumber) {
+    if (witnessNumber === 1) {
         myCase.witnessName1 = witnessName;
-    } else if (boolUtil.hasNoValue(myCase.witnessName2)) {
+    } else if (witnessNumber === 2) {
         myCase.witnessName2 = witnessName;
-    } else if (boolUtil.hasNoValue(myCase.witnessName3)) {
+    } else if (witnessNumber === 3) {
         myCase.witnessName3 = witnessName;
-    } else if (boolUtil.hasNoValue(myCase.witnessName4)) {
+    } else if (witnessNumber === 4) {
         myCase.witnessName4 = witnessName;
-    } else if (boolUtil.hasNoValue(myCase.witnessName5)) {
+    } else if (witnessNumber === 5) {
         myCase.witnessName5 = witnessName;
     }
 }
 
-function removeWitness(myCase, witnessName) {
-    if (myCase.witnessName1 === witnessName) {
+function removeWitness(myCase, witnessNumber) {
+    if (witnessNumber === 1) {
         myCase.witnessName1 = null;
-    } else if (myCase.witnessName2 === witnessName) {
+    } else if (witnessNumber === 2) {
         myCase.witnessName2 = null;
-    } else if (myCase.witnessName3 === witnessName) {
+    } else if (witnessNumber === 3) {
         myCase.witnessName3 = null;
-    } else if (myCase.witnessName4 === witnessName) {
+    } else if (witnessNumber === 4) {
         myCase.witnessName4 = null;
-    } else if (myCase.witnessName5 === witnessName) {
+    } else if (witnessNumber === 5) {
         myCase.witnessName5 = null;
     }
 }

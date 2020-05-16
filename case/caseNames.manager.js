@@ -173,7 +173,7 @@ function removeDefendantName(caseId) {
     });
 }
 
-function addWitnessName(witnessName, caseId) {
+function addWitnessName(witnessName, caseId, witnessNumber) {
     return new Promise((resolve, reject) => {
         if (!witnessName || !caseId) {
             reject("cannot add witness name");
@@ -188,16 +188,12 @@ function addWitnessName(witnessName, caseId) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
-                    } else if (caseUtil.hasMaxWitnesses(foundCase)) {
+                    } else if (caseUtil.hasWitnessNameAlready(foundCase, witnessNumber)) {
                         reject({
-                            message: `This case cannot have any more witnesses`
-                        });
-                    } else if (caseUtil.hasWitnessNameAlready(foundCase, witnessName)) {
-                        reject({
-                            message: `Name already taken`
+                            message: `Name already set`
                         });
                     } else {
-                        caseUtil.addWitness(foundCase, witnessName);
+                        caseUtil.addWitness(foundCase, witnessName, witnessNumber);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -209,9 +205,9 @@ function addWitnessName(witnessName, caseId) {
     });
 }
 
-function removeWitnessName(witnessName, caseId) {
+function removeWitnessName(caseId, witnessNumber) {
     return new Promise((resolve, reject) => {
-        if (!witnessName || !caseId) {
+        if (!witnessNumber || !caseId) {
             reject("cannot remove witness name");
         } else {
             Case.findOne({ _id: caseId })
@@ -224,12 +220,12 @@ function removeWitnessName(witnessName, caseId) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
-                    } else if (!caseUtil.hasWitnessNameAlready(foundCase, witnessName)) {
+                    } else if (!caseUtil.hasWitnessNameAlready(foundCase, witnessNumber)) {
                         reject({
                             message: `CANNOT REMOVE THIS NAME`
                         });
                     } else {
-                        caseUtil.removeWitness(foundCase, witnessName);
+                        caseUtil.removeWitness(foundCase, witnessNumber);
 
                         foundCase.save()
                             .then((updatedCase) => {

@@ -144,10 +144,11 @@ caseController.put('/removePlaintiffName/:id', (req, res) => {
     });
 });
 
-caseController.put('/witnessName/:id', (req, res) => {
+caseController.put('/witnessName/:caseId/:witnessNumber', (req, res) => {
   const witnessName = req.body.name;
-  const id = req.params.id;
-  caseNameManager.addWitnessName(witnessName, id)
+  const caseId = req.params.id;
+  const witnessNumber = Number(req.params.witnessNumber);
+  caseNameManager.addWitnessName(witnessName, caseId, witnessNumber)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
@@ -157,10 +158,10 @@ caseController.put('/witnessName/:id', (req, res) => {
     });
 });
 
-caseController.put('/removeWitnessName/:id', (req, res) => {
-  const witnessName = req.body.name;
-  const id = req.params.id;
-  caseNameManager.removeWitnessName(witnessName, id)
+caseController.put('/removeWitnessName/:caseId/:witnessNumber', (req, res) => {
+  const caseId = req.params.caseId;
+  const witnessNumber = Number(req.params.witnessNumber);
+  caseNameManager.removeWitnessName(caseId, witnessNumber)
     .then((updatedCase) => {
       res.send(updatedCase);
     })
