@@ -69,7 +69,7 @@ caseController.post('/', (req, res) => {
     });
 });
 
-caseController.put('/judgeName/:id', (req, res) => {
+caseController.put('/:id/assignName/judge', (req, res) => {
   const judgeName = req.body.name;
   const id = req.params.id;
   caseNameManager.assignJudgeName(judgeName, id)
@@ -82,7 +82,7 @@ caseController.put('/judgeName/:id', (req, res) => {
     });
 });
 
-caseController.put('/removeJudgeName/:id', (req, res) => {
+caseController.put('/:id/removeName/judge', (req, res) => {
   const id = req.params.id;
   caseNameManager.removeJudgeName(id)
     .then((updatedCase) => {
@@ -94,7 +94,7 @@ caseController.put('/removeJudgeName/:id', (req, res) => {
     });
 });
 
-caseController.put('/defendantName/:id', (req, res) => {
+caseController.put('/:id/assignName/defendant', (req, res) => {
   const defendantName = req.body.name;
   const id = req.params.id;
   caseNameManager.assignDefendantName(defendantName, id)
@@ -107,7 +107,7 @@ caseController.put('/defendantName/:id', (req, res) => {
     });
 });
 
-caseController.put('/removeDefendantName/:id', (req, res) => {
+caseController.put('/:id/removeName/defendant', (req, res) => {
   const id = req.params.id;
   caseNameManager.removeDefendantName(id)
     .then((updatedCase) => {
@@ -119,7 +119,7 @@ caseController.put('/removeDefendantName/:id', (req, res) => {
     });
 });
 
-caseController.put('/plaintiffName/:id', (req, res) => {
+caseController.put('/:id/assignName/plaintiff', (req, res) => {
   const plaintiffName = req.body.name;
   const id = req.params.id;
   caseNameManager.assignPlaintiffName(plaintiffName, id)
@@ -132,7 +132,7 @@ caseController.put('/plaintiffName/:id', (req, res) => {
     });
 });
 
-caseController.put('/removePlaintiffName/:id', (req, res) => {
+caseController.put('/:id/removeName/plaintiff', (req, res) => {
   const id = req.params.id;
   caseNameManager.removePlaintiffName(id)
     .then((updatedCase) => {
@@ -144,7 +144,7 @@ caseController.put('/removePlaintiffName/:id', (req, res) => {
     });
 });
 
-caseController.put('/witnessName/:caseId/:witnessNumber', (req, res) => {
+caseController.put('/:caseId/assignName/witness/:witnessNumber', (req, res) => {
   const witnessName = req.body.name;
   const caseId = req.params.caseId;
   const witnessNumber = Number(req.params.witnessNumber);
@@ -158,7 +158,7 @@ caseController.put('/witnessName/:caseId/:witnessNumber', (req, res) => {
     });
 });
 
-caseController.put('/removeWitnessName/:caseId/:witnessNumber', (req, res) => {
+caseController.put('/:caseId/removeName/witness/:witnessNumber', (req, res) => {
   const caseId = req.params.caseId;
   const witnessNumber = Number(req.params.witnessNumber);
   caseNameManager.removeWitnessName(caseId, witnessNumber)
@@ -171,7 +171,7 @@ caseController.put('/removeWitnessName/:caseId/:witnessNumber', (req, res) => {
     });
 });
 
-caseController.put('/lockRoles/:id', (req, res) => {
+caseController.put('/:id/lockRoles', (req, res) => {
   const id = req.params.id;
   caseStatusManager.lockRoles(id)
     .then((updatedCase) => {
@@ -183,7 +183,7 @@ caseController.put('/lockRoles/:id', (req, res) => {
     });
 });
 
-caseController.put('/startFreeTime/:id', (req, res) => {
+caseController.put('/:id/startFreeTime', (req, res) => {
   const id = req.params.id;
   caseStatusManager.startFreeTime(id)
     .then((updatedCase) => {
@@ -195,7 +195,7 @@ caseController.put('/startFreeTime/:id', (req, res) => {
     });
 });
 
-caseController.put('/startOpeningArguments/:id', (req, res) => {
+caseController.put('/:id/startOpeningArguments', (req, res) => {
   const id = req.params.id;
   caseStatusManager.startOpeningArguments(id)
     .then((updatedCase) => {
@@ -207,7 +207,7 @@ caseController.put('/startOpeningArguments/:id', (req, res) => {
     });
 });
 
-caseController.put('/startCrossfire/:id', (req, res) => {
+caseController.put('/:id/startCrossfire', (req, res) => {
   const id = req.params.id;
   caseStatusManager.startCrossfire(id)
     .then((updatedCase) => {
@@ -219,7 +219,7 @@ caseController.put('/startCrossfire/:id', (req, res) => {
     });
 });
 
-caseController.put('/startClosingArguments/:id', (req, res) => {
+caseController.put('/:id/startClosingArguments', (req, res) => {
   const id = req.params.id;
   caseStatusManager.startClosingArguments(id)
     .then((updatedCase) => {
@@ -231,7 +231,7 @@ caseController.put('/startClosingArguments/:id', (req, res) => {
     });
 });
 
-caseController.put('/startVerdictSelection/:id', (req, res) => {
+caseController.put('/:id/startVerdictSelection', (req, res) => {
   const id = req.params.id;
   caseStatusManager.startVerdictSelection(id)
     .then((updatedCase) => {
@@ -243,7 +243,7 @@ caseController.put('/startVerdictSelection/:id', (req, res) => {
     });
 });
 
-caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
+caseController.put('/:id/makeVerdict/:isDefendantGuiltyString', (req, res) => {
   const id = req.params.id;
   const isDefendantGuiltyString = req.params.isDefendantGuiltyString;
 
@@ -272,7 +272,7 @@ caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
   }
 });
 
-caseController.put('/selectWitness/:caseId/witnessNumber/:witnessNumber/witnessIndex/:witnessIndex', (req, res) => {
+caseController.put('/:caseId/selectWitness/:witnessNumber/:witnessIndex', (req, res) => {
   const caseId = req.params.caseId;
   const witnessNumber = Number(req.params.witnessNumber);
   const witnessIndex = Number(req.params.witnessIndex);
@@ -286,7 +286,7 @@ caseController.put('/selectWitness/:caseId/witnessNumber/:witnessNumber/witnessI
     });
 });
 
-caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/:caseId/selectEvidence/plaintiff/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.selectEvidence(caseId, evidenceId, true)
@@ -299,7 +299,7 @@ caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req
     });
 });
 
-caseController.put('/selectDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/:caseId/selectEvidence/defendant/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.selectEvidence(caseId, evidenceId, false)
@@ -312,7 +312,7 @@ caseController.put('/selectDefendantEvidence/:caseId/evidence/:evidenceId', (req
     });
 });
 
-caseController.put('/revealPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/:caseId/revealEvidence/plaintiff/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.revealEvidence(caseId, evidenceId, true)
@@ -325,7 +325,7 @@ caseController.put('/revealPlaintiffEvidence/:caseId/evidence/:evidenceId', (req
     });
 });
 
-caseController.put('/revealDefendantEvidence/:caseId/evidence/:evidenceId', (req, res) => {
+caseController.put('/:caseId/revealEvidence/defendant/:evidenceId', (req, res) => {
   const caseId = req.params.caseId;
   const evidenceId = Number(req.params.evidenceId);
   caseEvidenceManager.revealEvidence(caseId, evidenceId, false)
