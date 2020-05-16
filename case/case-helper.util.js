@@ -91,8 +91,8 @@ function getUnusedCaseName(allCases) {
 }
 
 function isAllEvidenceRevealed(myCase) {
-    const revealedAllPE = myCase.plaintiffEvidenceSelected.length === 0;
-    const revealedAllDE = myCase.defendantEvidenceSelected.length === 0;
+    const revealedAllPE = isAllPlaintiffEvidenceRevealed(myCase);
+    const revealedAllDE = isAllDefendantEvidenceRevealed(myCase);
     return revealedAllPE && revealedAllDE;
 }
 
@@ -181,11 +181,11 @@ function isAllWitnessesSelected(myCase) {
 }
 
 function isAllPlaintiffEvidenceSelected(myCase) {
-    return myCase.plaintiffEvidenceSelected.length >= 5;
+    return myCase.plaintiffEvidenceSelected.length >= 10;
 }
 
 function isAllDefendantEvidenceSelected(myCase) {
-    return myCase.defendantEvidenceSelected.length >= 5;
+    return myCase.defendantEvidenceSelected.length >= 10;
 }
 
 function isAllPlaintiffEvidenceRevealed(myCase) {
@@ -281,7 +281,7 @@ function cloneCase(myCase) {
 function populateDefendantEvidence(myCase, fullCase) {
     const defendantPoolValues = [];
     myCase.defendantEvidencePool.forEach((evIndex) => {
-        const myEv = myCase.defendantEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         defendantPoolValues.push({
             name: myEv,
             _id: evIndex
@@ -290,7 +290,7 @@ function populateDefendantEvidence(myCase, fullCase) {
 
     const defendantSelectedValues = [];
     myCase.defendantEvidenceSelected.forEach((evIndex) => {
-        const myEv = myCase.defendantEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         defendantSelectedValues.push({
             name: myEv,
             _id: evIndex
@@ -299,7 +299,7 @@ function populateDefendantEvidence(myCase, fullCase) {
 
     const defendantCourtValues = [];
     myCase.defendantEvidenceCourt.forEach((evIndex) => {
-        const myEv = myCase.defendantEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         defendantCourtValues.push({
             name: myEv,
             _id: evIndex
@@ -421,7 +421,7 @@ function populateWitnesses(myCase, fullCase) {
 function populatePlaintiffEvidence(myCase, fullCase) {
     const plaintiffPoolValues = [];
     myCase.plaintiffEvidencePool.forEach((evIndex) => {
-        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         plaintiffPoolValues.push({
             name: myEv,
             _id: evIndex
@@ -430,7 +430,7 @@ function populatePlaintiffEvidence(myCase, fullCase) {
 
     const plaintiffSelectedValues = [];
     myCase.plaintiffEvidenceSelected.forEach((evIndex) => {
-        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         plaintiffSelectedValues.push({
             name: myEv,
             _id: evIndex
@@ -439,7 +439,7 @@ function populatePlaintiffEvidence(myCase, fullCase) {
 
     const plaintiffCourtValues = [];
     myCase.plaintiffEvidenceCourt.forEach((evIndex) => {
-        const myEv = myCase.plaintiffEvidenceValues[evIndex];
+        const myEv = myCase.evidenceValues[evIndex];
         plaintiffCourtValues.push({
             name: myEv,
             _id: evIndex

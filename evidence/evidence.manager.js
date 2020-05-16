@@ -12,13 +12,12 @@ function getAllEvidence() {
   });
 }
 
-function getRandomEvidence(evidencePerSide) {
+function getRandomEvidence(evidenceCount) {
   return new Promise((resolve, reject) => {
-    Evidence.aggregate([{ $sample: { size: evidencePerSide * 2 } }])
+    Evidence.aggregate([{ $sample: { size: evidenceCount } }])
       .then((evidence) => {
         if (evidence) {
-          const sortedEvidence = sort(evidence);
-          resolve(sortedEvidence);
+          resolve(evidence);
         } else {
           reject({
             message: "Failed to get evidence"
@@ -111,19 +110,4 @@ module.exports = {
   editEvidence,
   deleteOneEvidence,
   getRandomEvidence
-}
-
-function sort(evidence) {
-  const sortedEvidence = {
-    plaintiffEvidence: [],
-    defendantEvidence: []
-  };
-  evidence.forEach((item, i) => {
-    if (i % 2 === 0) {
-      sortedEvidence.plaintiffEvidence.push(item);
-    } else {
-      sortedEvidence.defendantEvidence.push(item);
-    }
-  });
-  return sortedEvidence;
 }

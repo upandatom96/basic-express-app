@@ -18,9 +18,8 @@ function makeCaseAutomatic() {
                     .then((randomIssue) => {
                         witnessManager.getRandomWitnesses(15)
                             .then((randomWitnesses) => {
-                                evidenceManager.getRandomEvidence(10)
+                                evidenceManager.getRandomEvidence(30)
                                     .then((randomEvidence) => {
-
                                         const issueText = randomIssue.name;
 
                                         const witnessValues = [];
@@ -44,18 +43,16 @@ function makeCaseAutomatic() {
                                             }
                                         });
 
-                                        const allPlaintiffEvidence = [];
+                                        const evidenceValues = [];
                                         const plaintiffEvidencePool = [];
-                                        randomEvidence.plaintiffEvidence.forEach((ev, index) => {
-                                            allPlaintiffEvidence.push(ev.name);
-                                            plaintiffEvidencePool.push(index);
-                                        });
-
-                                        const allDefendantEvidence = [];
                                         const defendantEvidencePool = [];
-                                        randomEvidence.defendantEvidence.forEach((ev, index) => {
-                                            allDefendantEvidence.push(ev.name);
-                                            defendantEvidencePool.push(index);
+                                        randomEvidence.forEach((ev, index) => {
+                                            evidenceValues.push(ev.name);
+                                            if (index > 14) {
+                                                plaintiffEvidencePool.push(index);
+                                            } else {
+                                                defendantEvidencePool.push(index);
+                                            }
                                         });
 
                                         new Case({
@@ -67,9 +64,8 @@ function makeCaseAutomatic() {
                                             witnessPool3: witnessPool3,
                                             witnessPool4: witnessPool4,
                                             witnessPool5: witnessPool5,
-                                            plaintiffEvidenceValues: allPlaintiffEvidence,
+                                            evidenceValues: evidenceValues,
                                             plaintiffEvidencePool: plaintiffEvidencePool,
-                                            defendantEvidenceValues: allDefendantEvidence,
                                             defendantEvidencePool: defendantEvidencePool,
                                             status: caseConstants.ASSIGN_ROLES,
                                         })

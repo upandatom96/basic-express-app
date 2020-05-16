@@ -22,6 +22,11 @@ const CaseSchema = new Schema({
             type: String
         }
     ],
+    evidenceValues: [
+        {
+            type: String
+        }
+    ],
     witnessPool1: [
         {
             type: Number
@@ -67,11 +72,6 @@ const CaseSchema = new Schema({
         type: Number,
         default: null,
     },
-    plaintiffEvidenceValues: [
-        {
-            type: String
-        }
-    ],
     plaintiffEvidencePool: [
         {
             type: Number
@@ -85,11 +85,6 @@ const CaseSchema = new Schema({
     plaintiffEvidenceCourt: [
         {
             type: Number
-        }
-    ],
-    defendantEvidenceValues: [
-        {
-            type: String
         }
     ],
     defendantEvidencePool: [
