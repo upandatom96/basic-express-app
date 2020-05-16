@@ -175,7 +175,7 @@ function removeDefendantName(caseId) {
 
 function addWitnessName(witnessName, caseId, witnessNumber) {
     return new Promise((resolve, reject) => {
-        if (!witnessName || !caseId) {
+        if (!witnessName || !caseId || !witnessNumber) {
             reject("cannot add witness name");
         } else {
             Case.findOne({ _id: caseId })

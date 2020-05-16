@@ -146,7 +146,7 @@ caseController.put('/removePlaintiffName/:id', (req, res) => {
 
 caseController.put('/witnessName/:caseId/:witnessNumber', (req, res) => {
   const witnessName = req.body.name;
-  const caseId = req.params.id;
+  const caseId = req.params.caseId;
   const witnessNumber = Number(req.params.witnessNumber);
   caseNameManager.addWitnessName(witnessName, caseId, witnessNumber)
     .then((updatedCase) => {
