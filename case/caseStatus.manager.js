@@ -16,15 +16,32 @@ function makeCaseAutomatic() {
                 const caseName = caseUtil.getUnusedCaseName(allCases);
                 issueManager.getRandomIssue()
                     .then((randomIssue) => {
-                        witnessManager.getRandomWitnesses(5)
+                        witnessManager.getRandomWitnesses(15)
                             .then((randomWitnesses) => {
                                 evidenceManager.getRandomEvidence(10)
                                     .then((randomEvidence) => {
 
                                         const issueText = randomIssue.name;
-                                        const witnessNames = [];
-                                        randomWitnesses.forEach((witness) => {
-                                            witnessNames.push(witness.name);
+
+                                        const witnessValues = [];
+                                        const witnessPool1 = [];
+                                        const witnessPool2 = [];
+                                        const witnessPool3 = [];
+                                        const witnessPool4 = [];
+                                        const witnessPool5 = [];
+                                        randomWitnesses.forEach((witness, index) => {
+                                            witnessValues.push(witness.name);
+                                            if (index > 11) {
+                                                witnessPool1.push(index);
+                                            } else if (index > 8) {
+                                                witnessPool2.push(index);
+                                            } else if (index > 5) {
+                                                witnessPool3.push(index);
+                                            } else if (index > 2) {
+                                                witnessPool4.push(index);
+                                            } else {
+                                                witnessPool5.push(index);
+                                            }
                                         });
 
                                         const allPlaintiffEvidence = [];
@@ -44,15 +61,16 @@ function makeCaseAutomatic() {
                                         new Case({
                                             name: caseName,
                                             issue: issueText,
-                                            witnesses: witnessNames,
+                                            witnessValues: witnessValues,
+                                            witnessPool1: witnessPool1,
+                                            witnessPool2: witnessPool2,
+                                            witnessPool3: witnessPool3,
+                                            witnessPool4: witnessPool4,
+                                            witnessPool5: witnessPool5,
                                             plaintiffEvidenceValues: allPlaintiffEvidence,
                                             plaintiffEvidencePool: plaintiffEvidencePool,
-                                            plaintiffEvidenceSelected: [],
-                                            plaintiffEvidenceCourt: [],
                                             defendantEvidenceValues: allDefendantEvidence,
                                             defendantEvidencePool: defendantEvidencePool,
-                                            defendantEvidenceSelected: [],
-                                            defendantEvidenceCourt: [],
                                             status: caseConstants.ASSIGN_ROLES,
                                         })
                                             .save()

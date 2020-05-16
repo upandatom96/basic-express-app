@@ -3,6 +3,7 @@ const caseController = express.Router();
 const caseManager = require('./case.manager');
 const caseStatusManager = require('./caseStatus.manager');
 const caseEvidenceManager = require('./caseEvidence.manager');
+const caseWitnessManager = require('./caseWitness.manager');
 const caseNameManager = require('./caseNames.manager');
 const mailer = require('../utilities/mailer.util');
 const authUtil = require('../utilities/auth.util');
@@ -268,6 +269,20 @@ caseController.put('/makeVerdict/:id/:isDefendantGuiltyString', (req, res) => {
     res.statusCode = 500;
     res.send("Internal Error");
   }
+});
+
+caseController.put('/selectWitness/:caseId/witnessNumber/:witnessNumber/witnessIndex/:witnessIndex', (req, res) => {
+  const caseId = req.params.caseId;
+  const witnessNumber = Number(req.params.witnessNumber);
+  const witnessIndex = Number(req.params.witnessIndex);
+  caseWitnessManager.selectWitness(caseId, witnessIndex, witnessNumber)
+    .then((updatedCase) => {
+      res.send(updatedCase);
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(err);
+    });
 });
 
 caseController.put('/selectPlaintiffEvidence/:caseId/evidence/:evidenceId', (req, res) => {
