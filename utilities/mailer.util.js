@@ -1,7 +1,10 @@
 const sgMail = require('@sendgrid/mail');
-const { sendgridApiKey } = require('../config/env.config');
+const { sendgridApiKey, test } = require('../config/env.config');
 
 function sendEmail(recipient, subject, message) {
+  if (test === "true") {
+    return;
+  }
   // using Twilio SendGrid's v3 Node.js Library
   // https://github.com/sendgrid/sendgrid-nodejs
   sgMail.setApiKey(sendgridApiKey);
