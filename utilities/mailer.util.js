@@ -3,7 +3,7 @@ const { sendgridApiKey, test } = require('../config/env.config');
 
 function sendEmail(recipient, subject, message) {
   if (test === "true") {
-    return;
+    subject = "(NONPROD) " + subject;
   }
   // using Twilio SendGrid's v3 Node.js Library
   // https://github.com/sendgrid/sendgrid-nodejs
