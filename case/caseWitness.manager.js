@@ -62,7 +62,7 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                                     return witness != witnessIndex;
                                 })
                             } else if (witnessNumber === 5) {
-                                foundCase.selectedWitness1 = witnessIndex;
+                                foundCase.selectedWitness5 = witnessIndex;
                                 foundCase.witnessPool5 = foundCase.witnessPool5.filter((witness) => {
                                     return witness != witnessIndex;
                                 })
