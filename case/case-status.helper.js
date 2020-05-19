@@ -53,8 +53,8 @@ function isInProgress(myCase) {
 }
 
 function canMakeVerdict(myCase) {
-    const revealedAllEvidence = isAllEvidenceRevealed(myCase);
-    const statusReady = statusHelper.isClosingArguments(myCase) || statusHelper.isFreeTime(myCase);
+    const revealedAllEvidence = evidenceHelper.isAllEvidenceRevealed(myCase);
+    const statusReady = isClosingArguments(myCase) || isFreeTime(myCase);
     return revealedAllEvidence && statusReady;
 }
 
