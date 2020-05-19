@@ -142,6 +142,10 @@ const CaseSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    lastStatusUpdateDate: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 mongoose.model('case', CaseSchema);

@@ -7,6 +7,7 @@ function cloneCase(myCase) {
         name: myCase.name,
         closedDate: myCase.closedDate,
         openedDate: myCase.openedDate,
+        lastStatusUpdateDate: myCase.lastStatusUpdateDate,
         status: myCase.status,
         isDefendantGuilty: myCase.isDefendantGuilty,
         issue: myCase.issue,

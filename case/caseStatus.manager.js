@@ -99,6 +99,7 @@ function lockRoles(caseId) {
                 .then((foundCase) => {
                     if (foundCase && caseUtil.canLockRoles(foundCase)) {
                         foundCase.status = caseConstants.MAKE_SELECTIONS;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -123,6 +124,7 @@ function startFreeTime(caseId) {
                 .then((foundCase) => {
                     if (foundCase && caseUtil.areSelectionsComplete(foundCase)) {
                         foundCase.status = caseConstants.FREE_TIME;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -147,6 +149,7 @@ function startOpeningArguments(caseId) {
                 .then((foundCase) => {
                     if (foundCase && caseUtil.areSelectionsComplete(foundCase)) {
                         foundCase.status = caseConstants.OPENING_ARGUMENTS;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -171,6 +174,7 @@ function startCrossfire(caseId) {
                 .then((foundCase) => {
                     if (foundCase && statusHelper.isOpeningArguments(foundCase)) {
                         foundCase.status = caseConstants.CROSSFIRE;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -195,6 +199,7 @@ function startClosingArguments(caseId) {
                 .then((foundCase) => {
                     if (foundCase && statusHelper.isCrossfire(foundCase)) {
                         foundCase.status = caseConstants.CLOSING_ARGUMENTS;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -219,6 +224,7 @@ function startVerdictSelection(caseId) {
                 .then((foundCase) => {
                     if (foundCase && caseUtil.canMakeVerdict(foundCase)) {
                         foundCase.status = caseConstants.VERDICT_SELECTION;
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -245,6 +251,7 @@ function makeVerdict(caseId, isDefendantGuilty) {
                         foundCase.status = caseConstants.CASE_CLOSED;
                         foundCase.isDefendantGuilty = isDefendantGuilty;
                         foundCase.closedDate = new Date().toISOString();
+                        foundCase.lastStatusUpdateDate = new Date().toISOString();
 
                         foundCase.save()
                             .then((updatedCase) => {
