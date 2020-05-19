@@ -4,6 +4,7 @@ const Case = mongoose.model('case');
 
 const boolUtil = require('../utilities/bool.util');
 const caseUtil = require('./case-helper.util');
+const statusHelper = require('./case-status.helper');
 const caseConstants = require('./case.constants');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
@@ -172,7 +173,7 @@ function startCrossfire(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.isCaseStatusOpeningArguments(foundCase)) {
+                    if (foundCase && statusHelper.isOpeningArguments(foundCase)) {
                         foundCase.status = caseConstants.CROSSFIRE;
 
                         foundCase.save()
@@ -196,7 +197,7 @@ function startClosingArguments(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.isCaseStatusCrossfire(foundCase)) {
+                    if (foundCase && statusHelper.isCrossfire(foundCase)) {
                         foundCase.status = caseConstants.CLOSING_ARGUMENTS;
 
                         foundCase.save()
@@ -244,7 +245,7 @@ function makeVerdict(caseId, isDefendantGuilty) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.isCaseStatusVerdictSelection(foundCase)) {
+                    if (foundCase && statusHelper.isVerdictSelection(foundCase)) {
                         foundCase.status = caseConstants.CASE_CLOSED;
                         foundCase.isDefendantGuilty = isDefendantGuilty;
                         foundCase.closedDate = new Date().toISOString();

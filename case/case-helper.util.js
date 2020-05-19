@@ -1,85 +1,7 @@
-const timeUtil = require('../utilities/time.util');
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
 const boolUtil = require('../utilities/bool.util');
-const caseConstants = require('./case.constants');
-
-function orderCasesByDate(cases) {
-    return cases.sort(function (caseA, caseB) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
-        return new Date(caseB.openedDate) - new Date(caseA.openedDate);
-    });
-}
-
-function orderSortedCasesByDate(sortedCases) {
-    sortedCases.openCases = orderCasesByDate(sortedCases.openCases);
-    sortedCases.closedCases = orderCasesByDate(sortedCases.closedCases);
-    sortedCases.limboCases = orderCasesByDate(sortedCases.limboCases);
-    return sortedCases
-}
-
-function sortCasesByStatus(cases) {
-    const sortedCases = {
-        openCases: [],
-        closedCases: [],
-        limboCases: [],
-    };
-    cases.forEach((myCase) => {
-        const fullCase = populateValues(myCase);
-        if (isCaseLimbo(fullCase)) {
-            sortedCases.limboCases.push(fullCase);
-        } else if (isCaseStatusClosed(fullCase)) {
-            sortedCases.closedCases.push(fullCase);
-        } else {
-            sortedCases.openCases.push(fullCase);
-        }
-    });
-    return sortedCases;
-}
-
-function isCaseOpen(myCase) {
-    return !isCaseStatusClosed(myCase) && !isCaseLimbo(myCase);
-}
-
-function isCaseStatusAssignRoles(myCase) {
-    return myCase.status === caseConstants.ASSIGN_ROLES;
-}
-
-function isCaseStatusMakeSelections(myCase) {
-    return myCase.status === caseConstants.MAKE_SELECTIONS;
-}
-
-function isCaseStatusOpeningArguments(myCase) {
-    return myCase.status === caseConstants.OPENING_ARGUMENTS;
-}
-
-function isCaseStatusCrossfire(myCase) {
-    return myCase.status === caseConstants.CROSSFIRE;
-}
-
-function isCaseStatusClosingArguments(myCase) {
-    return myCase.status === caseConstants.CLOSING_ARGUMENTS;
-}
-
-function isCaseStatusFreeTime(myCase) {
-    return myCase.status === caseConstants.FREE_TIME;
-}
-
-function isCaseStatusVerdictSelection(myCase) {
-    return myCase.status === caseConstants.VERDICT_SELECTION;
-}
-
-function isCaseStatusClosed(myCase) {
-    return myCase.status === caseConstants.CASE_CLOSED;
-}
-
-function isCaseLimbo(myCase) {
-    if (isCaseStatusClosed(myCase)) {
-        return false;
-    }
-    return timeUtil.have24HoursPast(myCase.openedDate);
-}
+const statusHelper = require('./case-status.helper');
 
 function getUnusedCaseName(allCases) {
     const oldNames = [];
@@ -94,18 +16,6 @@ function isAllEvidenceRevealed(myCase) {
     const revealedAllPE = isAllPlaintiffEvidenceRevealed(myCase);
     const revealedAllDE = isAllDefendantEvidenceRevealed(myCase);
     return revealedAllPE && revealedAllDE;
-}
-
-function hasMaxWitnesses(myCase) {
-    return boolUtil.allHaveValues(
-        [
-            myCase.witnessName1,
-            myCase.witnessName2,
-            myCase.witnessName3,
-            myCase.witnessName4,
-            myCase.witnessName5
-        ]
-    );
 }
 
 function hasWitnessNameAlready(myCase, witnessNumber) {
@@ -153,7 +63,7 @@ function removeWitness(myCase, witnessNumber) {
 
 function canMakeVerdict(myCase) {
     const revealedAllEvidence = isAllEvidenceRevealed(myCase);
-    const statusReady = isCaseStatusClosingArguments(myCase) || isCaseStatusFreeTime(myCase);
+    const statusReady = statusHelper.isClosingArguments(myCase) || statusHelper.isFreeTime(myCase);
     return revealedAllEvidence && statusReady;
 }
 
@@ -166,14 +76,14 @@ function areEssentialNamesSet(myCase) {
 
 function canLockRoles(myCase) {
     const namesSet = areEssentialNamesSet(myCase);
-    const assigningRoles = isCaseStatusAssignRoles(myCase);
+    const assigningRoles = statusHelper.isAssignRoles(myCase);
     return assigningRoles && namesSet;
 }
 
 function areSelectionsComplete(myCase) {
     const evidenceSelected = isAllEvidenceSelected(myCase);
     const witnessesSelected = isAllWitnessesSelected(myCase);
-    const makingSelections = isCaseStatusMakeSelections(myCase);
+    const makingSelections = statusHelper.isMakeSelections(myCase);
     return evidenceSelected && witnessesSelected && makingSelections;
 }
 
@@ -208,37 +118,32 @@ function isAllEvidenceSelected(myCase) {
     return pEvidenceSelected && dEvidenceSelected;
 }
 
-function isCaseInProgress(myCase) {
-    return isCaseStatusOpeningArguments(myCase) || isCaseStatusCrossfire(myCase) ||
-        isCaseStatusClosingArguments(myCase) || isCaseStatusFreeTime(myCase);
-}
-
 function canRevealPlaintiffEvidence(myCase) {
-    const caseInProgress = isCaseInProgress(myCase);
+    const caseInProgress = statusHelper.isInProgress(myCase);
     const allRevealed = isAllPlaintiffEvidenceRevealed(myCase);
     return caseInProgress && !allRevealed;
 }
 
 function canRevealDefendantEvidence(myCase) {
-    const caseInProgress = isCaseInProgress(myCase);
+    const caseInProgress = statusHelper.isInProgress(myCase);
     const allSelected = isAllDefendantEvidenceRevealed(myCase);
     return caseInProgress && !allSelected;
 }
 
 function canSelectPlaintiffEvidence(myCase) {
-    const caseInProgress = isCaseStatusMakeSelections(myCase);
+    const caseInProgress = statusHelper.isMakeSelections(myCase);
     const allSelected = isAllPlaintiffEvidenceSelected(myCase);
     return caseInProgress && !allSelected;
 }
 
 function canSelectDefendantEvidence(myCase) {
-    const caseInProgress = isCaseStatusMakeSelections(myCase);
+    const caseInProgress = statusHelper.isMakeSelections(myCase);
     const allSelected = isAllDefendantEvidenceSelected(myCase);
     return caseInProgress && !allSelected;
 }
 
 function canSelectWitness(myCase, witnessNumber) {
-    if (!isCaseStatusMakeSelections(myCase)) {
+    if (!statusHelper.isMakeSelections(myCase)) {
         return false;
     }
     if (witnessNumber === 1) {
@@ -264,226 +169,17 @@ function canSelectWitness(myCase, witnessNumber) {
     }
 }
 
-function cloneCase(myCase) {
-    return {
-        _id: myCase._id,
-        name: myCase.name,
-        closedDate: myCase.closedDate,
-        openedDate: myCase.openedDate,
-        status: myCase.status,
-        isDefendantGuilty: myCase.isDefendantGuilty,
-        issue: myCase.issue,
-        judgeName: myCase.judgeName,
-        plaintiffName: myCase.plaintiffName,
-        defendantName: myCase.defendantName,
-        witnessName1: myCase.witnessName1,
-        witnessName2: myCase.witnessName2,
-        witnessName3: myCase.witnessName3,
-        witnessName4: myCase.witnessName4,
-        witnessName5: myCase.witnessName5,
-    };
-}
-
-function populateDefendantEvidence(myCase, fullCase) {
-    const defendantPoolValues = [];
-    myCase.defendantEvidencePool.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        defendantPoolValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    const defendantSelectedValues = [];
-    myCase.defendantEvidenceSelected.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        defendantSelectedValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    const defendantCourtValues = [];
-    myCase.defendantEvidenceCourt.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        defendantCourtValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    fullCase.defendantEvidencePool = defendantPoolValues;
-    fullCase.defendantEvidenceSelected = defendantSelectedValues;
-    fullCase.defendantEvidenceCourt = defendantCourtValues;
-}
-
-function populateWitnesses(myCase, fullCase) {
-    const witnessPool1 = [];
-    myCase.witnessPool1.forEach((witIndex) => {
-        const myWit = myCase.witnessValues[witIndex];
-        witnessPool1.push({
-            name: myWit,
-            _id: witIndex
-        });
-    });
-    fullCase.witnessPool1 = witnessPool1;
-
-    const witnessPool2 = [];
-    myCase.witnessPool2.forEach((witIndex) => {
-        const myWit = myCase.witnessValues[witIndex];
-        witnessPool2.push({
-            name: myWit,
-            _id: witIndex
-        });
-    });
-    fullCase.witnessPool2 = witnessPool2;
-
-    const witnessPool3 = [];
-    myCase.witnessPool3.forEach((witIndex) => {
-        const myWit = myCase.witnessValues[witIndex];
-        witnessPool3.push({
-            name: myWit,
-            _id: witIndex
-        });
-    });
-    fullCase.witnessPool3 = witnessPool3;
-
-    const witnessPool4 = [];
-    myCase.witnessPool4.forEach((witIndex) => {
-        const myWit = myCase.witnessValues[witIndex];
-        witnessPool4.push({
-            name: myWit,
-            _id: witIndex
-        });
-    });
-    fullCase.witnessPool4 = witnessPool4;
-
-    const witnessPool5 = [];
-    myCase.witnessPool5.forEach((witIndex) => {
-        const myWit = myCase.witnessValues[witIndex];
-        witnessPool5.push({
-            name: myWit,
-            _id: witIndex
-        });
-    });
-    fullCase.witnessPool5 = witnessPool5;
-
-    const witIndex1 = myCase.selectedWitness1;
-    if (witIndex1) {
-        const wit1 = myCase.witnessValues[witIndex1];
-        fullCase.selectedWitness1 = {
-            name: wit1,
-            _id: witIndex1
-        };
-    } else {
-        fullCase.selectedWitness1 = null;
-    }
-
-    const witIndex2 = myCase.selectedWitness2;
-    if (witIndex2) {
-        const wit2 = myCase.witnessValues[witIndex2];
-        fullCase.selectedWitness2 = {
-            name: wit2,
-            _id: witIndex2
-        };
-    } else {
-        fullCase.selectedWitness2 = null;
-    }
-
-    const witIndex3 = myCase.selectedWitness3;
-    if (witIndex3) {
-        const wit3 = myCase.witnessValues[witIndex3];
-        fullCase.selectedWitness3 = {
-            name: wit3,
-            _id: witIndex3
-        };
-    } else {
-        fullCase.selectedWitness3 = null;
-    }
-
-    const witIndex4 = myCase.selectedWitness4;
-    if (witIndex4) {
-        const wit4 = myCase.witnessValues[witIndex4];
-        fullCase.selectedWitness4 = {
-            name: wit4,
-            _id: witIndex4
-        };
-    } else {
-        fullCase.selectedWitness4 = null;
-    }
-
-    const witIndex5 = myCase.selectedWitness5;
-    if (witIndex5) {
-        const wit5 = myCase.witnessValues[witIndex5];
-        fullCase.selectedWitness5 = {
-            name: wit5,
-            _id: witIndex5
-        };
-    } else {
-        fullCase.selectedWitness5 = null;
-    }
-}
-
-function populatePlaintiffEvidence(myCase, fullCase) {
-    const plaintiffPoolValues = [];
-    myCase.plaintiffEvidencePool.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        plaintiffPoolValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    const plaintiffSelectedValues = [];
-    myCase.plaintiffEvidenceSelected.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        plaintiffSelectedValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    const plaintiffCourtValues = [];
-    myCase.plaintiffEvidenceCourt.forEach((evIndex) => {
-        const myEv = myCase.evidenceValues[evIndex];
-        plaintiffCourtValues.push({
-            name: myEv,
-            _id: evIndex
-        });
-    });
-
-    fullCase.plaintiffEvidencePool = plaintiffPoolValues;
-    fullCase.plaintiffEvidenceSelected = plaintiffSelectedValues;
-    fullCase.plaintiffEvidenceCourt = plaintiffCourtValues;
-}
-
-function populateValues(myCase) {
-    const fullCase = cloneCase(myCase);
-    populateWitnesses(myCase, fullCase);
-    populatePlaintiffEvidence(myCase, fullCase);
-    populateDefendantEvidence(myCase, fullCase);
-    return fullCase;
-}
-
 module.exports = {
-    orderSortedCasesByDate,
-    sortCasesByStatus,
-    hasMaxWitnesses,
     addWitness,
     removeWitness,
     hasWitnessNameAlready,
-    isCaseStatusAssignRoles,
-    isCaseStatusOpeningArguments,
-    isCaseStatusCrossfire,
     canSelectWitness,
     canRevealPlaintiffEvidence,
     canRevealDefendantEvidence,
     canSelectPlaintiffEvidence,
     canSelectDefendantEvidence,
-    isCaseStatusVerdictSelection,
     getUnusedCaseName,
     canLockRoles,
     areSelectionsComplete,
-    canMakeVerdict,
-    populateValues
+    canMakeVerdict
 }

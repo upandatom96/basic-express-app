@@ -3,7 +3,7 @@ require('./Case.model');
 const Case = mongoose.model('case');
 
 const caseUtil = require('./case-helper.util');
-const boolUtil = require('../utilities/bool.util');
+const statusHelper = require('./case-status.helper');
 
 function assignJudgeName(judgeName, caseId) {
     return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ function assignJudgeName(judgeName, caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -44,7 +44,7 @@ function removeJudgeName(caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -72,7 +72,7 @@ function assignPlaintiffName(plaintiffName, caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -100,7 +100,7 @@ function removePlaintiffName(caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -128,7 +128,7 @@ function assignDefendantName(defendantName, caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -156,7 +156,7 @@ function removeDefendantName(caseId) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -184,7 +184,7 @@ function addWitnessName(witnessName, caseId, witnessNumber) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
@@ -216,7 +216,7 @@ function removeWitnessName(caseId, witnessNumber) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.isCaseStatusAssignRoles(foundCase)) {
+                    } else if (!statusHelper.isAssignRoles(foundCase)) {
                         reject({
                             message: `CANNOT UPDATE NAMES`
                         });
