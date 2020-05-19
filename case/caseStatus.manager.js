@@ -3,7 +3,6 @@ require('./Case.model');
 const Case = mongoose.model('case');
 
 const caseBuilder = require('./case-builder.helper');
-const caseUtil = require('./case-helper.util');
 const statusHelper = require('./case-status.helper');
 const caseConstants = require('./case.constants');
 
@@ -56,7 +55,7 @@ function lockRoles(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.canLockRoles(foundCase)) {
+                    if (foundCase && statusHelper.canLockRoles(foundCase)) {
                         foundCase.status = caseConstants.MAKE_SELECTIONS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -81,7 +80,7 @@ function startFreeTime(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.areSelectionsComplete(foundCase)) {
+                    if (foundCase && statusHelper.areSelectionsComplete(foundCase)) {
                         foundCase.status = caseConstants.FREE_TIME;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -106,7 +105,7 @@ function startOpeningArguments(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.areSelectionsComplete(foundCase)) {
+                    if (foundCase && statusHelper.areSelectionsComplete(foundCase)) {
                         foundCase.status = caseConstants.OPENING_ARGUMENTS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -181,7 +180,7 @@ function startVerdictSelection(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && caseUtil.canMakeVerdict(foundCase)) {
+                    if (foundCase && statusHelper.canMakeVerdict(foundCase)) {
                         foundCase.status = caseConstants.VERDICT_SELECTION;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 

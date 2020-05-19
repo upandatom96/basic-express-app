@@ -3,7 +3,7 @@ require('./Case.model');
 const Case = mongoose.model('case');
 
 const boolUtil = require('../utilities/bool.util');
-const caseUtil = require('./case-helper.util');
+const witnessHelper = require('./witness.helper');
 
 function selectWitness(caseId, witnessIndex, witnessNumber) {
     return new Promise((resolve, reject) => {
@@ -18,16 +18,16 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!caseUtil.canSelectWitness(foundCase, witnessNumber)) {
+                    } else if (!witnessHelper.canSelectWitness(foundCase, witnessNumber)) {
                         reject({
                             message: `CANNOT SELECT WITNESS ${witnessNumber}`
                         });
-                    } else if (!caseUtil.isWitnessSelectable(foundCase, witnessNumber, witnessIndex)) {
+                    } else if (!witnessHelper.isWitnessSelectable(foundCase, witnessNumber, witnessIndex)) {
                         reject({
                             message: `WITNESS NOT SELECTABLE`
                         });
                     } else {
-                        caseUtil.selectWitness(foundCase, witnessNumber, witnessIndex);
+                        witnessHelper.selectWitness(foundCase, witnessNumber, witnessIndex);
 
                         foundCase.save()
                             .then((updatedCase) => {

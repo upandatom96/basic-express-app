@@ -3,7 +3,7 @@ require('./Case.model');
 const Case = mongoose.model('case');
 
 const boolUtil = require('../utilities/bool.util');
-const caseUtil = require('./case-helper.util');
+const evidenceHelper = require('./evidence.helper');
 
 function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
     return new Promise((resolve, reject) => {
@@ -18,20 +18,20 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !caseUtil.canRevealPlaintiffEvidence(foundCase)) {
+                    } else if (isPlaintiff && !evidenceHelper.canRevealPlaintiffEvidence(foundCase)) {
                         reject({
                             message: `CANNOT REVEAL PLAINTIFF EVIDENCE`
                         });
-                    } else if (!isPlaintiff && !caseUtil.canRevealDefendantEvidence(foundCase)) {
+                    } else if (!isPlaintiff && !evidenceHelper.canRevealDefendantEvidence(foundCase)) {
                         reject({
                             message: `CANNOT REVEAL DEFENDANT EVIDENCE`
                         });
-                    } else if (!caseUtil.isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex)) {
+                    } else if (!evidenceHelper.isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex)) {
                         reject({
                             message: `EVIDENCE NOT VALID`
                         });
                     } else {
-                        caseUtil.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
+                        evidenceHelper.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -56,20 +56,20 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !caseUtil.canSelectPlaintiffEvidence(foundCase)) {
+                    } else if (isPlaintiff && !evidenceHelper.canSelectPlaintiffEvidence(foundCase)) {
                         reject({
                             message: `CANNOT SELECT PLAINTIFF EVIDENCE`
                         });
-                    } else if (!isPlaintiff && !caseUtil.canSelectDefendantEvidence(foundCase)) {
+                    } else if (!isPlaintiff && !evidenceHelper.canSelectDefendantEvidence(foundCase)) {
                         reject({
                             message: `CANNOT SELECT DEFENDANT EVIDENCE`
                         });
-                    } else if (!caseUtil.isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex)) {
+                    } else if (!evidenceHelper.isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex)) {
                         reject({
                             message: `EVIDENCE NOT VALID`
                         });
                     } else {
-                        caseUtil.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
+                        evidenceHelper.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
 
                         foundCase.save()
                             .then((updatedCase) => {
