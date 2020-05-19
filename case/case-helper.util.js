@@ -1,16 +1,5 @@
-const randomManager = require('../random/random.manager');
-const stringUtil = require('../utilities/string.util');
 const boolUtil = require('../utilities/bool.util');
 const statusHelper = require('./case-status.helper');
-
-function getUnusedCaseName(allCases) {
-    const oldNames = [];
-    allCases.forEach((thisCase) => {
-        oldNames.push(thisCase.name);
-    });
-    const caseName = randomManager.getNewPhrase(oldNames);
-    return stringUtil.toTitleCase(caseName);
-}
 
 function addWitness(myCase, witnessName, witnessNumber) {
     if (witnessNumber === 1) {
@@ -272,7 +261,6 @@ module.exports = {
     canRevealDefendantEvidence,
     canSelectPlaintiffEvidence,
     canSelectDefendantEvidence,
-    getUnusedCaseName,
     canLockRoles,
     areSelectionsComplete,
     canMakeVerdict

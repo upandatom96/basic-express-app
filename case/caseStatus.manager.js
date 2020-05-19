@@ -9,12 +9,13 @@ const caseConstants = require('./case.constants');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
+const caseHelper = require('./case.helper');
 
 function makeCaseAutomatic() {
     return new Promise((resolve, reject) => {
         Case.find({})
             .then((allCases) => {
-                const caseName = caseUtil.getUnusedCaseName(allCases);
+                const caseName = caseHelper.getUnusedCaseName(allCases);
                 issueManager.getRandomIssue()
                     .then((randomIssue) => {
                         witnessManager.getRandomWitnesses(15)
