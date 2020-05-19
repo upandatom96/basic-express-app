@@ -12,27 +12,6 @@ function getUnusedCaseName(allCases) {
     return stringUtil.toTitleCase(caseName);
 }
 
-function isAllEvidenceRevealed(myCase) {
-    const revealedAllPE = isAllPlaintiffEvidenceRevealed(myCase);
-    const revealedAllDE = isAllDefendantEvidenceRevealed(myCase);
-    return revealedAllPE && revealedAllDE;
-}
-
-function hasWitnessNameAlready(myCase, witnessNumber) {
-    if (witnessNumber === 1) {
-        return myCase.witnessName1 !== null;
-    } else if (witnessNumber === 2) {
-        return myCase.witnessName2 !== null;
-    } else if (witnessNumber === 3) {
-        return myCase.witnessName3 !== null;
-    } else if (witnessNumber === 4) {
-        return myCase.witnessName4 !== null;
-    } else if (witnessNumber === 5) {
-        return myCase.witnessName5 !== null;
-    }
-    return false;
-}
-
 function addWitness(myCase, witnessName, witnessNumber) {
     if (witnessNumber === 1) {
         myCase.witnessName1 = witnessName;
@@ -59,6 +38,27 @@ function removeWitness(myCase, witnessNumber) {
     } else if (witnessNumber === 5) {
         myCase.witnessName5 = null;
     }
+}
+
+function hasWitnessNameAlready(myCase, witnessNumber) {
+    if (witnessNumber === 1) {
+        return myCase.witnessName1 !== null;
+    } else if (witnessNumber === 2) {
+        return myCase.witnessName2 !== null;
+    } else if (witnessNumber === 3) {
+        return myCase.witnessName3 !== null;
+    } else if (witnessNumber === 4) {
+        return myCase.witnessName4 !== null;
+    } else if (witnessNumber === 5) {
+        return myCase.witnessName5 !== null;
+    }
+    return false;
+}
+
+function isAllEvidenceRevealed(myCase) {
+    const revealedAllPE = isAllPlaintiffEvidenceRevealed(myCase);
+    const revealedAllDE = isAllDefendantEvidenceRevealed(myCase);
+    return revealedAllPE && revealedAllDE;
 }
 
 function canMakeVerdict(myCase) {
