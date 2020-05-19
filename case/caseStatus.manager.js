@@ -72,23 +72,19 @@ function makeCaseAutomatic() {
                                         })
                                             .save()
                                             .then((myCase) => {
-                                                const fullCase = caseUtil.populateValues(myCase);
-                                                resolve(fullCase);
+                                                resolve(myCase);
                                             });
                                     })
                                     .catch((err) => {
-                                        res.statusCode = 500;
-                                        res.send(err);
+                                        reject(err);
                                     });
                             })
                             .catch((err) => {
-                                res.statusCode = 500;
-                                res.send(err);
+                                reject(err);
                             });
                     })
                     .catch((err) => {
-                        res.statusCode = 500;
-                        res.send(err);
+                        reject(err);
                     });
             });
     });
