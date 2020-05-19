@@ -169,7 +169,101 @@ function canSelectWitness(myCase, witnessNumber) {
     }
 }
 
+function isWitnessSelectable(foundCase, witnessNumber, witnessIndex) {
+    if (witnessNumber === 1) {
+        return foundCase.witnessPool1.includes(witnessIndex);
+    } else if (witnessNumber === 2) {
+        return foundCase.witnessPool2.includes(witnessIndex);
+    } else if (witnessNumber === 3) {
+        return foundCase.witnessPool3.includes(witnessIndex);
+    } else if (witnessNumber === 4) {
+        return foundCase.witnessPool4.includes(witnessIndex);
+    } else if (witnessNumber === 5) {
+        return foundCase.witnessPool5.includes(witnessIndex);
+    }
+    return false;
+}
+
+function isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex) {
+    if (isPlaintiff) {
+        return foundCase.plaintiffEvidencePool.includes(evidenceIndex);
+    } else {
+        return foundCase.defendantEvidencePool.includes(evidenceIndex);
+    }
+}
+
+function isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex) {
+    if (isPlaintiff) {
+        return foundCase.plaintiffEvidenceSelected.includes(evidenceIndex);
+    } else {
+        return foundCase.defendantEvidenceSelected.includes(evidenceIndex);
+    }
+}
+
+function selectWitness(foundCase, witnessNumber, witnessIndex) {
+    if (witnessNumber === 1) {
+        foundCase.selectedWitness1 = witnessIndex;
+        foundCase.witnessPool1 = foundCase.witnessPool1.filter((witness) => {
+            return Number(witness) !== Number(witnessIndex);
+        })
+    } else if (witnessNumber === 2) {
+        foundCase.selectedWitness2 = witnessIndex;
+        foundCase.witnessPool2 = foundCase.witnessPool2.filter((witness) => {
+            return Number(witness) !== Number(witnessIndex);
+        })
+    } else if (witnessNumber === 3) {
+        foundCase.selectedWitness3 = witnessIndex;
+        foundCase.witnessPool3 = foundCase.witnessPool3.filter((witness) => {
+            return Number(witness) !== Number(witnessIndex);
+        })
+    } else if (witnessNumber === 4) {
+        foundCase.selectedWitness4 = witnessIndex;
+        foundCase.witnessPool4 = foundCase.witnessPool4.filter((witness) => {
+            return Number(witness) !== Number(witnessIndex);
+        })
+    } else if (witnessNumber === 5) {
+        foundCase.selectedWitness5 = witnessIndex;
+        foundCase.witnessPool5 = foundCase.witnessPool5.filter((witness) => {
+            return Number(witness) !== Number(witnessIndex);
+        })
+    }
+}
+
+function revealEvidence(foundCase, isPlaintiff, evidenceIndex) {
+    if (isPlaintiff) {
+        foundCase.plaintiffEvidenceCourt.push(evidenceIndex);
+        foundCase.plaintiffEvidenceSelected = foundCase.plaintiffEvidenceSelected.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    } else {
+        foundCase.defendantEvidenceCourt.push(evidenceIndex);
+        foundCase.defendantEvidenceSelected = foundCase.defendantEvidenceSelected.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    }
+}
+
+function selectEvidence(foundCase, isPlaintiff, evidenceIndex) {
+    if (isPlaintiff) {
+        foundCase.plaintiffEvidenceSelected.push(evidenceIndex);
+        foundCase.plaintiffEvidencePool = foundCase.plaintiffEvidencePool.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    } else {
+        foundCase.defendantEvidenceSelected.push(evidenceIndex);
+        foundCase.defendantEvidencePool = foundCase.defendantEvidencePool.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    }
+}
+
 module.exports = {
+    isWitnessSelectable,
+    isEvidenceSelectable,
+    isEvidenceRevealable,
+    selectWitness,
+    revealEvidence,
+    selectEvidence,
     addWitness,
     removeWitness,
     hasWitnessNameAlready,

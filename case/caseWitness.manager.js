@@ -12,7 +12,7 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
         if (!hasCaseId || !hasWitnessIndex) {
             reject("Case id and witness index required.");
         } else {
-            Case.findOne({ _id: caseId })
+            Case.findOne({_id: caseId})
                 .then((foundCase) => {
                     if (!foundCase) {
                         reject({
@@ -22,56 +22,18 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         reject({
                             message: `CANNOT SELECT WITNESS ${witnessNumber}`
                         });
+                    } else if (!caseUtil.isWitnessSelectable(foundCase, witnessNumber, witnessIndex)) {
+                        reject({
+                            message: `WITNESS NOT SELECTABLE`
+                        });
                     } else {
-                        let witnessIsSelectable;
-                        if (witnessNumber === 1) {
-                            witnessIsSelectable = foundCase.witnessPool1.includes(witnessIndex);
-                        } else if (witnessNumber === 2) {
-                            witnessIsSelectable = foundCase.witnessPool2.includes(witnessIndex);
-                        } else if (witnessNumber === 3) {
-                            witnessIsSelectable = foundCase.witnessPool3.includes(witnessIndex);
-                        } else if (witnessNumber === 4) {
-                            witnessIsSelectable = foundCase.witnessPool4.includes(witnessIndex);
-                        } else if (witnessNumber === 5) {
-                            witnessIsSelectable = foundCase.witnessPool5.includes(witnessIndex);
-                        }
+                        caseUtil.selectWitness(foundCase, witnessNumber, witnessIndex);
 
-                        if (!witnessIsSelectable) {
-                            reject({
-                                message: 'FAILED TO SELECT'
+                        foundCase.save()
+                            .then((updatedCase) => {
+                                resolve(updatedCase);
                             });
-                        } else {
-                            if (witnessNumber === 1) {
-                                foundCase.selectedWitness1 = witnessIndex;
-                                foundCase.witnessPool1 = foundCase.witnessPool1.filter((witness) => {
-                                    return witness != witnessIndex;
-                                })
-                            } else if (witnessNumber === 2) {
-                                foundCase.selectedWitness2 = witnessIndex;
-                                foundCase.witnessPool2 = foundCase.witnessPool2.filter((witness) => {
-                                    return witness != witnessIndex;
-                                })
-                            } else if (witnessNumber === 3) {
-                                foundCase.selectedWitness3 = witnessIndex;
-                                foundCase.witnessPool3 = foundCase.witnessPool3.filter((witness) => {
-                                    return witness != witnessIndex;
-                                })
-                            } else if (witnessNumber === 4) {
-                                foundCase.selectedWitness4 = witnessIndex;
-                                foundCase.witnessPool4 = foundCase.witnessPool4.filter((witness) => {
-                                    return witness != witnessIndex;
-                                })
-                            } else if (witnessNumber === 5) {
-                                foundCase.selectedWitness5 = witnessIndex;
-                                foundCase.witnessPool5 = foundCase.witnessPool5.filter((witness) => {
-                                    return witness != witnessIndex;
-                                })
-                            }
-                            foundCase.save()
-                                .then((updatedCase) => {
-                                    resolve(updatedCase);
-                                });
-                        }
+
                     }
                 });
         }

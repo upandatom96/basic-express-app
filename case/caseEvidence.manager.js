@@ -12,7 +12,7 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
         if (!hasCaseId || !hasEvidenceIndex) {
             reject("Case id and evidence index required.");
         } else {
-            Case.findOne({ _id: caseId })
+            Case.findOne({_id: caseId})
                 .then((foundCase) => {
                     if (!foundCase) {
                         reject({
@@ -20,42 +20,23 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else if (isPlaintiff && !caseUtil.canRevealPlaintiffEvidence(foundCase)) {
                         reject({
-                            message: `CANNOT REVEAL EVIDENCE`
+                            message: `CANNOT REVEAL PLAINTIFF EVIDENCE`
                         });
                     } else if (!isPlaintiff && !caseUtil.canRevealDefendantEvidence(foundCase)) {
                         reject({
-                            message: `CANNOT REVEAL EVIDENCE`
+                            message: `CANNOT REVEAL DEFENDANT EVIDENCE`
+                        });
+                    } else if (!caseUtil.isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex)) {
+                        reject({
+                            message: `EVIDENCE NOT VALID`
                         });
                     } else {
-                        let evidenceIsRevealable;
-                        if (isPlaintiff) {
-                            evidenceIsRevealable = foundCase.plaintiffEvidenceSelected.includes(evidenceIndex);
-                        } else {
-                            evidenceIsRevealable = foundCase.defendantEvidenceSelected.includes(evidenceIndex);
-                        }
+                        caseUtil.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
 
-                        if (!evidenceIsRevealable) {
-                            reject({
-                                message: 'REVEAL FAILED'
+                        foundCase.save()
+                            .then((updatedCase) => {
+                                resolve(updatedCase);
                             });
-                        } else {
-                            if (isPlaintiff) {
-                                foundCase.plaintiffEvidenceCourt.push(evidenceIndex);
-                                foundCase.plaintiffEvidenceSelected = foundCase.plaintiffEvidenceSelected.filter((evidence) => {
-                                    return evidence !== evidenceIndex;
-                                });
-                            } else {
-                                foundCase.defendantEvidenceCourt.push(evidenceIndex);
-                                foundCase.defendantEvidenceSelected = foundCase.defendantEvidenceSelected.filter((evidence) => {
-                                    return evidence !== evidenceIndex;
-                                });
-                            }
-
-                            foundCase.save()
-                                .then((updatedCase) => {
-                                    resolve(updatedCase);
-                                });
-                        }
                     }
                 });
         }
@@ -69,7 +50,7 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
         if (!hasCaseId || !hasEvidenceIndex) {
             reject("Case id and evidence index required.");
         } else {
-            Case.findOne({ _id: caseId })
+            Case.findOne({_id: caseId})
                 .then((foundCase) => {
                     if (!foundCase) {
                         reject({
@@ -77,42 +58,23 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else if (isPlaintiff && !caseUtil.canSelectPlaintiffEvidence(foundCase)) {
                         reject({
-                            message: `CANNOT SELECT EVIDENCE`
+                            message: `CANNOT SELECT PLAINTIFF EVIDENCE`
                         });
                     } else if (!isPlaintiff && !caseUtil.canSelectDefendantEvidence(foundCase)) {
                         reject({
-                            message: `CANNOT SELECT EVIDENCE`
+                            message: `CANNOT SELECT DEFENDANT EVIDENCE`
+                        });
+                    } else if (!caseUtil.isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex)) {
+                        reject({
+                            message: `EVIDENCE NOT VALID`
                         });
                     } else {
-                        let evidenceIsSelectable;
-                        if (isPlaintiff) {
-                            evidenceIsSelectable = foundCase.plaintiffEvidencePool.includes(evidenceIndex);
-                        } else {
-                            evidenceIsSelectable = foundCase.defendantEvidencePool.includes(evidenceIndex);
-                        }
+                        caseUtil.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
 
-                        if (!evidenceIsSelectable) {
-                            reject({
-                                message: 'FAILED TO SELECT'
+                        foundCase.save()
+                            .then((updatedCase) => {
+                                resolve(updatedCase);
                             });
-                        } else {
-                            if (isPlaintiff) {
-                                foundCase.plaintiffEvidenceSelected.push(evidenceIndex);
-                                foundCase.plaintiffEvidencePool = foundCase.plaintiffEvidencePool.filter((evidence) => {
-                                    return evidence !== evidenceIndex;
-                                });
-                            } else {
-                                foundCase.defendantEvidenceSelected.push(evidenceIndex);
-                                foundCase.defendantEvidencePool = foundCase.defendantEvidencePool.filter((evidence) => {
-                                    return evidence !== evidenceIndex;
-                                });
-                            }
-
-                            foundCase.save()
-                                .then((updatedCase) => {
-                                    resolve(updatedCase);
-                                });
-                        }
                     }
                 });
         }
