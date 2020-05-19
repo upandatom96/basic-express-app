@@ -1,7 +1,6 @@
 const caseConstants = require('./case.constants');
 const timeUtil = require('../utilities/time.util');
 const boolUtil = require('../utilities/bool.util');
-const statusHelper = require('./case-status.helper');
 const evidenceHelper = require('./evidence.helper');
 const witnessHelper = require('./witness.helper');
 
@@ -61,14 +60,14 @@ function canMakeVerdict(myCase) {
 
 function canLockRoles(myCase) {
     const namesSet = areEssentialNamesSet(myCase);
-    const assigningRoles = statusHelper.isAssignRoles(myCase);
+    const assigningRoles = isAssignRoles(myCase);
     return assigningRoles && namesSet;
 }
 
 function areSelectionsComplete(myCase) {
     const evidenceSelected = evidenceHelper.isAllEvidenceSelected(myCase);
     const witnessesSelected = witnessHelper.isAllWitnessesSelected(myCase);
-    const makingSelections = statusHelper.isMakeSelections(myCase);
+    const makingSelections = isMakeSelections(myCase);
     return evidenceSelected && witnessesSelected && makingSelections;
 }
 
