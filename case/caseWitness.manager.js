@@ -4,6 +4,7 @@ const Case = mongoose.model('case');
 
 const boolUtil = require('../utilities/bool.util');
 const witnessHelper = require('./witness.helper');
+const statusHelper = require('./case-status.helper');
 
 function selectWitness(caseId, witnessIndex, witnessNumber) {
     return new Promise((resolve, reject) => {
@@ -18,7 +19,7 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!witnessHelper.canSelectWitness(foundCase, witnessNumber)) {
+                    } else if (!statusHelper.canSelectWitness(foundCase, witnessNumber)) {
                         reject({
                             message: `CANNOT SELECT WITNESS ${witnessNumber}`
                         });
