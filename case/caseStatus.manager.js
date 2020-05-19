@@ -2,75 +2,33 @@ const mongoose = require('mongoose');
 require('./Case.model');
 const Case = mongoose.model('case');
 
-const boolUtil = require('../utilities/bool.util');
+const caseBuilder = require('./case-builder.helper');
 const caseUtil = require('./case-helper.util');
 const statusHelper = require('./case-status.helper');
 const caseConstants = require('./case.constants');
+
+const boolUtil = require('../utilities/bool.util');
 const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
-const caseHelper = require('./case.helper');
 
 function makeCaseAutomatic() {
     return new Promise((resolve, reject) => {
         Case.find({})
             .then((allCases) => {
-                const caseName = caseHelper.getUnusedCaseName(allCases);
                 issueManager.getRandomIssue()
                     .then((randomIssue) => {
-                        witnessManager.getRandomWitnesses(15)
+                        witnessManager.getRandomWitnesses(caseConstants.WITNESS_COUNT)
                             .then((randomWitnesses) => {
-                                evidenceManager.getRandomEvidence(30)
+                                evidenceManager.getRandomEvidence(caseConstants.EVIDENCE_COUNT)
                                     .then((randomEvidence) => {
-                                        const issueText = randomIssue.name;
-
-                                        const witnessValues = [];
-                                        const witnessPool1 = [];
-                                        const witnessPool2 = [];
-                                        const witnessPool3 = [];
-                                        const witnessPool4 = [];
-                                        const witnessPool5 = [];
-                                        randomWitnesses.forEach((witness, index) => {
-                                            witnessValues.push(witness.name);
-                                            if (index > 11) {
-                                                witnessPool1.push(index);
-                                            } else if (index > 8) {
-                                                witnessPool2.push(index);
-                                            } else if (index > 5) {
-                                                witnessPool3.push(index);
-                                            } else if (index > 2) {
-                                                witnessPool4.push(index);
-                                            } else {
-                                                witnessPool5.push(index);
-                                            }
-                                        });
-
-                                        const evidenceValues = [];
-                                        const plaintiffEvidencePool = [];
-                                        const defendantEvidencePool = [];
-                                        randomEvidence.forEach((ev, index) => {
-                                            evidenceValues.push(ev.name);
-                                            if (index > 14) {
-                                                plaintiffEvidencePool.push(index);
-                                            } else {
-                                                defendantEvidencePool.push(index);
-                                            }
-                                        });
-
-                                        new Case({
-                                            name: caseName,
-                                            issue: issueText,
-                                            witnessValues: witnessValues,
-                                            witnessPool1: witnessPool1,
-                                            witnessPool2: witnessPool2,
-                                            witnessPool3: witnessPool3,
-                                            witnessPool4: witnessPool4,
-                                            witnessPool5: witnessPool5,
-                                            evidenceValues: evidenceValues,
-                                            plaintiffEvidencePool: plaintiffEvidencePool,
-                                            defendantEvidencePool: defendantEvidencePool,
-                                            status: caseConstants.ASSIGN_ROLES,
-                                        })
+                                        const caseAttributes = caseBuilder.buildCaseAttributes(
+                                            allCases,
+                                            randomIssue,
+                                            randomWitnesses,
+                                            randomEvidence
+                                        );
+                                        new Case(caseAttributes)
                                             .save()
                                             .then((myCase) => {
                                                 resolve(myCase);
