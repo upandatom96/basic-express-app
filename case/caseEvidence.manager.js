@@ -4,6 +4,7 @@ const Case = mongoose.model('case');
 
 const boolUtil = require('../utilities/bool.util');
 const evidenceHelper = require('./evidence.helper');
+const statusHelper = require('./case-status.helper');
 
 function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
     return new Promise((resolve, reject) => {
@@ -18,11 +19,11 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !evidenceHelper.canRevealPlaintiffEvidence(foundCase)) {
+                    } else if (isPlaintiff && !statusHelper.canRevealPlaintiffEvidence(foundCase)) {
                         reject({
                             message: `CANNOT REVEAL PLAINTIFF EVIDENCE`
                         });
-                    } else if (!isPlaintiff && !evidenceHelper.canRevealDefendantEvidence(foundCase)) {
+                    } else if (!isPlaintiff && !statusHelper.canRevealDefendantEvidence(foundCase)) {
                         reject({
                             message: `CANNOT REVEAL DEFENDANT EVIDENCE`
                         });
@@ -56,11 +57,11 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !evidenceHelper.canSelectPlaintiffEvidence(foundCase)) {
+                    } else if (isPlaintiff && !statusHelper.canSelectPlaintiffEvidence(foundCase)) {
                         reject({
                             message: `CANNOT SELECT PLAINTIFF EVIDENCE`
                         });
-                    } else if (!isPlaintiff && !evidenceHelper.canSelectDefendantEvidence(foundCase)) {
+                    } else if (!isPlaintiff && !statusHelper.canSelectDefendantEvidence(foundCase)) {
                         reject({
                             message: `CANNOT SELECT DEFENDANT EVIDENCE`
                         });
