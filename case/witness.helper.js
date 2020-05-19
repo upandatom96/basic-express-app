@@ -94,7 +94,32 @@ function isAllWitnessesSelected(myCase) {
     return !(witness1Needed && witness2Needed && witness3Needed && witness4Needed && witness5Needed);
 }
 
+function witnessAvailable(myCase, witnessNumber) {
+    if (witnessNumber === 1) {
+        const playerPresent = myCase.witnessName1 !== null;
+        const witnessNeeded = myCase.selectedWitness1 === null;
+        return witnessNeeded && playerPresent;
+    } else if (witnessNumber === 2) {
+        const playerPresent = myCase.witnessName2 !== null;
+        const witnessNeeded = myCase.selectedWitness2 === null;
+        return witnessNeeded && playerPresent;
+    } else if (witnessNumber === 3) {
+        const playerPresent = myCase.witnessName3 !== null;
+        const witnessNeeded = myCase.selectedWitness3 === null;
+        return witnessNeeded && playerPresent;
+    } else if (witnessNumber === 4) {
+        const playerPresent = myCase.witnessName4 !== null;
+        const witnessNeeded = myCase.selectedWitness4 === null;
+        return witnessNeeded && playerPresent;
+    } else if (witnessNumber === 5) {
+        const playerPresent = myCase.witnessName5 !== null;
+        const witnessNeeded = myCase.selectedWitness5 === null;
+        return witnessNeeded && playerPresent;
+    }
+}
+
 module.exports = {
+    witnessAvailable,
     addWitness,
     removeWitness,
     hasWitnessNameAlready,
