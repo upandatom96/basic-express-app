@@ -26,30 +26,6 @@ function isAllEvidenceSelected(myCase) {
     return pEvidenceSelected && dEvidenceSelected;
 }
 
-function canRevealPlaintiffEvidence(myCase) {
-    const caseInProgress = statusHelper.isInProgress(myCase);
-    const allRevealed = isAllPlaintiffEvidenceRevealed(myCase);
-    return caseInProgress && !allRevealed;
-}
-
-function canRevealDefendantEvidence(myCase) {
-    const caseInProgress = statusHelper.isInProgress(myCase);
-    const allSelected = isAllDefendantEvidenceRevealed(myCase);
-    return caseInProgress && !allSelected;
-}
-
-function canSelectPlaintiffEvidence(myCase) {
-    const caseInProgress = statusHelper.isMakeSelections(myCase);
-    const allSelected = isAllPlaintiffEvidenceSelected(myCase);
-    return caseInProgress && !allSelected;
-}
-
-function canSelectDefendantEvidence(myCase) {
-    const caseInProgress = statusHelper.isMakeSelections(myCase);
-    const allSelected = isAllDefendantEvidenceSelected(myCase);
-    return caseInProgress && !allSelected;
-}
-
 function isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex) {
     if (isPlaintiff) {
         return foundCase.plaintiffEvidencePool.includes(evidenceIndex);
@@ -95,12 +71,12 @@ function selectEvidence(foundCase, isPlaintiff, evidenceIndex) {
 }
 
 module.exports = {
+    isAllPlaintiffEvidenceRevealed,
+    isAllDefendantEvidenceRevealed,
+    isAllPlaintiffEvidenceSelected,
+    isAllDefendantEvidenceSelected,
     isAllEvidenceRevealed,
     isAllEvidenceSelected,
-    canRevealPlaintiffEvidence,
-    canRevealDefendantEvidence,
-    canSelectPlaintiffEvidence,
-    canSelectDefendantEvidence,
     isEvidenceSelectable,
     isEvidenceRevealable,
     revealEvidence,

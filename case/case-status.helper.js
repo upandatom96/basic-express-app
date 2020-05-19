@@ -78,7 +78,35 @@ function areEssentialNamesSet(myCase) {
     return hasJudgeName && hasPName && hasDName;
 }
 
+function canRevealPlaintiffEvidence(myCase) {
+    const caseInProgress = isInProgress(myCase);
+    const allRevealed = evidenceHelper.isAllPlaintiffEvidenceRevealed(myCase);
+    return caseInProgress && !allRevealed;
+}
+
+function canRevealDefendantEvidence(myCase) {
+    const caseInProgress = isInProgress(myCase);
+    const allSelected = evidenceHelper.isAllDefendantEvidenceRevealed(myCase);
+    return caseInProgress && !allSelected;
+}
+
+function canSelectPlaintiffEvidence(myCase) {
+    const caseInProgress = isMakeSelections(myCase);
+    const allSelected = evidenceHelper.isAllPlaintiffEvidenceSelected(myCase);
+    return caseInProgress && !allSelected;
+}
+
+function canSelectDefendantEvidence(myCase) {
+    const caseInProgress = isMakeSelections(myCase);
+    const allSelected = evidenceHelper.isAllDefendantEvidenceSelected(myCase);
+    return caseInProgress && !allSelected;
+}
+
 module.exports = {
+    canSelectDefendantEvidence,
+    canSelectPlaintiffEvidence,
+    canRevealDefendantEvidence,
+    canRevealPlaintiffEvidence,
     isAssignRoles,
     isMakeSelections,
     isOpeningArguments,
@@ -88,7 +116,6 @@ module.exports = {
     isVerdictSelection,
     isClosed,
     isLimbo,
-    isInProgress,
     canLockRoles,
     areSelectionsComplete,
     canMakeVerdict
