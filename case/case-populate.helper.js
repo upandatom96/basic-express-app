@@ -1,6 +1,8 @@
 const witnessPopulator = require('./witness-populate.helper');
 const evidencePopulator = require('./evidence-populate.helper');
 
+const nameHelper = require('./name.helper');
+
 function cloneCase(myCase) {
     return {
         _id: myCase._id,
@@ -22,11 +24,42 @@ function cloneCase(myCase) {
     };
 }
 
+function addAttributes(myCase) {
+    myCase.fullCaseName = "The Case of the " + myCase.name;
+
+    myCase.areEssentialNamesSet = nameHelper.areEssentialNamesSet(myCase);
+    myCase.isAnyNameSet = nameHelper.isAnyNameSet(myCase);
+    // has name (each)
+    // # of names
+
+    // has witness name (each)
+    // has witness name (any)
+    // # of witness names
+    // # of witnesses selected
+    // all witnesses selected
+    // witness player array
+
+    // evidence - # selected P
+    // evidence - # selected D
+    // evidence - all selected P
+    // evidence - all selected D
+    // evidence - # revealed P
+    // evidence - # revealed D
+    // evidence - all revealed P
+    // evidence - all revealed D
+
+    // status booleans
+    // status string
+    // status ongoing
+
+    return myCase;
+}
+
 function populateCase(myCase) {
     let fullCase = cloneCase(myCase);
     fullCase = witnessPopulator.populateWitnesses(myCase, fullCase);
     fullCase = evidencePopulator.populateEvidence(myCase, fullCase);
-    return fullCase;
+    return addAttributes(fullCase);
 }
 
 function populateCases(myCases) {

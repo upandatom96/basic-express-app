@@ -6,6 +6,7 @@ const caseBuilder = require('./case-builder.helper');
 const statusHelper = require('./case-status.helper');
 const evidenceHelper = require('./evidence.helper');
 const witnessHelper = require('./witness.helper');
+const nameHelper = require('./name.helper');
 const caseConstants = require('./case.constants');
 
 const boolUtil = require('../utilities/bool.util');
@@ -241,16 +242,8 @@ function canStartTrial(myCase) {
 
 function canLockRoles(myCase) {
     const assigningRoles = statusHelper.isAssignRoles(myCase);
-    const namesSet = areEssentialNamesSet(myCase);
+    const namesSet = nameHelper.areEssentialNamesSet(myCase);
     return assigningRoles && namesSet;
-}
-
-function areEssentialNamesSet(myCase) {
-    return boolUtil.allHaveValues([
-        myCase.judgeName,
-        myCase.plaintiffName,
-        myCase.defendantName
-    ]);
 }
 
 module.exports = {

@@ -24,6 +24,12 @@ function allHaveValues(values) {
   });
 }
 
+function anyHasValue(values) {
+  return values.some((value) => {
+    return hasValue(value);
+  });
+}
+
 function hasNoNumberValue(value) {
   return hasNoValue(value) || isNaN(value);
 }
@@ -50,6 +56,7 @@ function translateBooleanString(value) {
 
 module.exports = {
   hasBoolValue,
+  anyHasValue,
   hasNoBoolValue,
   hasNoValue,
   hasValue,
