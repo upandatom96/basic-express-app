@@ -8,37 +8,42 @@ const boolUtil = require('../utilities/bool.util');
 function buildWitnessPlayers(myCase) {
     const witnessPlayers = [];
     if (myCase.witness1NameSet) {
+        const name1 = boolUtil.hasValue(myCase.selectedWitness1) ? myCase.selectedWitness1.name : "???";
         witnessPlayers.push({
             name: myCase.witnessName1,
-            character: myCase.selectedWitness1.name,
+            character: name1,
             witnessNumber: 1
         });
     }
     if (myCase.witness2NameSet) {
+        const name2 = boolUtil.hasValue(myCase.selectedWitness2) ? myCase.selectedWitness2.name : "???";
         witnessPlayers.push({
             name: myCase.witnessName2,
-            character: myCase.selectedWitness2.name,
+            character: name2,
             witnessNumber: 2
         });
     }
     if (myCase.witness3NameSet) {
+        const name3 = boolUtil.hasValue(myCase.selectedWitness3) ? myCase.selectedWitness3.name : "???";
         witnessPlayers.push({
             name: myCase.witnessName3,
-            character: myCase.selectedWitness3.name,
+            character: name3,
             witnessNumber: 3
         });
     }
     if (myCase.witness4NameSet) {
+        const name4 = boolUtil.hasValue(myCase.selectedWitness4) ? myCase.selectedWitness4.name : "???";
         witnessPlayers.push({
             name: myCase.witnessName4,
-            character: myCase.selectedWitness4.name,
+            character: name4,
             witnessNumber: 4
         });
     }
     if (myCase.witness5NameSet) {
+        const name5 = boolUtil.hasValue(myCase.selectedWitness5) ? myCase.selectedWitness5.name : "???";
         witnessPlayers.push({
             name: myCase.witnessName5,
-            character: myCase.selectedWitness5.name,
+            character: name5,
             witnessNumber: 5
         });
     }
