@@ -3,6 +3,7 @@ const evidencePopulator = require('./evidence-populate.helper');
 
 const nameHelper = require('./name.helper');
 const witnessHelper = require('./witness.helper');
+const statusHelper = require('./case-status.helper');
 
 const boolUtil = require('../utilities/bool.util');
 
@@ -88,14 +89,22 @@ function addAttributes(myCase) {
     // evidence - # selected D
     // evidence - all selected P
     // evidence - all selected D
+
     // evidence - # revealed P
     // evidence - # revealed D
     // evidence - all revealed P
     // evidence - all revealed D
 
-    // status booleans
-    // status string
-    // status ongoing
+    myCase.statusText = statusHelper.getStatusText(myCase);
+    myCase.isAssignRoles = statusHelper.isAssignRoles(myCase);
+    myCase.isMakeSelections = statusHelper.isMakeSelections(myCase);
+    myCase.isFreeTime = statusHelper.isFreeTime(myCase);
+    myCase.isOpeningArguments = statusHelper.isOpeningArguments(myCase);
+    myCase.isCrossfire = statusHelper.isCrossfire(myCase);
+    myCase.isClosingArguments = statusHelper.isClosingArguments(myCase);
+    myCase.isVerdictSelection = statusHelper.isVerdictSelection(myCase);
+    myCase.isClosed = statusHelper.isClosed(myCase);
+    myCase.isInProgress = statusHelper.isInProgress(myCase);
 
     return myCase;
 }

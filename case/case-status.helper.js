@@ -53,6 +53,27 @@ function verdictIsNext(myCase) {
     return isClosingArguments(myCase) || isFreeTime(myCase);
 }
 
+function getStatusText(myCase) {
+    if (isAssignRoles(myCase)) {
+        return "Role Assignment";
+    } else if (isMakeSelections(myCase)) {
+        return "Evidence & Witness Selection";
+    } else if (isFreeTime(myCase)) {
+        return "Open Trial";
+    } else if (isOpeningArguments(myCase)) {
+        return "Opening Arguments";
+    } else if (isCrossfire(myCase)) {
+        return "Crossfire Debate";
+    } else if (isClosingArguments(myCase)) {
+        return "Closing Arguments";
+    } else if (isVerdictSelection(myCase)) {
+        return "Final Ruling";
+    } else if (isClosed(myCase)) {
+        return "Case Closed";
+    }
+    return "CASE STATUS UNKNOWN";
+}
+
 module.exports = {
     verdictIsNext,
     isAssignRoles,
@@ -64,5 +85,6 @@ module.exports = {
     isInProgress,
     isVerdictSelection,
     isClosed,
-    isLimbo
+    isLimbo,
+    getStatusText
 }
