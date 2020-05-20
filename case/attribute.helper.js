@@ -51,6 +51,7 @@ function addStatusAttributes(myCase) {
     myCase.isVerdictSelection = statusHelper.isVerdictSelection(myCase);
     myCase.isClosed = statusHelper.isClosed(myCase);
     myCase.isInProgress = statusHelper.isInProgress(myCase);
+    myCase.verdictIsNext = statusHelper.verdictIsNext(myCase);
     return myCase;
 }
 
