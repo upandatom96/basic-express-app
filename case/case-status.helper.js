@@ -1,7 +1,5 @@
 const caseConstants = require('./case.constants');
 const timeUtil = require('../utilities/time.util');
-const boolUtil = require('../utilities/bool.util');
-const witnessHelper = require('./witness.helper');
 
 function isAssignRoles(myCase) {
     return myCase.status === caseConstants.ASSIGN_ROLES;
@@ -55,29 +53,8 @@ function verdictIsNext(myCase) {
     return isClosingArguments(myCase) || isFreeTime(myCase);
 }
 
-function canLockRoles(myCase) {
-    const namesSet = areEssentialNamesSet(myCase);
-    const assigningRoles = isAssignRoles(myCase);
-    return assigningRoles && namesSet;
-}
-
-function areEssentialNamesSet(myCase) {
-    const hasJudgeName = boolUtil.hasValue(myCase.judgeName);
-    const hasPName = boolUtil.hasValue(myCase.plaintiffName);
-    const hasDName = boolUtil.hasValue(myCase.defendantName);
-    return hasJudgeName && hasPName && hasDName;
-}
-
-function canSelectWitness(myCase, witnessNumber) {
-    if (!isMakeSelections(myCase)) {
-        return false;
-    }
-    return witnessHelper.witnessAvailable(myCase, witnessNumber);
-}
-
 module.exports = {
     verdictIsNext,
-    canSelectWitness,
     isAssignRoles,
     isMakeSelections,
     isOpeningArguments,
@@ -87,6 +64,5 @@ module.exports = {
     isInProgress,
     isVerdictSelection,
     isClosed,
-    isLimbo,
-    canLockRoles
+    isLimbo
 }

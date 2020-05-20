@@ -19,7 +19,7 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (!statusHelper.canSelectWitness(foundCase, witnessNumber)) {
+                    } else if (!canSelectWitness(foundCase, witnessNumber)) {
                         reject({
                             message: `CANNOT SELECT WITNESS ${witnessNumber}`
                         });
@@ -39,6 +39,12 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                 });
         }
     });
+}
+
+function canSelectWitness(myCase, witnessNumber) {
+    const caseMakingSelections = statusHelper.isMakeSelections(myCase);
+    const witnessNumberAvailable = witnessHelper.witnessAvailable(myCase, witnessNumber);
+    return caseMakingSelections && witnessNumberAvailable;
 }
 
 module.exports = {

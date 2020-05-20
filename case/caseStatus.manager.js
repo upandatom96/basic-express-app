@@ -57,7 +57,7 @@ function lockRoles(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && statusHelper.canLockRoles(foundCase)) {
+                    if (foundCase && canLockRoles(foundCase)) {
                         foundCase.status = caseConstants.MAKE_SELECTIONS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -237,6 +237,20 @@ function canStartTrial(myCase) {
     const witnessesSelected = witnessHelper.isAllWitnessesSelected(myCase);
     const makingSelections = statusHelper.isMakeSelections(myCase);
     return evidenceSelected && witnessesSelected && makingSelections;
+}
+
+function canLockRoles(myCase) {
+    const assigningRoles = statusHelper.isAssignRoles(myCase);
+    const namesSet = areEssentialNamesSet(myCase);
+    return assigningRoles && namesSet;
+}
+
+function areEssentialNamesSet(myCase) {
+    return boolUtil.allHaveValues([
+        myCase.judgeName,
+        myCase.plaintiffName,
+        myCase.defendantName
+    ]);
 }
 
 module.exports = {
