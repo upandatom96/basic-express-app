@@ -10,31 +10,36 @@ function buildWitnessPlayers(myCase) {
     if (myCase.witness1NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName1,
-            character: myCase.selectedWitness1
+            character: myCase.selectedWitness1,
+            witnessNumber: 1
         });
     }
     if (myCase.witness1NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName2,
-            character: myCase.selectedWitness2
+            character: myCase.selectedWitness2,
+            witnessNumber: 2
         });
     }
     if (myCase.witness3NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName3,
-            character: myCase.selectedWitness3
+            character: myCase.selectedWitness3,
+            witnessNumber: 3
         });
     }
     if (myCase.witness4NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName4,
-            character: myCase.selectedWitness4
+            character: myCase.selectedWitness4,
+            witnessNumber: 4
         });
     }
     if (myCase.witness5NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName5,
-            character: myCase.selectedWitness5
+            character: myCase.selectedWitness5,
+            witnessNumber: 5
         });
     }
     return witnessPlayers;
