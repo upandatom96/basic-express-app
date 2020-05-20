@@ -77,7 +77,7 @@ function addEvidenceAttributes(myCase) {
 
 function addWitnessAttributes(myCase) {
     myCase.howManyWitnessesSelected = witnessHelper.howManyWitnessesSelected(myCase);
-    myCase.allWitnessesReady = myCase.howManyWitnessesSelected === myCase.howManyPlayerNames;
+    myCase.allWitnessesReady = myCase.howManyWitnessesSelected === myCase.howManyWitnessNames;
     myCase.witnessPlayers = buildWitnessPlayers(myCase);
     return myCase;
 }
