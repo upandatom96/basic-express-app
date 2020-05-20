@@ -1,3 +1,5 @@
+const boolUtil = require('../utilities/bool.util');
+
 function addWitness(myCase, witnessName, witnessNumber) {
     if (witnessNumber === 1) {
         myCase.witnessName1 = witnessName;
@@ -118,8 +120,19 @@ function witnessAvailable(myCase, witnessNumber) {
     }
 }
 
+function howManyWitnessesSelected(myCase) {
+    return boolUtil.howManyHaveValue([
+        myCase.selectedWitness1,
+        myCase.selectedWitness2,
+        myCase.selectedWitness3,
+        myCase.selectedWitness4,
+        myCase.selectedWitness5
+    ]);
+}
+
 module.exports = {
     witnessAvailable,
+    howManyWitnessesSelected,
     addWitness,
     removeWitness,
     hasWitnessNameAlready,

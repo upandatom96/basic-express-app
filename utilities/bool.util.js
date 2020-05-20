@@ -30,6 +30,16 @@ function anyHasValue(values) {
   });
 }
 
+function howManyHaveValue(values) {
+  let count = 0;
+  values.forEach((value) => {
+    if (hasValue(value)) {
+      count++;
+    }
+  });
+  return count;
+}
+
 function hasNoNumberValue(value) {
   return hasNoValue(value) || isNaN(value);
 }
@@ -56,6 +66,7 @@ function translateBooleanString(value) {
 
 module.exports = {
   hasBoolValue,
+  howManyHaveValue,
   anyHasValue,
   hasNoBoolValue,
   hasNoValue,

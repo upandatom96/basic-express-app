@@ -21,7 +21,32 @@ function isAnyNameSet(myCase) {
     ]);
 }
 
+function howManyPlayerNames(myCase) {
+    return boolUtil.howManyHaveValue([
+        myCase.judgeName,
+        myCase.plaintiffName,
+        myCase.defendantName,
+        myCase.witnessName1,
+        myCase.witnessName2,
+        myCase.witnessName3,
+        myCase.witnessName4,
+        myCase.witnessName5
+    ]);
+}
+
+function howManyWitnesses(myCase) {
+    return boolUtil.howManyHaveValue([
+        myCase.witnessName1,
+        myCase.witnessName2,
+        myCase.witnessName3,
+        myCase.witnessName4,
+        myCase.witnessName5
+    ]);
+}
+
 module.exports = {
     areEssentialNamesSet,
-    isAnyNameSet
+    isAnyNameSet,
+    howManyWitnesses,
+    howManyPlayerNames
 };
