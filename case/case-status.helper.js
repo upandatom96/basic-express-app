@@ -1,7 +1,6 @@
 const caseConstants = require('./case.constants');
 const timeUtil = require('../utilities/time.util');
 const boolUtil = require('../utilities/bool.util');
-const evidenceHelper = require('./evidence.helper');
 const witnessHelper = require('./witness.helper');
 
 function isAssignRoles(myCase) {
@@ -52,10 +51,8 @@ function isInProgress(myCase) {
         isClosingArguments(myCase) || isFreeTime(myCase);
 }
 
-function canMakeVerdict(myCase) {
-    const revealedAllEvidence = evidenceHelper.isAllEvidenceRevealed(myCase);
-    const statusReady = isClosingArguments(myCase) || isFreeTime(myCase);
-    return revealedAllEvidence && statusReady;
+function verdictIsNext(myCase) {
+    return isClosingArguments(myCase) || isFreeTime(myCase);
 }
 
 function canLockRoles(myCase) {
@@ -64,42 +61,11 @@ function canLockRoles(myCase) {
     return assigningRoles && namesSet;
 }
 
-function areSelectionsComplete(myCase) {
-    const evidenceSelected = evidenceHelper.isAllEvidenceSelected(myCase);
-    const witnessesSelected = witnessHelper.isAllWitnessesSelected(myCase);
-    const makingSelections = isMakeSelections(myCase);
-    return evidenceSelected && witnessesSelected && makingSelections;
-}
-
 function areEssentialNamesSet(myCase) {
     const hasJudgeName = boolUtil.hasValue(myCase.judgeName);
     const hasPName = boolUtil.hasValue(myCase.plaintiffName);
     const hasDName = boolUtil.hasValue(myCase.defendantName);
     return hasJudgeName && hasPName && hasDName;
-}
-
-function canRevealPlaintiffEvidence(myCase) {
-    const caseInProgress = isInProgress(myCase);
-    const allRevealed = evidenceHelper.isAllPlaintiffEvidenceRevealed(myCase);
-    return caseInProgress && !allRevealed;
-}
-
-function canRevealDefendantEvidence(myCase) {
-    const caseInProgress = isInProgress(myCase);
-    const allSelected = evidenceHelper.isAllDefendantEvidenceRevealed(myCase);
-    return caseInProgress && !allSelected;
-}
-
-function canSelectPlaintiffEvidence(myCase) {
-    const caseInProgress = isMakeSelections(myCase);
-    const allSelected = evidenceHelper.isAllPlaintiffEvidenceSelected(myCase);
-    return caseInProgress && !allSelected;
-}
-
-function canSelectDefendantEvidence(myCase) {
-    const caseInProgress = isMakeSelections(myCase);
-    const allSelected = evidenceHelper.isAllDefendantEvidenceSelected(myCase);
-    return caseInProgress && !allSelected;
 }
 
 function canSelectWitness(myCase, witnessNumber) {
@@ -110,21 +76,17 @@ function canSelectWitness(myCase, witnessNumber) {
 }
 
 module.exports = {
+    verdictIsNext,
     canSelectWitness,
-    canSelectDefendantEvidence,
-    canSelectPlaintiffEvidence,
-    canRevealDefendantEvidence,
-    canRevealPlaintiffEvidence,
     isAssignRoles,
     isMakeSelections,
     isOpeningArguments,
     isCrossfire,
     isClosingArguments,
     isFreeTime,
+    isInProgress,
     isVerdictSelection,
     isClosed,
     isLimbo,
-    canLockRoles,
-    areSelectionsComplete,
-    canMakeVerdict
+    canLockRoles
 }

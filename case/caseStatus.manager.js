@@ -4,6 +4,8 @@ const Case = mongoose.model('case');
 
 const caseBuilder = require('./case-builder.helper');
 const statusHelper = require('./case-status.helper');
+const evidenceHelper = require('./evidence.helper');
+const witnessHelper = require('./witness.helper');
 const caseConstants = require('./case.constants');
 
 const boolUtil = require('../utilities/bool.util');
@@ -80,7 +82,7 @@ function startFreeTime(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && statusHelper.areSelectionsComplete(foundCase)) {
+                    if (foundCase && canStartTrial(foundCase)) {
                         foundCase.status = caseConstants.FREE_TIME;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -105,7 +107,7 @@ function startOpeningArguments(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && statusHelper.areSelectionsComplete(foundCase)) {
+                    if (foundCase && canStartTrial(foundCase)) {
                         foundCase.status = caseConstants.OPENING_ARGUMENTS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -180,7 +182,7 @@ function startVerdictSelection(caseId) {
         } else {
             Case.findOne({_id: caseId})
                 .then((foundCase) => {
-                    if (foundCase && statusHelper.canMakeVerdict(foundCase)) {
+                    if (foundCase && canMakeVerdict(foundCase)) {
                         foundCase.status = caseConstants.VERDICT_SELECTION;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
 
@@ -223,6 +225,18 @@ function makeVerdict(caseId, isDefendantGuilty) {
                 });
         }
     });
+}
+
+function canMakeVerdict(myCase) {
+    return statusHelper.verdictIsNext(myCase) &&
+        evidenceHelper.isAllEvidenceRevealed(myCase);
+}
+
+function canStartTrial(myCase) {
+    const evidenceSelected = evidenceHelper.isAllEvidenceSelected(myCase);
+    const witnessesSelected = witnessHelper.isAllWitnessesSelected(myCase);
+    const makingSelections = statusHelper.isMakeSelections(myCase);
+    return evidenceSelected && witnessesSelected && makingSelections;
 }
 
 module.exports = {

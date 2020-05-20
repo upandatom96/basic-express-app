@@ -19,13 +19,9 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !statusHelper.canRevealPlaintiffEvidence(foundCase)) {
+                    } else if (canRevealEvidence(foundCase, isPlaintiff)) {
                         reject({
-                            message: `CANNOT REVEAL PLAINTIFF EVIDENCE`
-                        });
-                    } else if (!isPlaintiff && !statusHelper.canRevealDefendantEvidence(foundCase)) {
-                        reject({
-                            message: `CANNOT REVEAL DEFENDANT EVIDENCE`
+                            message: `CANNOT REVEAL EVIDENCE`
                         });
                     } else if (!evidenceHelper.isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex)) {
                         reject({
@@ -57,13 +53,9 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (isPlaintiff && !statusHelper.canSelectPlaintiffEvidence(foundCase)) {
+                    } else if (canSelectEvidence(foundCase, isPlaintiff)) {
                         reject({
-                            message: `CANNOT SELECT PLAINTIFF EVIDENCE`
-                        });
-                    } else if (!isPlaintiff && !statusHelper.canSelectDefendantEvidence(foundCase)) {
-                        reject({
-                            message: `CANNOT SELECT DEFENDANT EVIDENCE`
+                            message: `CANNOT SELECT EVIDENCE`
                         });
                     } else if (!evidenceHelper.isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex)) {
                         reject({
@@ -80,6 +72,34 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                 });
         }
     });
+}
+
+function canRevealEvidence(myCase, isPlaintiff) {
+    const caseInProgress = statusHelper.isInProgress(myCase);
+    const roleHasEvidenceLeft = !roleRevealedAll(myCase, isPlaintiff);
+    return caseInProgress && roleHasEvidenceLeft;
+}
+
+function roleRevealedAll(myCase, isPlaintiff) {
+    if (isPlaintiff) {
+        return evidenceHelper.isAllPlaintiffEvidenceRevealed(myCase);
+    } else {
+        return evidenceHelper.isAllDefendantEvidenceRevealed(myCase);
+    }
+}
+
+function canSelectEvidence(myCase, isPlaintiff) {
+    const caseMakingSelections = statusHelper.isMakeSelections(myCase);
+    const roleHasEvidenceLeft = !roleSelectedAll(myCase, isPlaintiff);
+    return caseMakingSelections && roleHasEvidenceLeft;
+}
+
+function roleSelectedAll(myCase, isPlaintiff) {
+    if (isPlaintiff) {
+        return evidenceHelper.isAllPlaintiffEvidenceSelected(myCase);
+    } else {
+        return evidenceHelper.isAllDefendantEvidenceSelected(myCase);
+    }
 }
 
 module.exports = {
