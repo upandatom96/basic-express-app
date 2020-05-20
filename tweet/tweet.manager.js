@@ -1,5 +1,6 @@
 const Twit = require('twit');
-const { twitCredentials, test } = require("../config/twit.config");
+const { test } = require("../config/env.config");
+const { twitCredentials } = require("../config/twit.config");
 
 function makeTweet(message) {
   if (test === "true") {
