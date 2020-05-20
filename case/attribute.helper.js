@@ -87,6 +87,7 @@ function addNameAttributes(myCase) {
 
 function addGeneralAttributes(myCase) {
     myCase.fullCaseName = "The Case of the " + myCase.name;
+    myCase.fullIssue = "The Plaintiff claims that The Defendant " + myCase.issue;
     return myCase;
 }
 
