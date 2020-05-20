@@ -14,7 +14,7 @@ function buildWitnessPlayers(myCase) {
             witnessNumber: 1
         });
     }
-    if (myCase.witness1NameSet) {
+    if (myCase.witness2NameSet) {
         witnessPlayers.push({
             name: myCase.witnessName2,
             character: myCase.selectedWitness2,
