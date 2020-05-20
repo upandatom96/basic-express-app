@@ -19,7 +19,7 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (canRevealEvidence(foundCase, isPlaintiff)) {
+                    } else if (!canRevealEvidence(foundCase, isPlaintiff)) {
                         reject({
                             message: `CANNOT REVEAL EVIDENCE`
                         });
@@ -53,7 +53,7 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         reject({
                             message: `Failed to find case`
                         });
-                    } else if (canSelectEvidence(foundCase, isPlaintiff)) {
+                    } else if (!canSelectEvidence(foundCase, isPlaintiff)) {
                         reject({
                             message: `CANNOT SELECT EVIDENCE`
                         });

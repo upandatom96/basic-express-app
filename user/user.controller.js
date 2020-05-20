@@ -64,7 +64,6 @@ userController.put('/passwordReset/automatic', (req, res) => {
   } else {
     userManager.resetPasswordAutomatic(email)
       .then((response) => {
-        console.log("new password: " + response.newPassword);
         const recipient = email;
         const subject = "Password Reset";
         const message = `Your new password is ${response.newPassword}`;
