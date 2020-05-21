@@ -4,12 +4,21 @@ const chitChatManager = require('./chit-chat.manager');
 
 const authUtil = require('../utilities/auth.util');
 
-// TODO get one randomly
+chitChatController.get('/random', (req, res) => {
+    chitChatManager.getRandomChitChat()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
 
 chitChatController.get('/', (req, res) => {
     chitChatManager.getUnhiddenChitChats()
-        .then((doodads) => {
-            res.send(doodads);
+        .then((response) => {
+            res.send(response);
         })
         .catch((err) => {
             res.statusCode = 500;
@@ -19,8 +28,8 @@ chitChatController.get('/', (req, res) => {
 
 chitChatController.get('/all', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
     chitChatManager.getAllChitChats()
-        .then((doodads) => {
-            res.send(doodads);
+        .then((response) => {
+            res.send(response);
         })
         .catch((err) => {
             res.statusCode = 500;
@@ -52,8 +61,10 @@ chitChatController.post('/unhidden', authUtil.jwtAuthenticated, authUtil.jwtAdmi
         });
 });
 
-// TODO hide chit chat
-// TODO show chit chat
+// TODO put hide chit chat
+// TODO put show chit chat
+// TODO put edit chit chat
+
 // TODO delete chit chat
 
 module.exports = chitChatController;
