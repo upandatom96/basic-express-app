@@ -6,9 +6,9 @@ const ChitChatSchema = new Schema({
         type: String,
         required: true,
     },
-    show: {
+    hidden: {
         type: Boolean,
-        required: true,
+        default: true,
     },
     date: {
         type: Date,
