@@ -15,6 +15,9 @@ function setupControllers(app) {
   const contraptionController = require('../contraption/contraption.controller');
   app.use('/contraption', contraptionController);
 
+  const chitChatController = require('../chit-chat/chit-chit.controller');
+  app.use('/chitChat', chitChatController);
+
   const evidenceController = require('../evidence/evidence.controller');
   app.use('/evidence', evidenceController);
 
