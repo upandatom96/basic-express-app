@@ -68,6 +68,34 @@ function addChitChatUnhidden(chitChat) {
     });
 }
 
+function editChitChat(chitChatUpdate) {
+    return new Promise((resolve, reject) => {
+        if (invalidChitChat(chitChatUpdate)) {
+            reject("ERR");
+        } else {
+            const id = chitChatUpdate._id;
+            ChitChat.findOne({
+                _id: id
+            })
+                .then((foundChitChat) => {
+                    if (!foundChitChat) {
+                        reject({
+                            message: `Failed to find chitChat`
+                        });
+                    } else {
+                        foundChitChat.question = chitChatUpdate.question;
+                        foundChitChat.hidden = chitChatUpdate.hidden;
+
+                        foundChitChat.save()
+                            .then((response) => {
+                                resolve(response);
+                            });
+                    }
+                });
+        }
+    });
+}
+
 function deleteOneChitChat(id) {
     return new Promise((resolve, reject) => {
         ChitChat.deleteOne({
@@ -91,5 +119,6 @@ module.exports = {
     getUnhiddenChitChats,
     addChitChatSuggestion,
     addChitChatUnhidden,
+    editChitChat,
     deleteOneChitChat
 }
