@@ -68,6 +68,19 @@ function addChitChatUnhidden(chitChat) {
     });
 }
 
+function deleteOneChitChat(id) {
+    return new Promise((resolve, reject) => {
+        ChitChat.deleteOne({
+            _id: id
+        })
+            .then(() => {
+                resolve({
+                    message: `Issue with given id deleted or never existed`
+                });
+            });
+    });
+}
+
 function invalidChitChat(chitChat) {
     return boolUtil.hasNoValue(chitChat) || boolUtil.hasNoValue(chitChat.question);
 }
@@ -77,5 +90,6 @@ module.exports = {
     getAllChitChats,
     getUnhiddenChitChats,
     addChitChatSuggestion,
-    addChitChatUnhidden
+    addChitChatUnhidden,
+    deleteOneChitChat
 }

@@ -65,6 +65,18 @@ chitChatController.post('/unhidden', authUtil.jwtAuthenticated, authUtil.jwtAdmi
 // TODO put show chit chat
 // TODO put edit chit chat
 
+chitChatController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+    const id = req.params.id;
+    chitChatManager.deleteOneChitChat(id)
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 // TODO delete chit chat
 
 module.exports = chitChatController;
