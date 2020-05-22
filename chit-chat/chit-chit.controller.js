@@ -28,18 +28,7 @@ chitChatController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (re
         });
 });
 
-chitChatController.get('/', (req, res) => {
-    chitChatManager.getUnhiddenChitChats()
-        .then((response) => {
-            res.send(response);
-        })
-        .catch((err) => {
-            res.statusCode = 500;
-            res.send(err);
-        });
-});
-
-chitChatController.get('/all', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+chitChatController.get('/', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
     chitChatManager.getAllChitChats()
         .then((response) => {
             res.send(response);

@@ -16,15 +16,6 @@ function getRandomChitChat() {
     });
 }
 
-function getUnhiddenChitChats() {
-    return new Promise((resolve, reject) => {
-        ChitChat.find({hidden: false})
-            .then((chitChats) => {
-                resolve(chitChats);
-            });
-    });
-}
-
 function getChitChatById(id) {
     return new Promise((resolve, reject) => {
         ChitChat.findOne({
@@ -134,7 +125,6 @@ module.exports = {
     getRandomChitChat,
     getAllChitChats,
     getChitChatById,
-    getUnhiddenChitChats,
     addChitChatSuggestion,
     addChitChatUnhidden,
     editChitChat,
