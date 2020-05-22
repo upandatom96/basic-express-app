@@ -3,6 +3,7 @@ const chitChatController = express.Router();
 const chitChatManager = require('./chit-chat.manager');
 
 const authUtil = require('../utilities/auth.util');
+const mailUtil = require('../utilities/mailer.util');
 
 chitChatController.get('/random', (req, res) => {
     chitChatManager.getRandomChitChat()
@@ -41,6 +42,7 @@ chitChatController.post('/', (req, res) => {
     const chitChat = req.body;
     chitChatManager.addChitChatSuggestion(chitChat)
         .then((response) => {
+            mailUtil.sendDefaultEmail("ChitChat Suggestion", "Question: " + chitChat.question);
             res.send(response);
         })
         .catch((err) => {
