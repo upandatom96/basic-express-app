@@ -3,14 +3,15 @@ require('./ChitChat.model');
 const ChitChat = mongoose.model('chit-chat');
 
 const boolUtil = require('../utilities/bool.util');
+const randomUtil = require('../utilities/random.util');
 
 function getRandomChitChat() {
     return new Promise((resolve, reject) => {
-        // TODO actually get random document
         ChitChat
-            .findOne({hidden: false})
-            .then((chitChat) => {
-                resolve(chitChat);
+            .find({hidden: false})
+            .then((chitChats) => {
+                const selectedChat = randomUtil.pickRandom(chitChats);
+                resolve(selectedChat);
             });
     });
 }
