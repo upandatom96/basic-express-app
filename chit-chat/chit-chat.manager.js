@@ -25,6 +25,23 @@ function getUnhiddenChitChats() {
     });
 }
 
+function getChitChatById(id) {
+    return new Promise((resolve, reject) => {
+        ChitChat.findOne({
+            _id: id
+        })
+            .then((chitChat) => {
+                if (chitChat) {
+                    resolve(chitChat);
+                } else {
+                    reject({
+                        message: "Failed to find chit chat"
+                    });
+                }
+            });
+    });
+}
+
 function getAllChitChats() {
     return new Promise((resolve, reject) => {
         ChitChat.find({})
@@ -116,6 +133,7 @@ function invalidChitChat(chitChat) {
 module.exports = {
     getRandomChitChat,
     getAllChitChats,
+    getChitChatById,
     getUnhiddenChitChats,
     addChitChatSuggestion,
     addChitChatUnhidden,

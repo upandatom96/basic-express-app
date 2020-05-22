@@ -16,6 +16,18 @@ chitChatController.get('/random', (req, res) => {
         });
 });
 
+chitChatController.get('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
+    const id = req.params.id;
+    chitChatManager.getChitChatById(id)
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 chitChatController.get('/', (req, res) => {
     chitChatManager.getUnhiddenChitChats()
         .then((response) => {
