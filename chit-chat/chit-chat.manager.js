@@ -54,6 +54,7 @@ function addChitChatSuggestion(chitChat) {
         } else {
             new ChitChat({
                 question: chitChat.question,
+                credit: chitChat.credit,
                 hidden: true
             })
                 .save()
@@ -71,6 +72,7 @@ function addChitChatUnhidden(chitChat) {
         } else {
             new ChitChat({
                 question: chitChat.question,
+                credit: chitChat.credit,
                 hidden: false
             })
                 .save()
@@ -97,6 +99,7 @@ function editChitChat(chitChatUpdate) {
                         });
                     } else {
                         foundChitChat.question = chitChatUpdate.question;
+                        foundChitChat.credit = chitChatUpdate.credit;
                         foundChitChat.hidden = chitChatUpdate.hidden;
 
                         foundChitChat.save()

@@ -6,6 +6,10 @@ const ChitChatSchema = new Schema({
         type: String,
         required: true,
     },
+    credit: {
+        type: String,
+        required: false,
+    },
     hidden: {
         type: Boolean,
         default: true,
