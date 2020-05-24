@@ -6,7 +6,19 @@ const authUtil = require('../utilities/auth.util');
 const mailUtil = require('../utilities/mailer.util');
 
 chitChatController.get('/random', (req, res) => {
-    chitChatManager.getRandomChitChat()
+    chitChatManager.getRandomChitChat(null)
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
+chitChatController.get('/random/:previousId', (req, res) => {
+    const previousId = req.params.previousId;
+    chitChatManager.getRandomChitChat(previousId)
         .then((response) => {
             res.send(response);
         })

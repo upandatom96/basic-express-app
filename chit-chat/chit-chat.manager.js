@@ -5,11 +5,16 @@ const ChitChat = mongoose.model('chit-chat');
 const boolUtil = require('../utilities/bool.util');
 const randomUtil = require('../utilities/random.util');
 
-function getRandomChitChat() {
+function getRandomChitChat(previousId) {
     return new Promise((resolve, reject) => {
         ChitChat
             .find({hidden: false})
             .then((chitChats) => {
+                if (boolUtil.hasValue(previousId)) {
+                    chitChats = chitChats.filter((cc) => {
+                        return cc._id !== previousId;
+                    });
+                }
                 const selectedChat = randomUtil.pickRandom(chitChats);
                 resolve(selectedChat);
             });
