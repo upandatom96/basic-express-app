@@ -12,7 +12,7 @@ function getRandomChitChat(previousId) {
             .then((chitChats) => {
                 if (boolUtil.hasValue(previousId)) {
                     chitChats = chitChats.filter((cc) => {
-                        return cc._id !== previousId;
+                        return cc._id.toString() !== previousId.toString();
                     });
                 }
                 const selectedChat = randomUtil.pickRandom(chitChats);
