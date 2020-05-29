@@ -146,6 +146,11 @@ const CaseSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    logs: [
+        {
+            type: String
+        }
+    ],
 });
 
 mongoose.model('case', CaseSchema);

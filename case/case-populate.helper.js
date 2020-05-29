@@ -21,6 +21,7 @@ function cloneCase(myCase) {
         witnessName3: myCase.witnessName3,
         witnessName4: myCase.witnessName4,
         witnessName5: myCase.witnessName5,
+        logs: myCase.logs,
     };
 }
 
