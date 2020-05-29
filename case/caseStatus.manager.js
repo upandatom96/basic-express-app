@@ -14,7 +14,7 @@ const issueManager = require('../issue/issue.manager');
 const evidenceManager = require('../evidence/evidence.manager');
 const witnessManager = require('../witness/witness.manager');
 
-function makeCaseAutomatic() {
+function makeCase(caseOptions) {
     return new Promise((resolve, reject) => {
         Case.find({})
             .then((allCases) => {
@@ -28,7 +28,8 @@ function makeCaseAutomatic() {
                                             allCases,
                                             randomIssue,
                                             randomWitnesses,
-                                            randomEvidence
+                                            randomEvidence,
+                                            caseOptions
                                         );
                                         new Case(caseAttributes)
                                             .save()
@@ -255,7 +256,7 @@ function canLockRoles(myCase) {
 }
 
 module.exports = {
-    makeCaseAutomatic,
+    makeCase,
     lockRoles,
     startFreeTime,
     startOpeningArguments,

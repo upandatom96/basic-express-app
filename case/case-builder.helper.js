@@ -1,9 +1,11 @@
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
+const boolUtil = require('../utilities/bool.util');
 const caseConstants = require('./case.constants');
 
-function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvidence) {
-    const issueText = randomIssue.name;
+function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvidence, caseOptions) {
+    const selectedCustomIssue = boolUtil.hasValue(caseOptions.customIssue);
+    const issueText = selectedCustomIssue ? caseOptions.customIssue : randomIssue.name;
     const caseName = getUnusedCaseName(allCases);
     const witnessValues = getWitnessValues(randomWitnesses);
     const evidenceValues = getEvidenceValues(randomEvidence);

@@ -55,7 +55,8 @@ caseController.get('/:id', (req, res) => {
 });
 
 caseController.post('/', (req, res) => {
-    caseStatusManager.makeCaseAutomatic()
+    const caseOptions = req.body;
+    caseStatusManager.makeCase(caseOptions)
         .then((addedCase) => {
             res.send(addedCase);
         })
