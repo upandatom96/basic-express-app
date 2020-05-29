@@ -9,6 +9,7 @@ function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvide
     const caseName = getUnusedCaseName(allCases);
     const witnessValues = getWitnessValues(randomWitnesses);
     const evidenceValues = getEvidenceValues(randomEvidence);
+    const logs = [`The Case of the ${caseName} has opened, The Plaintiff claims that The Defendant ${issueText}`];
 
     return {
         name: caseName,
@@ -23,6 +24,7 @@ function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvide
         witnessPool5: caseConstants.WITNESS_POOL_5,
         plaintiffEvidencePool: caseConstants.PLAINTIFF_EVIDENCE_POOL,
         defendantEvidencePool: caseConstants.DEFENDANT_EVIDENCE_POOL,
+        logs: logs
     };
 }
 
