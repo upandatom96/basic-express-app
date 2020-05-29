@@ -8,7 +8,7 @@ const ApplicationSchema = new Schema({
   },
   link: {
     type: String,
-    required: true,
+    required: false,
   },
   tech: [
     {
