@@ -29,6 +29,9 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
+                        const role = isPlaintiff ? "Plaintiff" : "Defendant";
+                        const evidenceName = foundCase.evidenceValues[evidenceIndex];
+                        foundCase.logs.push(`Case Evidence Updated: ${role} revealed ${evidenceName}`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -63,6 +66,9 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
+                        const role = isPlaintiff ? "Plaintiff" : "Defendant";
+                        const evidenceName = foundCase.evidenceValues[evidenceIndex];
+                        foundCase.logs.push(`Case Evidence Updated: ${role} selected ${evidenceName}`);
 
                         foundCase.save()
                             .then((updatedCase) => {
