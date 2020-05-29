@@ -57,7 +57,6 @@ caseController.get('/:id', (req, res) => {
 caseController.post('/', (req, res) => {
     caseStatusManager.makeCaseAutomatic()
         .then((addedCase) => {
-            caseMessenger.handleAddedCase(addedCase);
             res.send(addedCase);
         })
         .catch((err) => {
@@ -184,6 +183,7 @@ caseController.put('/:id/startFreeTime', (req, res) => {
     const id = req.params.id;
     caseStatusManager.startFreeTime(id)
         .then((updatedCase) => {
+            caseMessenger.handleStartedCase(updatedCase);
             res.send(updatedCase);
         })
         .catch((err) => {
@@ -196,6 +196,7 @@ caseController.put('/:id/startOpeningArguments', (req, res) => {
     const id = req.params.id;
     caseStatusManager.startOpeningArguments(id)
         .then((updatedCase) => {
+            caseMessenger.handleStartedCase(updatedCase);
             res.send(updatedCase);
         })
         .catch((err) => {
