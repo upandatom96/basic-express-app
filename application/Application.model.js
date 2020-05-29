@@ -10,6 +10,19 @@ const ApplicationSchema = new Schema({
     type: String,
     required: true,
   },
+  tech: [
+    {
+      type: String
+    }
+  ],
+  githubLink: {
+    type: String,
+    required: false,
+  },
+  tagline: {
+    type: String,
+    required: false,
+  },
   description: {
     type: String,
     required: true,

@@ -36,13 +36,17 @@ function addApplication(application) {
       reject(errors);
     }
     else {
-      new Application({
+      const applicationOptions = {
         name: application.name,
         link: application.link,
+        tech: application.tech,
+        githubLink: application.githubLink,
+        tagline: application.tagline,
         description: application.description,
         icon: application.icon,
         status: application.status,
-      })
+      };
+      new Application(applicationOptions)
         .save()
         .then((resApp) => {
           resolve(resApp);
@@ -74,6 +78,9 @@ function editApplication(application) {
             foundApp.description = application.description;
             foundApp.icon = application.icon;
             foundApp.status = application.status;
+            foundApp.tech = application.tech;
+            foundApp.githubLink = application.githubLink;
+            foundApp.tagline = application.tagline;
 
             foundApp.save()
               .then((editApp) => {

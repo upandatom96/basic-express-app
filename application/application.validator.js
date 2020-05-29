@@ -21,6 +21,9 @@ function checkForGeneralApplicationErrors(application) {
   if (boolUtil.hasNoValue(application.name)) {
     errors.push({ text: 'Please add a name' });
   }
+  if (boolUtil.hasNoValue(application.tagline)) {
+    errors.push({ text: 'Please add a tagline' });
+  }
   if (boolUtil.hasNoValue(application.description)) {
     errors.push({ text: 'Please add a description' });
   }
