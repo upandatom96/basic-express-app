@@ -29,6 +29,8 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         });
                     } else {
                         witnessHelper.selectWitness(foundCase, witnessNumber, witnessIndex);
+                        const witnessCharacter = foundCase.witnessValues[witnessIndex];
+                        foundCase.logs.push(`Case Witnesses Updated: Witness #${witnessNumber} is ${witnessCharacter}`);
 
                         foundCase.save()
                             .then((updatedCase) => {
