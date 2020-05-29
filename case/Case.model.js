@@ -146,6 +146,10 @@ const CaseSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    version: {
+        type: Number,
+        default: 1,
+    },
     logs: [
         {
             type: String
