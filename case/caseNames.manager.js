@@ -22,7 +22,7 @@ function assignJudgeName(judgeName, caseId) {
                         });
                     } else {
                         foundCase.judgeName = judgeName;
-                        foundCase.logs.push(`Case Players Updated: Player ${judgeName} joined as The Judge`);
+                        foundCase.logs.push(`${judgeName} joined as The Judge`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -51,7 +51,7 @@ function removeJudgeName(caseId) {
                         });
                     } else {
                         foundCase.judgeName = null;
-                        foundCase.logs.push(`Case Players Updated: The Judge left`);
+                        foundCase.logs.push(`The Judge left`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -80,7 +80,7 @@ function assignPlaintiffName(plaintiffName, caseId) {
                         });
                     } else {
                         foundCase.plaintiffName = plaintiffName;
-                        foundCase.logs.push(`Case Players Updated: Player ${plaintiffName} joined as The Plaintiff`);
+                        foundCase.logs.push(`${plaintiffName} joined as The Plaintiff`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -109,7 +109,7 @@ function removePlaintiffName(caseId) {
                         });
                     } else {
                         foundCase.plaintiffName = null;
-                        foundCase.logs.push(`Case Players Updated: The Plaintiff left`);
+                        foundCase.logs.push(`The Plaintiff left`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -138,7 +138,7 @@ function assignDefendantName(defendantName, caseId) {
                         });
                     } else {
                         foundCase.defendantName = defendantName;
-                        foundCase.logs.push(`Case Players Updated: Player ${defendantName} joined as The Defendant`);
+                        foundCase.logs.push(`${defendantName} joined as The Defendant`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -167,7 +167,7 @@ function removeDefendantName(caseId) {
                         });
                     } else {
                         foundCase.defendantName = null;
-                        foundCase.logs.push(`Case Players Updated: The Defendant left`);
+                        foundCase.logs.push(`The Defendant left`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -200,7 +200,7 @@ function addWitnessName(witnessName, caseId, witnessNumber) {
                         });
                     } else {
                         witnessHelper.addWitness(foundCase, witnessName, witnessNumber);
-                        foundCase.logs.push(`Case Players Updated: Player ${witnessName} joined as Witness #${witnessNumber}`);
+                        foundCase.logs.push(`${witnessName} joined as Witness #${witnessNumber}`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -233,7 +233,7 @@ function removeWitnessName(caseId, witnessNumber) {
                         });
                     } else {
                         witnessHelper.removeWitness(foundCase, witnessNumber);
-                        foundCase.logs.push(`Case Players Updated: Witness #${witnessNumber} left`);
+                        foundCase.logs.push(`Witness #${witnessNumber} left`);
 
                         foundCase.save()
                             .then((updatedCase) => {

@@ -30,7 +30,19 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                     } else {
                         witnessHelper.selectWitness(foundCase, witnessNumber, witnessIndex);
                         const witnessCharacter = foundCase.witnessValues[witnessIndex];
-                        foundCase.logs.push(`Case Witnesses Updated: Witness #${witnessNumber} is ${witnessCharacter}`);
+                        let witnessName;
+                        if (witnessNumber === 1) {
+                            witnessName = foundCase.witnessName1;
+                        } else if (witnessNumber === 2) {
+                            witnessName = foundCase.witnessName2;
+                        } else if (witnessNumber === 3) {
+                            witnessName = foundCase.witnessName3;
+                        } else if (witnessNumber === 4) {
+                            witnessName = foundCase.witnessName4;
+                        } else if (witnessNumber === 5) {
+                            witnessName = foundCase.witnessName5;
+                        }
+                        foundCase.logs.push(`Witness #${witnessNumber} (${witnessName}) is ${witnessCharacter}`);
 
                         foundCase.save()
                             .then((updatedCase) => {

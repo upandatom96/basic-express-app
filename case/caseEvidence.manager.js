@@ -29,9 +29,9 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
-                        const role = isPlaintiff ? "Plaintiff" : "Defendant";
+                        const role = isPlaintiff ? `Plaintiff (${foundCase.plaintiffName})` : `Defendant (${foundCase.defendantName})`;
                         const evidenceName = foundCase.evidenceValues[evidenceIndex];
-                        foundCase.logs.push(`Case Evidence Updated: ${role} revealed ${evidenceName}`);
+                        foundCase.logs.push(`The ${role} presented ${evidenceName} as evidence`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -66,9 +66,8 @@ function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
-                        const role = isPlaintiff ? "Plaintiff" : "Defendant";
-                        const evidenceName = foundCase.evidenceValues[evidenceIndex];
-                        foundCase.logs.push(`Case Evidence Updated: ${role} selected ${evidenceName}`);
+                        const role = isPlaintiff ? `Plaintiff (${foundCase.plaintiffName})` : `Defendant (${foundCase.defendantName})`;
+                        foundCase.logs.push(`The ${role} selected evidence item #${evidenceIndex}`);
 
                         foundCase.save()
                             .then((updatedCase) => {
