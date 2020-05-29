@@ -61,6 +61,7 @@ function lockRoles(caseId) {
                     if (foundCase && canLockRoles(foundCase)) {
                         foundCase.status = caseConstants.MAKE_SELECTIONS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
+                        foundCase.logs.push("Roles locked");
 
                         foundCase.save()
                             .then((updatedCase) => {
