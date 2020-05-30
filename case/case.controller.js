@@ -278,32 +278,6 @@ caseController.put('/:caseId/selectWitness/:witnessNumber/:witnessIndex', (req, 
         });
 });
 
-caseController.put('/:caseId/selectEvidence/plaintiff/:evidenceId', (req, res) => {
-    const caseId = req.params.caseId;
-    const evidenceId = Number(req.params.evidenceId);
-    caseEvidenceManager.selectEvidence(caseId, evidenceId, true)
-        .then((updatedCase) => {
-            res.send(updatedCase);
-        })
-        .catch((err) => {
-            res.statusCode = 500;
-            res.send(err);
-        });
-});
-
-caseController.put('/:caseId/selectEvidence/defendant/:evidenceId', (req, res) => {
-    const caseId = req.params.caseId;
-    const evidenceId = Number(req.params.evidenceId);
-    caseEvidenceManager.selectEvidence(caseId, evidenceId, false)
-        .then((updatedCase) => {
-            res.send(updatedCase);
-        })
-        .catch((err) => {
-            res.statusCode = 500;
-            res.send(err);
-        });
-});
-
 caseController.put('/:caseId/revealEvidence/plaintiff/:evidenceId', (req, res) => {
     const caseId = req.params.caseId;
     const evidenceId = Number(req.params.evidenceId);

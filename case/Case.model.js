@@ -77,22 +77,12 @@ const CaseSchema = new Schema({
             type: Number
         }
     ],
-    plaintiffEvidenceSelected: [
-        {
-            type: Number
-        }
-    ],
     plaintiffEvidenceCourt: [
         {
             type: Number
         }
     ],
     defendantEvidencePool: [
-        {
-            type: Number
-        }
-    ],
-    defendantEvidenceSelected: [
         {
             type: Number
         }

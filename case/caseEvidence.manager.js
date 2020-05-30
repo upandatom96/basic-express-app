@@ -43,42 +43,6 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
     });
 }
 
-function selectEvidence(caseId, evidenceIndex, isPlaintiff) {
-    return new Promise((resolve, reject) => {
-        const hasCaseId = boolUtil.hasValue(caseId);
-        const hasEvidenceIndex = boolUtil.hasValue(evidenceIndex);
-        if (!hasCaseId || !hasEvidenceIndex) {
-            reject("Case id and evidence index required.");
-        } else {
-            Case.findOne({_id: caseId})
-                .then((foundCase) => {
-                    if (!foundCase) {
-                        reject({
-                            message: `Failed to find case`
-                        });
-                    } else if (!canSelectEvidence(foundCase, isPlaintiff)) {
-                        reject({
-                            message: `CANNOT SELECT EVIDENCE`
-                        });
-                    } else if (!evidenceHelper.isEvidenceSelectable(foundCase, isPlaintiff, evidenceIndex)) {
-                        reject({
-                            message: `EVIDENCE NOT VALID`
-                        });
-                    } else {
-                        evidenceHelper.selectEvidence(foundCase, isPlaintiff, evidenceIndex);
-                        const role = isPlaintiff ? `Plaintiff (${foundCase.plaintiffName})` : `Defendant (${foundCase.defendantName})`;
-                        foundCase.logs.push(`The ${role} selected evidence item #${evidenceIndex}`);
-
-                        foundCase.save()
-                            .then((updatedCase) => {
-                                resolve(updatedCase);
-                            });
-                    }
-                });
-        }
-    });
-}
-
 function canRevealEvidence(myCase, isPlaintiff) {
     const caseInProgress = statusHelper.isInProgress(myCase);
     const roleHasEvidenceLeft = !roleRevealedAll(myCase, isPlaintiff);
@@ -93,21 +57,6 @@ function roleRevealedAll(myCase, isPlaintiff) {
     }
 }
 
-function canSelectEvidence(myCase, isPlaintiff) {
-    const caseMakingSelections = statusHelper.isMakeSelections(myCase);
-    const roleHasEvidenceLeft = !roleSelectedAll(myCase, isPlaintiff);
-    return caseMakingSelections && roleHasEvidenceLeft;
-}
-
-function roleSelectedAll(myCase, isPlaintiff) {
-    if (isPlaintiff) {
-        return evidenceHelper.isAllPlaintiffEvidenceSelected(myCase);
-    } else {
-        return evidenceHelper.isAllDefendantEvidenceSelected(myCase);
-    }
-}
-
 module.exports = {
-    revealEvidence,
-    selectEvidence
+    revealEvidence
 }

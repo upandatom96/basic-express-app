@@ -2,14 +2,12 @@ const generalUtil = require('../utilities/general.util');
 
 function populatePlaintiffEvidence(myCase, fullCase) {
     fullCase.plaintiffEvidencePool = generalUtil.translateIndicesToValues(myCase.plaintiffEvidencePool, myCase.evidenceValues);
-    fullCase.plaintiffEvidenceSelected = generalUtil.translateIndicesToValues(myCase.plaintiffEvidenceSelected, myCase.evidenceValues);
     fullCase.plaintiffEvidenceCourt = generalUtil.translateIndicesToValues(myCase.plaintiffEvidenceCourt, myCase.evidenceValues);
     return fullCase;
 }
 
 function populateDefendantEvidence(myCase, fullCase) {
     fullCase.defendantEvidencePool = generalUtil.translateIndicesToValues(myCase.defendantEvidencePool, myCase.evidenceValues);
-    fullCase.defendantEvidenceSelected = generalUtil.translateIndicesToValues(myCase.defendantEvidenceSelected, myCase.evidenceValues);
     fullCase.defendantEvidenceCourt = generalUtil.translateIndicesToValues(myCase.defendantEvidenceCourt, myCase.evidenceValues);
     return fullCase;
 }

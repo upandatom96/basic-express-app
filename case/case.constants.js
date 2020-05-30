@@ -8,7 +8,7 @@ const VERDICT_SELECTION = 6;
 const CASE_CLOSED = 7;
 
 const WITNESS_COUNT = 15;
-const EVIDENCE_COUNT = 30;
+const EVIDENCE_COUNT = 20;
 
 const WITNESS_POOL_1 = [0, 1, 2];
 const WITNESS_POOL_2 = [3, 4, 5];
@@ -16,8 +16,8 @@ const WITNESS_POOL_3 = [6, 7, 8];
 const WITNESS_POOL_4 = [9, 10, 11];
 const WITNESS_POOL_5 = [12, 13, 14];
 
-const PLAINTIFF_EVIDENCE_POOL = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const DEFENDANT_EVIDENCE_POOL = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+const PLAINTIFF_EVIDENCE_POOL = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const DEFENDANT_EVIDENCE_POOL = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 module.exports = {
     WITNESS_POOL_1,
