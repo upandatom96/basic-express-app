@@ -9,7 +9,7 @@ function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvide
     const caseName = getUnusedCaseName(allCases);
     const witnessValues = getWitnessValues(randomWitnesses);
     const evidenceValues = getEvidenceValues(randomEvidence);
-    const logs = [`The Case of the ${caseName} has opened, The Plaintiff claims that The Defendant ${issueText}`];
+    const logs = [`The Case of the ${caseName} has opened.`, `The Plaintiff claims that The Defendant ${issueText}`];
 
     return {
         name: caseName,
