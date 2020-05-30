@@ -66,6 +66,9 @@ function addStatusAttributes(myCase) {
 }
 
 function addEvidenceAttributes(myCase) {
+    myCase.isStartingPlaintiffEvidenceRevealed = evidenceHelper.isStartingPlaintiffEvidenceRevealed(myCase);
+    myCase.isStartingDefendantEvidenceRevealed = evidenceHelper.isStartingDefendantEvidenceRevealed(myCase);
+    myCase.isStartingEvidenceRevealed = evidenceHelper.isStartingEvidenceRevealed(myCase);
     myCase.isAllPlaintiffEvidenceRevealed = evidenceHelper.isAllPlaintiffEvidenceRevealed(myCase);
     myCase.isAllDefendantEvidenceRevealed = evidenceHelper.isAllDefendantEvidenceRevealed(myCase);
     myCase.isAllEvidenceRevealed = evidenceHelper.isAllEvidenceRevealed(myCase);
