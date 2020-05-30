@@ -4,6 +4,20 @@ function isAllEvidenceRevealed(myCase) {
     return revealedAllPE && revealedAllDE;
 }
 
+function isStartingEvidenceRevealed(myCase) {
+    const revealedStartingPE = isStartingPlaintiffEvidenceRevealed(myCase);
+    const revealedStartingDE = isStartingDefendantEvidenceRevealed(myCase);
+    return revealedStartingPE && revealedStartingDE;
+}
+
+function isStartingPlaintiffEvidenceRevealed(myCase) {
+    return myCase.plaintiffEvidenceCourt.length >= 1;
+}
+
+function isStartingDefendantEvidenceRevealed(myCase) {
+    return myCase.defendantEvidenceCourt.length >= 1;
+}
+
 function isAllPlaintiffEvidenceRevealed(myCase) {
     return myCase.plaintiffEvidenceCourt.length >= 5;
 }
@@ -35,6 +49,7 @@ function revealEvidence(foundCase, isPlaintiff, evidenceIndex) {
 }
 
 module.exports = {
+    isStartingEvidenceRevealed,
     isAllPlaintiffEvidenceRevealed,
     isAllDefendantEvidenceRevealed,
     isAllEvidenceRevealed,

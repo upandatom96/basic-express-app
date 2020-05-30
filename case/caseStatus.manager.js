@@ -243,9 +243,10 @@ function canMakeVerdict(myCase) {
 }
 
 function canStartTrial(myCase) {
+    const startingEvidenceRevealed = evidenceHelper.isStartingEvidenceRevealed(myCase);
     const witnessesSelected = witnessHelper.isAllWitnessesSelected(myCase);
     const makingSelections = statusHelper.isMakeSelections(myCase);
-    return witnessesSelected && makingSelections;
+    return startingEvidenceRevealed && witnessesSelected && makingSelections;
 }
 
 function canLockRoles(myCase) {
