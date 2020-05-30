@@ -26,7 +26,7 @@ function isAllDefendantEvidenceRevealed(myCase) {
     return myCase.defendantEvidenceCourt.length >= 5;
 }
 
-function isEvidenceRevealable(foundCase, isPlaintiff, evidenceIndex) {
+function isEvidenceInPool(foundCase, isPlaintiff, evidenceIndex) {
     if (isPlaintiff) {
         return foundCase.plaintiffEvidencePool.includes(evidenceIndex);
     } else {
@@ -48,11 +48,28 @@ function revealEvidence(foundCase, isPlaintiff, evidenceIndex) {
     }
 }
 
+function pickStartingEvidence(foundCase, isPlaintiff, evidenceIndex) {
+    if (isPlaintiff) {
+        foundCase.plaintiffEvidenceCourt.push(evidenceIndex);
+        foundCase.defendantEvidencePool = foundCase.defendantEvidencePool.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    } else {
+        foundCase.defendantEvidenceCourt.push(evidenceIndex);
+        foundCase.plaintiffEvidencePool = foundCase.plaintiffEvidencePool.filter((evidence) => {
+            return evidence !== evidenceIndex;
+        });
+    }
+}
+
 module.exports = {
     isStartingEvidenceRevealed,
     isAllPlaintiffEvidenceRevealed,
     isAllDefendantEvidenceRevealed,
+    isStartingPlaintiffEvidenceRevealed,
+    isStartingDefendantEvidenceRevealed,
+    isEvidenceInPool,
     isAllEvidenceRevealed,
-    isEvidenceRevealable,
-    revealEvidence
+    revealEvidence,
+    pickStartingEvidence
 }

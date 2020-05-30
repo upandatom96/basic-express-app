@@ -304,6 +304,32 @@ caseController.put('/:caseId/revealEvidence/defendant/:evidenceId', (req, res) =
         });
 });
 
+caseController.put('/:caseId/pickStartingEvidence/plaintiff/:evidenceId', (req, res) => {
+    const caseId = req.params.caseId;
+    const evidenceId = Number(req.params.evidenceId);
+    caseEvidenceManager.pickStartingEvidence(caseId, evidenceId, true)
+        .then((updatedCase) => {
+            res.send(updatedCase);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
+caseController.put('/:caseId/pickStartingEvidence/defendant/:evidenceId', (req, res) => {
+    const caseId = req.params.caseId;
+    const evidenceId = Number(req.params.evidenceId);
+    caseEvidenceManager.pickStartingEvidence(caseId, evidenceId, false)
+        .then((updatedCase) => {
+            res.send(updatedCase);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 caseController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, (req, res) => {
     const id = req.params.id;
     caseManager.deleteOneCase(id)
