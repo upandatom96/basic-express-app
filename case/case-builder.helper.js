@@ -24,7 +24,8 @@ function buildCaseAttributes(allCases, randomIssue, randomWitnesses, randomEvide
         witnessPool5: caseConstants.WITNESS_POOL_5,
         plaintiffEvidencePool: caseConstants.PLAINTIFF_EVIDENCE_POOL,
         defendantEvidencePool: caseConstants.DEFENDANT_EVIDENCE_POOL,
-        logs: logs
+        logs: logs,
+        isCustom: selectedCustomIssue
     };
 }
 

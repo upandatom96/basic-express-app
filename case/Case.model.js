@@ -141,6 +141,10 @@ const CaseSchema = new Schema({
             type: String
         }
     ],
+    isCustom: {
+        type: Boolean,
+        default: false
+    },
 });
 
 mongoose.model('case', CaseSchema);
