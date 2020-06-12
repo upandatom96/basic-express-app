@@ -22,7 +22,7 @@ function assignJudgeName(judgeName, caseId) {
                         });
                     } else {
                         foundCase.judgeName = judgeName;
-                        foundCase.logs.push(`${judgeName} joined as The Judge`);
+                        foundCase.logs.push(`The Judge joined`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -80,7 +80,7 @@ function assignPlaintiffName(plaintiffName, caseId) {
                         });
                     } else {
                         foundCase.plaintiffName = plaintiffName;
-                        foundCase.logs.push(`${plaintiffName} joined as The Plaintiff`);
+                        foundCase.logs.push(`The Plaintiff joined`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -138,7 +138,7 @@ function assignDefendantName(defendantName, caseId) {
                         });
                     } else {
                         foundCase.defendantName = defendantName;
-                        foundCase.logs.push(`${defendantName} joined as The Defendant`);
+                        foundCase.logs.push(`The Defendant joined`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -200,7 +200,7 @@ function addWitnessName(witnessName, caseId, witnessNumber) {
                         });
                     } else {
                         witnessHelper.addWitness(foundCase, witnessName, witnessNumber);
-                        foundCase.logs.push(`${witnessName} joined as Witness #${witnessNumber}`);
+                        foundCase.logs.push(`Witness #${witnessNumber} joined`);
 
                         foundCase.save()
                             .then((updatedCase) => {

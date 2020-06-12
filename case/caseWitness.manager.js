@@ -42,7 +42,7 @@ function selectWitness(caseId, witnessIndex, witnessNumber) {
                         } else if (witnessNumber === 5) {
                             witnessName = foundCase.witnessName5;
                         }
-                        foundCase.logs.push(`Witness #${witnessNumber} (${witnessName}) is ${witnessCharacter}`);
+                        foundCase.logs.push(`Witness #${witnessNumber} is ${witnessCharacter}`);
 
                         foundCase.save()
                             .then((updatedCase) => {

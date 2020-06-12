@@ -62,7 +62,7 @@ function lockRoles(caseId) {
                     if (foundCase && canLockRoles(foundCase)) {
                         foundCase.status = caseConstants.MAKE_SELECTIONS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has locked the roles.`);
+                        foundCase.logs.push(`The Judge has locked the roles.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -88,7 +88,7 @@ function startFreeTime(caseId) {
                     if (foundCase && canStartTrial(foundCase)) {
                         foundCase.status = caseConstants.FREE_TIME;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has started the trial.`);
+                        foundCase.logs.push(`The Judge has started the trial.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -114,7 +114,7 @@ function startOpeningArguments(caseId) {
                     if (foundCase && canStartTrial(foundCase)) {
                         foundCase.status = caseConstants.OPENING_ARGUMENTS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has started opening arguments.`);
+                        foundCase.logs.push(`The Judge has started opening arguments.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -140,7 +140,7 @@ function startCrossfire(caseId) {
                     if (foundCase && statusHelper.isOpeningArguments(foundCase)) {
                         foundCase.status = caseConstants.CROSSFIRE;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has started crossfire debate.`);
+                        foundCase.logs.push(`The Judge has started crossfire debate.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -166,7 +166,7 @@ function startClosingArguments(caseId) {
                     if (foundCase && statusHelper.isCrossfire(foundCase)) {
                         foundCase.status = caseConstants.CLOSING_ARGUMENTS;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has started closing arguments.`);
+                        foundCase.logs.push(`The Judge has started closing arguments.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -192,7 +192,7 @@ function startVerdictSelection(caseId) {
                     if (foundCase && canMakeVerdict(foundCase)) {
                         foundCase.status = caseConstants.VERDICT_SELECTION;
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) is reviewing the case before their final ruling.`);
+                        foundCase.logs.push(`The Judge is reviewing the case before their final ruling.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
@@ -221,7 +221,7 @@ function makeVerdict(caseId, isDefendantGuilty) {
                         foundCase.closedDate = new Date().toISOString();
                         foundCase.lastStatusUpdateDate = new Date().toISOString();
                         const verdict = isDefendantGuilty ? "GUILTY" : "NOT GUILTY";
-                        foundCase.logs.push(`The Judge (${foundCase.judgeName}) has found the defendant ${verdict}.`);
+                        foundCase.logs.push(`The Judge has found the defendant ${verdict}.`);
 
                         foundCase.save()
                             .then((updatedCase) => {
