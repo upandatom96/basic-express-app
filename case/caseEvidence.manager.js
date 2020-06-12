@@ -29,7 +29,7 @@ function revealEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.revealEvidence(foundCase, isPlaintiff, evidenceIndex);
-                        const role = isPlaintiff ? `Plaintiff (${foundCase.plaintiffName})` : `Defendant (${foundCase.defendantName})`;
+                        const role = isPlaintiff ? `Plaintiff` : `Defendant`;
                         const evidenceName = foundCase.evidenceValues[evidenceIndex];
                         foundCase.logs.push(`The ${role} presented ${evidenceName} as evidence`);
 
@@ -66,7 +66,7 @@ function pickStartingEvidence(caseId, evidenceIndex, isPlaintiff) {
                         });
                     } else {
                         evidenceHelper.pickStartingEvidence(foundCase, isPlaintiff, evidenceIndex);
-                        const role = isPlaintiff ? `Plaintiff (${foundCase.plaintiffName})` : `Defendant (${foundCase.defendantName})`;
+                        const role = isPlaintiff ? `Plaintiff` : `Defendant`;
                         const evidenceName = foundCase.evidenceValues[evidenceIndex];
                         foundCase.logs.push(`The ${role} must use ${evidenceName} as evidence`);
 
