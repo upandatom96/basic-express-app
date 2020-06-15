@@ -1,14 +1,13 @@
 const Twit = require('twit');
 const {test} = require("../config/env.config");
-const {twitCredentials} = require("../config/twit.config");
 
 let twitConnection;
 
-function makeTweet(message) {
+function makeTweet(message, twitterCredentials) {
     if (test === "true") {
         return;
     }
-    twitConnection = new Twit(twitCredentials);
+    twitConnection = new Twit(twitterCredentials);
     twitConnection.get('account/verify_credentials', {
         include_entities: false,
         skip_status: true,

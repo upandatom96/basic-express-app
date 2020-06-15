@@ -1,5 +1,6 @@
 const { twitConsumerKey, twitConsumerSecret, twitAccessToken, twitAccessTokenSecret } = require('../config/env.config');
-const twitCredentials = {
+
+const aotiCredentials = {
   consumer_key: twitConsumerKey,
   consumer_secret: twitConsumerSecret,
   access_token: twitAccessToken,
@@ -7,5 +8,5 @@ const twitCredentials = {
 };
 
 module.exports = {
-  twitCredentials: twitCredentials
+  aotiCredentials
 };
