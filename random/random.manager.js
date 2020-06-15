@@ -1,4 +1,5 @@
 const words = require("./words");
+const storyPieces = require("./story-pieces");
 const randomUtil = require("../utilities/random.util");
 
 function getOneNoun() {
@@ -44,13 +45,18 @@ function getNewPhrase(oldPhrases) {
   return phrase;
 }
 
+function pickStoryPrefix() {
+  return randomUtil.pickRandom(storyPieces.storyPrefixes);
+}
+
 module.exports = {
   getOneNoun,
   getOneAdjective,
   getAllWords,
   getPhrase,
   getNewPhrase,
-  getWordCount
+  getWordCount,
+  pickStoryPrefix
 }
 
 function pickNoun() {

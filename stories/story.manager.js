@@ -1,5 +1,9 @@
+const randomManager = require("../random/random.manager");
+const stringUtil = require('../utilities/string.util');
+
 function getRandomStory() {
-    return "The Case of the XY";
+    const phrase = randomManager.getPhrase();
+    return randomManager.pickStoryPrefix() + stringUtil.toTitleCase(phrase);
 }
 
 module.exports = {
