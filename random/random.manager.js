@@ -49,6 +49,14 @@ function pickStoryPrefix() {
   return randomUtil.pickRandom(storyPieces.storyPrefixes);
 }
 
+function pickNoun() {
+  return randomUtil.pickRandom(words.nouns);
+}
+
+function pickAdjective() {
+  return randomUtil.pickRandom(words.adjectives);
+}
+
 module.exports = {
   getOneNoun,
   getOneAdjective,
@@ -56,13 +64,7 @@ module.exports = {
   getPhrase,
   getNewPhrase,
   getWordCount,
-  pickStoryPrefix
-}
-
-function pickNoun() {
-  return randomUtil.pickRandom(words.nouns);
-}
-
-function pickAdjective() {
-  return randomUtil.pickRandom(words.adjectives);
+  pickStoryPrefix,
+  pickNoun,
+  pickAdjective
 }
