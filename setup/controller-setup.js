@@ -18,6 +18,9 @@ function setupControllers(app) {
   const chitChatController = require('../chit-chat/chit-chit.controller');
   app.use('/chitChat', chitChatController);
 
+  const storyController = require('../stories/stories.controller');
+  app.use('/story', storyController);
+
   const evidenceController = require('../evidence/evidence.controller');
   app.use('/evidence', evidenceController);
 
