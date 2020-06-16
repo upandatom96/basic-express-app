@@ -9,12 +9,12 @@ const {
 let twitConnection;
 
 function makeStoryTweet(message) {
-    makeTweet(message, storyCredentials);
+    console.log(message);
+    // makeTweet(message, storyCredentials);
 }
 
 function makeAotiTweet(message) {
-    console.log(message);
-    // makeTweet(message, aotiCredentials);
+    makeTweet(message, aotiCredentials);
 }
 
 function makeOrderTweet(message) {
