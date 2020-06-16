@@ -1,7 +1,32 @@
 const Twit = require('twit');
 const {test} = require("../config/env.config");
+const {
+    aotiCredentials,
+    storyCredentials,
+    orderCredentials
+} = require("../config/twit.config");
 
 let twitConnection;
+
+function makeStoryTweet(message) {
+    makeTweet(message, storyCredentials);
+}
+
+function makeAotiTweet(message) {
+    console.log(message);
+    // makeTweet(message, aotiCredentials);
+}
+
+function makeOrderTweet(message) {
+    console.log(message);
+    // makeTweet(message, orderCredentials);
+}
+
+module.exports = {
+    makeAotiTweet,
+    makeStoryTweet,
+    makeOrderTweet
+}
 
 function makeTweet(message, twitterCredentials) {
     if (test === "true") {
@@ -13,10 +38,6 @@ function makeTweet(message, twitterCredentials) {
         skip_status: true,
         include_email: false
     }, tweetAfterAuth(message))
-}
-
-module.exports = {
-    makeTweet
 }
 
 function tweetAfterAuth(message) {

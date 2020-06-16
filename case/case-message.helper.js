@@ -1,6 +1,5 @@
 const mailer = require('../utilities/mailer.util');
 const tweetManager = require('../tweet/tweet.manager');
-const {aotiCredentials} = require("../config/twit.config");
 const logManager = require('../log/log.manager');
 
 function handleStartedCase(startedCase) {
@@ -25,7 +24,7 @@ function handleClosedCase(closedCase) {
     logManager.addLog(closingMessage);
     mailer.sendDefaultEmail("CASE CLOSED", closingMessage);
     if (!closedCase.isCustom) {
-        tweetManager.makeTweet(closingMessage, aotiCredentials);
+        tweetManager.makeAotiTweet(closingMessage);
     }
 }
 
