@@ -6,6 +6,14 @@ let mongoCluster;
 let secret;
 let sendgridApiKey;
 let test;
+let storyConsumerKey;
+let storyConsumerSecret;
+let storyAccessToken;
+let storyAccessTokenSecret;
+let orderConsumerKey;
+let orderConsumerSecret;
+let orderAccessToken;
+let orderAccessTokenSecret;
 
 const port = process.env.PORT || 5000;
 
@@ -15,10 +23,22 @@ if (runningProd) {
   mongoCluster = process.env.MONGO_CLUSTER;
   secret = process.env.SECRET;
   sendgridApiKey = process.env.SENDGRID_API_KEY;
+
   twitConsumerKey = process.env.TWIT_CONSUMER_KEY;
   twitConsumerSecret = process.env.TWIT_CONSUMER_SECRET;
   twitAccessToken = process.env.TWIT_ACCESS_TOKEN;
   twitAccessTokenSecret = process.env.TWIT_ACCESS_TOKEN_SECRET;
+
+  storyConsumerKey = process.env.STORY_CONSUMER_KEY;
+  storyConsumerSecret = process.env.STORY_CONSUMER_SECRET;
+  storyAccessToken = process.env.STORY_ACCESS_TOKEN;
+  storyAccessTokenSecret = process.env.STORY_ACCESS_TOKEN_SECRET;
+
+  orderConsumerKey = process.env.ORDER_CONSUMER_KEY;
+  orderConsumerSecret = process.env.ORDER_CONSUMER_SECRET;
+  orderAccessToken = process.env.ORDER_ACCESS_TOKEN;
+  orderAccessTokenSecret = process.env.ORDER_ACCESS_TOKEN_SECRET;
+
   test = process.env.TEST;
 } else {
   try {
@@ -32,6 +52,14 @@ if (runningProd) {
       TWIT_CONSUMER_SECRET,
       TWIT_ACCESS_TOKEN,
       TWIT_ACCESS_TOKEN_SECRET,
+      STORY_CONSUMER_KEY,
+      STORY_CONSUMER_SECRET,
+      STORY_ACCESS_TOKEN,
+      STORY_ACCESS_TOKEN_SECRET,
+      ORDER_CONSUMER_KEY,
+      ORDER_CONSUMER_SECRET,
+      ORDER_ACCESS_TOKEN,
+      ORDER_ACCESS_TOKEN_SECRET,
       TEST
     } = require("../local.env");
 
@@ -40,10 +68,21 @@ if (runningProd) {
     mongoCluster = MONGO_CLUSTER;
     secret = SECRET;
     sendgridApiKey = SENDGRID_API_KEY;
+
     twitConsumerKey = TWIT_CONSUMER_KEY;
     twitConsumerSecret = TWIT_CONSUMER_SECRET;
     twitAccessToken = TWIT_ACCESS_TOKEN;
     twitAccessTokenSecret = TWIT_ACCESS_TOKEN_SECRET;
+
+    storyConsumerKey = STORY_CONSUMER_KEY;
+    storyConsumerSecret = STORY_CONSUMER_SECRET;
+    storyAccessToken = STORY_ACCESS_TOKEN;
+    storyAccessTokenSecret = STORY_ACCESS_TOKEN_SECRET;
+
+    orderConsumerKey = ORDER_CONSUMER_KEY;
+    orderConsumerSecret = ORDER_CONSUMER_SECRET;
+    orderAccessToken = ORDER_ACCESS_TOKEN;
+    orderAccessTokenSecret = ORDER_ACCESS_TOKEN_SECRET;
     test = TEST;
   }
   catch (e) {
@@ -65,5 +104,13 @@ module.exports = {
   twitConsumerSecret: twitConsumerSecret,
   twitAccessToken: twitAccessToken,
   twitAccessTokenSecret: twitAccessTokenSecret,
+  storyConsumerKey,
+  storyConsumerSecret,
+  storyAccessToken,
+  storyAccessTokenSecret,
+  orderConsumerKey,
+  orderConsumerSecret,
+  orderAccessToken,
+  orderAccessTokenSecret,
   test: test
 };
