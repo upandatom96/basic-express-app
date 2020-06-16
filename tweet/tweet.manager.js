@@ -9,8 +9,7 @@ const {
 let twitConnection;
 
 function makeStoryTweet(message) {
-    console.log(message);
-    // makeTweet(message, storyCredentials);
+    makeTweet(message, storyCredentials);
 }
 
 function makeAotiTweet(message) {
@@ -18,8 +17,7 @@ function makeAotiTweet(message) {
 }
 
 function makeOrderTweet(message) {
-    console.log(message);
-    // makeTweet(message, orderCredentials);
+    makeTweet(message, orderCredentials);
 }
 
 module.exports = {
@@ -29,6 +27,7 @@ module.exports = {
 }
 
 function makeTweet(message, twitterCredentials) {
+    console.log("TWEET: " + message);
     if (test === "true") {
         return;
     }

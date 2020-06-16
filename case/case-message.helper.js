@@ -24,7 +24,7 @@ function handleClosedCase(closedCase) {
     logManager.addLog(closingMessage);
     mailer.sendDefaultEmail("CASE CLOSED", closingMessage);
     if (!closedCase.isCustom) {
-        tweetManager.makeAotiTweet(closingMessage);
+        tweetManager.makeOrderTweet(closingMessage);
     }
 }
 
