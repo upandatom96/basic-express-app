@@ -42,6 +42,15 @@ const storyPrefixes = [
     "Gone With the {N1}",
     "Indiana Jones: Raiders of the Lost {N1}",
     "The {N1} of Oz",
+    "The Lion, the Witch, and the {N1}",
+    "{N1} of the Flies",
+    "The {N1} of Dr. Caligari",
+    "{N1}-Man: Into the {N1}-Verse",
+    "{A1} Max: Fury Road",
+    "Snow White and the {A1} Dwarfs",
+    "E.T. The {A1}-Terrestrial",
+    "Call Me by Your {N1}",
+    "A {N1} Named Desire",
 ];
 
 module.exports = {
