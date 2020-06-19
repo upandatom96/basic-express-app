@@ -1,14 +1,15 @@
 const randomUtil = require('../utilities/random.util');
 
 const WEAPONS = [
-    "Weapon One",
-    "Weapon Two",
-    "Weapon Three",
-    "Weapon Four",
-    "Weapon Five",
-    "Weapon Six",
-    "Weapon Seven",
-    "Weapon Eight",
+    "Wrench",
+    "Candlestick",
+    "Knife",
+    "Pipe",
+    "Revolver",
+    "Rope",
+    "Anvil",
+    "Poison",
+    "Bear Trap",
 ];
 
 function selectWeapons(weaponCount) {
