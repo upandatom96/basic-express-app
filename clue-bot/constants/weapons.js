@@ -28,8 +28,22 @@ const WEAPONS = [
     "A Pen",
     "A Harpoon",
     "A Thorn from a Rose",
-    "A Crucifix",
     "A Bow & Arrow",
+    "A Crucifix",
+    "A Javelin",
+    "A Gauntlet",
+    "Brass Knuckles",
+    "A Sickle",
+    "A Hammer",
+    "A Crowbar",
+    "A Mace",
+    "Nunchucks",
+    "A Rock",
+    "A Throwing Dart",
+    "A Boomerang",
+    "A Crossbow",
+    "A Cat o' Nine Tails",
+    "A Musket",
 ];
 
 module.exports = {
