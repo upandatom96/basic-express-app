@@ -1,10 +1,18 @@
 function progressClue(clueBot) {
-//    1. if status = 0, THE CRIME
-//    2. if status = 1
-//     A. if > 0 cards left, THE INVESTIGATION
-//     B. if 0 cards left, THE REVEAL
-    clueBot.status = 1;
-    makeAnnouncement("Tweet");
+    if (clueBot.status === 0) {
+        clueBot.status = 1;
+        makeAnnouncement("THE CRIME");
+    } else if (clueBot.status === 1) {
+        if (clueBot.unDrawnClues.length === 0) {
+            clueBot.status = 2;
+            makeAnnouncement("THE REVEAL");
+        } else {
+            const nextClue = clueBot.unDrawnClues.shift();
+            clueBot.drawnClues.push(nextClue);
+            const part = clueBot.drawnClues.length;
+            makeAnnouncement(`THE INVESTIGATION (${part}/15)`);
+        }
+    }
     return clueBot;
 }
 
