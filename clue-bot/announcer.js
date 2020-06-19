@@ -1,5 +1,5 @@
 function makeFinalRevealAnnouncement(clueBot) {
-    makeAnnouncement(`It was ${clueBot.culprit} in the ${clueBot.scene} with the ${clueBot.weapon}!`);
+    makeAnnouncement(`THE END. ${clueBot.victim} was killed by ${clueBot.culprit} in the ${clueBot.scene} with the ${clueBot.weapon}!`);
 }
 
 function makeClueAnnouncement(clueBot, nextClue) {
