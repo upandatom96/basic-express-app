@@ -27,6 +27,11 @@ function generateClueBotDetails() {
     const allWeapons = weaponSelector.selectWeapons(6);
 
     const victimName = allCulprits.shift();
+
+    const culpritOptions = allCulprits;
+    const sceneOptions = allScenes;
+    const weaponOptions = allWeapons;
+
     const culpritName = allCulprits.shift();
     const sceneName = allScenes.shift();
     const weaponName = allWeapons.shift();
@@ -42,6 +47,9 @@ function generateClueBotDetails() {
         scene: sceneName,
         weapon: weaponName,
         unDrawnClues: unDrawnClues,
+        weaponOptions: weaponOptions,
+        sceneOptions: sceneOptions,
+        culpritOptions: culpritOptions,
     };
 }
 

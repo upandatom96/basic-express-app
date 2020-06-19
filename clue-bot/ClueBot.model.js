@@ -31,6 +31,21 @@ const ClueBotSchema = new Schema({
             type: String
         }
     ],
+    weaponOptions: [
+        {
+            type: String
+        }
+    ],
+    sceneOptions: [
+        {
+            type: String
+        }
+    ],
+    culpritOptions: [
+        {
+            type: String
+        }
+    ],
     date: {
         type: Date,
         default: Date.now
