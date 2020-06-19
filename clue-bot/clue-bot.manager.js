@@ -12,7 +12,10 @@ function checkMystery() {
             .find({
                 $or: [
                     {status: 0},
-                    {status: 1}
+                    {status: 1},
+                    {status: 2},
+                    {status: 3},
+                    {status: 4}
                 ]
             })
             .then((clueBot) => {
@@ -41,7 +44,10 @@ function progressMystery() {
             .findOne({
                 $or: [
                     {status: 0},
-                    {status: 1}
+                    {status: 1},
+                    {status: 2},
+                    {status: 3},
+                    {status: 4}
                 ]
             })
             .then((foundClueBot) => {
