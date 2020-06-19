@@ -56,6 +56,11 @@ const ClueBotSchema = new Schema({
             type: String
         }
     ],
+    announcements: [
+        {
+            type: String
+        }
+    ],
     date: {
         type: Date,
         default: Date.now

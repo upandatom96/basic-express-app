@@ -70,4 +70,5 @@ function makeAnnouncement(clueBot, part, announcement) {
     tweetManager.makeClueTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");
+    clueBot.announcements.push(fullAnnouncement);
 }
