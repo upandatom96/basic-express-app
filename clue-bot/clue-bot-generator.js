@@ -1,7 +1,7 @@
-import {SCENES} from "./constants/scenes";
-import {CULPRITS} from "./constants/culprits";
-import {WEAPONS} from "./constants/weapons";
-import {MANOR_NAMES, MANOR_TYPES, MYSTERY_SYNONYMS} from "./constants/title-pieces";
+const SCENE_CONSTANTS = require("./constants/scenes");
+const CULPRITS_CONSTANTS = require("./constants/culprits");
+const WEAPONS_CONSTANTS = require("./constants/weapons");
+const TITLE_CONSTANTS = require("./constants/title-pieces");
 
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
@@ -9,10 +9,10 @@ const randomUtil = require('../utilities/random.util');
 
 function makeRandomTitle() {
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    const name = randomUtil.pickRandom(MANOR_NAMES);
-    const type = randomUtil.pickRandom(MANOR_TYPES);
-    const mystery = randomUtil.pickRandom(MYSTERY_SYNONYMS);
-    return `The ${adjective} ${mystery} of ${name} ${type}`;
+    const name = randomUtil.pickRandom(TITLE_CONSTANTS.MANOR_NAMES);
+    const type = randomUtil.pickRandom(TITLE_CONSTANTS.MANOR_TYPES);
+    const mystery = randomUtil.pickRandom(TITLE_CONSTANTS.MYSTERY_SYNONYMS);
+    return `The ${adjective} ${mystery} at the ${name} ${type}`;
 }
 
 function pickNewTitle(previousTitles) {
@@ -28,7 +28,7 @@ function pickNewTitle(previousTitles) {
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
-    const combinedClues = allCaharacters.concat(allScenes).concat(allWeapons);
+    const combinedClues = allCharacters.concat(allScenes).concat(allWeapons);
     return randomUtil.shuffleArray(combinedClues);
 }
 
@@ -38,9 +38,9 @@ function generateClueBotDetails(pastClueBots) {
 
     console.log(`Generating ${title}...`);
 
-    const randomCulprits = randomUtil.drawNItems(CULPRITS, 13);
-    const randomScenes = randomUtil.drawNItems(SCENES, 12);
-    const randomWeapons = randomUtil.drawNItems(WEAPONS, 12);
+    const randomCulprits = randomUtil.drawNItems(CULPRITS_CONSTANTS.CULPRITS, 13);
+    const randomScenes = randomUtil.drawNItems(SCENE_CONSTANTS.SCENES, 12);
+    const randomWeapons = randomUtil.drawNItems(WEAPONS_CONSTANTS.WEAPONS, 12);
 
     // unlucky 13 is killed
     const victim = randomCulprits[12];

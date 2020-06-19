@@ -1,4 +1,4 @@
-import {CULPRIT_CLUE_BASES, SCENE_CLUE_BASES, WEAPON_CLUE_BASES} from "./constants/clue-bases";
+const CLUE_BASES = require('./constants/clue-bases');
 
 const randomUtil = require('../utilities/random.util');
 
@@ -11,13 +11,13 @@ function createClue(clueBot, nextClue) {
 
     if (isWeapon) {
         fakeClue = clueBot.fakeWeapons.shift();
-        clueBases = WEAPON_CLUE_BASES;
+        clueBases = CLUE_BASES.WEAPON_CLUE_BASES;
     } else if (isScene) {
         fakeClue = clueBot.fakeScenes.shift();
-        clueBases = SCENE_CLUE_BASES;
+        clueBases = CLUE_BASES.SCENE_CLUE_BASES;
     } else {
         fakeClue = clueBot.fakeCulprits.shift();
-        clueBases = CULPRIT_CLUE_BASES;
+        clueBases = CLUE_BASES.CULPRIT_CLUE_BASES;
     }
 
     return randomizeClue(clueBases, nextClue, fakeClue);

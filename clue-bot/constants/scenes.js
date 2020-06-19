@@ -1,4 +1,4 @@
-export const SCENES = [
+const SCENES = [
     "The Pool",
     "The Observatory",
     "The Kitchen",
@@ -28,3 +28,7 @@ export const SCENES = [
     "The Music Room",
     "The Sanctuary",
 ];
+
+module.exports = {
+    SCENES
+}

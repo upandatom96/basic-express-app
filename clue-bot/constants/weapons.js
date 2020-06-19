@@ -1,4 +1,4 @@
-export const WEAPONS = [
+const WEAPONS = [
     "A Wrench",
     "A Candlestick",
     "A Knife",
@@ -28,3 +28,7 @@ export const WEAPONS = [
     "A Pen",
     "A Crucifix",
 ];
+
+module.exports = {
+    WEAPONS
+}

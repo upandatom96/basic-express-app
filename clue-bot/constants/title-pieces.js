@@ -1,4 +1,4 @@
-export const MANOR_NAMES = [
+const MANOR_NAMES = [
     "Davis",
     "Quilty",
     "Dobson",
@@ -8,7 +8,7 @@ export const MANOR_NAMES = [
     "Smithson",
 ];
 
-export const MANOR_TYPES = [
+const MANOR_TYPES = [
     "Estate",
     "Palace",
     "Castle",
@@ -19,7 +19,7 @@ export const MANOR_TYPES = [
     "Ranch",
 ];
 
-export const MYSTERY_SYNONYMS = [
+const MYSTERY_SYNONYMS = [
     "Case",
     "Mystery",
     "Incident",
@@ -41,3 +41,9 @@ export const MYSTERY_SYNONYMS = [
     "Phenomenon",
     "Gathering",
 ];
+
+module.exports = {
+    MYSTERY_SYNONYMS,
+    MANOR_NAMES,
+    MANOR_TYPES
+}

@@ -1,4 +1,4 @@
-export const CULPRITS = [
+const CULPRITS = [
     "Mr. Teal",
     "Doctor Chartreuse",
     "Chef Ratatouille",
@@ -51,3 +51,7 @@ export const CULPRITS = [
     "The Judge",
     "The Reverend",
 ];
+
+module.exports = {
+    CULPRITS
+}

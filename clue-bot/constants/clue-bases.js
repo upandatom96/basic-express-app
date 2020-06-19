@@ -1,4 +1,4 @@
-export const CULPRIT_CLUE_BASES = [
+const CULPRIT_CLUE_BASES = [
     `{CLUE1} and {CLUE2} were talking at the time of the murder`,
     `{CLUE1} and {CLUE2} were asleep at the time of the murder`,
     `{CLUE1} was singing a duet with {CLUE2} at the time of the murder`,
@@ -9,7 +9,7 @@ export const CULPRIT_CLUE_BASES = [
     `{CLUE} passed out before the murder occurred`,
 ];
 
-export const SCENE_CLUE_BASES = [
+const SCENE_CLUE_BASES = [
     `{CLUE1} and {CLUE2} were empty at the time of the murder`,
     `{CLUE1} and {CLUE2} were being cleaned at the time of the murder`,
     `{CLUE1} and {CLUE2} were under surveillance at the time of the murder`,
@@ -20,7 +20,7 @@ export const SCENE_CLUE_BASES = [
     `{CLUE} would have been too obvious a place for a murder`,
 ];
 
-export const WEAPON_CLUE_BASES = [
+const WEAPON_CLUE_BASES = [
     `{CLUE1} and {CLUE2} were locked away at the time of the murder`,
     `{CLUE1} and {CLUE2} were being used by party-goers at the time of the murder`,
     `{CLUE1} and {CLUE2} were on display at the time of the murder`,
@@ -29,3 +29,9 @@ export const WEAPON_CLUE_BASES = [
     `{CLUE} was in plain sight all night long`,
     `{CLUE} was being guarded by a dog all night`,
 ];
+
+module.exports = {
+    SCENE_CLUE_BASES,
+    WEAPON_CLUE_BASES,
+    CULPRIT_CLUE_BASES
+}
