@@ -3,7 +3,7 @@ const clueCreator = require('./clue-creator');
 const tweetManager = require('../tweet/tweet.manager');
 
 function makeFinalRevealAnnouncement(clueBot) {
-    makeAnnouncement(`THE END. ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}!`);
+    makeAnnouncement(`SOLUTION: ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}! THE END`);
 }
 
 function makePenultimateAnnouncement(clueBot) {
@@ -22,17 +22,17 @@ function makeCrimeAnnouncement(clueBot) {
 
 function makeSuspectOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.culpritOptions);
-    makeAnnouncement("The potential culprits are: " + optionText);
+    makeAnnouncement(optionText + " are all very suspicious");
 }
 
 function makeWeaponOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.weaponOptions);
-    makeAnnouncement("The potential weapons are: " + optionText);
+    makeAnnouncement(optionText + " could have been used to kill");
 }
 
 function makeSceneOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.sceneOptions);
-    makeAnnouncement("The potential crime scenes are: " + optionText);
+    makeAnnouncement("The body was found near " + optionText);
 }
 
 module.exports = {
