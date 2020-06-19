@@ -11,16 +11,32 @@ function makeCrimeAnnouncement(clueBot) {
     makeAnnouncement(`Oh No! ${clueBot.victim} has been killed!`);
 }
 
-function makeSuspectOptionAnnouncement() {
-    makeAnnouncement("The suspects are: ");
+function getOptionText(options) {
+    let optionText = "";
+    options.forEach((option, index) => {
+        optionText = optionText + option;
+        if (index === options.length - 2) {
+            optionText = optionText + ", and ";
+        } else if (index < options.length - 2) {
+            optionText = optionText + ", ";
+        }
+    })
+    return optionText;
 }
 
-function makeWeaponOptionAnnouncement() {
-    makeAnnouncement("The potential murder weapons are:");
+function makeSuspectOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.culpritOptions);
+    makeAnnouncement("The potential culprits are: " + optionText);
 }
 
-function makeSceneOptionAnnouncement() {
-    makeAnnouncement("The potential crime scenes are:");
+function makeWeaponOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.weaponOptions);
+    makeAnnouncement("The potential weapons are: " + optionText);
+}
+
+function makeSceneOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.sceneOptions);
+    makeAnnouncement("The potential crime scenes are: " + optionText);
 }
 
 function makeAnnouncement(announcement) {
