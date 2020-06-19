@@ -10,6 +10,12 @@ const WEAPONS = [
     "Anvil",
     "Poison",
     "Bear Trap",
+    "Pocket Knife",
+    "Ninja Star",
+    "Sword",
+    "Axe",
+    "Motor Oil",
+    "Mouse Trap",
 ];
 
 function selectWeapons(weaponCount) {

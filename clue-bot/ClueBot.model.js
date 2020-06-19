@@ -21,12 +21,7 @@ const ClueBotSchema = new Schema({
     weapon: {
         type: String
     },
-    unDrawnClues: [
-        {
-            type: String
-        }
-    ],
-    drawnClues: [
+    clues: [
         {
             type: String
         }
@@ -42,6 +37,21 @@ const ClueBotSchema = new Schema({
         }
     ],
     culpritOptions: [
+        {
+            type: String
+        }
+    ],
+    fakeWeapons: [
+        {
+            type: String
+        }
+    ],
+    fakeScenes: [
+        {
+            type: String
+        }
+    ],
+    fakeCulprits: [
         {
             type: String
         }

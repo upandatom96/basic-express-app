@@ -8,7 +8,7 @@ function buildClueDescription(clueBot, nextClue) {
 
 function makeClueAnnouncement(clueBot, nextClue) {
     const clueAnnouncement = buildClueDescription(clueBot, nextClue);
-    const part = clueBot.drawnClues.length;
+    const part = 15 - clueBot.clues.length;
     makeAnnouncement(`Clue #${part}: ${clueAnnouncement}`);
 }
 

@@ -14,12 +14,11 @@ function progressClue(clueBot) {
         clueBot.status = 4;
         announcer.makeSceneOptionAnnouncement(clueBot);
     } else if (clueBot.status === 4) {
-        if (clueBot.unDrawnClues.length === 0) {
+        if (clueBot.clues.length === 0) {
             clueBot.status = 5;
             announcer.makeFinalRevealAnnouncement(clueBot);
         } else {
-            const nextClue = clueBot.unDrawnClues.shift();
-            clueBot.drawnClues.push(nextClue);
+            const nextClue = clueBot.clues.shift();
             announcer.makeClueAnnouncement(clueBot, nextClue);
         }
     }

@@ -21,34 +21,47 @@ function generateClueBotDetails() {
 
     console.log(`Generating ${title}...`);
 
-    const allCulprits = culpritSelector.selectCulprits(7);
-    const allScenes = sceneSelector.selectScenes(6);
-    const allWeapons = weaponSelector.selectWeapons(6);
+    const randomCulprits = culpritSelector.selectCulprits(13);
+    const randomScenes = sceneSelector.selectScenes(12);
+    const randomWeapons = weaponSelector.selectWeapons(12);
 
-    const victimName = allCulprits.shift();
+    // unlucky 13 is killed
+    const victim = randomCulprits[13];
 
-    const culpritOptions = allCulprits;
-    const sceneOptions = allScenes;
-    const weaponOptions = allWeapons;
+    // first 6 are red herrings
+    const fakeCulprits = randomCulprits.slice(0, 6);
+    const fakeScenes = randomScenes.slice(0, 6);
+    const fakeWeapons = randomWeapons.slice(0, 6);
 
-    const culpritName = allCulprits.shift();
-    const sceneName = allScenes.shift();
-    const weaponName = allWeapons.shift();
+    // second 6 are suspicious
+    const allCulprits = randomCulprits.slice(6,12);
+    const allScenes = randomScenes.slice(6,12);
+    const allWeapons = randomWeapons.slice(6,12);
 
-    const unDrawnClues = shuffleCluesTogether(allCulprits, allScenes, allWeapons);
+    // first of each is picked off as the real scenario
+    const culprit = allCulprits.shift();
+    const scene = allScenes.shift();
+    const weapon = allWeapons.shift();
+
+    const clues = shuffleCluesTogether(allCulprits, allScenes, allWeapons);
+
+    const culpritOptions = randomUtil.shuffleArray(allCulprits.concat(culprit));
+    const sceneOptions = randomUtil.shuffleArray(allScenes.concat(scene));
+    const weaponOptions = randomUtil.shuffleArray(allWeapons.concat(weapon));
 
     return {
-        status: 0,
-        title: title,
-        drawnClues: [],
-        victim: victimName,
-        culprit: culpritName,
-        scene: sceneName,
-        weapon: weaponName,
-        unDrawnClues: unDrawnClues,
-        weaponOptions: weaponOptions,
-        sceneOptions: sceneOptions,
-        culpritOptions: culpritOptions,
+        title,
+        victim,
+        culprit,
+        scene,
+        weapon,
+        clues,
+        weaponOptions,
+        sceneOptions,
+        culpritOptions,
+        fakeCulprits,
+        fakeWeapons,
+        fakeScenes
     };
 }
 
