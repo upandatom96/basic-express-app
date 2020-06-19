@@ -1,15 +1,15 @@
 const randomUtil = require('../utilities/random.util');
 
 const CULPRITS = [
-    "Character One",
-    "Character Two",
-    "Character Three",
-    "Character Four",
-    "Character Five",
-    "Character Six",
-    "Character Seven",
-    "Character Eight",
-    "Character Nine",
+    "Mr. Teal",
+    "Doctor Chartreuse",
+    "Chef Ratatouille",
+    "Professor Chalmers",
+    "Elizabeth Bloodwell",
+    "Hamilton Alexandre",
+    "Ms. Terri",
+    "Old MacDonald",
+    "De Tektiv",
 ];
 
 function selectCulprits(culpritCount) {
