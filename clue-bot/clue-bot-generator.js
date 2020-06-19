@@ -26,7 +26,7 @@ function generateClueBotDetails() {
     const randomWeapons = weaponSelector.selectWeapons(12);
 
     // unlucky 13 is killed
-    const victim = randomCulprits[13];
+    const victim = randomCulprits[12];
 
     // first 6 are red herrings
     const fakeCulprits = randomCulprits.slice(0, 6);

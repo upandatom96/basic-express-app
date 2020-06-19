@@ -10,12 +10,12 @@ const CULPRITS = [
     "Ms. Terri",
     "Old MacDonald",
     "De Tektiv",
-    "Mr. 1",
-    "Ms. 2",
-    "Mrs. 3",
-    "Mx. 4",
-    "Dr. 5",
-    "Mx. 6",
+    "Captain O' Ship",
+    "Fido",
+    "John Smith",
+    "Jane Doe",
+    "The Count",
+    "Granny",
     "Simon",
 ];
 

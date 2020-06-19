@@ -1,21 +1,21 @@
 const randomUtil = require('../utilities/random.util');
 
 const WEAPONS = [
-    "Wrench",
-    "Candlestick",
-    "Knife",
-    "Pipe",
-    "Revolver",
-    "Rope",
-    "Anvil",
+    "A Wrench",
+    "A Candlestick",
+    "A Knife",
+    "A Pipe",
+    "A Revolver",
+    "A Rope",
+    "An Anvil",
     "Poison",
-    "Bear Trap",
-    "Pocket Knife",
-    "Ninja Star",
-    "Sword",
-    "Axe",
+    "A Bear Trap",
+    "A Pocket Knife",
+    "A Ninja Star",
+    "A Sword",
+    "An Axe",
     "Motor Oil",
-    "Mouse Trap",
+    "A Mouse Trap",
 ];
 
 function selectWeapons(weaponCount) {
