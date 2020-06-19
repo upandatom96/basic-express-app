@@ -39,6 +39,19 @@ function checkAllMysteries() {
     });
 }
 
+function createNewClueBot(resolve) {
+    ClueBot
+        .find()
+        .then((clueBots) => {
+            const clueBotDetails = clueBotGenerator.generateClueBotDetails(clueBots);
+            new ClueBot(clueBotDetails)
+                .save()
+                .then((newClueBot) => {
+                    advanceClueBot(newClueBot, resolve);
+                });
+        });
+}
+
 function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
@@ -54,28 +67,9 @@ function progressMystery() {
             })
             .then((foundClueBot) => {
                 if (boolUtil.hasValue(foundClueBot)) {
-                    const updatedClueBot = clueBotProgressor.progressClue(foundClueBot);
-                    updatedClueBot.save()
-                        .then((response) => {
-                            resolve({
-                                title: response.title,
-                                _id: response._id
-                            });
-                        });
+                    advanceClueBot(foundClueBot, resolve);
                 } else {
-                    const clueBotDetails = clueBotGenerator.generateClueBotDetails();
-                    new ClueBot(clueBotDetails)
-                        .save()
-                        .then((newClueBot) => {
-                            const updatedClueBot = clueBotProgressor.progressClue(newClueBot);
-                            updatedClueBot.save()
-                                .then((response) => {
-                                    resolve({
-                                        title: response.title,
-                                        _id: response._id
-                                    });
-                                });
-                        });
+                    createNewClueBot(resolve);
                 }
             });
     });
@@ -99,4 +93,15 @@ module.exports = {
     checkAllMysteries,
     progressMystery,
     deleteMystery
+}
+
+function advanceClueBot(clueBot, resolve) {
+    const updatedClueBot = clueBotProgressor.progressClue(clueBot);
+    updatedClueBot.save()
+        .then((response) => {
+            resolve({
+                title: response.title,
+                _id: response._id
+            });
+        });
 }

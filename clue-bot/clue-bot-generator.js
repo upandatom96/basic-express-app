@@ -28,12 +28,13 @@ function pickNewTitle(previousTitles) {
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
-    const combinedClues = allCharacters.concat(allScenes).concat(allWeapons);
+    const combinedClues = allCaharacters.concat(allScenes).concat(allWeapons);
     return randomUtil.shuffleArray(combinedClues);
 }
 
-function generateClueBotDetails() {
-    const title = pickNewTitle([]);
+function generateClueBotDetails(pastClueBots) {
+    const previousTitles = getPreviousTitles(pastClueBots);
+    const title = pickNewTitle(previousTitles);
 
     console.log(`Generating ${title}...`);
 
@@ -83,4 +84,12 @@ function generateClueBotDetails() {
 
 module.exports = {
     generateClueBotDetails
+}
+
+function getPreviousTitles(clueBots) {
+    const previousTitles = [];
+    clueBots.forEach((clueBot) => {
+        previousTitles.push(clueBot.title);
+    });
+    return previousTitles;
 }
