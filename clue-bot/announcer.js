@@ -1,4 +1,5 @@
 const randomUtil = require('../utilities/random.util');
+const tweetManager = require('../tweet/tweet.manager');
 
 function makeFinalRevealAnnouncement(clueBot) {
     makeAnnouncement(`THE END. ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}!`);
@@ -52,6 +53,7 @@ function getOptionText(options) {
 }
 
 function makeAnnouncement(announcement) {
+    tweetManager.makeClueTweet(announcement);
     console.log(announcement);
     console.log(announcement.length + " characters");
 }

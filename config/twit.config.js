@@ -7,6 +7,10 @@ const {
   storyConsumerSecret,
   storyAccessToken,
   storyAccessTokenSecret,
+  clueConsumerKey,
+  clueConsumerSecret,
+  clueAccessToken,
+  clueAccessTokenSecret,
   orderConsumerKey,
   orderConsumerSecret,
   orderAccessToken,
@@ -34,8 +38,16 @@ const orderCredentials = {
   access_token_secret: orderAccessTokenSecret
 };
 
+const clueCredentials = {
+  consumer_key: clueConsumerKey,
+  consumer_secret: clueConsumerSecret,
+  access_token: clueAccessToken,
+  access_token_secret: clueAccessTokenSecret
+};
+
 module.exports = {
   aotiCredentials,
   storyCredentials,
+  clueCredentials,
   orderCredentials
 };

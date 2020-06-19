@@ -14,6 +14,10 @@ let orderConsumerKey;
 let orderConsumerSecret;
 let orderAccessToken;
 let orderAccessTokenSecret;
+let clueConsumerKey;
+let clueConsumerSecret;
+let clueAccessToken;
+let clueAccessTokenSecret;
 
 const port = process.env.PORT || 5000;
 
@@ -33,6 +37,11 @@ if (runningProd) {
   storyConsumerSecret = process.env.STORY_CONSUMER_SECRET;
   storyAccessToken = process.env.STORY_ACCESS_TOKEN;
   storyAccessTokenSecret = process.env.STORY_ACCESS_TOKEN_SECRET;
+
+  clueConsumerKey = process.env.CLUE_CONSUMER_KEY;
+  clueConsumerSecret = process.env.CLUE_CONSUMER_SECRET;
+  clueAccessToken = process.env.CLUE_ACCESS_TOKEN;
+  clueAccessTokenSecret = process.env.CLUE_ACCESS_TOKEN_SECRET;
 
   orderConsumerKey = process.env.ORDER_CONSUMER_KEY;
   orderConsumerSecret = process.env.ORDER_CONSUMER_SECRET;
@@ -56,6 +65,10 @@ if (runningProd) {
       STORY_CONSUMER_SECRET,
       STORY_ACCESS_TOKEN,
       STORY_ACCESS_TOKEN_SECRET,
+      CLUE_CONSUMER_KEY,
+      CLUE_CONSUMER_SECRET,
+      CLUE_ACCESS_TOKEN,
+      CLUE_ACCESS_TOKEN_SECRET,
       ORDER_CONSUMER_KEY,
       ORDER_CONSUMER_SECRET,
       ORDER_ACCESS_TOKEN,
@@ -78,6 +91,11 @@ if (runningProd) {
     storyConsumerSecret = STORY_CONSUMER_SECRET;
     storyAccessToken = STORY_ACCESS_TOKEN;
     storyAccessTokenSecret = STORY_ACCESS_TOKEN_SECRET;
+
+    clueConsumerKey = CLUE_CONSUMER_KEY;
+    clueConsumerSecret = CLUE_CONSUMER_SECRET;
+    clueAccessToken = CLUE_ACCESS_TOKEN;
+    clueAccessTokenSecret = CLUE_ACCESS_TOKEN_SECRET;
 
     orderConsumerKey = ORDER_CONSUMER_KEY;
     orderConsumerSecret = ORDER_CONSUMER_SECRET;
@@ -112,5 +130,9 @@ module.exports = {
   orderConsumerSecret,
   orderAccessToken,
   orderAccessTokenSecret,
+  clueConsumerKey,
+  clueConsumerSecret,
+  clueAccessToken,
+  clueAccessTokenSecret,
   test: test
 };

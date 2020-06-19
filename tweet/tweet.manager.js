@@ -3,6 +3,7 @@ const {test} = require("../config/env.config");
 const {
     aotiCredentials,
     storyCredentials,
+    clueCredentials,
     orderCredentials
 } = require("../config/twit.config");
 
@@ -20,9 +21,14 @@ function makeOrderTweet(message) {
     makeTweet(message, orderCredentials);
 }
 
+function makeClueTweet(message) {
+    makeTweet(message, clueCredentials);
+}
+
 module.exports = {
     makeAotiTweet,
     makeStoryTweet,
+    makeClueTweet,
     makeOrderTweet
 }
 
