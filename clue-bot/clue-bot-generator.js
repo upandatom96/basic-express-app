@@ -1,15 +1,30 @@
 import {SCENES} from "./constants/scenes";
 import {CULPRITS} from "./constants/culprits";
 import {WEAPONS} from "./constants/weapons";
+import {MANOR_NAMES, MANOR_TYPES, MYSTERY_SYNONYMS} from "./constants/title-pieces";
 
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
-function makeTitle() {
+function makeRandomTitle() {
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    const name = "Smith";
-    return `The ${adjective} Mystery of ${name} Manor`;
+    const name = randomUtil.pickRandom(MANOR_NAMES);
+    const type = randomUtil.pickRandom(MANOR_TYPES);
+    const mystery = randomUtil.pickRandom(MYSTERY_SYNONYMS);
+    return `The ${adjective} ${mystery} of ${name} ${type}`;
+}
+
+function pickNewTitle(previousTitles) {
+    let foundNewTitle = false;
+    let potentialTitle;
+    while (!foundNewTitle) {
+        potentialTitle = makeRandomTitle();
+        if (!previousTitles.includes(potentialTitle)) {
+            foundNewTitle = true;
+        }
+    }
+    return potentialTitle;
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
@@ -18,7 +33,7 @@ function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
 }
 
 function generateClueBotDetails() {
-    const title = makeTitle();
+    const title = pickNewTitle([]);
 
     console.log(`Generating ${title}...`);
 
@@ -35,9 +50,9 @@ function generateClueBotDetails() {
     const fakeWeapons = randomWeapons.slice(0, 6);
 
     // second 6 are suspicious
-    const allCulprits = randomCulprits.slice(6,12);
-    const allScenes = randomScenes.slice(6,12);
-    const allWeapons = randomWeapons.slice(6,12);
+    const allCulprits = randomCulprits.slice(6, 12);
+    const allScenes = randomScenes.slice(6, 12);
+    const allWeapons = randomWeapons.slice(6, 12);
 
     // first of each is picked off as the real scenario
     const culprit = allCulprits.shift();
