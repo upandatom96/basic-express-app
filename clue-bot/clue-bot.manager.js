@@ -15,7 +15,8 @@ function checkMystery() {
                     {status: 1},
                     {status: 2},
                     {status: 3},
-                    {status: 4}
+                    {status: 4},
+                    {status: 5}
                 ]
             })
             .then((clueBot) => {
@@ -47,7 +48,8 @@ function progressMystery() {
                     {status: 1},
                     {status: 2},
                     {status: 3},
-                    {status: 4}
+                    {status: 4},
+                    {status: 5}
                 ]
             })
             .then((foundClueBot) => {

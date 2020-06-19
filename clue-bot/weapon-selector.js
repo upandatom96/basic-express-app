@@ -10,7 +10,6 @@ const WEAPONS = [
     "An Anvil",
     "Poison",
     "A Bear Trap",
-    "A Pocket Knife",
     "A Ninja Star",
     "A Sword",
     "An Axe",

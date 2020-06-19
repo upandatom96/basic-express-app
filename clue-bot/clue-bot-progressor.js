@@ -16,11 +16,14 @@ function progressClue(clueBot) {
     } else if (clueBot.status === 4) {
         if (clueBot.clues.length === 0) {
             clueBot.status = 5;
-            announcer.makeFinalRevealAnnouncement(clueBot);
+            announcer.makePenultimateAnnouncement(clueBot);
         } else {
             const nextClue = clueBot.clues.shift();
             announcer.makeClueAnnouncement(clueBot, nextClue);
         }
+    } else if (clueBot.status === 5) {
+        clueBot.status = 6;
+        announcer.makeFinalRevealAnnouncement(clueBot);
     }
     return clueBot;
 }

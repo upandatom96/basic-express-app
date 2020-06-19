@@ -5,6 +5,10 @@ function makeFinalRevealAnnouncement(clueBot) {
     makeAnnouncement(`THE END. ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}!`);
 }
 
+function makePenultimateAnnouncement(clueBot) {
+    makeAnnouncement(`The truth of ${clueBot.title} is about to be revealed! Make your guesses now! Who? Where? How?`);
+}
+
 function makeClueAnnouncement(clueBot, nextClue) {
     const clueAnnouncement = buildClueDescription(clueBot, nextClue);
     const part = 15 - clueBot.clues.length;
@@ -36,6 +40,7 @@ module.exports = {
     makeSuspectOptionAnnouncement,
     makeCrimeAnnouncement,
     makeClueAnnouncement,
+    makePenultimateAnnouncement,
     makeFinalRevealAnnouncement,
 }
 
