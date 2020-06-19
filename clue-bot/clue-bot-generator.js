@@ -1,6 +1,5 @@
 const randomManager = require('../random/random.manager');
 
-
 function generateClueBotDetails() {
     console.log("Generating mystery...");
 

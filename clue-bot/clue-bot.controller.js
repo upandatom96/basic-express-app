@@ -24,4 +24,16 @@ clueBotController.post('/', (req, res) => {
         });
 });
 
+clueBotController.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    clueBotManager.deleteMystery(id)
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 module.exports = clueBotController;

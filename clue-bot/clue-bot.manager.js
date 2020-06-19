@@ -38,7 +38,21 @@ function progressMystery() {
     });
 }
 
+function deleteMystery(id) {
+    return new Promise((resolve, reject) => {
+        ClueBot.deleteOne({
+            _id: id
+        })
+            .then(() => {
+                resolve({
+                    message: `ClueBot with given id deleted or never existed`
+                });
+            });
+    });
+}
+
 module.exports = {
     checkMystery,
-    progressMystery
+    progressMystery,
+    deleteMystery
 }
