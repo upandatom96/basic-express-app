@@ -18,6 +18,9 @@ function setupControllers(app) {
   const chitChatController = require('../chit-chat/chit-chit.controller');
   app.use('/chitChat', chitChatController);
 
+  const clueBotController = require('../clue-bot/clue-bot.controller');
+  app.use('/clueBot', clueBotController);
+
   const storyController = require('../stories/stories.controller');
   app.use('/story', storyController);
 
