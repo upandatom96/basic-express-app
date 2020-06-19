@@ -26,7 +26,10 @@ const WEAPONS = [
     "A Deadly Fungus",
     "A Venomous Snake",
     "A Pen",
+    "A Harpoon",
+    "A Thorn from a Rose",
     "A Crucifix",
+    "A Bow & Arrow",
 ];
 
 module.exports = {
