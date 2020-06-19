@@ -2,8 +2,19 @@ const express = require('express');
 const clueBotController = express.Router();
 const clueBotManager = require('./clue-bot.manager');
 
-clueBotController.get('/', (req, res) => {
+clueBotController.get('/current', (req, res) => {
     clueBotManager.checkMystery()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
+clueBotController.get('/', (req, res) => {
+    clueBotManager.checkAllMysteries()
         .then((response) => {
             res.send(response);
         })

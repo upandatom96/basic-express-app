@@ -9,10 +9,12 @@ const boolUtil = require('../utilities/bool.util');
 function checkMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne({$or: [
+            .find({
+                $or: [
                     {status: 0},
                     {status: 1}
-                ]})
+                ]
+            })
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
                     resolve(clueBot);
@@ -23,13 +25,25 @@ function checkMystery() {
     });
 }
 
+function checkAllMysteries() {
+    return new Promise((resolve, reject) => {
+        ClueBot
+            .find()
+            .then((clueBots) => {
+                resolve(clueBots);
+            });
+    });
+}
+
 function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne({$or: [
+            .findOne({
+                $or: [
                     {status: 0},
                     {status: 1}
-                ]})
+                ]
+            })
             .then((foundClueBot) => {
                 if (boolUtil.hasValue(foundClueBot)) {
                     const updatedClueBot = clueBotProgressor.progressClue(foundClueBot);
@@ -74,6 +88,7 @@ function deleteMystery(id) {
 
 module.exports = {
     checkMystery,
+    checkAllMysteries,
     progressMystery,
     deleteMystery
 }
