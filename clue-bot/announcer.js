@@ -2,37 +2,44 @@ const clueCreator = require('./clue-creator');
 
 const tweetManager = require('../tweet/tweet.manager');
 
-function makeFinalRevealAnnouncement(clueBot) {
-    makeAnnouncement(`SOLUTION: ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}! THE END`);
+function makeCrimeAnnouncement(clueBot) {
+    const announcement = `${clueBot.title} | Welcome, detectives! Last night, during a party with many Esteemed Guests, ${clueBot.victim} was killed! Who did it? Where? How?`;
+    makeAnnouncement(clueBot, 1, announcement);
 }
 
-function makePenultimateAnnouncement(clueBot) {
-    makeAnnouncement(`The truth of ${clueBot.title} is about to be revealed! Make your guesses now! Who? Where? How?`);
+function makeSuspectOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.culpritOptions);
+    const announcement = optionText + " are all very suspicious.";
+    makeAnnouncement(clueBot, 2, announcement);
+}
+
+function makeWeaponOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.weaponOptions);
+    const announcement = optionText + " could have been used to kill.";
+    makeAnnouncement(clueBot, 3, announcement);
+}
+
+function makeSceneOptionAnnouncement(clueBot) {
+    const optionText = getOptionText(clueBot.sceneOptions);
+    const announcement = "The body was found near " + optionText + ".";
+    makeAnnouncement(clueBot, 4, announcement);
 }
 
 function makeClueAnnouncement(clueBot, nextClue) {
     const clueAnnouncement = clueCreator.createClue(clueBot, nextClue);
     const part = 15 - clueBot.clues.length;
-    makeAnnouncement(`Clue #${part}: ${clueAnnouncement}`);
+    const announcement = `Clue #${part}: ${clueAnnouncement}`;
+    makeAnnouncement(clueBot, 4 + part, announcement);
 }
 
-function makeCrimeAnnouncement(clueBot) {
-    makeAnnouncement(`${clueBot.title} begins... ${clueBot.victim} has been killed! Who did it? Where? How?`);
+function makePenultimateAnnouncement(clueBot) {
+    const announcement = `The truth of ${clueBot.title} is about to be revealed! Make your guesses now! Who? Where? How?`;
+    makeAnnouncement(clueBot, 20, announcement);
 }
 
-function makeSuspectOptionAnnouncement(clueBot) {
-    const optionText = getOptionText(clueBot.culpritOptions);
-    makeAnnouncement(optionText + " are all very suspicious");
-}
-
-function makeWeaponOptionAnnouncement(clueBot) {
-    const optionText = getOptionText(clueBot.weaponOptions);
-    makeAnnouncement(optionText + " could have been used to kill");
-}
-
-function makeSceneOptionAnnouncement(clueBot) {
-    const optionText = getOptionText(clueBot.sceneOptions);
-    makeAnnouncement("The body was found near " + optionText);
+function makeFinalRevealAnnouncement(clueBot) {
+    const announcement = `We caught the Culprit! ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}! Thank you for your help!`;
+    makeAnnouncement(clueBot, 21, announcement);
 }
 
 module.exports = {
@@ -58,8 +65,9 @@ function getOptionText(options) {
     return optionText;
 }
 
-function makeAnnouncement(announcement) {
-    tweetManager.makeClueTweet(announcement);
-    console.log(announcement);
-    console.log(announcement.length + " characters");
+function makeAnnouncement(clueBot, part, announcement) {
+    const fullAnnouncement = `${announcement} (${clueBot.title} ${part}/21)`;
+    tweetManager.makeClueTweet(fullAnnouncement);
+    console.log(fullAnnouncement);
+    console.log(fullAnnouncement.length + " characters");
 }
