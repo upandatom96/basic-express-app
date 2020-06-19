@@ -35,7 +35,10 @@ function progressMystery() {
                     const updatedClueBot = clueBotProgressor.progressClue(foundClueBot);
                     updatedClueBot.save()
                         .then((response) => {
-                            resolve(response);
+                            resolve({
+                                title: response.title,
+                                _id: response._id
+                            });
                         });
                 } else {
                     const clueBotDetails = clueBotGenerator.generateClueBotDetails();
@@ -45,7 +48,10 @@ function progressMystery() {
                             const updatedClueBot = clueBotProgressor.progressClue(newClueBot);
                             updatedClueBot.save()
                                 .then((response) => {
-                                    resolve(response);
+                                    resolve({
+                                        title: response.title,
+                                        _id: response._id
+                                    });
                                 });
                         });
                 }
