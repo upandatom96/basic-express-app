@@ -27,6 +27,19 @@ const SCENES = [
     "The Bowling Alley",
     "The Music Room",
     "The Sanctuary",
+    "The Attic",
+    "The Loft",
+    "The Balcony",
+    "The Living Room",
+    "The Nursery",
+    "The Mud Room",
+    "The Games Room",
+    "The Walk-In Closet",
+    "The Porch",
+    "The Shed",
+    "The Tree House",
+    "The Utility Room",
+    "The Spare Room",
 ];
 
 module.exports = {
