@@ -63,7 +63,7 @@ function generateClueBotDetails() {
     const unDrawnClues = shuffleCluesTogether(allCharacters, allScenes, allWeapons);
 
     return {
-        concluded: false,
+        status: 0,
         title: title,
         drawnClues: [],
         victim: victimName,

@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 require('./ClueBot.model');
 const ClueBot = mongoose.model('clue-bot');
 const clueBotGenerator = require('./clue-bot-generator');
+const clueBotProgressor = require('./clue-bot-progressor');
 
 const boolUtil = require('../utilities/bool.util');
 
 function checkMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne({concluded: false})
+            .findOne({$or: [
+                    {status: 0},
+                    {status: 1}
+                ]})
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
                     resolve(clueBot);
@@ -22,16 +26,27 @@ function checkMystery() {
 function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne({concluded: false})
-            .then((clueBot) => {
-                if (boolUtil.hasValue(clueBot)) {
-                    resolve(clueBot);
+            .findOne({$or: [
+                    {status: 0},
+                    {status: 1}
+                ]})
+            .then((foundClueBot) => {
+                if (boolUtil.hasValue(foundClueBot)) {
+                    const updatedClueBot = clueBotProgressor.progressClue(foundClueBot);
+                    updatedClueBot.save()
+                        .then((response) => {
+                            resolve(response);
+                        });
                 } else {
                     const clueBotDetails = clueBotGenerator.generateClueBotDetails();
                     new ClueBot(clueBotDetails)
                         .save()
-                        .then((res) => {
-                            resolve(res);
+                        .then((newClueBot) => {
+                            const updatedClueBot = clueBotProgressor.progressClue(newClueBot);
+                            updatedClueBot.save()
+                                .then((response) => {
+                                    resolve(response);
+                                });
                         });
                 }
             });
