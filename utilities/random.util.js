@@ -13,6 +13,11 @@ function pickRandom(array) {
     return shuffledArray[0];
 }
 
+function drawNItems(array, n) {
+    const shuffledArray = shuffleArray(array);
+    return shuffledArray.slice(0, n);
+}
+
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -36,5 +41,6 @@ function shuffleArray(array) {
 module.exports = {
     generateRandomPassword,
     shuffleArray,
-    pickRandom
+    pickRandom,
+    drawNItems
 }

@@ -1,6 +1,4 @@
-const randomUtil = require('../utilities/random.util');
-
-const CULPRITS = [
+export const CULPRITS = [
     "Mr. Teal",
     "Doctor Chartreuse",
     "Chef Ratatouille",
@@ -53,12 +51,3 @@ const CULPRITS = [
     "The Judge",
     "The Reverend",
 ];
-
-function selectCulprits(culpritCount) {
-    const shuffledCulprits = randomUtil.shuffleArray(CULPRITS);
-    return shuffledCulprits.slice(0, culpritCount);
-}
-
-module.exports = {
-    selectCulprits
-}

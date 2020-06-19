@@ -1,6 +1,4 @@
-const randomUtil = require('../utilities/random.util');
-
-const WEAPONS = [
+export const WEAPONS = [
     "A Wrench",
     "A Candlestick",
     "A Knife",
@@ -30,12 +28,3 @@ const WEAPONS = [
     "A Pen",
     "A Crucifix",
 ];
-
-function selectWeapons(weaponCount) {
-    const shuffledWeapons = randomUtil.shuffleArray(WEAPONS);
-    return shuffledWeapons.slice(0, weaponCount);
-}
-
-module.exports = {
-    selectWeapons
-}

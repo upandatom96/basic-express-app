@@ -1,14 +1,15 @@
+import {SCENES} from "./constants/scenes";
+import {CULPRITS} from "./constants/culprits";
+import {WEAPONS} from "./constants/weapons";
+
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
-const culpritSelector = require('./culprit-selector');
-const sceneSelector = require('./scene-selector');
-const weaponSelector = require('./weapon-selector');
-
 function makeTitle() {
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    return `The ${adjective} Mystery`;
+    const name = "Smith";
+    return `The ${adjective} Mystery of ${name} Manor`;
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
@@ -21,9 +22,9 @@ function generateClueBotDetails() {
 
     console.log(`Generating ${title}...`);
 
-    const randomCulprits = culpritSelector.selectCulprits(13);
-    const randomScenes = sceneSelector.selectScenes(12);
-    const randomWeapons = weaponSelector.selectWeapons(12);
+    const randomCulprits = randomUtil.drawNItems(CULPRITS, 13);
+    const randomScenes = randomUtil.drawNItems(SCENES, 12);
+    const randomWeapons = randomUtil.drawNItems(WEAPONS, 12);
 
     // unlucky 13 is killed
     const victim = randomCulprits[12];

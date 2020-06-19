@@ -1,6 +1,4 @@
-const randomUtil = require('../utilities/random.util');
-
-const SCENES = [
+export const SCENES = [
     "The Pool",
     "The Observatory",
     "The Kitchen",
@@ -30,12 +28,3 @@ const SCENES = [
     "The Music Room",
     "The Sanctuary",
 ];
-
-function selectScenes(sceneCount) {
-    const shuffledScenes = randomUtil.shuffleArray(SCENES);
-    return shuffledScenes.slice(0, sceneCount);
-}
-
-module.exports = {
-    selectScenes
-}
