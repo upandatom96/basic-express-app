@@ -51,6 +51,7 @@ const CULPRITS = [
     "The Butler",
     "A Mysterious Stranger",
     "The Judge",
+    "The Reverend",
 ];
 
 function selectCulprits(culpritCount) {

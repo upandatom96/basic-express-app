@@ -28,6 +28,7 @@ const SCENES = [
     "The Crawlspace",
     "The Bowling Alley",
     "The Music Room",
+    "The Sanctuary",
 ];
 
 function selectScenes(sceneCount) {

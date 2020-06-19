@@ -28,6 +28,7 @@ const WEAPONS = [
     "A Deadly Fungus",
     "A Venomous Snake",
     "A Pen",
+    "A Crucifix",
 ];
 
 function selectWeapons(weaponCount) {
