@@ -16,6 +16,19 @@ const WEAPONS = [
     "An Axe",
     "Motor Oil",
     "A Mouse Trap",
+    "A Dumbbell",
+    "A Trophy",
+    "A Potted Plant",
+    "A Prized Pumpkin",
+    "An LED TV",
+    "A Gavel",
+    "A Cane-sword",
+    "A Guitar",
+    "A Pillow",
+    "A Banana Peel",
+    "A Deadly Fungus",
+    "A Venomous Snake",
+    "A Pen",
 ];
 
 function selectWeapons(weaponCount) {

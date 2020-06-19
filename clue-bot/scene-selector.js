@@ -1,7 +1,6 @@
 const randomUtil = require('../utilities/random.util');
 
 const SCENES = [
-    "The Ballroom",
     "The Pool",
     "The Observatory",
     "The Kitchen",
@@ -18,6 +17,17 @@ const SCENES = [
     "The Panic Room",
     "The Library",
     "The Green House",
+    "The Billiard Room",
+    "The Lounge",
+    "The Ballroom",
+    "The Sitting Room",
+    "The Foyer",
+    "The Sauna",
+    "The Junk Room",
+    "The Workshop",
+    "The Crawlspace",
+    "The Bowling Alley",
+    "The Music Room",
 ];
 
 function selectScenes(sceneCount) {
