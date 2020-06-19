@@ -2,43 +2,14 @@ const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
+const culpritSelector = require('./culprit-selector');
+const sceneSelector = require('./scene-selector');
+const weaponSelector = require('./weapon-selector');
+
 function makeTitle() {
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    return `The ${adjective} Mystery`;
-}
-
-function selectWeapons() {
-    return [
-        "Weapon One",
-        "Weapon Two",
-        "Weapon Three",
-        "Weapon Four",
-        "Weapon Five",
-        "Weapon Six",
-    ];
-}
-
-function selectScenes() {
-    return [
-        "Scene One",
-        "Scene Two",
-        "Scene Three",
-        "Scene Four",
-        "Scene Five",
-        "Scene Six",
-    ];
-}
-
-function selectCharacters() {
-    return [
-        "Character One",
-        "Character Two",
-        "Character Three",
-        "Character Four",
-        "Character Five",
-        "Character Six",
-        "Character Seven",
-    ];
+    const noun = stringUtil.toTitleCase(randomManager.pickNoun());
+    return `The ${adjective} Mystery of the ${noun}`;
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
@@ -51,16 +22,16 @@ function generateClueBotDetails() {
 
     console.log(`Generating ${title}...`);
 
-    const allCharacters = selectCharacters();
-    const allScenes = selectScenes();
-    const allWeapons = selectWeapons();
+    const allCulprits = culpritSelector.selectCulprits(7);
+    const allScenes = sceneSelector.selectScenes(6);
+    const allWeapons = weaponSelector.selectWeapons(6);
 
-    const victimName = allCharacters.shift();
-    const culpritName = allCharacters.shift();
+    const victimName = allCulprits.shift();
+    const culpritName = allCulprits.shift();
     const sceneName = allScenes.shift();
     const weaponName = allWeapons.shift();
 
-    const unDrawnClues = shuffleCluesTogether(allCharacters, allScenes, allWeapons);
+    const unDrawnClues = shuffleCluesTogether(allCulprits, allScenes, allWeapons);
 
     return {
         status: 0,
