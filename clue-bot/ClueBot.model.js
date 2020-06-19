@@ -2,16 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ClueBotSchema = new Schema({
-    revealed: {
-        type: Boolean
+    concluded: {
+        type: Boolean,
+        default: false
     },
-    person: {
+    title: {
+        type: String,
+    },
+    victim: {
         type: String
     },
-    place: {
+    culprit: {
         type: String
     },
-    thing: {
+    scene: {
+        type: String
+    },
+    weapon: {
         type: String
     },
     unDrawnClues: [
