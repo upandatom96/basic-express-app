@@ -8,8 +8,7 @@ const weaponSelector = require('./weapon-selector');
 
 function makeTitle() {
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    const noun = stringUtil.toTitleCase(randomManager.pickNoun());
-    return `The ${adjective} Mystery of the ${noun}`;
+    return `The ${adjective} Mystery`;
 }
 
 function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
