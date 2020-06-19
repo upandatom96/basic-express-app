@@ -8,7 +8,7 @@ function makeClueAnnouncement(clueBot, nextClue) {
 }
 
 function makeCrimeAnnouncement(clueBot) {
-    makeAnnouncement(`Oh No! ${clueBot.victim} has been killed!`);
+    makeAnnouncement(`${clueBot.title} begins... ${clueBot.victim} has been killed! Who did it? Where? How?`);
 }
 
 function getOptionText(options) {
