@@ -1,12 +1,19 @@
+const randomUtil = require('../utilities/random.util');
+
+const SCENES = [
+    "Scene One",
+    "Scene Two",
+    "Scene Three",
+    "Scene Four",
+    "Scene Five",
+    "Scene Six",
+    "Scene Seven",
+    "Scene Eight",
+];
+
 function selectScenes(sceneCount) {
-    return [
-        "Scene One",
-        "Scene Two",
-        "Scene Three",
-        "Scene Four",
-        "Scene Five",
-        "Scene Six",
-    ];
+    const shuffledScenes = randomUtil.shuffleArray(SCENES);
+    return shuffledScenes.slice(0, sceneCount);
 }
 
 module.exports = {
