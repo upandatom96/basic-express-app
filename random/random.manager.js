@@ -1,5 +1,4 @@
-const words = require("./words");
-const storyPieces = require("./story-pieces");
+const constants = require("../constants/constants.manager");
 const randomUtil = require("../utilities/random.util");
 
 function getOneNoun() {
@@ -11,8 +10,8 @@ function getOneAdjective() {
 }
 
 function getAllWords() {
-  const adjectives = words.adjectives;
-  const nouns = words.nouns;
+  const adjectives = constants.ADJECTIVES;
+  const nouns = constants.NOUNS;
   return {
     adjectives,
     nouns,
@@ -20,8 +19,8 @@ function getAllWords() {
 }
 
 function getWordCount() {
-  const adjectives = words.adjectives;
-  const nouns = words.nouns;
+  const adjectives = constants.ADJECTIVES;
+  const nouns = constants.NOUNS;
   return {
     nounCount: nouns.length,
     adjectiveCount: adjectives.length,
@@ -46,15 +45,15 @@ function getNewPhrase(oldPhrases) {
 }
 
 function pickStoryPrefix() {
-  return randomUtil.pickRandom(storyPieces.storyPrefixes);
+  return randomUtil.pickRandom(constants.STORY_PIECES.STORY_PREFIXES);
 }
 
 function pickNoun() {
-  return randomUtil.pickRandom(words.nouns);
+  return randomUtil.pickRandom(constants.NOUNS);
 }
 
 function pickAdjective() {
-  return randomUtil.pickRandom(words.adjectives);
+  return randomUtil.pickRandom(constants.ADJECTIVES);
 }
 
 module.exports = {

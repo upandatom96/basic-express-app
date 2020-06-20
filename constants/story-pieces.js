@@ -1,4 +1,4 @@
-const storyPrefixes = [
+const STORY_PREFIXES = [
     "Sherlock Holmes and the Case of the {A1} {N1}",
     "Star Wars: Episode VI - {N1} of the Jedi",
     "Harry Potter and the Sorcerer's {N1}",
@@ -54,5 +54,5 @@ const storyPrefixes = [
 ];
 
 module.exports = {
-    storyPrefixes
+    STORY_PREFIXES
 }
