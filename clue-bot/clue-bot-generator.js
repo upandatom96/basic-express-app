@@ -1,19 +1,16 @@
 const constants = require("../constants/constants.manager");
 
+const clueCreator = require("./clue-creator");
+
 const randomManager = require('../random/random.manager');
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeRandomTitle() {
-    console.log("there");
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
-    console.log(adjective);
     const name = randomUtil.pickRandom(constants.TITLE_BASES.MANOR_NAMES);
-    console.log(name);
     const type = randomUtil.pickRandom(constants.TITLE_BASES.MANOR_TYPES);
-    console.log(type);
     const mystery = randomUtil.pickRandom(constants.TITLE_BASES.MYSTERY_SYNONYMS);
-    console.log(mystery);
     return `The ${adjective} ${mystery} at the ${name} ${type}`;
 }
 
@@ -34,8 +31,14 @@ function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
     return randomUtil.shuffleArray(combinedClues);
 }
 
+function makeClueDeck(allWeapons, fakeWeapons, allScenes, fakeScenes, allCulprits, fakeCulprits) {
+    const fullWeaponClues = clueCreator.buildWeaponClues(allWeapons, fakeWeapons);
+    const fullSceneClues = clueCreator.buildSceneClues(allScenes, fakeScenes);
+    const fullCulpritClues = clueCreator.buildCulpritClues(allCulprits, fakeCulprits);
+    return shuffleCluesTogether(fullCulpritClues, fullSceneClues, fullWeaponClues);
+}
+
 function generateClueBotDetails(pastClueBots) {
-    console.log("here");
     const previousTitles = getPreviousTitles(pastClueBots);
     const title = pickNewTitle(previousTitles);
 
@@ -63,7 +66,7 @@ function generateClueBotDetails(pastClueBots) {
     const scene = allScenes.shift();
     const weapon = allWeapons.shift();
 
-    const clues = shuffleCluesTogether(allCulprits, allScenes, allWeapons);
+    const clues = makeClueDeck(allWeapons, fakeWeapons, allScenes, fakeScenes, allCulprits, fakeCulprits);
 
     const culpritOptions = randomUtil.shuffleArray(allCulprits.concat(culprit));
     const sceneOptions = randomUtil.shuffleArray(allScenes.concat(scene));
@@ -78,10 +81,7 @@ function generateClueBotDetails(pastClueBots) {
         clues,
         weaponOptions,
         sceneOptions,
-        culpritOptions,
-        fakeCulprits,
-        fakeWeapons,
-        fakeScenes
+        culpritOptions
     };
 }
 

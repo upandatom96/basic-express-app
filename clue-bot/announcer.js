@@ -26,9 +26,8 @@ function makeSceneOptionAnnouncement(clueBot) {
 }
 
 function makeClueAnnouncement(clueBot, nextClue) {
-    const clueAnnouncement = clueCreator.createClue(clueBot, nextClue);
     const part = 15 - clueBot.clues.length;
-    const announcement = `Clue #${part}: ${clueAnnouncement}`;
+    const announcement = `Clue #${part}: ${nextClue}`;
     makeAnnouncement(clueBot, 4 + part, announcement);
 }
 

@@ -41,21 +41,6 @@ const ClueBotSchema = new Schema({
             type: String
         }
     ],
-    fakeWeapons: [
-        {
-            type: String
-        }
-    ],
-    fakeScenes: [
-        {
-            type: String
-        }
-    ],
-    fakeCulprits: [
-        {
-            type: String
-        }
-    ],
     announcements: [
         {
             type: String
