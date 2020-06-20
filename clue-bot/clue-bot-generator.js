@@ -5,10 +5,15 @@ const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeRandomTitle() {
+    console.log("there");
     const adjective = stringUtil.toTitleCase(randomManager.pickAdjective());
+    console.log(adjective);
     const name = randomUtil.pickRandom(constants.TITLE_BASES.MANOR_NAMES);
+    console.log(name);
     const type = randomUtil.pickRandom(constants.TITLE_BASES.MANOR_TYPES);
+    console.log(type);
     const mystery = randomUtil.pickRandom(constants.TITLE_BASES.MYSTERY_SYNONYMS);
+    console.log(mystery);
     return `The ${adjective} ${mystery} at the ${name} ${type}`;
 }
 
@@ -30,6 +35,7 @@ function shuffleCluesTogether(allCharacters, allScenes, allWeapons) {
 }
 
 function generateClueBotDetails(pastClueBots) {
+    console.log("here");
     const previousTitles = getPreviousTitles(pastClueBots);
     const title = pickNewTitle(previousTitles);
 

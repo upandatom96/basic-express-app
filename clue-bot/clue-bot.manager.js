@@ -53,6 +53,7 @@ function createNewClueBot(resolve) {
 }
 
 function progressMystery() {
+    console.log("progress mystery");
     return new Promise((resolve, reject) => {
         ClueBot
             .findOne({

@@ -8,12 +8,12 @@ const ADJECTIVES = require('./words/adjectives');
 const STORY_PIECES = require('./story/story-pieces');
 
 module.exports = {
-    WEAPONS,
-    SCENES,
-    CULPRITS,
-    CLUE_BASES,
-    TITLE_BASES,
-    NOUNS,
-    ADJECTIVES,
-    STORY_PIECES
+    WEAPONS: WEAPONS.WEAPONS,
+    SCENES: SCENES.SCENES,
+    CULPRITS: CULPRITS.CULPRITS,
+    CLUE_BASES: CLUE_BASES,
+    TITLE_BASES: TITLE_BASES,
+    NOUNS: NOUNS.NOUNS,
+    ADJECTIVES: ADJECTIVES.ADJECTIVES,
+    STORY_PIECES: STORY_PIECES
 }
