@@ -1,11 +1,11 @@
-const WEAPONS = require('./weapons');
-const SCENES = require('./scenes');
-const CULPRITS = require('./culprits');
-const CLUE_BASES = require('./clue-bases');
-const TITLE_BASES = require('./title-pieces');
-const NOUNS = require('./nouns');
-const ADJECTIVES = require('./adjectives');
-const STORY_PIECES = require('./story-pieces');
+const WEAPONS = require('./clue/weapons');
+const SCENES = require('./clue/scenes');
+const CULPRITS = require('./clue/culprits');
+const CLUE_BASES = require('./clue/clue-bases');
+const TITLE_BASES = require('./clue/title-pieces');
+const NOUNS = require('./words/nouns');
+const ADJECTIVES = require('./words/adjectives');
+const STORY_PIECES = require('./story/story-pieces');
 
 module.exports = {
     WEAPONS,
