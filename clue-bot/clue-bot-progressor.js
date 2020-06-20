@@ -37,6 +37,7 @@ function progressClue(clueBot) {
             announcer.makePenultimateAnnouncement(clueBot);
             break;
         case 20:
+            clueBot.solved = true;
             announcer.makeFinalRevealAnnouncement(clueBot);
             break;
         default:

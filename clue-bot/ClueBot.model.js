@@ -6,6 +6,10 @@ const ClueBotSchema = new Schema({
         type: Number,
         default: 0
     },
+    solved: {
+        type: Boolean,
+        default: false
+    },
     title: {
         type: String,
     },
@@ -46,7 +50,7 @@ const ClueBotSchema = new Schema({
             type: String
         }
     ],
-    date: {
+    dateStarted: {
         type: Date,
         default: Date.now
     },

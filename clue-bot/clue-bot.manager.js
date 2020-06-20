@@ -10,7 +10,7 @@ function checkMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
             .find(
-                {status: {$ne: 21}}
+                {solved: false}
             )
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
@@ -49,7 +49,7 @@ function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
             .findOne(
-                {status: {$ne: 21}}
+                {solved: false}
             )
             .then((foundClueBot) => {
                 if (boolUtil.hasValue(foundClueBot)) {
@@ -88,8 +88,11 @@ function advanceClueBot(clueBot, resolve) {
             const announcement = response.announcements[response.announcements.length - 1];
             resolve({
                 title: response.title,
+                announcement,
+                status: response.status,
+                solved: response.solved,
+                dateStarted: response.date,
                 _id: response._id,
-                announcement
             });
         });
 }
