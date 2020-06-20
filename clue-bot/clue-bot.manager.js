@@ -99,9 +99,11 @@ function advanceClueBot(clueBot, resolve) {
     const updatedClueBot = clueBotProgressor.progressClue(clueBot);
     updatedClueBot.save()
         .then((response) => {
+            const announcement = response.announcements[response.announcements.length - 1];
             resolve({
                 title: response.title,
-                _id: response._id
+                _id: response._id,
+                announcement
             });
         });
 }
