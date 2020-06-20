@@ -45,6 +45,9 @@ const WEAPONS = [
     "A Crossbow",
     "A Cat o' Nine Tails",
     "A Musket",
+    "A Chainsaw",
+    "A Machete",
+    "A Katana",
 ];
 
 module.exports = {

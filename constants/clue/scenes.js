@@ -43,6 +43,9 @@ const SCENES = [
     "The Server Room",
     "The Prayer Room",
     "The Bar",
+    "The Dojo",
+    "The Vault",
+    "The Locker Room",
     "The Roof",
     "The Secret Passageway",
 ];
