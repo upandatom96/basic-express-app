@@ -1,30 +1,48 @@
 const announcer = require('./announcer');
 
 function progressClue(clueBot) {
-    if (clueBot.status === 0) {
-        clueBot.status = 1;
-        announcer.makeCrimeAnnouncement(clueBot);
-    } else if (clueBot.status === 1) {
-        clueBot.status = 2;
-        announcer.makeSuspectOptionAnnouncement(clueBot);
-    } else if (clueBot.status === 2) {
-        clueBot.status = 3;
-        announcer.makeWeaponOptionAnnouncement(clueBot);
-    } else if (clueBot.status === 3) {
-        clueBot.status = 4;
-        announcer.makeSceneOptionAnnouncement(clueBot);
-    } else if (clueBot.status === 4) {
-        if (clueBot.clues.length === 0) {
-            clueBot.status = 5;
-            announcer.makePenultimateAnnouncement(clueBot);
-        } else {
-            const nextClue = clueBot.clues.shift();
+    switch (clueBot.status) {
+        case 0:
+            announcer.makeCrimeAnnouncement(clueBot);
+            break;
+        case 1:
+            announcer.makeSuspectOptionAnnouncement(clueBot);
+            break;
+        case 2:
+            announcer.makeWeaponOptionAnnouncement(clueBot);
+            break;
+        case 3:
+            announcer.makeSceneOptionAnnouncement(clueBot);
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 17:
+        case 18:
+            const clueIndex = clueBot.status - 4;
+            const nextClue = clueBot.clues[clueIndex];
             announcer.makeClueAnnouncement(clueBot, nextClue);
-        }
-    } else if (clueBot.status === 5) {
-        clueBot.status = 6;
-        announcer.makeFinalRevealAnnouncement(clueBot);
+            break;
+        case 19:
+            announcer.makePenultimateAnnouncement(clueBot);
+            break;
+        case 20:
+            announcer.makeFinalRevealAnnouncement(clueBot);
+            break;
+        default:
+            console.log("INVALID STATUS");
     }
+    clueBot.status++;
     return clueBot;
 }
 

@@ -9,16 +9,9 @@ const boolUtil = require('../utilities/bool.util');
 function checkMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .find({
-                $or: [
-                    {status: 0},
-                    {status: 1},
-                    {status: 2},
-                    {status: 3},
-                    {status: 4},
-                    {status: 5}
-                ]
-            })
+            .find(
+                {status: {$ne: 21}}
+            )
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
                     resolve(clueBot);
@@ -55,16 +48,9 @@ function createNewClueBot(resolve) {
 function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne({
-                $or: [
-                    {status: 0},
-                    {status: 1},
-                    {status: 2},
-                    {status: 3},
-                    {status: 4},
-                    {status: 5}
-                ]
-            })
+            .findOne(
+                {status: {$ne: 21}}
+            )
             .then((foundClueBot) => {
                 if (boolUtil.hasValue(foundClueBot)) {
                     advanceClueBot(foundClueBot, resolve);
