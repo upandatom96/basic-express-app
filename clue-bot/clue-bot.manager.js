@@ -19,7 +19,7 @@ function checkMystery() {
                         announcements: clueBot.announcements,
                         status: clueBot.status,
                         solved: clueBot.solved,
-                        dateStarted: clueBot.date,
+                        dateStarted: clueBot.dateStarted,
                         _id: clueBot._id,
                     });
                 } else {
@@ -100,7 +100,7 @@ function advanceClueBot(clueBot, resolve) {
                 announcement,
                 status: response.status,
                 solved: response.solved,
-                dateStarted: response.date,
+                dateStarted: response.dateStarted,
                 _id: response._id,
             });
         });
