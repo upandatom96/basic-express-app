@@ -9,14 +9,21 @@ const boolUtil = require('../utilities/bool.util');
 function checkMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .find(
+            .findOne(
                 {solved: false}
             )
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
-                    resolve(clueBot);
+                    resolve({
+                        title: clueBot.title,
+                        announcements: clueBot.announcements,
+                        status: clueBot.status,
+                        solved: clueBot.solved,
+                        dateStarted: clueBot.date,
+                        _id: clueBot._id,
+                    });
                 } else {
-                    resolve("No active mystery");
+                    resolve(null);
                 }
             });
     });
