@@ -25,7 +25,9 @@ function checkMystery() {
 function checkAllMysteries() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .find()
+            .find(
+                {solved: true}
+            )
             .then((clueBots) => {
                 resolve(clueBots);
             });
