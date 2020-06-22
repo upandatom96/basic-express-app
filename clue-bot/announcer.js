@@ -19,7 +19,7 @@ function makeWeaponOptionAnnouncement(clueBot) {
 
 function makeSceneOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.sceneOptions);
-    const announcement = "The body was found near " + optionText + ".";
+    const announcement = "Based on where the body was found, the murder may have occurred in " + optionText + ".";
     makeAnnouncement(clueBot, announcement);
 }
 
