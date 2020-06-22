@@ -98,7 +98,8 @@ const NOUNS = [
     "lizard",
     "turtle",
     "frame",
-    "car"
+    "car",
+    "slime",
 ];
 
 module.exports = {

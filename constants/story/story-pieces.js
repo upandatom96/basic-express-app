@@ -51,6 +51,7 @@ const STORY_PREFIXES = [
     "E.T. The {A1}-Terrestrial",
     "Call Me by Your {N1}",
     "A {N1} Named Desire",
+    "The {A1} Life of Zack and Cody",
 ];
 
 module.exports = {
