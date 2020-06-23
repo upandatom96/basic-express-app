@@ -11,14 +11,12 @@ function getStats(clueBots) {
     const crimeSceneOccurrences = checkOccurrences(solvedMysteries, "scene");
 
     const solvedMysteryCount = solvedMysteries.length;
-    const mysteryCount = clueBots.length;
 
     const suspectCount = CONSTANTS.CULPRITS.length;
     const sceneCount = CONSTANTS.SCENES.length;
     const weaponCount = CONSTANTS.WEAPONS.length;
 
     return {
-        mysteryCount,
         solvedMysteryCount,
         suspectCount,
         sceneCount,
@@ -49,6 +47,9 @@ function checkOccurrences(solvedMysteries, attribute) {
             };
             occurrences.push(firstOccurrence);
         }
+    });
+    occurrences.sort(function(a,b) {
+        return b.count - a.count;
     });
     return occurrences;
 }
