@@ -1,7 +1,17 @@
 const tweetManager = require('../tweet/tweet.manager');
 
+function makeIntroAnnouncement(clueBot) {
+    const announcement = `${clueBot.title} | Welcome, detectives!`;
+    makeAnnouncement(clueBot, announcement);
+}
+
+function makeStatsAnnouncement(clueBot) {
+    const announcement = `Previous stats are...`;
+    makeAnnouncement(clueBot, announcement);
+}
+
 function makeCrimeAnnouncement(clueBot) {
-    const announcement = `${clueBot.title} | Welcome, detectives! Last night, during a party with many Esteemed Guests, ${clueBot.victim} was killed! Who did it? Where? How?`;
+    const announcement = `Last night, during a party with many Esteemed Guests, ${clueBot.victim} was killed! Who did it? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
@@ -23,8 +33,13 @@ function makeSceneOptionAnnouncement(clueBot) {
     makeAnnouncement(clueBot, announcement);
 }
 
+function makeInvestigationAnnouncement(clueBot) {
+    const announcement = `Your investigation starts now...`;
+    makeAnnouncement(clueBot, announcement);
+}
+
 function makeClueAnnouncement(clueBot, nextClue) {
-    const clueNumber = clueBot.status - 3;
+    const clueNumber = clueBot.status - 6;
     const announcement = `Clue #${clueNumber}: ${nextClue}`;
     makeAnnouncement(clueBot, announcement);
 }
@@ -47,6 +62,9 @@ module.exports = {
     makeClueAnnouncement,
     makePenultimateAnnouncement,
     makeFinalRevealAnnouncement,
+    makeInvestigationAnnouncement,
+    makeStatsAnnouncement,
+    makeIntroAnnouncement,
 }
 
 function getOptionText(options) {
@@ -63,7 +81,7 @@ function getOptionText(options) {
 }
 
 function makeAnnouncement(clueBot, announcement) {
-    const fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/21)`;
+    const fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/24)`;
     tweetManager.makeClueTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");
