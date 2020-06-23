@@ -1,12 +1,12 @@
 const tweetManager = require('../tweet/tweet.manager');
 
 function makeIntroAnnouncement(clueBot) {
-    const announcement = `${clueBot.title} | Welcome, detectives! As you sit in your office, you have a sense that a new mystery is about to unfold.`;
+    const announcement = `${clueBot.title} | Welcome, detectives! A new mystery is about to unfold.`;
     makeAnnouncement(clueBot, announcement);
 }
 
-function makeStatsAnnouncement(clueBot) {
-    const announcement = `You get a call, there has been another murder!`;
+function makeStatsAnnouncement(clueBot, solvedCount) {
+    const announcement = `There has been another murder! You've already solved ${solvedCount} mysteries, time for one more.`;
     makeAnnouncement(clueBot, announcement);
 }
 

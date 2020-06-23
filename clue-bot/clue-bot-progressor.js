@@ -1,12 +1,12 @@
 const announcer = require('./announcer');
 
-function progressClue(clueBot) {
+function progressClue(clueBot, solvedCount) {
     switch (clueBot.status) {
         case 0:
             announcer.makeIntroAnnouncement(clueBot);
             break;
         case 1:
-            announcer.makeStatsAnnouncement(clueBot);
+            announcer.makeStatsAnnouncement(clueBot, solvedCount);
             break;
         case 2:
             announcer.makeCrimeAnnouncement(clueBot);

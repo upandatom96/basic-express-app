@@ -61,7 +61,7 @@ function createNewClueBot(resolve) {
             new ClueBot(clueBotDetails)
                 .save()
                 .then((newClueBot) => {
-                    advanceClueBot(newClueBot, resolve);
+                    advanceClueBot(newClueBot, resolve, clueBots.length);
                 });
         });
 }
@@ -69,12 +69,16 @@ function createNewClueBot(resolve) {
 function progressMystery() {
     return new Promise((resolve, reject) => {
         ClueBot
-            .findOne(
-                {solved: false}
-            )
-            .then((foundClueBot) => {
-                if (boolUtil.hasValue(foundClueBot)) {
-                    advanceClueBot(foundClueBot, resolve);
+            .find({})
+            .then((allClueBots) => {
+                const unsolvedClueBot = allClueBots.find((bot) => {
+                    return !bot.solved;
+                });
+                if (boolUtil.hasValue(unsolvedClueBot)) {
+                    const solvedBots = allClueBots.filter((bot) => {
+                        return bot.solved;
+                    });
+                    advanceClueBot(unsolvedClueBot, resolve, solvedBots.length);
                 } else {
                     createNewClueBot(resolve);
                 }
@@ -103,8 +107,8 @@ module.exports = {
     deleteMystery
 }
 
-function advanceClueBot(clueBot, resolve) {
-    const updatedClueBot = clueBotProgressor.progressClue(clueBot);
+function advanceClueBot(clueBot, resolve, solvedCount) {
+    const updatedClueBot = clueBotProgressor.progressClue(clueBot, solvedCount);
     updatedClueBot.save()
         .then((response) => {
             const announcement = response.announcements[response.announcements.length - 1];
