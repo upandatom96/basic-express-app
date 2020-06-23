@@ -13,6 +13,17 @@ clueBotController.get('/current', (req, res) => {
         });
 });
 
+clueBotController.get('/stats', (req, res) => {
+    clueBotManager.checkStats()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 clueBotController.get('/', (req, res) => {
     clueBotManager.checkAllMysteries()
         .then((response) => {

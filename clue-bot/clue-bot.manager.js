@@ -3,6 +3,7 @@ require('./ClueBot.model');
 const ClueBot = mongoose.model('clue-bot');
 const clueBotGenerator = require('./clue-bot-generator');
 const clueBotProgressor = require('./clue-bot-progressor');
+const clueStats = require('./clue-stats');
 
 const boolUtil = require('../utilities/bool.util');
 
@@ -37,6 +38,17 @@ function checkAllMysteries() {
             )
             .then((clueBots) => {
                 resolve(clueBots);
+            });
+    });
+}
+
+function checkStats() {
+    return new Promise((resolve, reject) => {
+        ClueBot
+            .find({})
+            .then((clueBots) => {
+                const stats = clueStats.getStats(clueBots);
+                resolve(stats);
             });
     });
 }
@@ -84,6 +96,7 @@ function deleteMystery(id) {
 }
 
 module.exports = {
+    checkStats,
     checkMystery,
     checkAllMysteries,
     progressMystery,
