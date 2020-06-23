@@ -1,12 +1,12 @@
 const tweetManager = require('../tweet/tweet.manager');
 
 function makeIntroAnnouncement(clueBot) {
-    const announcement = `${clueBot.title} | Welcome, detectives!`;
+    const announcement = `${clueBot.title} | Welcome, detectives! As you sit in your office, you have a sense that a new mystery is about to unfold.`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeStatsAnnouncement(clueBot) {
-    const announcement = `Previous stats are...`;
+    const announcement = `You get a call, there has been another murder!`;
     makeAnnouncement(clueBot, announcement);
 }
 
@@ -17,24 +17,24 @@ function makeCrimeAnnouncement(clueBot) {
 
 function makeSuspectOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.culpritOptions);
-    const announcement = optionText + " are all very suspicious.";
+    const announcement = "As you head to the house, you compile a list of suspects. " + optionText + " seem suspicious to you.";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeWeaponOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.weaponOptions);
-    const announcement = optionText + " could have been used to kill.";
+    const announcement = "You find some strange items throughout the house. " + optionText + " could have been used to kill.";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeSceneOptionAnnouncement(clueBot) {
     const optionText = getOptionText(clueBot.sceneOptions);
-    const announcement = "Based on where the body was found, the murder may have occurred in " + optionText + ".";
+    const announcement = "You investigate where the body was found. You believe the crime was committed nearby in " + optionText + ".";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeInvestigationAnnouncement(clueBot) {
-    const announcement = `Your investigation starts now...`;
+    const announcement = `You have your lists of potential suspects, weapons, and crime scenes. You need to start finding Clues to eliminate some possibilities.`;
     makeAnnouncement(clueBot, announcement);
 }
 
