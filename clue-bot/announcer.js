@@ -16,8 +16,7 @@ function makeStatsAnnouncement(clueBot, solvedCount) {
 
 function makeCrimeAnnouncement(clueBot) {
     const crime = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.CRIME_PIECES);
-    const manorName = getManorName(clueBot.title);
-    const announcement = `Last night, ${clueBot.victim} ${crime} at ${manorName}. Who did it? Where? How?`;
+    const announcement = `Last night, [VICTIM] ${crime} at [MANOR]. Who did it? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
@@ -109,8 +108,15 @@ function getOptionText(options) {
     return optionText;
 }
 
+function interpolate(fullAnnouncement, clueBot) {
+    fullAnnouncement = fullAnnouncement.replace("[VICTIM]", clueBot.victim);
+    fullAnnouncement = fullAnnouncement.replace("[MANOR]", getManorName(clueBot.title));
+    return fullAnnouncement;
+}
+
 function makeAnnouncement(clueBot, announcement) {
-    const fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/27)`;
+    let fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/27)`;
+    fullAnnouncement = interpolate(fullAnnouncement, clueBot);
     tweetManager.makeClueTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");

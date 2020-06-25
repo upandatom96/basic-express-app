@@ -36,9 +36,9 @@ const SCENE_OPTION_PIECES = [
     "You enter all the rooms in the house and consider some as potential crime scenes:",
 ];
 const INVESTIGATION_PIECES = [
-    "you begin searching the house for Clues to eliminate some possibilities",
-    "you start gathering Clues to find the truth",
-    "you check the house for Clues to lead you to the truth",
+    "you begin searching the [MANOR] for clues to eliminate some possibilities",
+    "you start gathering clues to find the truth",
+    "you check the house for clues to lead you to the truth",
 ];
 const PENULTIMATE_PIECES = [
     "You are about to learn the truth of",
