@@ -1,4 +1,5 @@
 const STORY_PREFIXES = [
+    // TITLES
     "Sherlock Holmes and the Case of the {A1} {N1}",
     "Star Wars: Episode VI - {N1} of the Jedi",
     "Harry Potter and the Sorcerer's {N1}",
@@ -61,6 +62,15 @@ const STORY_PREFIXES = [
     "A {N1} Named Desire",
     "The {A1} Life of Zack and Cody",
     "The {A1} School Bus",
+    "Grant Theft {N1}",
+    "The Legend of Zelda: {N1} of the Wild",
+    "The Legend of Zelda: {N1}waker",
+    "The Legend of Zelda: A Link to the {N1}",
+    "The Legend of Zelda: Ocarina of {N1}",
+    "The Legend of Zelda: Majora's {N1}",
+    "Super Mario {N1}",
+    "{A1} Souls",
+    // QUOTES
     `"Frankly, my dear, I don't give a {N1}." - Gone With The Wind (1940)`,
     `"You're gonna need a bigger {N1}." - Jaws (1975)`,
     `"A martini. Shaken, not {A1}." - Goldfinger (1964)`,
@@ -79,6 +89,7 @@ const STORY_PREFIXES = [
     `"Keep your friends close, but your {N1} closer." - The Godfather Part II`,
     `"May the {N1} be with you." - Star Wars (1977)`,
     `"Fasten your seatbelts. It's going to be a {A1} night." - All About Eve (1950)`,
+    `"{N1}." - Citizen Kane (1941)`,
 ];
 
 module.exports = {
