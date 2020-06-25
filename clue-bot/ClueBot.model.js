@@ -13,9 +13,6 @@ const ClueBotSchema = new Schema({
     title: {
         type: String,
     },
-    manor: {
-        type: String,
-    },
     victim: {
         type: String
     },

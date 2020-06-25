@@ -38,15 +38,9 @@ function makeClueDeck(allWeapons, fakeWeapons, allScenes, fakeScenes, allCulprit
     return shuffleCluesTogether(fullCulpritClues, fullSceneClues, fullWeaponClues);
 }
 
-function scrubManorName(title) {
-    const manorNamePieces = title.split(" ").splice(-2);
-    return manorNamePieces[0] + " " + manorNamePieces[1];
-}
-
 function generateClueBotDetails(pastClueBots) {
     const previousTitles = getPreviousTitles(pastClueBots);
     const title = pickNewTitle(previousTitles);
-    const manor = scrubManorName(title);
 
     console.log(`Generating ${title}...`);
 
@@ -82,7 +76,6 @@ function generateClueBotDetails(pastClueBots) {
         title,
         victim,
         culprit,
-        manor,
         scene,
         weapon,
         clues,
