@@ -16,7 +16,7 @@ function makeStatsAnnouncement(clueBot, solvedCount) {
 
 function makeCrimeAnnouncement(clueBot) {
     const crime = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.CRIME_PIECES);
-    const announcement = `Last night, ${clueBot.victim} ${crime}. Who did it? Where? How?`;
+    const announcement = `Last night, ${clueBot.victim} ${crime} at ${clueBot.manorName}. Who did it? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
