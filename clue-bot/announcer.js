@@ -1,39 +1,45 @@
 const tweetManager = require('../tweet/tweet.manager');
 
 function makeIntroAnnouncement(clueBot) {
+    // TODO
     const announcement = `${clueBot.title} | Welcome, detectives! A new mystery is about to unfold.`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeStatsAnnouncement(clueBot, solvedCount) {
-    const announcement = `There has been another murder! You've already solved ${solvedCount} mysteries, time for one more.`;
+    const announcement = `After solving ${solvedCount + 1} murder mysteries, someone else has been killed! For statistics and solved mysteries, go to https://adam-on-the-internet.github.io/the-clue-bot-ui/`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeCrimeAnnouncement(clueBot) {
+    // TODO
     const announcement = `Last night, during a party with many Esteemed Guests, ${clueBot.victim} was killed! Who did it? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeSuspectOptionAnnouncement(clueBot) {
+    // TODO
     const optionText = getOptionText(clueBot.culpritOptions);
     const announcement = "As you head to the house, you compile a list of suspects. " + optionText + " seem suspicious to you.";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeWeaponOptionAnnouncement(clueBot) {
+    // TODO
     const optionText = getOptionText(clueBot.weaponOptions);
     const announcement = "You find some strange items throughout the house. " + optionText + " could have been used to kill.";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeSceneOptionAnnouncement(clueBot) {
+    // TODO
     const optionText = getOptionText(clueBot.sceneOptions);
     const announcement = "You investigate where the body was found. You take note of nearby rooms: " + optionText + ".";
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeInvestigationAnnouncement(clueBot) {
+    // TODO
     const announcement = `You have your lists of potential suspects, weapons, and crime scenes. You need to start finding Clues to eliminate some possibilities.`;
     makeAnnouncement(clueBot, announcement);
 }
@@ -50,7 +56,9 @@ function makePenultimateAnnouncement(clueBot) {
 }
 
 function makeFinalRevealAnnouncement(clueBot) {
-    const announcement = `We caught the Culprit! ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}! Thank you for your help!`;
+    // TODO
+    const revealIntro = "We caught the Culprit!";
+    const announcement = `${revealIntro} ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}!`;
     makeAnnouncement(clueBot, announcement);
 }
 
