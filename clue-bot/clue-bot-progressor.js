@@ -24,30 +24,37 @@ function progressClue(clueBot, solvedCount) {
             announcer.makeInvestigationAnnouncement(clueBot);
             break;
         case 7:
+            announcer.endDayOne(clueBot);
+            break;
         case 8:
         case 9:
         case 10:
         case 11:
-
         case 12:
         case 13:
         case 14:
         case 15:
+            announcer.makeClueAnnouncement(clueBot, clueBot.status - 7);
+            break;
         case 16:
-
+            announcer.endDayTwo(clueBot);
+            break;
         case 17:
         case 18:
         case 19:
         case 20:
         case 21:
-            const clueIndex = clueBot.status - 7;
-            const nextClue = clueBot.clues[clueIndex];
-            announcer.makeClueAnnouncement(clueBot, nextClue);
-            break;
         case 22:
+        case 23:
+            announcer.makeClueAnnouncement(clueBot, clueBot.status - 8);
+            break;
+        case 24:
             announcer.makePenultimateAnnouncement(clueBot);
             break;
-        case 23:
+        case 25:
+            announcer.endDayThree(clueBot);
+            break;
+        case 26:
             clueBot.solved = true;
             announcer.makeFinalRevealAnnouncement(clueBot);
             break;

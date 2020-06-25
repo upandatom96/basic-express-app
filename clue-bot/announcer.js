@@ -3,8 +3,9 @@ const CONSTANTS = require('../constants/constants.manager');
 const randomUtil = require('../utilities/random.util');
 
 function makeIntroAnnouncement(clueBot) {
-    // TODO
-    const announcement = `${clueBot.title} | Welcome, detectives! A new mystery is about to unfold.`;
+    const introStart = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.INTRO_START_PIECES);
+    const introEnd = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.INTRO_END_PIECES);
+    const announcement = `${clueBot.title} | ${introStart} ${introEnd}`;
     makeAnnouncement(clueBot, announcement);
 }
 
@@ -14,47 +15,61 @@ function makeStatsAnnouncement(clueBot, solvedCount) {
 }
 
 function makeCrimeAnnouncement(clueBot) {
-    // TODO
-    const announcement = `Last night, during a party with many Esteemed Guests, ${clueBot.victim} was killed! Who did it? Where? How?`;
+    const crime = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.CRIME_PIECES);
+    const announcement = `Last night, ${clueBot.victim} ${crime}. Who did it? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeSuspectOptionAnnouncement(clueBot) {
-    // TODO
     const optionText = getOptionText(clueBot.culpritOptions);
-    const announcement = "As you head to the house, you compile a list of suspects. " + optionText + " seem suspicious to you.";
+    const suspectPiece = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.SUSPECT_OPTION_PIECES);
+    const announcement = `${suspectPiece} ${optionText}.`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeWeaponOptionAnnouncement(clueBot) {
-    // TODO
     const optionText = getOptionText(clueBot.weaponOptions);
-    const announcement = "You find some strange items throughout the house. " + optionText + " could have been used to kill.";
+    const weaponPiece = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.WEAPON_OPTION_PIECES);
+    const announcement = `${weaponPiece} ${optionText}.`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeSceneOptionAnnouncement(clueBot) {
-    // TODO
     const optionText = getOptionText(clueBot.sceneOptions);
-    const announcement = "You investigate where the body was found. You take note of nearby rooms: " + optionText + ".";
+    const scenePiece = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.SCENE_OPTION_PIECES);
+    const announcement = `${scenePiece} ${optionText}.`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeInvestigationAnnouncement(clueBot) {
-    // TODO
-    const announcement = `You have your lists of potential suspects, weapons, and crime scenes. You need to start finding Clues to eliminate some possibilities.`;
+    const investigationStart = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.INVESTIGATION_PIECES);
+    const announcement = `With your lists of potential suspects, weapons, and crime scenes, ${investigationStart}.`;
     makeAnnouncement(clueBot, announcement);
 }
 
-function makeClueAnnouncement(clueBot, nextClue) {
-    const clueNumber = clueBot.status - 6;
-    const announcement = `Clue #${clueNumber}: ${nextClue}`;
+function endDayOne(clueBot) {
+    const announcement = `Day One of this mystery has ended. The story continues tomorrow as you begin finding clues.`;
+    makeAnnouncement(clueBot, announcement);
+}
+
+function endDayTwo(clueBot) {
+    const announcement = `Day Two of this mystery has ended. The story continues tomorrow as you uncover more clues!`;
+    makeAnnouncement(clueBot, announcement);
+}
+
+function endDayThree(clueBot) {
+    const announcement = `Day Three of this mystery has ended. The story will conclude with tomorrow's first update!`;
+    makeAnnouncement(clueBot, announcement);
+}
+
+function makeClueAnnouncement(clueBot, clueNumber) {
+    const announcement = `Clue #${clueNumber}: ${clueBot.clues[clueNumber - 1]}`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makePenultimateAnnouncement(clueBot) {
     const penultimatePiece = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.PENULTIMATE_PIECES);
-    const announcement = `${penultimatePiece} ${clueBot.title}! Make your guesses now! Who? Where? How?`;
+    const announcement = `${penultimatePiece} ${clueBot.title}! Who? Where? How? Make your guesses...`;
     makeAnnouncement(clueBot, announcement);
 }
 
@@ -75,6 +90,9 @@ module.exports = {
     makeInvestigationAnnouncement,
     makeStatsAnnouncement,
     makeIntroAnnouncement,
+    endDayOne,
+    endDayTwo,
+    endDayThree,
 }
 
 function getOptionText(options) {
@@ -91,7 +109,7 @@ function getOptionText(options) {
 }
 
 function makeAnnouncement(clueBot, announcement) {
-    const fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/24)`;
+    const fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/27)`;
     tweetManager.makeClueTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");
