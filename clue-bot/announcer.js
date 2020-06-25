@@ -1,4 +1,6 @@
 const tweetManager = require('../tweet/tweet.manager');
+const CONSTANTS = require('../constants/constants.manager');
+const randomUtil = require('../utilities/random.util');
 
 function makeIntroAnnouncement(clueBot) {
     // TODO
@@ -51,13 +53,13 @@ function makeClueAnnouncement(clueBot, nextClue) {
 }
 
 function makePenultimateAnnouncement(clueBot) {
-    const announcement = `The truth of ${clueBot.title} is about to be revealed! Make your guesses now! Who? Where? How?`;
+    const penultimatePiece = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.PENULTIMATE_PIECES);
+    const announcement = `${penultimatePiece} ${clueBot.title}! Make your guesses now! Who? Where? How?`;
     makeAnnouncement(clueBot, announcement);
 }
 
 function makeFinalRevealAnnouncement(clueBot) {
-    // TODO
-    const revealIntro = "We caught the Culprit!";
+    const revealIntro = randomUtil.pickRandom(CONSTANTS.ANNOUNCEMENT_PIECES.REVEAL_PIECES);
     const announcement = `${revealIntro} ${clueBot.victim} was killed by ${clueBot.culprit} in ${clueBot.scene} with ${clueBot.weapon}!`;
     makeAnnouncement(clueBot, announcement);
 }
