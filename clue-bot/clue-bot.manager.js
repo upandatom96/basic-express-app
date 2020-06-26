@@ -36,6 +36,7 @@ function checkAllMysteries() {
             .find(
                 {solved: true}
             )
+            .sort({dateStarted: -1})
             .then((clueBots) => {
                 resolve(clueBots);
             });
