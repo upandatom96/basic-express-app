@@ -42,7 +42,7 @@ const STORY_PREFIXES = [
     "It's a {A1} Life",
     "Gone With the {N1}",
     "Indiana Jones: Raiders of the Lost {N1}",
-    "Night of the ${A1} Dead",
+    "Night of the {A1} Dead",
     "{A1} Miss Sunshine",
     "The Secret {N1} of Walter Mitty",
     "It's Always {A1} in Philadelphia",
