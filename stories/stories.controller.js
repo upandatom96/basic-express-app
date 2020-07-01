@@ -25,7 +25,7 @@ storyController.post('/', (req, res) => {
     res.send(story);
 });
 
-storyController.post('/', (req, res) => {
+storyController.post('/synonym', (req, res) => {
     storyManager.getRandomSynonymStory()
         .then((story) => {
             tweetManager.makeStoryTweet(story);
