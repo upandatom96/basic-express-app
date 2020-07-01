@@ -48,6 +48,10 @@ function pickStoryPrefix() {
   return randomUtil.pickRandom(constants.STORY_PIECES.STORY_PREFIXES);
 }
 
+function pickStorySynonym() {
+  return randomUtil.pickRandom(constants.STORY_PIECES.STORY_FOR_SYNONYMS);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -64,6 +68,7 @@ module.exports = {
   getNewPhrase,
   getWordCount,
   pickStoryPrefix,
+  pickStorySynonym,
   pickNoun,
   pickAdjective
 }

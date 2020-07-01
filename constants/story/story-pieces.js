@@ -1,3 +1,12 @@
+const STORY_FOR_SYNONYMS = [
+    "Some Like It {Hot}",
+    "James Bond: From Russia with {Love}",
+    "James Bond: The Man with the {Golden} Gun",
+    "James Bond: The Man with the Golden {Gun}",
+    "Indiana Jones and the {Temple} of Doom",
+    "Indiana Jones and the Temple of {Doom}",
+];
+
 const STORY_PREFIXES = [
     // TITLES
     "Sherlock Holmes and the Case of the {A1} {N1}",
@@ -8,6 +17,7 @@ const STORY_PREFIXES = [
     "Call of Duty: {A1} Warfare",
     "James Bond: From Russia with {N1}",
     "James Bond: The Man with the {A1} Gun",
+    "James Bond: The Man with the Golden {N1}",
     "Indiana Jones and the {N1} of Doom",
     "Indiana Jones and the Kingdom of the {A1} {N1}",
     "Avengers: {A1} {N1}",
@@ -93,5 +103,6 @@ const STORY_PREFIXES = [
 ];
 
 module.exports = {
-    STORY_PREFIXES
+    STORY_PREFIXES,
+    STORY_FOR_SYNONYMS
 }

@@ -1,4 +1,5 @@
 const randomManager = require("../random/random.manager");
+const wordManager = require("../word/word.manager");
 const stringUtil = require('../utilities/string.util');
 
 function getRandomStory() {
@@ -14,6 +15,20 @@ function getRandomStory() {
     return storyPrefix;
 }
 
+function getRandomSynonymStory() {
+    return new Promise((resolve, reject) => {
+        const chosenPhrase = randomManager.pickStorySynonym();
+        wordManager.swapAWord(chosenPhrase)
+            .then((newPhrase) => {
+                resolve(newPhrase);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
+
 module.exports = {
-    getRandomStory
+    getRandomStory,
+    getRandomSynonymStory
 }

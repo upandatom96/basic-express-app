@@ -8,10 +8,33 @@ storyController.get('/', (req, res) => {
     res.send(story);
 });
 
+storyController.get('/synonym', (req, res) => {
+    storyManager.getRandomSynonymStory()
+        .then((story) => {
+            res.send(story);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 storyController.post('/', (req, res) => {
     const story = storyManager.getRandomStory();
     tweetManager.makeStoryTweet(story);
     res.send(story);
+});
+
+storyController.post('/', (req, res) => {
+    storyManager.getRandomSynonymStory()
+        .then((story) => {
+            tweetManager.makeStoryTweet(story);
+            res.send(story);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
 });
 
 module.exports = storyController;
