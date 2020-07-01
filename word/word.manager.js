@@ -40,8 +40,16 @@ module.exports = {
 
 function getNewWordFromResponse(body) {
     const synonyms = JSON.parse(body);
-    const topFive = synonyms.slice(0, 5);
-    const oneSelected = randomUtil.pickRandom(topFive);
+
+    let topSize;
+    if (synonyms.length >= 5) {
+        topSize = 5;
+    } else {
+        topSize = synonyms.length;
+    }
+
+    const top = synonyms.slice(0, topSize);
+    const oneSelected = randomUtil.pickRandom(top);
     return oneSelected.word;
 }
 
