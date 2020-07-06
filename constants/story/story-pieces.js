@@ -172,7 +172,7 @@ const STORY_PREFIXES = [
     "Red Dead {N1}",
     "Resident {A1}",
     "{A1} Hill",
-    "The {Legend} of Zelda",
+    "The {N1} of Zelda",
     "Castlevania: {N1} of the Night",
     "Castlevania: Symphony of the {N1}",
     "Super {A1} Bros: Melee",
