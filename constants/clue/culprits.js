@@ -68,6 +68,12 @@ const CULPRITS = [
     "Professor Moriarty",
     "Columbo",
     "Dupin",
+    "Professor Layton",
+    "Kyoko Kirigiri",
+    "Shuichi Saihara",
+    "Tommy Beresford",
+    "Phoenix Wright",
+    "Miles Edgeworth",
 ];
 
 module.exports = {
