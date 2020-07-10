@@ -49,6 +49,11 @@ const WEAPONS = [
     "A Machete",
     "A Katana",
     "A Shovel",
+    "A Saxophone",
+    "A Drumstick",
+    "A Stick of Dynamite",
+    "A Pick-axe",
+    "A Cigar",
 ];
 
 module.exports = {

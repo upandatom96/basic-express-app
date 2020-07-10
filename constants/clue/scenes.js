@@ -49,6 +49,11 @@ const SCENES = [
     "The Roof",
     "The Secret Passageway",
     "The Garden",
+    "The Docks",
+    "The Poker Room",
+    "The Pantry",
+    "The Control Room",
+    "The Entryway",
 ];
 
 module.exports = {
