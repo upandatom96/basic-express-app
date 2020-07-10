@@ -48,7 +48,7 @@ const SCENES = [
     "The Locker Room",
     "The Roof",
     "The Secret Passageway",
-    "The Garden",
+    "The Flower Garden",
     "The Docks",
     "The Poker Room",
     "The Pantry",
@@ -64,6 +64,16 @@ const SCENES = [
     "The Computer Room",
     "The Office",
     "The Fire Escape",
+    "The Boudoir",
+    "The Rotunda",
+    "The Powder Room",
+    "The Cloak Room",
+    "The Cabana",
+    "The Dance Studio",
+    "The Zen Garden",
+    "The Stables",
+    "The Spiral Staircase",
+    "The Driveway",
 ];
 
 module.exports = {

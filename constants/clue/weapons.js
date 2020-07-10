@@ -64,6 +64,16 @@ const WEAPONS = [
     "A Tool-belt",
     "A Strange Gadget",
     "A Moldy Cheese",
+    "A Microchip",
+    "A Model Ship",
+    "A Model Car",
+    "A Model Train",
+    "A Building Block",
+    "A Teddy Bear",
+    "A Flamethrower",
+    "A Work of Art",
+    "A Towel",
+    "A Strongly Worded Letter",
 ];
 
 module.exports = {
