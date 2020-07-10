@@ -54,6 +54,16 @@ const SCENES = [
     "The Pantry",
     "The Control Room",
     "The Entryway",
+    "The Cheese Cabinet",
+    "The Generator Room",
+    "The Furnace Room",
+    "The Surveillance Room",
+    "The Art Gallery",
+    "The Model Train Room",
+    "The Distillery",
+    "The Computer Room",
+    "The Office",
+    "The Fire Escape",
 ];
 
 module.exports = {

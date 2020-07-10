@@ -54,6 +54,16 @@ const WEAPONS = [
     "A Stick of Dynamite",
     "A Pick-axe",
     "A Cigar",
+    "A Fork",
+    "A Spoon",
+    "A Pitchfork",
+    "A Dagger",
+    "A Handsaw",
+    "A Screwdriver",
+    "A Cheese-grater",
+    "A Tool-belt",
+    "A Strange Gadget",
+    "A Moldy Cheese",
 ];
 
 module.exports = {
