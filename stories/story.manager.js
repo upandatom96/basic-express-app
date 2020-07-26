@@ -8,10 +8,10 @@ function getRandomStory() {
     const adjective1 = stringUtil.toTitleCase(randomManager.pickAdjective());
     const adjective2 = stringUtil.toTitleCase(randomManager.pickAdjective());
     let storyPrefix = randomManager.pickStoryPrefix();
-    storyPrefix = storyPrefix.replace("{N1}", noun1);
-    storyPrefix = storyPrefix.replace("{A1}", adjective1);
-    storyPrefix = storyPrefix.replace("{N2}", noun2);
-    storyPrefix = storyPrefix.replace("{A2}", adjective2);
+    storyPrefix = storyPrefix.replace(/{N1}/g, noun1);
+    storyPrefix = storyPrefix.replace(/{A1}/g, adjective1);
+    storyPrefix = storyPrefix.replace(/{N2}/g, noun2);
+    storyPrefix = storyPrefix.replace(/{A2}/g, adjective2);
     return storyPrefix;
 }
 
