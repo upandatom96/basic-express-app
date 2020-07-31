@@ -68,7 +68,7 @@ module.exports = {
   getNewPhrase,
   getWordCount,
   pickStoryPrefix,
-  pickStorySynonym,
+  pickStoryBase: pickStorySynonym,
   pickNoun,
   pickAdjective
 }

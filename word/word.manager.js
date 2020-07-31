@@ -2,14 +2,19 @@ const randomUtil = require("../utilities/random.util");
 const stringUtil = require("../utilities/string.util");
 const request = require('request');
 
+const DATAMUSE_BASE = 'http://api.datamuse.com/words';
+
 function getSynonym(oldWord) {
     return new Promise((resolve, reject) => {
-        const synonymRequest = 'http://api.datamuse.com/words?ml=' + oldWord;
-        request(synonymRequest, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                const newWord = getNewWordFromResponse(body);
-                console.log(`${oldWord} -> ${newWord}`);
-                resolve(newWord);
+        const url = `${DATAMUSE_BASE}?ml=${oldWord}`;
+        request(url, function (error, response, body) {
+            const happyResponse = !error && response.statusCode === 200;
+            if (happyResponse) {
+                const synonymItems = JSON.parse(body);
+                const synonyms = synonymItems.map((item) => {
+                    return item.word;
+                });
+                resolve(synonyms);
             } else {
                 reject();
             }
@@ -17,14 +22,16 @@ function getSynonym(oldWord) {
     });
 }
 
-function swapAWord(oldPhase) {
-    const wordToReplace = fetchWordToReplace(oldPhase);
+function swapAWord(oldPhrase) {
+    const oldWord = fetchWordToReplace(oldPhrase);
 
     return new Promise((resolve, reject) => {
-        getSynonym(wordToReplace)
-            .then((newWord) => {
-                const newPhrase = oldPhase.replace(`{${wordToReplace}}`, stringUtil.toTitleCase(newWord));
-                console.log(`${oldPhase} -> ${newPhrase}`);
+        getSynonym(oldWord)
+            .then((synonyms) => {
+                const newWord = randomUtil.pickRandomWithLimit(synonyms, 5);
+                console.log(`${oldWord} -> ${newWord}`);
+                const newPhrase = replaceWord(oldPhrase, oldWord, newWord);
+                console.log(`${oldPhrase} -> ${newPhrase}`);
                 resolve(newPhrase);
             })
             .catch((err) => {
@@ -38,24 +45,12 @@ module.exports = {
     swapAWord
 }
 
-function getNewWordFromResponse(body) {
-    const synonyms = JSON.parse(body);
-
-    let topSize;
-    if (synonyms.length >= 5) {
-        topSize = 5;
-    } else {
-        topSize = synonyms.length;
-    }
-
-    const top = synonyms.slice(0, topSize);
-    const oneSelected = randomUtil.pickRandom(top);
-    return oneSelected.word;
+function fetchWordToReplace(oldPhase) {
+    const start = oldPhase.lastIndexOf("{") + 1;
+    const end = oldPhase.lastIndexOf("}");
+    return oldPhase.substring(start, end);
 }
 
-function fetchWordToReplace(oldPhase) {
-    return oldPhase.substring(
-        oldPhase.lastIndexOf("{") + 1,
-        oldPhase.lastIndexOf("}")
-    );
+function replaceWord(oldPhase, wordToReplace, newWord) {
+    return oldPhase.replace(`{${wordToReplace}}`, stringUtil.toTitleCase(newWord));
 }

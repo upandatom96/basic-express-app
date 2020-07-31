@@ -17,8 +17,8 @@ function getRandomStory() {
 
 function getRandomSynonymStory() {
     return new Promise((resolve, reject) => {
-        const chosenPhrase = randomManager.pickStorySynonym();
-        wordManager.swapAWord(chosenPhrase)
+        const storyBase = randomManager.pickStoryBase();
+        wordManager.swapAWord(storyBase)
             .then((newPhrase) => {
                 resolve(newPhrase);
             })
