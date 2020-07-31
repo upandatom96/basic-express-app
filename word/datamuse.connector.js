@@ -8,8 +8,33 @@ function retrieveRhymes(oldWord) {
     return findMatchingWords("rel_rhy", oldWord);
 }
 
+function retrieveAntonyms(oldWord) {
+    return findMatchingWords("rel_ant", oldWord);
+}
+
+function retrieveSynonyms(oldWord) {
+    return findMatchingWords("rel_syn", oldWord);
+}
+
+function retrieveHomophones(oldWord) {
+    return findMatchingWords("rel_hom", oldWord);
+}
+
+function retrieveConsonantMatches(oldWord) {
+    return findMatchingWords("rel_cns", oldWord);
+}
+
+function retrieveKindOfMatches(oldWord) {
+    return findMatchingWords("rel_spc", oldWord);
+}
+
 module.exports = {
     retrieveSimilarMeaningPhrases,
+    retrieveAntonyms,
+    retrieveSynonyms,
+    retrieveHomophones,
+    retrieveConsonantMatches,
+    retrieveKindOfMatches,
     retrieveRhymes
 }
 

@@ -29,6 +29,16 @@ storyController.get('/super', async (req, res) => {
     }
 });
 
+storyController.get('/rhyme', async (req, res) => {
+    try {
+        const story = await storyManager.getRandomRhymeStory();
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 storyController.post('/', (req, res) => {
     const story = storyManager.getRandomStory();
     tweetManager.makeStoryTweet(story);
@@ -45,6 +55,28 @@ storyController.post('/synonym', (req, res) => {
             res.statusCode = 500;
             res.send(err);
         });
+});
+
+storyController.post('/super', async (req, res) => {
+    try {
+        const story = await storyManager.getSuperRandomStory();
+        tweetManager.makeStoryTweet(story);
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
+storyController.post('/rhyme', async (req, res) => {
+    try {
+        const story = await storyManager.getRandomRhymeStory();
+        tweetManager.makeStoryTweet(story);
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
 });
 
 module.exports = storyController;

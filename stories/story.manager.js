@@ -34,12 +34,27 @@ async function getSuperRandomStory() {
         const storyBase = randomManager.pickStoryBase();
         const oldWord = fetchWordToReplace(storyBase);
 
-        const meansLike = await datamuseConnector.retrieveSimilarMeaningPhrases(oldWord)
-        const rhymes = await datamuseConnector.retrieveRhymes(oldWord)
+        const rhymes = await datamuseConnector.retrieveRhymes(oldWord);
+        const antonyms = await datamuseConnector.retrieveAntonyms(oldWord);
+        const synonyms = await datamuseConnector.retrieveSynonyms(oldWord);
+        const homophones = await datamuseConnector.retrieveHomophones(oldWord);
 
-        const wordOptions = [].concat(meansLike, rhymes);
+        const wordOptions = rhymes.concat(antonyms, synonyms, homophones);
 
         return buildNewPhrase(wordOptions, oldWord, storyBase);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getRandomRhymeStory() {
+    try {
+        const storyBase = randomManager.pickStoryBase();
+        const oldWord = fetchWordToReplace(storyBase);
+
+        const rhymes = await datamuseConnector.retrieveRhymes(oldWord);
+
+        return buildNewPhrase(rhymes, oldWord, storyBase);
     } catch (error) {
         console.error(error);
     }
@@ -63,6 +78,7 @@ function getRandomSynonymStory() {
 
 module.exports = {
     getSuperRandomStory,
+    getRandomRhymeStory,
     getRandomStory,
     getRandomSynonymStory
 }
