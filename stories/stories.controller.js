@@ -3,13 +3,13 @@ const storyController = express.Router();
 const storyManager = require("./story.manager");
 const tweetManager = require('../tweet/tweet.manager');
 
-storyController.post('/random', (req, res) => {
+storyController.get('/random', (req, res) => {
     const story = storyManager.getRandomStory();
     tweetStory(req.query.tweet, story);
     res.send(story);
 });
 
-storyController.post('/synonym', (req, res) => {
+storyController.get('/synonym', (req, res) => {
     storyManager.getRandomSynonymStory()
         .then((story) => {
             tweetStory(req.query.tweet, story);
@@ -21,7 +21,7 @@ storyController.post('/synonym', (req, res) => {
         });
 });
 
-storyController.post('/super', async (req, res) => {
+storyController.get('/super', async (req, res) => {
     try {
         const story = await storyManager.getSuperRandomStory();
         tweetStory(req.query.tweet, story);
@@ -32,7 +32,7 @@ storyController.post('/super', async (req, res) => {
     }
 });
 
-storyController.post('/rhyme', async (req, res) => {
+storyController.get('/rhyme', async (req, res) => {
     try {
         const story = await storyManager.getRandomRhymeStory();
         tweetStory(req.query.tweet, story);
