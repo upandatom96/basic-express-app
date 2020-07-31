@@ -21,9 +21,6 @@ function setupControllers(app) {
   const clueBotController = require('../clue-bot/clue-bot.controller');
   app.use('/clueBot', clueBotController);
 
-  const wordController = require('../word/word.controller');
-  app.use('/word', wordController);
-
   const storyController = require('../stories/stories.controller');
   app.use('/story', storyController);
 
