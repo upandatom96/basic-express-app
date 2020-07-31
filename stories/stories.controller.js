@@ -3,22 +3,26 @@ const storyController = express.Router();
 const storyManager = require("./story.manager");
 const tweetManager = require('../tweet/tweet.manager');
 
-storyController.get('/random', (req, res) => {
-    const story = storyManager.getRandomStory();
-    tweetStory(req.query.tweet, story);
-    res.send(story);
+storyController.get('/random', async (req, res) => {
+    try {
+        const story = await storyManager.getRandomStory();
+        tweetStory(req.query.tweet, story);
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
 });
 
-storyController.get('/synonym', (req, res) => {
-    storyManager.getRandomSynonymStory()
-        .then((story) => {
-            tweetStory(req.query.tweet, story);
-            res.send(story);
-        })
-        .catch((err) => {
-            res.statusCode = 500;
-            res.send(err);
-        });
+storyController.get('/synonym', async (req, res) => {
+    try {
+        const story = await storyManager.getRandomSynonymStory();
+        tweetStory(req.query.tweet, story);
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
 });
 
 storyController.get('/super', async (req, res) => {
