@@ -21,12 +21,28 @@ function replaceGlobally(originalString, wordToReplace, replacement) {
     return originalString.replace(regex, replacement);
 }
 
-function buildNewPhase(wordOptions, oldWord, storyBase) {
-    const newWord = randomUtil.pickRandomWithLimit(wordOptions, 5);
+function buildNewPhrase(wordOptions, oldWord, storyBase) {
+    const newWord = randomUtil.pickRandom(wordOptions);
     console.log(`${oldWord} -> ${newWord}`);
     const newPhrase = replaceGlobally(storyBase, `{${oldWord}}`, stringUtil.toTitleCase(newWord));
     console.log(`${storyBase} -> ${newPhrase}`);
     return newPhrase;
+}
+
+async function getSuperRandomStory() {
+    try {
+        const storyBase = randomManager.pickStoryBase();
+        const oldWord = fetchWordToReplace(storyBase);
+
+        const meansLike = await datamuseConnector.retrieveSimilarMeaningPhrases(oldWord)
+        const rhymes = await datamuseConnector.retrieveRhymes(oldWord)
+
+        const wordOptions = [].concat(meansLike, rhymes);
+
+        return buildNewPhrase(wordOptions, oldWord, storyBase);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function getRandomSynonymStory() {
@@ -34,9 +50,9 @@ function getRandomSynonymStory() {
         const storyBase = randomManager.pickStoryBase();
         const oldWord = fetchWordToReplace(storyBase);
 
-        datamuseConnector.retrieveSynonyms(oldWord)
+        datamuseConnector.retrieveSimilarMeaningPhrases(oldWord)
             .then((wordOptions) => {
-                const newPhrase = buildNewPhase(wordOptions, oldWord, storyBase);
+                const newPhrase = buildNewPhrase(wordOptions, oldWord, storyBase);
                 resolve(newPhrase);
             })
             .catch((err) => {
@@ -46,6 +62,7 @@ function getRandomSynonymStory() {
 }
 
 module.exports = {
+    getSuperRandomStory,
     getRandomStory,
     getRandomSynonymStory
 }

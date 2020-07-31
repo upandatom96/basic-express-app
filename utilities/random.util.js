@@ -8,13 +8,6 @@ function generateRandomPassword() {
     return result;
 }
 
-function pickRandomWithLimit(items, limit) {
-    const listExceedsLimit = items.length >= limit;
-    const trueLimit = listExceedsLimit ? limit : items.length;
-    const limitedList = items.slice(0, trueLimit);
-    return pickRandom(limitedList);
-}
-
 function pickRandom(array) {
     const shuffledArray = shuffleArray(array);
     return shuffledArray[0];
@@ -48,7 +41,6 @@ function shuffleArray(array) {
 module.exports = {
     generateRandomPassword,
     shuffleArray,
-    pickRandomWithLimit,
     pickRandom,
     drawNItems
 }

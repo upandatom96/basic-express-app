@@ -19,6 +19,16 @@ storyController.get('/synonym', (req, res) => {
         });
 });
 
+storyController.get('/super', async (req, res) => {
+    try {
+        const story = await storyManager.getSuperRandomStory();
+        res.send(story);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 storyController.post('/', (req, res) => {
     const story = storyManager.getRandomStory();
     tweetManager.makeStoryTweet(story);
