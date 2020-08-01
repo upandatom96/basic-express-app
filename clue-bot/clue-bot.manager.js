@@ -15,14 +15,24 @@ function checkMystery() {
             )
             .then((clueBot) => {
                 if (boolUtil.hasValue(clueBot)) {
-                    resolve({
+                    const revealedDetails = {
                         title: clueBot.title,
                         announcements: clueBot.announcements,
                         status: clueBot.status,
                         solved: clueBot.solved,
                         dateStarted: clueBot.dateStarted,
                         _id: clueBot._id,
-                    });
+                    };
+                    if (areOptionsRevealed(clueBot.weaponOptions, clueBot.announcements)) {
+                        revealedDetails.weaponOptions = clueBot.weaponOptions;
+                    }
+                    if (areOptionsRevealed(clueBot.sceneOptions, clueBot.announcements)) {
+                        revealedDetails.sceneOptions = clueBot.sceneOptions;
+                    }
+                    if (areOptionsRevealed(clueBot.culpritOptions, clueBot.announcements)) {
+                        revealedDetails.culpritOptions = clueBot.culpritOptions;
+                    }
+                    resolve(revealedDetails);
                 } else {
                     resolve(null);
                 }
@@ -122,4 +132,12 @@ function advanceClueBot(clueBot, resolve, solvedCount) {
                 _id: response._id,
             });
         });
+}
+
+function areOptionsRevealed(options, announcements) {
+    return announcements.some((announcement) => {
+        return options.every((option) => {
+            return announcement.includes(option);
+        });
+    });
 }
