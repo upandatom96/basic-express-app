@@ -48,9 +48,6 @@ function progressClue(clueBot, solvedCount) {
             announcer.makeFinalRevealAnnouncement(clueBot);
             break;
         default:
-            clueBot.solved = true;
-            announcer.makeFinalRevealAnnouncement(clueBot);
-            break;
             console.log("INVALID STATUS");
     }
     clueBot.status++;
