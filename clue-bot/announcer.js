@@ -47,21 +47,6 @@ function makeInvestigationAnnouncement(clueBot) {
     makeAnnouncement(clueBot, announcement);
 }
 
-function endDayOne(clueBot) {
-    const announcement = `Day One of this mystery has ended. The story continues tomorrow as you begin finding clues.`;
-    makeAnnouncement(clueBot, announcement);
-}
-
-function endDayTwo(clueBot) {
-    const announcement = `Day Two of this mystery has ended. The story continues tomorrow as you uncover more clues!`;
-    makeAnnouncement(clueBot, announcement);
-}
-
-function endDayThree(clueBot) {
-    const announcement = `Day Three of this mystery has ended. The story will conclude with tomorrow's first update!`;
-    makeAnnouncement(clueBot, announcement);
-}
-
 function makeClueAnnouncement(clueBot, clueNumber) {
     const announcement = `Clue #${clueNumber}: ${clueBot.clues[clueNumber - 1]}`;
     makeAnnouncement(clueBot, announcement);
@@ -90,9 +75,6 @@ module.exports = {
     makeInvestigationAnnouncement,
     makeStatsAnnouncement,
     makeIntroAnnouncement,
-    endDayOne,
-    endDayTwo,
-    endDayThree,
 }
 
 function getOptionText(options) {
@@ -115,7 +97,7 @@ function interpolate(fullAnnouncement, clueBot) {
 }
 
 function makeAnnouncement(clueBot, announcement) {
-    let fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/27)`;
+    let fullAnnouncement = `${announcement} (${clueBot.title} ${clueBot.status + 1}/24)`;
     fullAnnouncement = interpolate(fullAnnouncement, clueBot);
     tweetManager.makeClueTweet(fullAnnouncement);
     console.log(fullAnnouncement);
