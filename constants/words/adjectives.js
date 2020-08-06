@@ -99,7 +99,8 @@ const ADJECTIVES = [
     "magical",
     "suspicious",
     "long-forgotten",
-    "heavy"
+    "heavy",
+    "valid",
 ];
 
 module.exports = {
