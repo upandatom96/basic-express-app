@@ -3,6 +3,7 @@ require('./ClueBot.model');
 const ClueBot = mongoose.model('clue-bot');
 const clueBotGenerator = require('./clue-bot-generator');
 const clueBotProgressor = require('./clue-bot-progressor');
+const tweetManager = require('../tweet/tweet.manager');
 const clueStats = require('./clue-stats');
 
 const boolUtil = require('../utilities/bool.util');
@@ -81,6 +82,7 @@ function getStatMessage() {
                 const victimMessage = buildStatMessageBit("victim", fVictim);
 
                 const message = `${killerMessage} ${weaponMessage} ${sceneMessage} ${victimMessage}`;
+                tweetManager.makeClueTweet(message);
                 resolve(message);
             })
             .catch((err) => {
