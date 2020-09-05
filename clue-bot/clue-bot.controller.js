@@ -24,6 +24,17 @@ clueBotController.get('/stats', (req, res) => {
         });
 });
 
+clueBotController.get('/statMessage', (req, res) => {
+    clueBotManager.getStatMessage()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 clueBotController.get('/', (req, res) => {
     clueBotManager.checkAllMysteries()
         .then((response) => {

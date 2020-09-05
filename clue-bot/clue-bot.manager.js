@@ -64,6 +64,31 @@ function checkStats() {
     });
 }
 
+function getStatMessage() {
+    return new Promise((resolve, reject) => {
+        checkStats()
+            .then((response) => {
+                const fCulprit = response.culpritOccurrences[0];
+                const killerMessage = buildStatMessageBit("culprit", fCulprit);
+
+                const fWeapon = response.murderWeaponOccurrences[0];
+                const weaponMessage = buildStatMessageBit("weapon", fWeapon);
+
+                const fScene = response.crimeSceneOccurrences[0];
+                const sceneMessage = buildStatMessageBit("scene", fScene);
+
+                const fVictim = response.victimOccurrences[0];
+                const victimMessage = buildStatMessageBit("victim", fVictim);
+
+                const message = `${killerMessage} ${weaponMessage} ${sceneMessage} ${victimMessage}`;
+                resolve(message);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
+
 function createNewClueBot(resolve) {
     ClueBot
         .find()
@@ -112,6 +137,7 @@ function deleteMystery(id) {
 
 module.exports = {
     checkStats,
+    getStatMessage,
     checkMystery,
     checkAllMysteries,
     progressMystery,
@@ -140,4 +166,8 @@ function areOptionsRevealed(options, announcements) {
             return announcement.includes(option);
         });
     });
+}
+
+function buildStatMessageBit(category, item) {
+    return `The most frequent ${category} is ${item.name} (${item.count} times).`;
 }
