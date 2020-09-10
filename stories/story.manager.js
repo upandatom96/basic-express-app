@@ -1,5 +1,5 @@
 const randomManager = require("../random/random.manager");
-const datamuseConnector = require("../word/datamuse.connector");
+const datamuseConnector = require("../api-connector/datamuse.connector");
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 

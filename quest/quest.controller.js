@@ -14,15 +14,14 @@ questController.get('/randomQuestName', (req, res) => {
         });
 });
 
-questController.get('/randomHeroName', (req, res) => {
-    questManager.getRandomHeroName()
-        .then((response) => {
-            res.send(response);
-        })
-        .catch((err) => {
-            res.statusCode = 500;
-            res.send(err);
-        });
+questController.get('/randomHeroName', async (req, res) => {
+    try {
+        const name = await questManager.getRandomHeroName();
+        res.send(name);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
 });
 
 module.exports = questController;

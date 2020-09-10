@@ -1,4 +1,5 @@
 const randomManager = require("../random/random.manager");
+const nameyConnector = require("../api-connector/namey.connector");
 
 function getRandomQuestName() {
     return new Promise((resolve, reject) => {
@@ -8,11 +9,14 @@ function getRandomQuestName() {
     });
 }
 
-function getRandomHeroName() {
-    return new Promise((resolve, reject) => {
-        const name = "Gribnar";
-        resolve(`${name}`);
-    });
+async function getRandomHeroName() {
+    try {
+        const names = await nameyConnector.findRareNames(1);
+
+        return names[0];
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 module.exports = {
