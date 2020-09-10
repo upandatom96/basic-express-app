@@ -57,6 +57,9 @@ function setupControllers(app) {
   const spectreCardController = require('../spectre-card/spectreCard.controller');
   app.use('/spectreCard', spectreCardController);
 
+  const questController = require('../quest/quest.controller');
+  app.use('/quest', questController);
+
   const tweetController = require('../tweet/tweet.controller');
   app.use('/tweet', tweetController);
 
