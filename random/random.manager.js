@@ -52,6 +52,10 @@ function pickStorySynonym() {
   return randomUtil.pickRandom(constants.STORY_PIECES.STORY_FOR_SYNONYMS);
 }
 
+function pickQuestWord() {
+  return randomUtil.pickRandom(constants.QUEST_PIECES.QUEST_WORDS);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -65,6 +69,7 @@ module.exports = {
   getOneAdjective,
   getAllWords,
   getPhrase,
+  pickQuestWord,
   getNewPhrase,
   getWordCount,
   pickStoryPrefix,

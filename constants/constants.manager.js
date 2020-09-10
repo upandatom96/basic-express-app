@@ -10,6 +10,8 @@ const ADJECTIVES = require('./words/adjectives');
 
 const STORY_PIECES = require('./story/story-pieces');
 
+const QUEST_PIECES = require('./quest/quest-pieces');
+
 module.exports = {
     WEAPONS: WEAPONS.WEAPONS,
     SCENES: SCENES.SCENES,
@@ -19,5 +21,6 @@ module.exports = {
     NOUNS: NOUNS.NOUNS,
     ADJECTIVES: ADJECTIVES.ADJECTIVES,
     STORY_PIECES: STORY_PIECES,
+    QUEST_PIECES: QUEST_PIECES,
     ANNOUNCEMENT_PIECES: ANNOUNCEMENT_PIECES,
 }
