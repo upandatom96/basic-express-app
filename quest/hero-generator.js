@@ -9,18 +9,21 @@ function generateHero(firstName, pastHeroes) {
 
     const specialAbility = randomManager.pickAbility();
     const specialWeakness = randomManager.pickWeakness();
+    const backstory = randomManager.pickBackstory();
     const stats = rollStats();
 
+    const status = 0;
     const hp = 100;
     const hpMax = 100;
     const level = 1;
-    const storyOver = false;
     const item = null;
     const ally = null;
     const journal = [];
 
     return {
         name,
+        status,
+        backstory,
         specialAbility,
         specialWeakness,
         strength: stats.strength,
@@ -30,7 +33,6 @@ function generateHero(firstName, pastHeroes) {
         hp,
         hpMax,
         level,
-        storyOver,
         item,
         ally,
         journal

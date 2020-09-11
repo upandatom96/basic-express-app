@@ -8,7 +8,13 @@ const WEAKNESSES = [
     "SMELLY",
 ];
 
+const BACKSTORY = [
+    "They are the king's secret child.",
+    "They are the chosen one.",
+];
+
 module.exports = {
     ABILITIES,
-    WEAKNESSES
+    WEAKNESSES,
+    BACKSTORY
 }

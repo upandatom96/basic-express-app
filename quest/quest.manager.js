@@ -18,10 +18,10 @@ function getAllHeroes() {
 
 function getCurrentHero() {
     return new Promise((resolve, reject) => {
-        Hero.findOne({storyOver: false})
-            .then((hero) => {
-                if (boolUtil.hasValue(hero)) {
-                    resolve(hero);
+        Hero.find( { status: { $ne: 99 } } )
+            .then((livingHeroes) => {
+                if (livingHeroes.length > 0) {
+                    resolve(livingHeroes[0]);
                 } else {
                     resolve("no current hero");
                 }
@@ -31,10 +31,10 @@ function getCurrentHero() {
 
 function advanceCurrentHero() {
     return new Promise((resolve, reject) => {
-        Hero.findOne({storyOver: false})
-            .then((hero) => {
-                if (boolUtil.hasValue(hero)) {
-                    advanceHero(hero, resolve);
+        Hero.find( { status: { $ne: 99 } } )
+            .then((livingHeroes) => {
+                if (livingHeroes.length > 0) {
+                    advanceHero(livingHeroes[0], resolve);
                 } else {
                     createNewHero(resolve);
                 }

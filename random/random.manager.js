@@ -69,6 +69,10 @@ function pickWeakness() {
   return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.WEAKNESSES);
 }
 
+function pickBackstory() {
+  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.BACKSTORY);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -87,6 +91,7 @@ module.exports = {
   getWordCount,
   pickAbility,
   pickWeakness,
+  pickBackstory,
   pickStoryPrefix,
   pickStoryBase: pickStorySynonym,
   pickNoun,

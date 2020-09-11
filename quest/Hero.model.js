@@ -7,6 +7,11 @@ const HeroSchema = new Schema({
         required: true,
         default: "Gribnar Bleck"
     },
+    status: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     hp: {
         type: Number,
         required: true,
@@ -42,10 +47,10 @@ const HeroSchema = new Schema({
         required: true,
         default: 1
     },
-    storyOver: {
-        type: Boolean,
+    backstory: {
+        type: String,
         required: true,
-        default: false
+        default: "They are the king's secret child."
     },
     specialAbility: {
         type: String,
