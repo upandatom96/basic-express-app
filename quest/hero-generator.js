@@ -27,9 +27,9 @@ function generateHero(firstName, pastHeroes) {
         specialAbility,
         specialWeakness,
         strength: stats.strength,
-        knowledge: stats.knowledge,
+        wisdom: stats.wisdom,
         charisma: stats.charisma,
-        speed: stats.speed,
+        dexterity: stats.dexterity,
         hp,
         hpMax,
         level,
@@ -66,9 +66,9 @@ function getPreviousHeroNames(previousHeroes) {
 
 function rollStats() {
     let strength = 1;
-    let knowledge = 1;
+    let wisdom = 1;
     let charisma = 1;
-    let speed = 1;
+    let dexterity = 1;
 
     for (let i = 16; i > 0; i--) {
         const categoryNumber = randomUtil.pickRandomNumber(1, 4);
@@ -77,21 +77,21 @@ function rollStats() {
                 strength++;
                 break;
             case 2:
-                knowledge++;
+                wisdom++;
                 break;
             case 3:
                 charisma++;
                 break;
             case 4:
-                speed++
+                dexterity++
                 break;
         }
     }
 
     return {
         strength,
-        knowledge,
+        wisdom,
         charisma,
-        speed
+        dexterity
     };
 }

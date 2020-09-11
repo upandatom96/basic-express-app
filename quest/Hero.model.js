@@ -27,7 +27,7 @@ const HeroSchema = new Schema({
         required: true,
         default: 5
     },
-    knowledge: {
+    wisdom: {
         type: Number,
         required: true,
         default: 5
@@ -37,7 +37,7 @@ const HeroSchema = new Schema({
         required: true,
         default: 5
     },
-    speed: {
+    dexterity: {
         type: Number,
         required: true,
         default: 5
