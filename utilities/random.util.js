@@ -8,6 +8,10 @@ function generateRandomPassword() {
     return result;
 }
 
+function pickRandomNumber(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
+
 function pickRandom(array) {
     const shuffledArray = shuffleArray(array);
     return shuffledArray[0];
@@ -41,6 +45,7 @@ function shuffleArray(array) {
 module.exports = {
     generateRandomPassword,
     shuffleArray,
+    pickRandomNumber,
     pickRandom,
     drawNItems
 }
