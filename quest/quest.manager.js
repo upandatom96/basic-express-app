@@ -2,11 +2,13 @@ const randomManager = require("../random/random.manager");
 const nameyConnector = require("../api-connector/namey.connector");
 
 function getRandomQuestName() {
-    return new Promise((resolve, reject) => {
+    try {
         const adjective = capitalizeFirstLetter(randomManager.getOneAdjective());
         const questWord = capitalizeFirstLetter(randomManager.pickQuestWord());
-        resolve(`The ${adjective} ${questWord}`);
-    });
+        return `The ${adjective} ${questWord}`;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 async function getRandomHeroName() {
