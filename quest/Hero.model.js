@@ -17,6 +17,26 @@ const HeroSchema = new Schema({
         required: true,
         default: 100
     },
+    strength: {
+        type: Number,
+        required: true,
+        default: 5
+    },
+    knowledge: {
+        type: Number,
+        required: true,
+        default: 5
+    },
+    charisma: {
+        type: Number,
+        required: true,
+        default: 5
+    },
+    speed: {
+        type: Number,
+        required: true,
+        default: 5
+    },
     level: {
         type: Number,
         required: true,
@@ -27,15 +47,15 @@ const HeroSchema = new Schema({
         required: true,
         default: false
     },
-    abilityOne: {
+    specialAbility: {
         type: String,
         required: true,
-        default: "Punch"
+        default: "BLESSED"
     },
-    abilityTwo: {
+    specialWeakness: {
         type: String,
         required: true,
-        default: "Kick"
+        default: "CURSED"
     },
     item: {
         type: String,

@@ -6,7 +6,8 @@ const authUtil = require('../utilities/auth.util');
 
 questController.get('/currentHero', async (req, res) => {
     try {
-        res.send("No current Hero");
+        const response = await questManager.getCurrentHero();
+        res.send(response);
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
@@ -23,9 +24,10 @@ questController.get('/heroes', async (req, res) => {
     }
 });
 
-questController.post('/continueCurrentHero', async (req, res) => {
+questController.post('/advanceCurrentHero', async (req, res) => {
     try {
-        res.send("Advancing story...");
+        const message = await questManager.advanceCurrentHero();
+        res.send(message);
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
@@ -35,7 +37,8 @@ questController.post('/continueCurrentHero', async (req, res) => {
 questController.delete('/hero/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, async (req, res) => {
     try {
         const id = req.params.id;
-        res.send("Deleting hero " + id + "...");
+        const response = await questManager.deleteHero(id);
+        res.send(response);
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
