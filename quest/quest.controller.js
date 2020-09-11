@@ -1,5 +1,6 @@
 const express = require('express');
 const questController = express.Router();
+const questNameManager = require("./quest-name.manager");
 const questManager = require("./quest.manager");
 const authUtil = require('../utilities/auth.util');
 
@@ -14,7 +15,8 @@ questController.get('/currentHero', async (req, res) => {
 
 questController.get('/heroes', async (req, res) => {
     try {
-        res.send([]);
+        const heroes = await questManager.getAllHeroes();
+        res.send(heroes);
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
@@ -42,7 +44,7 @@ questController.delete('/hero/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin
 
 questController.get('/randomQuestName', async (req, res) => {
     try {
-        const name = await questManager.getRandomQuestName();
+        const name = await questNameManager.getRandomQuestName();
         res.send(name);
     } catch (err) {
         res.statusCode = 500;
@@ -52,7 +54,7 @@ questController.get('/randomQuestName', async (req, res) => {
 
 questController.get('/randomHeroName', async (req, res) => {
     try {
-        const name = await questManager.getRandomHeroName();
+        const name = await questNameManager.getRandomHeroName();
         res.send(name);
     } catch (err) {
         res.statusCode = 500;
