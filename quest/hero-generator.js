@@ -1,4 +1,5 @@
 const randomUtil = require('../utilities/random.util');
+const randomManager = require('../random/random.manager');
 
 function generateHero(pastHeroes) {
     const previousNames = getPreviousHeroNames(pastHeroes);
@@ -6,8 +7,8 @@ function generateHero(pastHeroes) {
 
     console.log(`Generating HERO ${name}...`);
 
-    const specialAbility = "BLESSED";
-    const specialWeakness = "CURSED";
+    const specialAbility = randomManager.pickAbility();
+    const specialWeakness = randomManager.pickWeakness();
     const stats = rollStats();
 
     const hp = 100;

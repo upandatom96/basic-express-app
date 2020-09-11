@@ -11,7 +11,7 @@ const ADJECTIVES = require('./words/adjectives');
 const STORY_PIECES = require('./story/story-pieces');
 
 const QUEST_PIECES = require('./quest/quest-pieces');
-const QUEST_ABILITIES = require('./quest/quest-abilities');
+const QUEST_ATTRIBUTES = require('./quest/quest-attributes');
 const QUEST_QUESTS = require('./quest/quest-quests');
 const QUEST_CHAPTER_EVENTS = require('./quest/quest-chapter-events');
 const QUEST_FINALE_EVENTS = require('./quest/quest-finale-events');
@@ -26,7 +26,7 @@ module.exports = {
     ADJECTIVES: ADJECTIVES.ADJECTIVES,
     STORY_PIECES: STORY_PIECES,
     QUEST_PIECES: QUEST_PIECES,
-    QUEST_ABILITIES: QUEST_ABILITIES,
+    QUEST_ATTRIBUTES: QUEST_ATTRIBUTES,
     QUEST_QUESTS: QUEST_QUESTS,
     QUEST_CHAPTER_EVENTS: QUEST_CHAPTER_EVENTS,
     QUEST_FINALE_EVENTS: QUEST_FINALE_EVENTS,

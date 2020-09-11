@@ -61,6 +61,14 @@ function pickLastName() {
   return randomUtil.pickRandom(lastNames);
 }
 
+function pickAbility() {
+  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ABILITIES);
+}
+
+function pickWeakness() {
+  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.WEAKNESSES);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -77,6 +85,8 @@ module.exports = {
   pickQuestWord,
   getNewPhrase,
   getWordCount,
+  pickAbility,
+  pickWeakness,
   pickStoryPrefix,
   pickStoryBase: pickStorySynonym,
   pickNoun,
