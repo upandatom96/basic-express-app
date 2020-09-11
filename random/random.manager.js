@@ -56,6 +56,11 @@ function pickQuestWord() {
   return randomUtil.pickRandom(constants.QUEST_PIECES.QUEST_WORDS);
 }
 
+function pickLastName() {
+  const lastNames = constants.QUEST_PIECES.FAMILY_NAMES.concat(constants.TITLE_BASES.MANOR_NAMES);
+  return randomUtil.pickRandom(lastNames);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -75,5 +80,6 @@ module.exports = {
   pickStoryPrefix,
   pickStoryBase: pickStorySynonym,
   pickNoun,
+  pickLastName,
   pickAdjective
 }

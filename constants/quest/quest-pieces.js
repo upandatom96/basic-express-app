@@ -23,6 +23,16 @@ const QUEST_WORDS = [
     "Mission"
 ];
 
+const FAMILY_NAMES = [
+    "Mystique",
+    "Wesson",
+    "Smith",
+    "Tralix",
+    "Abadon",
+    "Gibnar"
+];
+
 module.exports = {
-    QUEST_WORDS
+    QUEST_WORDS,
+    FAMILY_NAMES
 }
