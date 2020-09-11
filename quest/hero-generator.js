@@ -1,9 +1,9 @@
 const randomUtil = require('../utilities/random.util');
 const randomManager = require('../random/random.manager');
 
-function generateHero(pastHeroes) {
+function generateHero(firstName, pastHeroes) {
     const previousNames = getPreviousHeroNames(pastHeroes);
-    const name = pickNewName(previousNames);
+    const name = pickNewName(firstName, previousNames);
 
     console.log(`Generating HERO ${name}...`);
 
@@ -41,17 +41,17 @@ module.exports = {
     generateHero
 }
 
-function pickNewName(previousNames) {
-    return "Alex the Hero";
-    // let foundNewName = false;
-    // let potentialName;
-    // while (!foundNewName) {
-    //     potentialName = makeRandomName();
-    //     if (!previousNames.includes(potentialName)) {
-    //         foundNewName = true;
-    //     }
-    // }
-    // return potentialName;
+function pickNewName(firstName, previousNames) {
+    let foundNewName = false;
+    let potentialName;
+    while (!foundNewName) {
+        const lastName = randomManager.pickLastName();
+        potentialName = firstName + " " + lastName;
+        if (!previousNames.includes(potentialName)) {
+            foundNewName = true;
+        }
+    }
+    return potentialName;
 }
 
 function getPreviousHeroNames(previousHeroes) {

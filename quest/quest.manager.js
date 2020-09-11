@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 require('./Hero.model');
 const Hero = mongoose.model('hero');
 
-const heroGenerator = require('./hero-generator')
+const heroGenerator = require('./hero-generator');
+const nameManager = require('./quest-name.manager');
 
 const boolUtil = require('../utilities/bool.util');
 
@@ -62,14 +63,17 @@ module.exports = {
 }
 
 function createNewHero(resolve) {
-    Hero
-        .find()
-        .then((heroes) => {
-            const heroDetails = heroGenerator.generateHero(heroes);
-            new Hero(heroDetails)
-                .save()
-                .then((newHero) => {
-                    advanceHero(newHero, resolve);
+    nameManager.getRandomHeroName()
+        .then((heroName) => {
+            Hero
+                .find()
+                .then((heroes) => {
+                    const heroDetails = heroGenerator.generateHero(heroName, heroes);
+                    new Hero(heroDetails)
+                        .save()
+                        .then((newHero) => {
+                            advanceHero(newHero, resolve);
+                        });
                 });
         });
 }

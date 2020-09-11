@@ -14,9 +14,7 @@ function getRandomQuestName() {
 async function getRandomHeroName() {
     try {
         const names = await nameyConnector.findRareNames(1);
-        const firstName = names[0];
-        const lastName = randomManager.pickLastName();
-        return firstName + " " + lastName;
+        return names[0];
     } catch (error) {
         console.error(error);
     }
