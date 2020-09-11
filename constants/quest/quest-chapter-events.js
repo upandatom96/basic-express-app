@@ -1,7 +1,7 @@
 const CHAPTER_EVENTS = [
     {
         code: "C1",
-        text: "A goblin attacks you.",
+        text: "A goblin attacks |HERO|.",
         halfDamageCondition: null,
         noDamageCondition: null,
         distanceMin: 9,
@@ -13,7 +13,7 @@ const CHAPTER_EVENTS = [
     },
     {
         code: "CE2",
-        text: "A fairy enchants you.",
+        text: "A fairy enchants |HERO|.",
         halfDamageCondition: null,
         noDamageCondition: null,
         distanceMin: 9,
@@ -24,3 +24,7 @@ const CHAPTER_EVENTS = [
         ally: null,
     },
 ];
+
+module.exports = {
+    CHAPTER_EVENTS
+}

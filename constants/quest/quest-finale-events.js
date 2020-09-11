@@ -1,7 +1,7 @@
-const CHAPTER_EVENTS = [
+const FINALE_EVENTS = [
     {
         code: "F1",
-        text: "You fight a dragon.",
+        text: "|HERO| fights a dragon.",
         halfDamageCondition: null,
         noDamageCondition: null,
         hpMin: -50,
@@ -10,3 +10,7 @@ const CHAPTER_EVENTS = [
         ally: null,
     },
 ];
+
+module.exports = {
+    FINALE_EVENTS
+}
