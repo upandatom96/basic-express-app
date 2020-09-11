@@ -11,24 +11,14 @@ const QuestSchema = new Schema({
         required: true,
         default: "The Great Quest"
     },
-    objective: {
+    questCode: {
         type: String,
         required: true,
-        default: "retrieve the golden spoon"
     },
     distanceTravelled: {
         type: Number,
         required: true,
         default: 0
-    },
-    distanceRequired: {
-        type: Number,
-        required: true,
-        default: 10
-    },
-    finaleEvent: {
-      type: String,
-      required: true,
     },
     finaleCompleted: {
         type: Boolean,
