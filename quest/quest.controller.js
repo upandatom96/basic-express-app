@@ -3,16 +3,16 @@ const questController = express.Router();
 const questManager = require("./quest.manager");
 const authUtil = require('../utilities/auth.util');
 
-questController.get('/currentEpic', async (req, res) => {
+questController.get('/currentHero', async (req, res) => {
     try {
-        res.send("No current Epic");
+        res.send("No current Hero");
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
     }
 });
 
-questController.get('/epics', async (req, res) => {
+questController.get('/heroes', async (req, res) => {
     try {
         res.send([]);
     } catch (err) {
@@ -21,19 +21,19 @@ questController.get('/epics', async (req, res) => {
     }
 });
 
-questController.post('/advanceCurrentEpic', async (req, res) => {
+questController.post('/continueCurrentHero', async (req, res) => {
     try {
-        res.send("Advancing epic...");
+        res.send("Advancing story...");
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
     }
 });
 
-questController.delete('/epic/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, async (req, res) => {
+questController.delete('/hero/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, async (req, res) => {
     try {
         const id = req.params.id;
-        res.send("Deleting epic " + id + "...");
+        res.send("Deleting hero " + id + "...");
     } catch (err) {
         res.statusCode = 500;
         res.send(err);
