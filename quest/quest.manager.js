@@ -4,6 +4,7 @@ const Hero = mongoose.model('hero');
 
 const heroGenerator = require('./hero-generator');
 const nameManager = require('./quest-name.manager');
+const heroProgressor = require('./hero-progressor');
 
 const boolUtil = require('../utilities/bool.util');
 
@@ -79,13 +80,11 @@ function createNewHero(resolve) {
 }
 
 function advanceHero(hero, resolve) {
-    resolve("advancing hero...");
-    // const updatedHero = heroProgressor.progressHero(hero);
-    // updatedHero.save()
-    //     .then((response) => {
-    //         const lastJournal = response.journal.length - 1;
-    //         const message = response.journal[lastJournal];
-    //         resolve(message);
-    //     });
+    const updatedHero = heroProgressor.progressHero(hero);
+    updatedHero.save()
+        .then((response) => {
+            const lastJournal = response.journal.length - 1;
+            const message = response.journal[lastJournal];
+            resolve(message);
+        });
 }
-
