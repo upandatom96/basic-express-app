@@ -33,7 +33,7 @@ function gainNewQuest(hero) {
 
 function travel(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
-    const healthChange = -100;
+    const healthChange = -10;
     const distance = 5;
 
     hero.hp += healthChange;
@@ -63,7 +63,7 @@ function finale(hero) {
 function rest(hero) {
     // heal some
     // level up
-    hero.status = 3;
+    hero.status = 10;
 }
 
 function death(hero) {
@@ -83,6 +83,7 @@ module.exports = {
 }
 
 function isReadyForFinale(hero) {
-    const distanceReq = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const distanceReq = quest.distanceRequired;
     return hero.distanceTravelled >= distanceReq;
 }
