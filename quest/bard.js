@@ -22,12 +22,12 @@ function makeNewQuestAnnouncement(hero) {
 }
 
 function makeQuestProgressAnnouncement(hero, report) {
-    const announcement = `QUEST PROGRESS: ${report}`;
+    const announcement = `TRAVEL: ${report}`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeDeathAnnouncement(hero) {
-    const announcement = `|HERO|'s hp dropped to zero, and their journey ended.`;
+    const announcement = `DEATH: |HERO|'s hp dropped to zero, and their journey ended.`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -37,7 +37,7 @@ function makeFinaleAnnouncement(hero, report) {
 }
 
 function makeRestAnnouncement(hero) {
-    const announcement = `REST: Coming soon...`;
+    const announcement = `REST: After your quest, you level up to LVL ${hero.level}! You take a moment and regain some health up to ${hero.hp}/${hero.hpMax}.`;
     makeAnnouncement(hero, announcement);
 }
 

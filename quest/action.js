@@ -1,15 +1,10 @@
 const randomManager = require('../random/random.manager');
+const randomUtil = require('../utilities/random.util');
 const codeRetriever = require('./code-retriever');
 
 function checkHealth(hero) {
-    if (hero.hp > hero.hpMax) {
-        hero.hp = hero.hpMax;
-    }
-
-    if (hero.hp <= 0) {
-        hero.hp = 0;
-        hero.status = 98;
-    }
+    enforceMaxHealth(hero);
+    checkHeartbeat(hero);
 }
 
 function revealHero(hero) {
@@ -33,7 +28,10 @@ function gainNewQuest(hero) {
 
 function travel(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
-    const healthChange = -10;
+
+    const randomDamage = randomUtil.pickRandomNumber(1, 100);
+    const healthChange = randomDamage * -1;
+
     const distance = 5;
 
     hero.hp += healthChange;
@@ -61,8 +59,8 @@ function finale(hero) {
 }
 
 function rest(hero) {
-    // heal some
-    // level up
+    healHalfHealth(hero);
+    levelUp(hero);
     hero.status = 10;
 }
 
@@ -86,4 +84,27 @@ function isReadyForFinale(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const distanceReq = quest.distanceRequired;
     return hero.distanceTravelled >= distanceReq;
+}
+
+function enforceMaxHealth(hero) {
+    if (hero.hp > hero.hpMax) {
+        hero.hp = hero.hpMax;
+    }
+}
+
+function checkHeartbeat(hero) {
+    if (hero.hp <= 0) {
+        hero.hp = 0;
+        hero.status = 98;
+    }
+}
+
+function healHalfHealth(hero) {
+    const halfHealth = hero.hpMax / 2;
+    hero.hp += halfHealth;
+    enforceMaxHealth(hero);
+}
+
+function levelUp(hero) {
+    hero.level++;
 }
