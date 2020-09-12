@@ -13,8 +13,28 @@ function makeStatsAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function makeNewQuestAnnouncement(hero) {
+    const announcement = `NEW QUEST: coming soon...`;
+    makeAnnouncement(hero, announcement);
+}
+
 function makeQuestProgressAnnouncement(hero) {
     const announcement = `QUEST PROGRESS: coming soon...`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeDeathAnnouncement(hero) {
+    const announcement = `|HERO|'s hp dropped to zero, and their journey ended.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeFinaleAnnouncement(hero) {
+    const announcement = `FINALE: Coming soon...`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeRestAnnouncement(hero) {
+    const announcement = `REST: Coming soon...`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -22,7 +42,11 @@ module.exports = {
     makeNameAnnouncement,
     makeBackstoryAnnouncement,
     makeStatsAnnouncement,
+    makeNewQuestAnnouncement,
     makeQuestProgressAnnouncement,
+    makeDeathAnnouncement,
+    makeFinaleAnnouncement,
+    makeRestAnnouncement,
 }
 
 function interpolate(fullAnnouncement, hero) {

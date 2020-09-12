@@ -19,6 +19,9 @@ function generateHero(firstName, pastHeroes) {
     const item = null;
     const ally = null;
     const journal = [];
+    const currentQuestCode = null;
+    const distanceTravelled = 0;
+    const completedQuestCodeLog = [];
 
     return {
         name,
@@ -35,7 +38,10 @@ function generateHero(firstName, pastHeroes) {
         level,
         item,
         ally,
-        journal
+        journal,
+        currentQuestCode,
+        distanceTravelled,
+        completedQuestCodeLog,
     };
 }
 

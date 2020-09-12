@@ -73,6 +73,20 @@ const HeroSchema = new Schema({
             type: String
         }
     ],
+    currentQuestCode: {
+        type: String,
+        required: false,
+    },
+    distanceTravelled: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    completedQuestCodeLog: [
+        {
+            type: String
+        }
+    ],
     startDate: {
         type: Date,
         default: Date.now
