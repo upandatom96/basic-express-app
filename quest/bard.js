@@ -21,8 +21,8 @@ function makeNewQuestAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
-function makeQuestProgressAnnouncement(hero) {
-    const announcement = `QUEST PROGRESS: coming soon...`;
+function makeQuestProgressAnnouncement(hero, report) {
+    const announcement = `QUEST PROGRESS: ${report}`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -31,14 +31,12 @@ function makeDeathAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
-function makeFinaleAnnouncement(hero) {
-    const announcement = `FINALE: Coming soon...`;
+function makeFinaleAnnouncement(hero, report) {
+    const announcement = `FINALE: ${report}`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestAnnouncement(hero) {
-    // heal some
-    // level up
     const announcement = `REST: Coming soon...`;
     makeAnnouncement(hero, announcement);
 }

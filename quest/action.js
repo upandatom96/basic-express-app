@@ -32,6 +32,7 @@ function gainNewQuest(hero) {
 }
 
 function travel(hero) {
+    const chapterEvent = randomManager.pickChapterEvent();
     const healthChange = -100;
     const distance = 5;
 
@@ -47,14 +48,21 @@ function travel(hero) {
     } else {
         hero.status = 11;
     }
+
+    const positiveSymbol = healthChange >= 0 ? "+" : "";
+    return `travelled ${distance} // hp ${positiveSymbol}${healthChange} // ${chapterEvent.code}`;
 }
 
 function finale(hero) {
     const finaleEvent = codeRetriever.findFinaleEventForQuest(hero.currentQuestCode);
     hero.status = 13;
+
+    return `finale happened ${finaleEvent.code}`;
 }
 
 function rest(hero) {
+    // heal some
+    // level up
     hero.status = 3;
 }
 

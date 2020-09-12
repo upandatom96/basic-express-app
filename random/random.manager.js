@@ -65,6 +65,10 @@ function pickQuest() {
   return randomUtil.pickRandom(constants.QUEST_QUESTS.QUESTS);
 }
 
+function pickChapterEvent() {
+  return randomUtil.pickRandom(constants.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS);
+}
+
 function pickAbility() {
   return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ABILITIES);
 }
@@ -94,6 +98,7 @@ module.exports = {
   getNewPhrase,
   getWordCount,
   pickQuest,
+  pickChapterEvent,
   pickAbility,
   pickWeakness,
   pickBackstory,

@@ -22,12 +22,12 @@ function progressHero(hero) {
             bard.makeNewQuestAnnouncement(hero);
             break;
         case 11:
-            action.travel(hero);
-            bard.makeQuestProgressAnnouncement(hero);
+            const travelReport = action.travel(hero);
+            bard.makeQuestProgressAnnouncement(hero, travelReport);
             break;
         case 12:
-            action.finale(hero);
-            bard.makeFinaleAnnouncement(hero);
+            const finaleReport = action.finale(hero);
+            bard.makeFinaleAnnouncement(hero, finaleReport);
             break;
         case 13:
             action.rest(hero);
