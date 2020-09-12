@@ -37,6 +37,8 @@ function makeFinaleAnnouncement(hero) {
 }
 
 function makeRestAnnouncement(hero) {
+    // heal some
+    // level up
     const announcement = `REST: Coming soon...`;
     makeAnnouncement(hero, announcement);
 }

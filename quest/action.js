@@ -1,4 +1,5 @@
 const randomManager = require('../random/random.manager');
+const codeRetriever = require('./code-retriever');
 
 function checkHealth(hero) {
     if (hero.hp > hero.hpMax) {
@@ -31,14 +32,25 @@ function gainNewQuest(hero) {
 }
 
 function travel(hero) {
-    hero.hp -= 1000;
-    hero.status = 11;
+    const healthChange = -100;
+    const distance = 5;
 
-    // TODO if ready for finale, determine here
-    // hero.status = 12;
+    hero.hp += healthChange;
+    hero.distanceTravelled += distance;
+    hero.distanceTravelledTotal += distance;
+
+    // todo item?
+    // todo ally?
+
+    if (isReadyForFinale(hero)) {
+        hero.status = 12;
+    } else {
+        hero.status = 11;
+    }
 }
 
 function finale(hero) {
+    const finaleEvent = codeRetriever.findFinaleEventForQuest(hero.currentQuestCode);
     hero.status = 13;
 }
 
@@ -62,8 +74,7 @@ module.exports = {
     death,
 }
 
-function readyForFinale(hero) {
-    // todo calculate by distance
-    // IF hero.status 3 && hasQuest && distance travelled = distance required
-    return false;
+function isReadyForFinale(hero) {
+    const distanceReq = codeRetriever.findQuest(hero.currentQuestCode);
+    return hero.distanceTravelled >= distanceReq;
 }
