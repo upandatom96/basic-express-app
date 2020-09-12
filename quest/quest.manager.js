@@ -6,8 +6,6 @@ const heroGenerator = require('./hero-generator');
 const nameManager = require('./quest-name.manager');
 const heroProgressor = require('./hero-progressor');
 
-const boolUtil = require('../utilities/bool.util');
-
 function getAllHeroes() {
     return new Promise((resolve, reject) => {
         Hero.find({})
@@ -82,9 +80,14 @@ function createNewHero(resolve) {
 function advanceHero(hero, resolve) {
     const updatedHero = heroProgressor.progressHero(hero);
     updatedHero.save()
-        .then((response) => {
-            const lastJournal = response.journal.length - 1;
-            const message = response.journal[lastJournal];
-            resolve(message);
+        .then((savedHero) => {
+            const lastJournalIndex = savedHero.journal.length - 1;
+            const message = savedHero.journal[lastJournalIndex];
+            resolve({
+                name: savedHero.name,
+                hp: `${savedHero.hp}/${savedHero.hpMax} hp`,
+                level: savedHero.level,
+                message
+            });
         });
 }
