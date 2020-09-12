@@ -1,3 +1,5 @@
+const codeRetriever = require('./code-retriever');
+
 function makeNameAnnouncement(hero) {
     const announcement = `INTRODUCING HERO: ${hero.name}`;
     makeAnnouncement(hero, announcement);
@@ -14,7 +16,8 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeNewQuestAnnouncement(hero) {
-    const announcement = `NEW QUEST: coming soon...`;
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const announcement = `NEW QUEST: ${quest.name}`;
     makeAnnouncement(hero, announcement);
 }
 

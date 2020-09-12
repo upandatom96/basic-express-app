@@ -1,3 +1,5 @@
+const randomManager = require('../random/random.manager');
+
 function checkHealth(hero) {
     if (hero.hp > hero.hpMax) {
         hero.hp = hero.hpMax;
@@ -22,6 +24,9 @@ function revealStats(hero) {
 }
 
 function gainNewQuest(hero) {
+    const newQuest = randomManager.pickQuest();
+    hero.currentQuestCode = newQuest.code;
+    hero.distanceTravelled = 0;
     hero.status = 11;
 }
 
