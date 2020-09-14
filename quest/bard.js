@@ -15,6 +15,11 @@ function makeStatsAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function makeSpecialAnnouncement(hero) {
+    const announcement = `SPECIAL: ability ${hero.ability}, weakness ${hero.weakness}`;
+    makeAnnouncement(hero, announcement);
+}
+
 function makeNewQuestAnnouncement(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const announcement = `NEW QUEST: ${quest.name}`;
@@ -43,6 +48,7 @@ module.exports = {
     makeNameAnnouncement,
     makeBackstoryAnnouncement,
     makeStatsAnnouncement,
+    makeSpecialAnnouncement,
     makeNewQuestAnnouncement,
     makeQuestProgressAnnouncement,
     makeDeathAnnouncement,

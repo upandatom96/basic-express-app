@@ -17,6 +17,10 @@ function progressHero(hero) {
             action.revealStats(hero);
             bard.makeStatsAnnouncement(hero);
             break;
+        case 3:
+            action.revealSpecial(hero);
+            bard.makeSpecialAnnouncement(hero);
+            break;
         case 10:
             action.gainNewQuest(hero);
             bard.makeNewQuestAnnouncement(hero);

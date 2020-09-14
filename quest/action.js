@@ -16,6 +16,10 @@ function revealBackstory(hero) {
 }
 
 function revealStats(hero) {
+    hero.status = 3;
+}
+
+function revealSpecial(hero) {
     hero.status = 10;
 }
 
@@ -59,6 +63,7 @@ module.exports = {
     revealHero,
     revealBackstory,
     revealStats,
+    revealSpecial,
     gainNewQuest,
     travel,
     finale,
