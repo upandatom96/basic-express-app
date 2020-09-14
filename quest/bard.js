@@ -22,8 +22,7 @@ function makeNewQuestAnnouncement(hero) {
 }
 
 function makeQuestProgressAnnouncement(hero, report) {
-    const announcement = `TRAVEL: ${report}`;
-    makeAnnouncement(hero, announcement);
+    makeAnnouncement(hero, report);
 }
 
 function makeDeathAnnouncement(hero) {
@@ -59,7 +58,7 @@ function interpolate(fullAnnouncement, hero) {
 
 function makeAnnouncement(hero, announcement) {
     const page = hero.journal.length + 1;
-    let fullAnnouncement = `${announcement} (${hero.name} p${page})`;
+    let fullAnnouncement = `${announcement} (${hero.name} ${hero.hp}/${hero.hpMax}hp #${page})`;
     fullAnnouncement = interpolate(fullAnnouncement, hero);
     // tweetManager.makeQuestTweet(fullAnnouncement);
     console.log(fullAnnouncement);

@@ -1,6 +1,6 @@
 const randomManager = require('../random/random.manager');
-const randomUtil = require('../utilities/random.util');
 const codeRetriever = require('./code-retriever');
+const eventHandler = require('./event-handler');
 
 function checkHealth(hero) {
     enforceMaxHealth(hero);
@@ -27,35 +27,19 @@ function gainNewQuest(hero) {
 }
 
 function travel(hero) {
-    const chapterEvent = randomManager.pickChapterEvent();
+    const message = eventHandler.handleChapterEvent(hero);
 
-    const randomDamage = randomUtil.pickRandomNumber(1, 100);
-    const healthChange = randomDamage * -1;
+    hero.status = isReadyForFinale(hero) ? 12 : 11;
 
-    const distance = 5;
-
-    hero.hp += healthChange;
-    hero.distanceTravelled += distance;
-    hero.distanceTravelledTotal += distance;
-
-    // todo item?
-    // todo ally?
-
-    if (isReadyForFinale(hero)) {
-        hero.status = 12;
-    } else {
-        hero.status = 11;
-    }
-
-    const positiveSymbol = healthChange >= 0 ? "+" : "";
-    return `travelled ${distance} // hp ${positiveSymbol}${healthChange} // ${chapterEvent.code}`;
+    return message;
 }
 
 function finale(hero) {
-    const finaleEvent = codeRetriever.findFinaleEventForQuest(hero.currentQuestCode);
+    const message = eventHandler.handleFinaleEvent(hero);
+
     hero.status = 13;
 
-    return `finale happened ${finaleEvent.code}`;
+    return message;
 }
 
 function rest(hero) {
