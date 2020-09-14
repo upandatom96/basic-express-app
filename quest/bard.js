@@ -35,7 +35,7 @@ function makeFinaleAnnouncement(hero, report) {
 }
 
 function makeRestAnnouncement(hero) {
-    const announcement = `REST: After your quest, you level up to LVL ${hero.level}! You take a moment and regain some health up to ${hero.hp}/${hero.hpMax}.`;
+    const announcement = `REST: After their quest, they level up to LVL ${hero.level}! They take a moment and regain some health up to ${hero.hp}/${hero.hpMax}.`;
     makeAnnouncement(hero, announcement);
 }
 
