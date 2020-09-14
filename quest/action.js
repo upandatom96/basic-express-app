@@ -36,6 +36,7 @@ function travel(hero) {
 
 function finale(hero) {
     const message = eventHandler.handleFinaleEvent(hero);
+    checkHealth(hero);
 
     hero.status = 13;
 

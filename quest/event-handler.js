@@ -8,14 +8,16 @@ const trigger = require('./trigger');
 function handleChapterEvent(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
     const distance = addDistance(chapterEvent, hero);
-    const flavorText = takePath(chapterEvent, hero);
+    const flavorText = takeChapterPath(chapterEvent, hero);
 
     return `|HERO| travels ${distance}miles. ${flavorText}`;
 }
 
 function handleFinaleEvent(hero) {
     const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
-    return `FINALE:  ${finaleEvent.code}`;
+    const flavorText = takeFinalePath(finaleEvent, hero);
+
+    return `FINALE: ${flavorText}`;
 }
 
 module.exports = {
@@ -34,7 +36,7 @@ function getHealthChangeAmount(changeMin, changeMax) {
     }
 }
 
-function applyChange(path, hero) {
+function applyChapterChange(path, hero) {
     const damage = getHealthChangeAmount(path.damageMin, path.damageMax);
     const heal = getHealthChangeAmount(path.healMin, path.healMax);
 
@@ -57,6 +59,19 @@ function applyChange(path, hero) {
     return changeText;
 }
 
+function applyFinaleChange(path, hero) {
+    const damage = getHealthChangeAmount(path.damageMin, path.damageMax);
+
+    let changeText;
+    if (damage > 0) {
+        hero.hp -= damage;
+        changeText = `They lose ${damage}hp.`
+    } else {
+        changeText = "They are unaffected.";
+    }
+    return changeText;
+}
+
 function addDistance(event, hero) {
     const distance = randomUtil.pickRandomNumber(event.distanceMin, event.distanceMax);
     hero.distanceTravelled += distance;
@@ -64,10 +79,20 @@ function addDistance(event, hero) {
     return distance;
 }
 
-function takePath(chapterEvent, hero) {
-    const path = chapterEvent.paths.find((path) => {
+function pickPath(event, hero) {
+    return event.paths.find((path) => {
         return trigger.triggersActivated(path.triggers, hero);
     });
-    const changeText = applyChange(path, hero);
+}
+
+function takeChapterPath(chapterEvent, hero) {
+    const path = pickPath(chapterEvent, hero);
+    const changeText = applyChapterChange(path, hero);
+    return `${path.text} ${changeText}`;
+}
+
+function takeFinalePath(chapterEvent, hero) {
+    const path = pickPath(chapterEvent, hero);
+    const changeText = applyFinaleChange(path, hero);
     return `${path.text} ${changeText}`;
 }

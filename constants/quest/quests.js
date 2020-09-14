@@ -4,16 +4,17 @@ const QUESTS = [
         type: "STANDARD",
         name: "Dragon's Bounty",
         text: "|HERO| must slay the dragon.",
-        distanceRequired: 10,
+        distanceRequired: 25,
         finaleEvent: {
-            code: "F1",
-            text: "|HERO| fights a dragon.",
-            halfDamageCondition: null,
-            noDamageCondition: null,
-            hpMin: -50,
-            hpMax: -100,
-            item: "DRAGON_EGG",
-            ally: null,
+            type: "SIMPLE",
+            paths: [
+                {
+                    triggers: null,
+                    damageMin: 50,
+                    damageMax: 60,
+                    text: "|HERO| fights the dragon."
+                }
+            ],
         },
     },
 ];
