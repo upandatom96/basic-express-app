@@ -45,6 +45,16 @@ questController.delete('/hero/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin
     }
 });
 
+questController.delete('/all', authUtil.jwtAuthenticated, authUtil.jwtAdmin, async (req, res) => {
+    try {
+        const response = await questManager.deleteAll();
+        res.send(response);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 questController.get('/randomQuestName', async (req, res) => {
     try {
         const name = await questNameManager.getRandomQuestName();

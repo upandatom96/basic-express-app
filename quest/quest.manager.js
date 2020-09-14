@@ -54,10 +54,22 @@ function deleteHero(id) {
     });
 }
 
+function deleteAll() {
+    return new Promise((resolve, reject) => {
+        Hero.deleteMany({})
+            .then(() => {
+                resolve({
+                    message: `All heroes deleted`
+                });
+            });
+    });
+}
+
 module.exports = {
     getAllHeroes,
     getCurrentHero,
     deleteHero,
+    deleteAll,
     advanceCurrentHero
 }
 
