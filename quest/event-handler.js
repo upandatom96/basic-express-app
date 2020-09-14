@@ -14,8 +14,8 @@ function handleChapterEvent(hero) {
 }
 
 function handleFinaleEvent(hero) {
-    const finaleEvent = codeRetriever.findFinaleEventForQuest(hero.currentQuestCode);
-    return `finale happened ${finaleEvent.code}`;
+    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+    return `FINALE:  ${finaleEvent.code}`;
 }
 
 module.exports = {

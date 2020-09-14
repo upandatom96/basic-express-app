@@ -10,11 +10,10 @@ const ADJECTIVES = require('./words/adjectives');
 
 const STORY_PIECES = require('./story/story-pieces');
 
-const QUEST_PIECES = require('./quest/quest-pieces');
-const QUEST_ATTRIBUTES = require('./quest/quest-attributes');
-const QUEST_QUESTS = require('./quest/quest-quests');
-const QUEST_CHAPTER_EVENTS = require('./quest/quest-chapter-events');
-const QUEST_FINALE_EVENTS = require('./quest/quest-finale-events');
+const QUEST_PIECES = require('./quest/quest-words');
+const QUEST_ATTRIBUTES = require('./quest/hero-attributes');
+const QUEST_QUESTS = require('./quest/quests');
+const QUEST_CHAPTER_EVENTS = require('./quest/chapter-events');
 
 module.exports = {
     WEAPONS: WEAPONS.WEAPONS,
@@ -29,6 +28,5 @@ module.exports = {
     QUEST_ATTRIBUTES: QUEST_ATTRIBUTES,
     QUEST_QUESTS: QUEST_QUESTS,
     QUEST_CHAPTER_EVENTS: QUEST_CHAPTER_EVENTS,
-    QUEST_FINALE_EVENTS: QUEST_FINALE_EVENTS,
     ANNOUNCEMENT_PIECES: ANNOUNCEMENT_PIECES,
 }

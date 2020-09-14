@@ -31,8 +31,7 @@ function makeDeathAnnouncement(hero) {
 }
 
 function makeFinaleAnnouncement(hero, report) {
-    const announcement = `FINALE: ${report}`;
-    makeAnnouncement(hero, announcement);
+    makeAnnouncement(hero, report);
 }
 
 function makeRestAnnouncement(hero) {
