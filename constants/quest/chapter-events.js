@@ -21,7 +21,7 @@ const CHAPTER_EVENTS = [
                 damageMax: 2,
                 itemGain: null,
                 allyGain: null,
-                text: "|HERO| is strong enough to fight back."
+                text: "A goblin attacks! They are strong enough to fight back."
             },
             {
                 triggers: null,
@@ -31,23 +31,66 @@ const CHAPTER_EVENTS = [
                 damageMax: 8,
                 itemGain: null,
                 allyGain: null,
-                text: "|HERO| is too weak to fight back."
+                text: "A goblin attacks! They are too weak to fight back."
             }
         ],
     },
-    // {
-    //     code: "CE2",
-    //     text: "A fairy enchants |HERO|.",
-    //     type: "simple",
-    //     halfDamageCondition: null,
-    //     noDamageCondition: null,
-    //     distanceMin: 9,
-    //     distanceMax: 11,
-    //     hpMin: 5,
-    //     hpMax: 8,
-    //     item: null,
-    //     ally: null,
-    // },
+    {
+        type: "SIMPLE",
+        distanceMin: 5,
+        distanceMax: 7,
+        paths: [
+            {
+                triggers: {
+                    wisdomReq: 7,
+                },
+                text: "A troll emerges. They are wise enough to trick the troll."
+            },
+            {
+                damageMin: 6,
+                damageMax: 9,
+                text: "A troll emerges. They are hurt by a trap the troll created."
+            }
+        ],
+    },
+    {
+        type: "SIMPLE",
+        distanceMin: 1,
+        distanceMax: 10,
+        paths: [
+            {
+                triggers: {
+                    charismaReq: 7,
+                },
+                healMin: 6,
+                healMax: 10,
+                text: "They convince a fairy to heal them well."
+            },
+            {
+                healMin: 3,
+                healMax: 6,
+                text: "They find a fairy and get healed a little."
+            }
+        ],
+    },
+    {
+        type: "SIMPLE",
+        distanceMin: 5,
+        distanceMax: 7,
+        paths: [
+            {
+                triggers: {
+                    dexterityReq: 7,
+                },
+                text: "They carefully cross a broken bridge."
+            },
+            {
+                damageMin: 5,
+                damageMax: 10,
+                text: "They fall while trying to cross a broken bridge."
+            }
+        ],
+    },
 ];
 
 module.exports = {

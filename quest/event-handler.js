@@ -46,7 +46,7 @@ function applyChapterChange(path, hero) {
         changeText = `They lose ${damage}hp.`
     } else if (heal > 0) {
         hero.hp += heal;
-        changeText = `They heal ${damage}hp.`
+        changeText = `They heal ${heal}hp.`
     } else if (boolUtil.hasValue(path.item)) {
         hero.item = path.item;
         changeText = `They equip ${path.item}.`
