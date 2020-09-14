@@ -85,6 +85,16 @@ function advanceHero(hero, resolve) {
             const message = savedHero.journal[lastJournalIndex];
             resolve({
                 name: savedHero.name,
+                stats: {
+                    strength: savedHero.strength,
+                    wisdom: savedHero.wisdom,
+                    dexterity: savedHero.dexterity,
+                    charisma: savedHero.charisma,
+                    ally: savedHero.ally,
+                    item: savedHero.item,
+                    ability: savedHero.ability,
+                    weakness: savedHero.weakness,
+                },
                 hp: `${savedHero.hp}/${savedHero.hpMax} hp`,
                 level: savedHero.level,
                 message

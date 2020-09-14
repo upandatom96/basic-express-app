@@ -28,6 +28,7 @@ function gainNewQuest(hero) {
 
 function travel(hero) {
     const message = eventHandler.handleChapterEvent(hero);
+    checkHealth(hero);
 
     hero.status = isReadyForFinale(hero) ? 12 : 11;
 
