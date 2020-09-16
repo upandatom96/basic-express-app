@@ -25,13 +25,17 @@ function revealSpecial(hero) {
 }
 
 function setOff(hero) {
-    hero.status = HeroStatus.QUEST_NEW;
+    hero.status = HeroStatus.QUEST_FIND;
 }
 
-function gainNewQuest(hero) {
+function findNewQuest(hero) {
     const newQuest = randomManager.pickQuest();
     hero.currentQuestCode = newQuest.code;
     hero.distanceTravelled = 0;
+    hero.status = HeroStatus.QUEST_NEW;
+}
+
+function startNewQuest(hero) {
     hero.status = HeroStatus.QUEST_CHAPTER_START;
 }
 
@@ -97,7 +101,8 @@ module.exports = {
     revealBackstory,
     revealStats,
     revealSpecial,
-    gainNewQuest,
+    findNewQuest,
+    startNewQuest,
     setOff,
     startChapter,
     endChapter,

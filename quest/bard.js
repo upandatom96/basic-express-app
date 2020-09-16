@@ -27,9 +27,15 @@ function makeSetOffAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
-function makeNewQuestAnnouncement(hero) {
+function makeFindNewQuestAnnouncement(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
-    const announcement = `{HERO_FIRST} begins the quest ${quest.name}. ${quest.text}`;
+    const announcement = `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeStartNewQuestAnnouncement(hero) {
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const announcement = `To complete the quest, {HERO_FIRST} must travel ${quest.distanceRequired} miles and ${quest.text}.`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -62,7 +68,8 @@ module.exports = {
     makeStatsAnnouncement,
     makeSpecialAnnouncement,
     makeSetOffAnnouncement,
-    makeNewQuestAnnouncement,
+    makeFindNewQuestAnnouncement,
+    makeStartNewQuestAnnouncement,
     makeDirectAnnouncement,
     makeRestAnnouncement,
     makeDeathAnnouncement,

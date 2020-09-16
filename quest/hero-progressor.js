@@ -26,9 +26,13 @@ function progressHero(hero) {
             action.setOff(hero);
             bard.makeSetOffAnnouncement(hero);
             break;
+        case HeroStatus.QUEST_FIND:
+            action.findNewQuest(hero);
+            bard.makeFindNewQuestAnnouncement(hero);
+            break;
         case HeroStatus.QUEST_NEW:
-            action.gainNewQuest(hero);
-            bard.makeNewQuestAnnouncement(hero);
+            action.startNewQuest(hero);
+            bard.makeStartNewQuestAnnouncement(hero);
             break;
         case HeroStatus.QUEST_CHAPTER_START:
             const chapterStartReport = action.startChapter(hero);

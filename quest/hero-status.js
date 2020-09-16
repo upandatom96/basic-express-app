@@ -4,11 +4,12 @@ const REVEAL_STATS = 2;
 const REVEAL_SPECIAL = 3;
 const SET_OFF = 4;
 
-const QUEST_NEW = 10;
-const QUEST_CHAPTER_START = 11;
-const QUEST_CHAPTER_END = 12;
-const QUEST_FINALE_START = 13;
-const QUEST_FINALE_END = 14;
+const QUEST_FIND = 10;
+const QUEST_NEW = 11;
+const QUEST_CHAPTER_START = 12;
+const QUEST_CHAPTER_END = 13;
+const QUEST_FINALE_START = 14;
+const QUEST_FINALE_END = 15;
 
 const REST = 50;
 
@@ -22,6 +23,7 @@ module.exports = {
     REVEAL_STATS,
     REVEAL_SPECIAL,
     SET_OFF,
+    QUEST_FIND,
     QUEST_NEW,
     QUEST_CHAPTER_START,
     QUEST_CHAPTER_END,

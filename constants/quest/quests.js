@@ -3,7 +3,7 @@ const QUESTS = [
         code: "Q1",
         type: "STANDARD",
         name: "Dragon's Bounty",
-        text: "{HERO_FIRST} must slay the Red Dragon.",
+        text: "slay the Red Dragon",
         distanceRequired: 25,
         finaleEvent: {
             type: "SIMPLE",
@@ -21,7 +21,7 @@ const QUESTS = [
         code: "Q2",
         type: "STANDARD",
         name: "Witch's Curse",
-        text: "{HERO_FIRST} must melt the Wicked Witch.",
+        text: "melt the Wicked Witch",
         distanceRequired: 25,
         finaleEvent: {
             type: "SIMPLE",
