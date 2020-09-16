@@ -1,12 +1,24 @@
 const request = require('request');
 
-function findRareNames(nameCount) {
-    const url = buildNameyUrl(nameCount, "rare", false);
+function findRareNames(nameCount, withSurname) {
+    const url = buildNameyUrl(nameCount, "rare", withSurname);
+    return queryNamey(url);
+}
+
+function findAnyNames(nameCount, withSurname) {
+    const url = buildNameyUrl(nameCount, "all", withSurname);
+    return queryNamey(url);
+}
+
+function findCommonNames(nameCount, withSurname) {
+    const url = buildNameyUrl(nameCount, "common", withSurname);
     return queryNamey(url);
 }
 
 module.exports = {
-    findRareNames
+    findRareNames,
+    findAnyNames,
+    findCommonNames,
 }
 
 function queryNamey(url) {

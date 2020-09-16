@@ -12,7 +12,12 @@ function replaceGlobally(originalString, wordToReplace, replacement) {
     return originalString.replace(regex, replacement);
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 module.exports = {
     toTitleCase,
-    replaceGlobally
+    replaceGlobally,
+    capitalizeFirstLetter
 };

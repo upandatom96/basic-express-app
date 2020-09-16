@@ -1,10 +1,13 @@
 const randomManager = require("../random/random.manager");
 const nameyConnector = require("../api-connector/namey.connector");
 
+const randomUtil = require('../utilities/random.util');
+const stringUtil = require('../utilities/string.util');
+
 function getRandomQuestName() {
     try {
-        const adjective = capitalizeFirstLetter(randomManager.getOneAdjective());
-        const questWord = capitalizeFirstLetter(randomManager.pickQuestWord());
+        const adjective = stringUtil.capitalizeFirstLetter(randomManager.getOneAdjective());
+        const questWord = stringUtil.capitalizeFirstLetter(randomManager.pickQuestWord());
         return `The ${adjective} ${questWord}`;
     } catch (error) {
         console.error(error);
@@ -13,9 +16,12 @@ function getRandomQuestName() {
 
 async function getRandomHeroName() {
     try {
-        const names = await nameyConnector.findRareNames(1);
-        return names[0];
+        const rareNames = await nameyConnector.findRareNames(3, false);
+        const commonNames = await nameyConnector.findCommonNames(1, false);
+        return randomUtil.pickRandom(rareNames.concat(commonNames));
     } catch (error) {
+        const defaultNames = ["Tom", "Flom", "Glom", "Trish", "Felicia"];
+        return randomUtil.pickRandom(defaultNames);
         console.error(error);
     }
 }
@@ -23,8 +29,4 @@ async function getRandomHeroName() {
 module.exports = {
     getRandomQuestName,
     getRandomHeroName
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
 }
