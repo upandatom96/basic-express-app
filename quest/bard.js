@@ -20,22 +20,18 @@ function makeSpecialAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function makeSetOffAnnouncement(hero) {
+    const announcement = `SET OFF`;
+    makeAnnouncement(hero, announcement);
+}
+
 function makeNewQuestAnnouncement(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const announcement = `NEW QUEST: ${quest.name}`;
     makeAnnouncement(hero, announcement);
 }
 
-function makeQuestProgressAnnouncement(hero, report) {
-    makeAnnouncement(hero, report);
-}
-
-function makeDeathAnnouncement(hero) {
-    const announcement = `DEATH: |HERO|'s hp dropped to zero, and their journey ended.`;
-    makeAnnouncement(hero, announcement);
-}
-
-function makeFinaleAnnouncement(hero, report) {
+function makeDirectAnnouncement(hero, report) {
     makeAnnouncement(hero, report);
 }
 
@@ -44,16 +40,27 @@ function makeRestAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function makeDeathAnnouncement(hero) {
+    const announcement = `DEATH: |HERO|'s hp dropped to zero, and their journey ended.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeObituaryAnnouncement(hero) {
+    const announcement = `OBIT`;
+    makeAnnouncement(hero, announcement);
+}
+
 module.exports = {
     makeNameAnnouncement,
     makeBackstoryAnnouncement,
     makeStatsAnnouncement,
     makeSpecialAnnouncement,
+    makeSetOffAnnouncement,
     makeNewQuestAnnouncement,
-    makeQuestProgressAnnouncement,
-    makeDeathAnnouncement,
-    makeFinaleAnnouncement,
+    makeDirectAnnouncement,
     makeRestAnnouncement,
+    makeDeathAnnouncement,
+    makeObituaryAnnouncement,
 }
 
 function interpolate(fullAnnouncement, hero) {

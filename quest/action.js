@@ -1,6 +1,7 @@
 const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const eventHandler = require('./event-handler');
+const HeroStatus = require('./hero-status');
 
 function checkHealth(hero) {
     enforceMaxHealth(hero);
@@ -8,54 +9,79 @@ function checkHealth(hero) {
 }
 
 function revealHero(hero) {
-    hero.status = 1;
+    hero.status = HeroStatus.REVEAL_BACKSTORY;
 }
 
 function revealBackstory(hero) {
-    hero.status = 2;
+    hero.status = HeroStatus.REVEAL_STATS;
 }
 
 function revealStats(hero) {
-    hero.status = 3;
+    hero.status = HeroStatus.REVEAL_SPECIAL;
 }
 
 function revealSpecial(hero) {
-    hero.status = 10;
+    hero.status = HeroStatus.SET_OFF;
+}
+
+function setOff(hero) {
+    hero.status = HeroStatus.QUEST_NEW;
 }
 
 function gainNewQuest(hero) {
     const newQuest = randomManager.pickQuest();
     hero.currentQuestCode = newQuest.code;
     hero.distanceTravelled = 0;
-    hero.status = 11;
+    hero.status = HeroStatus.QUEST_CHAPTER_START;
 }
 
-function travel(hero) {
+function startChapter(hero) {
+    hero.status = HeroStatus.QUEST_CHAPTER_END;
+
+    return "START CHAPTER...";
+}
+
+function endChapter(hero) {
     const message = eventHandler.handleChapterEvent(hero);
     checkHealth(hero);
 
-    hero.status = isReadyForFinale(hero) ? 12 : 11;
+    hero.status = isReadyForFinale(hero) ?
+        HeroStatus.QUEST_FINALE_START :
+        HeroStatus.QUEST_CHAPTER_START;
 
     return message;
 }
 
-function finale(hero) {
-    const message = eventHandler.handleFinaleEvent(hero);
-    checkHealth(hero);
+function startFinale(hero) {
+    hero.status = HeroStatus.QUEST_FINALE_END;
 
-    hero.status = 13;
+    return "START FINALE";
+}
+
+function endFinale(hero) {
+    const message = eventHandler.handleFinaleEvent(hero);
+
+    hero.status = HeroStatus.REST;
+
+    checkHealth(hero);
 
     return message;
 }
 
 function rest(hero) {
     healHalfHealth(hero);
+
     levelUp(hero);
-    hero.status = 10;
+
+    hero.status = HeroStatus.QUEST_NEW;
 }
 
-function death(hero) {
-    hero.status = 99;
+function die(hero) {
+    hero.status = HeroStatus.OBITUARY;
+}
+
+function obituary(hero) {
+    hero.status = HeroStatus.DEAD;
 }
 
 module.exports = {
@@ -65,10 +91,14 @@ module.exports = {
     revealStats,
     revealSpecial,
     gainNewQuest,
-    travel,
-    finale,
+    setOff,
+    startChapter,
+    endChapter,
+    startFinale,
+    endFinale,
     rest,
-    death,
+    die,
+    obituary,
 }
 
 function isReadyForFinale(hero) {
@@ -86,7 +116,9 @@ function enforceMaxHealth(hero) {
 function checkHeartbeat(hero) {
     if (hero.hp <= 0) {
         hero.hp = 0;
-        hero.status = 98;
+        if (heroIsAlive(hero)) {
+            hero.status = HeroStatus.DYING;
+        }
     }
 }
 
@@ -98,4 +130,9 @@ function healHalfHealth(hero) {
 
 function levelUp(hero) {
     hero.level++;
+}
+
+function heroIsAlive(hero) {
+    const deadStatuses = [HeroStatus.DYING, HeroStatus.OBITUARY, HeroStatus.DEAD];
+    return !deadStatuses.includes(hero.status);
 }
