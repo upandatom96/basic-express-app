@@ -1,27 +1,27 @@
 const codeRetriever = require('./code-retriever');
 
 function makeNameAnnouncement(hero) {
-    const announcement = `INTRODUCING HERO: ${hero.name}`;
+    const announcement = `Once Upon a Time, ${hero.name} packed up their things and prepared for adventure.`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeBackstoryAnnouncement(hero) {
-    const announcement = `BACKSTORY: ${hero.backstory}`;
+    const announcement = `|HERO| was destined to become a hero. ${hero.backstory}`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeStatsAnnouncement(hero) {
-    const announcement = `STATS: Strength ${hero.strength}, Wisdom ${hero.wisdom}, Charisma ${hero.charisma}, Dexterity ${hero.dexterity}`;
+    const announcement = `They have ${hero.strength} Strength, ${hero.wisdom} Wisdom, ${hero.charisma} Charisma, and ${hero.dexterity} Dexterity.`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeSpecialAnnouncement(hero) {
-    const announcement = `SPECIAL: ability ${hero.ability}, weakness ${hero.weakness}`;
+    const announcement = `Fortunately, they are ${hero.ability}. They will have to overcome being ${hero.weakness}.`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeSetOffAnnouncement(hero) {
-    const announcement = `SET OFF`;
+    const announcement = `|HERO| finished preparing and set off, looking for any quest they could find.`;
     makeAnnouncement(hero, announcement);
 }
 
