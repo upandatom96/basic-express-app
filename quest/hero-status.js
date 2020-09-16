@@ -11,7 +11,8 @@ const QUEST_CHAPTER_END = 13;
 const QUEST_FINALE_START = 14;
 const QUEST_FINALE_END = 15;
 
-const REST = 50;
+const REST_START = 50;
+const REST_END = 51;
 
 const DYING = 97;
 const OBITUARY = 98;
@@ -29,7 +30,8 @@ module.exports = {
     QUEST_CHAPTER_END,
     QUEST_FINALE_START,
     QUEST_FINALE_END,
-    REST,
+    REST_START,
+    REST_END,
     DYING,
     OBITUARY,
     DEAD,

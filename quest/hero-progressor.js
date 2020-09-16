@@ -50,9 +50,13 @@ function progressHero(hero) {
             const finaleEndReport = action.endFinale(hero);
             bard.makeDirectAnnouncement(hero, finaleEndReport);
             break;
-        case HeroStatus.REST:
-            action.rest(hero);
-            bard.makeRestAnnouncement(hero);
+        case HeroStatus.REST_START:
+            action.startRest(hero);
+            bard.makeRestStartAnnouncement(hero);
+            break;
+        case HeroStatus.REST_END:
+            action.endRest(hero);
+            bard.makeRestEndAnnouncement(hero);
             break;
         case HeroStatus.DYING:
             action.die(hero);

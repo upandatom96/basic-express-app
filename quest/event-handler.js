@@ -60,8 +60,7 @@ function applyChapterChange(path, hero) {
 
     let changeText;
     if (damage > 0) {
-        hero.hp -= damage;
-        changeText = `They lose ${damage}hp.`
+        changeText = handleDamage(hero, damage);
     } else if (heal > 0) {
         hero.hp += heal;
         changeText = `They heal ${heal}hp.`
@@ -77,13 +76,22 @@ function applyChapterChange(path, hero) {
     return changeText;
 }
 
+function handleDamage(hero, damage) {
+    const modifiedDamage = damage + getDamageModifier(hero.level);
+    hero.hp -= modifiedDamage;
+    return `They lose ${modifiedDamage}hp.`
+}
+
+function getDamageModifier(level) {
+    return (level - 1) * 2;
+}
+
 function applyFinaleChange(path, hero) {
     const damage = getHealthChangeAmount(path.damageMin, path.damageMax);
 
     let changeText;
     if (damage > 0) {
-        hero.hp -= damage;
-        changeText = `They lose ${damage}hp.`
+        changeText = handleDamage(hero, damage);
     } else {
         changeText = "They are unaffected.";
     }

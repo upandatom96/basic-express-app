@@ -70,19 +70,23 @@ function startFinale(hero) {
 function endFinale(hero) {
     const message = eventHandler.finishFinaleEvent(hero);
 
-    hero.status = HeroStatus.REST;
+    hero.status = HeroStatus.REST_START;
 
     checkHealth(hero);
 
     return message;
 }
 
-function rest(hero) {
-    regainQuarterHealth(hero);
-
+function startRest(hero) {
     levelUp(hero);
 
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
+
+    hero.status = HeroStatus.REST_END;
+}
+
+function endRest(hero) {
+    restHealth(hero);
 
     hero.status = HeroStatus.QUEST_FIND;
 }
@@ -108,7 +112,8 @@ module.exports = {
     endChapter,
     startFinale,
     endFinale,
-    rest,
+    startRest,
+    endRest,
     die,
     obituary,
 }
@@ -134,9 +139,13 @@ function checkHeartbeat(hero) {
     }
 }
 
-function regainQuarterHealth(hero) {
-    const halfHealth = hero.hpMax / 4;
-    hero.hp += halfHealth;
+function restHealth(hero) {
+    hero.hpMax += 5;
+
+    const quarterHealth = hero.hpMax / 4;
+    const someHealth = Math.floor(quarterHealth);
+    hero.hp += someHealth;
+
     enforceMaxHealth(hero);
 }
 
