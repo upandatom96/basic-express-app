@@ -7,6 +7,12 @@ function toTitleCase(str) {
     );
 }
 
+function replaceGlobally(originalString, wordToReplace, replacement) {
+    const regex = new RegExp(wordToReplace, 'g');
+    return originalString.replace(regex, replacement);
+}
+
 module.exports = {
-    toTitleCase
+    toTitleCase,
+    replaceGlobally
 };

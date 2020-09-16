@@ -36,13 +36,16 @@ function gainNewQuest(hero) {
 }
 
 function startChapter(hero) {
+    const message = eventHandler.startChapterEvent(hero);
+
     hero.status = HeroStatus.QUEST_CHAPTER_END;
 
-    return "START CHAPTER...";
+    return message;
 }
 
 function endChapter(hero) {
-    const message = eventHandler.handleChapterEvent(hero);
+    const message = eventHandler.finishChapterEvent(hero);
+
     checkHealth(hero);
 
     hero.status = isReadyForFinale(hero) ?
@@ -53,13 +56,15 @@ function endChapter(hero) {
 }
 
 function startFinale(hero) {
+    const message = eventHandler.startFinaleEvent(hero);
+
     hero.status = HeroStatus.QUEST_FINALE_END;
 
-    return "START FINALE";
+    return message;
 }
 
 function endFinale(hero) {
-    const message = eventHandler.handleFinaleEvent(hero);
+    const message = eventHandler.finishFinaleEvent(hero);
 
     hero.status = HeroStatus.REST;
 
@@ -69,9 +74,11 @@ function endFinale(hero) {
 }
 
 function rest(hero) {
-    healHalfHealth(hero);
+    regainQuarterHealth(hero);
 
     levelUp(hero);
+
+    hero.completedQuestCodeLog.push(hero.currentQuestCode);
 
     hero.status = HeroStatus.QUEST_NEW;
 }
@@ -122,8 +129,8 @@ function checkHeartbeat(hero) {
     }
 }
 
-function healHalfHealth(hero) {
-    const halfHealth = hero.hpMax / 2;
+function regainQuarterHealth(hero) {
+    const halfHealth = hero.hpMax / 4;
     hero.hp += halfHealth;
     enforceMaxHealth(hero);
 }

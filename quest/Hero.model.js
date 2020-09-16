@@ -73,6 +73,10 @@ const HeroSchema = new Schema({
             type: String
         }
     ],
+    currentChapterCode: {
+        type: String,
+        required: false,
+    },
     currentQuestCode: {
         type: String,
         required: false,
@@ -88,6 +92,11 @@ const HeroSchema = new Schema({
         default: 0
     },
     completedQuestCodeLog: [
+        {
+            type: String
+        }
+    ],
+    completedChapterCodeLog: [
         {
             type: String
         }

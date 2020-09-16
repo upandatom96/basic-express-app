@@ -5,24 +5,42 @@ const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const trigger = require('./trigger');
 
-function handleChapterEvent(hero) {
+function startChapterEvent(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
+    hero.currentChapterCode = chapterEvent.code;
+
+    return chapterEvent.intro;
+}
+
+function finishChapterEvent(hero) {
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    hero.completedChapterCodeLog.push(hero.currentChapterCode);
+    hero.currentChapterCode = null;
+
     const distance = addDistance(chapterEvent, hero);
     const flavorText = takeChapterPath(chapterEvent, hero);
 
-    return `|HERO| travels ${distance}miles. ${flavorText}`;
+    return `${flavorText} {HERO_FIRST} travels ${distance} miles.`;
 }
 
-function handleFinaleEvent(hero) {
+function startFinaleEvent(hero) {
+    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+
+    return `{HERO_FIRST} reaches their destination. ${finaleEvent.intro}`;
+}
+
+function finishFinaleEvent(hero) {
     const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
     const flavorText = takeFinalePath(finaleEvent, hero);
 
-    return `FINALE: ${flavorText}`;
+    return `${flavorText}`;
 }
 
 module.exports = {
-    handleChapterEvent,
-    handleFinaleEvent,
+    startChapterEvent,
+    finishChapterEvent,
+    startFinaleEvent,
+    finishFinaleEvent,
 }
 
 function getHealthChangeAmount(changeMin, changeMax) {

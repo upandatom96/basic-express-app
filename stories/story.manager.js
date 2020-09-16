@@ -9,10 +9,10 @@ function getRandomStory() {
     const adjective1 = stringUtil.toTitleCase(randomManager.pickAdjective());
     const adjective2 = stringUtil.toTitleCase(randomManager.pickAdjective());
     let storyPrefix = randomManager.pickStoryPrefix();
-    storyPrefix = replaceGlobally(storyPrefix, "{N1}", noun1);
-    storyPrefix = replaceGlobally(storyPrefix, "{N2}", noun2);
-    storyPrefix = replaceGlobally(storyPrefix, "{A1}", adjective1);
-    storyPrefix = replaceGlobally(storyPrefix, "{A2}", adjective2);
+    storyPrefix = stringUtil.replaceGlobally(storyPrefix, "{N1}", noun1);
+    storyPrefix = stringUtil.replaceGlobally(storyPrefix, "{N2}", noun2);
+    storyPrefix = stringUtil.replaceGlobally(storyPrefix, "{A1}", adjective1);
+    storyPrefix = stringUtil.replaceGlobally(storyPrefix, "{A2}", adjective2);
     return storyPrefix;
 }
 
@@ -73,15 +73,10 @@ function fetchWordToReplace(oldPhase) {
     return oldPhase.substring(start, end);
 }
 
-function replaceGlobally(originalString, wordToReplace, replacement) {
-    const regex = new RegExp(wordToReplace, 'g');
-    return originalString.replace(regex, replacement);
-}
-
 function buildNewPhrase(wordOptions, oldWord, storyBase) {
     const newWord = randomUtil.pickRandom(wordOptions);
     console.log(`${oldWord} -> ${newWord}`);
-    const newPhrase = replaceGlobally(storyBase, `{${oldWord}}`, stringUtil.toTitleCase(newWord));
+    const newPhrase = stringUtil.replaceGlobally(storyBase, `{${oldWord}}`, stringUtil.toTitleCase(newWord));
     console.log(`${storyBase} -> ${newPhrase}`);
     return newPhrase;
 }

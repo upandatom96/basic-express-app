@@ -6,6 +6,13 @@ function findQuest(code) {
     });
 }
 
+function findChapterEvent(code) {
+    return constantsManager.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS.find((event) => {
+        return event.code === code;
+    });
+}
+
 module.exports = {
     findQuest,
+    findChapterEvent,
 }

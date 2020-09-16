@@ -22,6 +22,7 @@ function generateHero(firstName, pastHeroes) {
     const currentQuestCode = null;
     const distanceTravelled = 0;
     const completedQuestCodeLog = [];
+    const completedChapterCodeLog = [];
 
     return {
         name,
@@ -42,6 +43,7 @@ function generateHero(firstName, pastHeroes) {
         currentQuestCode,
         distanceTravelled,
         completedQuestCodeLog,
+        completedChapterCodeLog,
     };
 }
 
