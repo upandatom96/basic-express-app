@@ -12,7 +12,7 @@ const QUESTS = [
                 {
                     damageMin: 40,
                     damageMax: 60,
-                    text: "{HERO_FIRST} fights the dragon and wins after taking some damage."
+                    text: "{HERO_FIRST} fights the dragon. They take some damage but manage to defeat the dragon."
                 }
             ],
         },

@@ -23,7 +23,7 @@ const CHAPTER_EVENTS = [
                 damageMax: 2,
                 itemGain: null,
                 allyGain: null,
-                text: "A goblin attacks! They are strong enough to fight back."
+                text: "{HERO_FIRST} is strong enough to fight back against the goblin."
             },
             {
                 triggers: null,
@@ -33,7 +33,7 @@ const CHAPTER_EVENTS = [
                 damageMax: 8,
                 itemGain: null,
                 allyGain: null,
-                text: "A goblin attacks! They are too weak to fight back."
+                text: "{HERO_FIRST} takes some damage fighting off the goblin."
             }
         ],
     },
@@ -48,12 +48,12 @@ const CHAPTER_EVENTS = [
                 triggers: {
                     wisdomReq: 7,
                 },
-                text: "A troll emerges. They are wise enough to trick the troll."
+                text: "{HERO_FIRST} is wise enough to trick the troll into letting them pass."
             },
             {
                 damageMin: 6,
                 damageMax: 9,
-                text: "A troll emerges. They are hurt by a trap the troll created."
+                text: "{HERO_FIRST} is tricked by the troll and gets hurt."
             }
         ],
     },
@@ -70,12 +70,12 @@ const CHAPTER_EVENTS = [
                 },
                 healMin: 6,
                 healMax: 10,
-                text: "They convince a fairy to heal them well."
+                text: "{HERO_FIRST} convinces the fairy to heal them well."
             },
             {
                 healMin: 3,
                 healMax: 6,
-                text: "They find a fairy and get healed a little."
+                text: "The fairy heals {HERO_FIRST} a little bit."
             }
         ],
     },
@@ -90,12 +90,12 @@ const CHAPTER_EVENTS = [
                 triggers: {
                     dexterityReq: 7,
                 },
-                text: "They careFIRSTy cross a broken bridge."
+                text: "{HERO_FIRST} is agile enough to cross the bridge swiftly."
             },
             {
                 damageMin: 5,
                 damageMax: 10,
-                text: "They fall while trying to cross a broken bridge."
+                text: "{HERO_FIRST} falls while trying to cross the bridge."
             }
         ],
     },

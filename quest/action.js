@@ -84,7 +84,7 @@ function rest(hero) {
 
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
 
-    hero.status = HeroStatus.QUEST_NEW;
+    hero.status = HeroStatus.QUEST_FIND;
 }
 
 function die(hero) {
