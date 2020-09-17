@@ -174,6 +174,7 @@ function getHeroReport(heroDB) {
     const questInfo = getQuestInfo(heroDB);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
+    const heroFullyRevealed = heroDB.status > 3;
     return {
         announcement,
         name: heroDB.name,
@@ -186,6 +187,9 @@ function getHeroReport(heroDB) {
         hp: heroDB.hp,
         hpMax: heroDB.hpMax,
         journal: heroDB.journal,
-        _id: heroDB._id
+        _id: heroDB._id,
+        startDate: heroDB.startDate,
+        deathDate: heroDB.deathDate,
+        heroFullyRevealed
     };
 }
