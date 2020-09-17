@@ -81,6 +81,7 @@ function startRest(hero) {
     levelUp(hero);
 
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
+    hero.currentQuestCode = null;
 
     hero.status = HeroStatus.REST_END;
 }

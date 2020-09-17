@@ -13,7 +13,8 @@ function getAllHeroes() {
     return new Promise((resolve, reject) => {
         Hero.find({})
             .then((heroes) => {
-                resolve(heroes);
+                const heroReports = getHeroReports(heroes);
+                resolve(heroReports);
             });
     });
 }
@@ -131,18 +132,31 @@ function getStats(savedHero) {
     };
 }
 
-function getHeroReport(savedHero) {
-    const message = getLatestMessage(savedHero);
-    const questInfo = getQuestInfo(savedHero);
-    const hp = `${savedHero.hp}/${savedHero.hpMax} hp`;
-    const stats = getStats(savedHero);
+function getHeroReports(heroDBs) {
+    const heroReports = [];
+    heroDBs.forEach((heroDB) => {
+        const heroReport = getHeroReport(heroDB);
+        heroReports.push(heroReport);
+    });
+    return heroReports;
+}
+
+function getHeroReport(heroDB) {
+    const announcement = getLatestMessage(heroDB);
+    const questInfo = getQuestInfo(heroDB);
+    const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
+    const stats = getStats(heroDB);
     return {
-        message,
-        name: savedHero.name,
-        level: savedHero.level,
-        hp,
+        announcement,
+        name: heroDB.name,
+        level: heroDB.level,
+        hpText: hpText,
         stats,
         questInfo,
-        distanceTravelledTotal: savedHero.distanceTravelledTotal,
+        distanceTravelledTotal: heroDB.distanceTravelledTotal,
+        storyOver: heroDB.status === 99,
+        hp: heroDB.hp,
+        hpMax: heroDB.hpMax,
+        journal: heroDB.journal
     };
 }
