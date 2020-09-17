@@ -24,6 +24,26 @@ questController.get('/heroes', async (req, res) => {
     }
 });
 
+questController.get('/fallenHeroes', async (req, res) => {
+    try {
+        const heroes = await questManager.getFallenHeroes();
+        res.send(heroes);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
+questController.get('/heroStats', async (req, res) => {
+    try {
+        const heroStats = await questManager.getHeroStats();
+        res.send(heroStats);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 questController.post('/advanceCurrentHero', async (req, res) => {
     try {
         const message = await questManager.advanceCurrentHero();

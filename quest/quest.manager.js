@@ -19,6 +19,32 @@ function getAllHeroes() {
     });
 }
 
+function getFallenHeroes() {
+    return new Promise((resolve, reject) => {
+        Hero.find({
+            status: 99
+        })
+            .then((heroes) => {
+                const heroReports = getHeroReports(heroes);
+                resolve(heroReports);
+            });
+    });
+}
+
+function getHeroStats() {
+    return new Promise((resolve, reject) => {
+        Hero.find({
+            status: 99
+        })
+            .then((heroes) => {
+                const heroReports = getHeroReports(heroes);
+                resolve({
+                    fallenHeroes: heroReports.length
+                });
+            });
+    });
+}
+
 function getCurrentHero() {
     return new Promise((resolve, reject) => {
         Hero.find({status: {$ne: 99}})
@@ -71,6 +97,8 @@ function deleteAll() {
 
 module.exports = {
     getAllHeroes,
+    getFallenHeroes,
+    getHeroStats,
     getCurrentHero,
     deleteHero,
     deleteAll,
