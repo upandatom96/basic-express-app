@@ -105,6 +105,10 @@ const HeroSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    deathDate: {
+        type: Date,
+        default: null
+    },
 });
 
 mongoose.model('hero', HeroSchema);

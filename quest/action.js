@@ -94,6 +94,7 @@ function endRest(hero) {
 
 function die(hero) {
     hero.status = HeroStatus.OBITUARY;
+    hero.deathDate = new Date();
 }
 
 function obituary(hero) {
