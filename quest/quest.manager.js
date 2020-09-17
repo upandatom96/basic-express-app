@@ -185,6 +185,7 @@ function getHeroReport(heroDB) {
         storyOver: heroDB.status === 99,
         hp: heroDB.hp,
         hpMax: heroDB.hpMax,
-        journal: heroDB.journal
+        journal: heroDB.journal,
+        _id: heroDB._id
     };
 }
