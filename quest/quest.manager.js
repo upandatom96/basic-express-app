@@ -8,6 +8,7 @@ const heroProgressor = require('./hero-progressor');
 const codeRetriever = require('./code-retriever');
 
 const boolUtil = require('../utilities/bool.util');
+const calcUtil = require('../utilities/calc.util');
 
 function getAllHeroes() {
     return new Promise((resolve, reject) => {
@@ -180,6 +181,8 @@ function getHeroReport(heroDB) {
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
+    const uniqueQuestCount = calcUtil.countUniqueItems(heroDB.completedQuestCodeLog);
+    const uniqueChapterCount = calcUtil.countUniqueItems(heroDB.completedChapterCodeLog);
     return {
         announcement,
         name: heroDB.name,
@@ -196,5 +199,7 @@ function getHeroReport(heroDB) {
         backstory: backstoryRevealed ? heroDB.backstory : "???",
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
+        uniqueQuestCount,
+        uniqueChapterCount,
     };
 }

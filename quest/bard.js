@@ -1,6 +1,7 @@
 const codeRetriever = require('./code-retriever');
 
 const stringUtil = require('../utilities/string.util');
+const calcUtil = require('../utilities/calc.util');
 
 function makeNameAnnouncement(hero) {
     const announcement = `Once Upon a Time, ${hero.name} packed up their things and prepared for adventure.`;
@@ -111,22 +112,16 @@ function getLastName(heroName) {
     return heroName.split(' ').slice(-1).join(' ');
 }
 
-function countUniqueItems(items) {
-    const uniqueItems = items
-        .filter((item, i, ar) => ar.indexOf(item) === i);
-    return uniqueItems.length;
-}
-
 function getAnnouncementClosing(hero) {
     const page = hero.journal.length + 1;
     return `({HERO_FULL} ${hero.hp}/${hero.hpMax}hp #${page})`;
 }
 
 function getUniqueInfo(hero) {
-    const uniqueQuestCount = countUniqueItems(hero.completedQuestCodeLog);
+    const uniqueQuestCount = calcUtil.countUniqueItems(hero.completedQuestCodeLog);
     const questS = uniqueQuestCount === 1 ? "" : "s";
 
-    const uniqueChapterCount = countUniqueItems(hero.completedChapterCodeLog);
+    const uniqueChapterCount = calcUtil.countUniqueItems(hero.completedChapterCodeLog);
     const chapterS = uniqueChapterCount === 1 ? "" : "s";
 
     return `They finished ${uniqueQuestCount} unique quest${questS} and had ${uniqueChapterCount} unique encounter${chapterS} along the way.`;
