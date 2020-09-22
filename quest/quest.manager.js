@@ -208,5 +208,6 @@ function getHeroReport(heroDB) {
         deathDate: heroDB.deathDate,
         uniqueQuestCount,
         uniqueChapterCount,
+        age: heroDB.journal.length,
     };
 }
