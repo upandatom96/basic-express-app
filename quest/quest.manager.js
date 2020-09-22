@@ -133,11 +133,7 @@ function advanceHero(hero, resolve) {
 
 function getQuestInfo(savedHero) {
     if (boolUtil.hasValue(savedHero.currentQuestCode)) {
-        const quest = codeRetriever.findQuest(savedHero.currentQuestCode);
-        return {
-            name: quest.name,
-            distance: `${savedHero.distanceTravelled}/${quest.distanceRequired} miles`,
-        };
+        return codeRetriever.findQuest(savedHero.currentQuestCode);
     } else {
         return null;
     }
@@ -200,6 +196,7 @@ function getHeroReport(heroDB) {
         stats,
         questInfo,
         chapterInfo,
+        distanceTravelled: heroDB.distanceTravelled,
         distanceTravelledTotal: heroDB.distanceTravelledTotal,
         storyOver: heroDB.status === 99,
         hp: heroDB.hp,
