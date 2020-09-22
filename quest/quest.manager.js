@@ -51,9 +51,11 @@ function getCurrentHero() {
         Hero.find({status: {$ne: 99}})
             .then((livingHeroes) => {
                 if (livingHeroes.length > 0) {
-                    resolve(livingHeroes[0]);
+                    const currentHero = livingHeroes[0];
+                    const currentHeroReport = getHeroReport(currentHero);
+                    resolve(currentHeroReport);
                 } else {
-                    resolve("no current hero");
+                    resolve(null);
                 }
             });
     });
