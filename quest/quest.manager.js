@@ -148,15 +148,20 @@ function getLatestMessage(savedHero) {
 }
 
 function getStats(savedHero) {
+    const specialRevealed = savedHero.status > 3;
+    const baseStatsRevealed = savedHero.status > 2;
     return {
-        strength: savedHero.strength,
-        wisdom: savedHero.wisdom,
-        dexterity: savedHero.dexterity,
-        charisma: savedHero.charisma,
+        // base stats
+        strength: baseStatsRevealed ? savedHero.strength : "???",
+        wisdom: baseStatsRevealed ? savedHero.wisdom : "???",
+        dexterity: baseStatsRevealed ? savedHero.dexterity : "???",
+        charisma: baseStatsRevealed ? savedHero.charisma : "???",
+        // special stats
+        ability: specialRevealed ? savedHero.ability : "???",
+        weakness: specialRevealed ? savedHero.weakness : "???",
+        // holding stats
         ally: savedHero.ally,
         item: savedHero.item,
-        ability: savedHero.ability,
-        weakness: savedHero.weakness,
     };
 }
 
@@ -174,7 +179,7 @@ function getHeroReport(heroDB) {
     const questInfo = getQuestInfo(heroDB);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
-    const heroFullyRevealed = heroDB.status > 3;
+    const backstoryRevealed = heroDB.status > 1;
     return {
         announcement,
         name: heroDB.name,
@@ -188,8 +193,8 @@ function getHeroReport(heroDB) {
         hpMax: heroDB.hpMax,
         journal: heroDB.journal,
         _id: heroDB._id,
+        backstory: backstoryRevealed ? heroDB.backstory : "???",
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
-        heroFullyRevealed
     };
 }
