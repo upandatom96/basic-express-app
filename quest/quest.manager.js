@@ -135,7 +135,14 @@ function advanceHero(hero, resolve) {
 
 function getQuestInfo(savedHero) {
     if (boolUtil.hasValue(savedHero.currentQuestCode)) {
-        return codeRetriever.findQuest(savedHero.currentQuestCode);
+        const quest = codeRetriever.findQuest(savedHero.currentQuestCode);
+        return {
+            title: quest.title,
+            flavorText: `
+            They must travel ${quest.distanceRequired} miles and ${quest.text}. 
+            So far, they have travelled ${savedHero.distanceTravelled}.
+            `,
+        };
     } else {
         return null;
     }
@@ -143,7 +150,13 @@ function getQuestInfo(savedHero) {
 
 function getChapterInfo(savedHero) {
     if (boolUtil.hasValue(savedHero.currentChapterCode)) {
-        return codeRetriever.findChapterEvent(savedHero.currentChapterCode);
+        const chapterEvent = codeRetriever.findChapterEvent(savedHero.currentChapterCode);
+        return {
+            title: "title",
+            flavorText: `
+            flavor text
+            `,
+        };
     } else {
         return null;
     }
