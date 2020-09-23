@@ -152,9 +152,9 @@ function getChapterInfo(savedHero) {
     if (boolUtil.hasValue(savedHero.currentChapterCode)) {
         const chapterEvent = codeRetriever.findChapterEvent(savedHero.currentChapterCode);
         return {
-            title: "title",
+            title: "title TBD",
             flavorText: `
-            flavor text
+            ${chapterEvent.intro}
             `,
         };
     } else {
