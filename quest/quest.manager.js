@@ -137,7 +137,7 @@ function getQuestInfo(savedHero) {
     if (boolUtil.hasValue(savedHero.currentQuestCode)) {
         const quest = codeRetriever.findQuest(savedHero.currentQuestCode);
         return {
-            title: quest.title,
+            title: quest.name,
             flavorText: `
             They must travel ${quest.distanceRequired} miles and ${quest.text}. 
             So far, they have travelled ${savedHero.distanceTravelled} miles.
