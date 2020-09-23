@@ -224,5 +224,6 @@ function getHeroReport(heroDB) {
         uniqueQuestCount,
         uniqueChapterCount,
         age: heroDB.journal.length,
+        seed: heroDB.seed,
     };
 }
