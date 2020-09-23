@@ -177,8 +177,8 @@ function getStats(savedHero) {
         dexterity: baseStatsRevealed ? savedHero.dexterity : "???",
         charisma: baseStatsRevealed ? savedHero.charisma : "???",
         // special stats
-        ability: specialRevealed ? savedHero.ability : "???",
-        weakness: specialRevealed ? savedHero.weakness : "???",
+        advantage: specialRevealed ? savedHero.advantage : "???",
+        disadvantage: specialRevealed ? savedHero.disadvantage : "???",
         // holding stats
         ally: savedHero.ally,
         item: savedHero.item,

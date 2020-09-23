@@ -7,8 +7,8 @@ function generateHero(firstName, pastHeroes) {
 
     console.log(`Generating HERO ${name}...`);
 
-    const ability = randomManager.pickAbility();
-    const weakness = randomManager.pickWeakness();
+    const advantage = randomManager.pickAdvantage();
+    const disadvantage = randomManager.pickDisadvantage();
     const backstory = randomManager.pickBackstory();
     const stats = rollStats();
 
@@ -28,8 +28,8 @@ function generateHero(firstName, pastHeroes) {
         name,
         status,
         backstory,
-        ability,
-        weakness,
+        advantage,
+        disadvantage,
         strength: stats.strength,
         wisdom: stats.wisdom,
         charisma: stats.charisma,

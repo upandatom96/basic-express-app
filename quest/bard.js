@@ -19,7 +19,7 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeSpecialAnnouncement(hero) {
-    const announcement = `Fortunately, they are ${hero.ability}. They will have to overcome being ${hero.weakness}.`;
+    const announcement = `Fortunately, they are ${hero.advantage}. They will have to overcome being ${hero.disadvantage}.`;
     makeAnnouncement(hero, announcement);
 }
 

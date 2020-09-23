@@ -52,12 +52,12 @@ const HeroSchema = new Schema({
         required: true,
         default: "They are the king's secret child."
     },
-    ability: {
+    advantage: {
         type: String,
         required: true,
         default: "BLESSED"
     },
-    weakness: {
+    disadvantage: {
         type: String,
         required: true,
         default: "CURSED"

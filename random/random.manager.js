@@ -69,12 +69,12 @@ function pickChapterEvent() {
   return randomUtil.pickRandom(constants.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS);
 }
 
-function pickAbility() {
-  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ABILITIES);
+function pickAdvantage() {
+  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ADVANTAGES);
 }
 
-function pickWeakness() {
-  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.WEAKNESSES);
+function pickDisadvantage() {
+  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.DISADVANTAGES);
 }
 
 function pickBackstory() {
@@ -99,8 +99,8 @@ module.exports = {
   getWordCount,
   pickQuest,
   pickChapterEvent,
-  pickAbility,
-  pickWeakness,
+  pickAdvantage,
+  pickDisadvantage,
   pickBackstory,
   pickStoryPrefix,
   pickStoryBase: pickStorySynonym,

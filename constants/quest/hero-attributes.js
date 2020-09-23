@@ -1,9 +1,9 @@
-const ABILITIES = [
+const ADVANTAGES = [
     "BLESSED",
     "ATTRACTIVE",
 ];
 
-const WEAKNESSES = [
+const DISADVANTAGES = [
     "CURSED",
     "SMELLY",
 ];
@@ -14,7 +14,7 @@ const BACKSTORY = [
 ];
 
 module.exports = {
-    ABILITIES,
-    WEAKNESSES,
+    ADVANTAGES,
+    DISADVANTAGES,
     BACKSTORY
 }

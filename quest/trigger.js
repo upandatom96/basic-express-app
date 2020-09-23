@@ -35,18 +35,18 @@ function checkSpecialReq(reqAttributeList, specialAttribute) {
     if (noReq) {
         return true;
     }
-    return reqAttributeList.some((abilityReq) => {
-        return abilityReq === specialAttribute;
+    return reqAttributeList.some((advantageReq) => {
+        return advantageReq === specialAttribute;
     });
 }
 
 function areSpecialReqsMet(triggers, hero) {
-    const abilityMet = checkSpecialReq(triggers.abilityReq, hero.ability);
-    const weaknessMet = checkSpecialReq(triggers.weaknessReq, hero.weakness);
+    const advantageMet = checkSpecialReq(triggers.advantageReq, hero.advantage);
+    const disadvantageMet = checkSpecialReq(triggers.disadvantageReq, hero.disadvantage);
     const itemMet = checkSpecialReq(triggers.itemReq, hero.item);
     const allyMet = checkSpecialReq(triggers.allyReq, hero.ally);
 
-    return abilityMet && weaknessMet && itemMet && allyMet;
+    return advantageMet && disadvantageMet && itemMet && allyMet;
 }
 
 function areNoTriggers(triggers) {

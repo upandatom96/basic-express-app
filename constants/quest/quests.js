@@ -29,7 +29,7 @@ const QUESTS = [
             paths: [
                 {
                     triggers: {
-                        abilityReq: ["BLESSED"],
+                        advantageReq: ["BLESSED"],
                     },
                     damageMin: 10,
                     damageMax: 20,
@@ -37,7 +37,7 @@ const QUESTS = [
                 },
                 {
                     triggers: {
-                        weaknessReq: ["CURSED"],
+                        disadvantageReq: ["CURSED"],
                     },
                     damageMin: 70,
                     damageMax: 75,
