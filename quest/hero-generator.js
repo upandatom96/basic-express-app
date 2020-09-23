@@ -7,6 +7,7 @@ function generateHero(firstName, pastHeroes) {
 
     console.log(`Generating HERO ${name}...`);
 
+    const seed = randomUtil.pickRandomNumber(0, 100);
     const advantage = randomManager.pickAdvantage();
     const disadvantage = randomManager.pickDisadvantage();
     const backstory = randomManager.pickBackstory();
@@ -26,6 +27,7 @@ function generateHero(firstName, pastHeroes) {
 
     return {
         name,
+        seed,
         status,
         backstory,
         advantage,

@@ -7,6 +7,11 @@ const HeroSchema = new Schema({
         required: true,
         default: "Gribnar Bleck"
     },
+    seed: {
+        type: Number,
+        required: true,
+        default: 1
+    },
     status: {
         type: Number,
         required: true,
