@@ -9,7 +9,9 @@ function generateRandomPassword() {
 }
 
 function pickRandomNumber(min, max) {
-    return Math.floor(Math.random() * max) + min;
+    const maxOffset = max - min + 1;
+    const fullRandom = Math.random() * maxOffset + min;
+    return Math.floor(fullRandom);
 }
 
 function pickRandom(array) {
