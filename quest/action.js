@@ -3,6 +3,8 @@ const codeRetriever = require('./code-retriever');
 const eventHandler = require('./event-handler');
 const HeroStatus = require('./hero-status');
 
+const randomUtil = require('../utilities/random.util');
+
 function checkHealth(hero) {
     enforceMaxHealth(hero);
     checkHeartbeat(hero);
@@ -36,7 +38,7 @@ function findNewQuest(hero) {
 }
 
 function startNewQuest(hero) {
-    hero.status = HeroStatus.QUEST_CHAPTER_START;
+    hero.status = HeroStatus.QUEST_TRAVEL;
 }
 
 function startChapter(hero) {
@@ -52,11 +54,24 @@ function endChapter(hero) {
 
     checkHealth(hero);
 
-    hero.status = isReadyForFinale(hero) ?
+    hero.status = HeroStatus.QUEST_TRAVEL;
+
+    return message;
+}
+
+function travel(hero) {
+    const distance = addDistance(hero);
+    const ready = isReadyForFinale(hero);
+
+    hero.status = ready ?
         HeroStatus.QUEST_FINALE_START :
         HeroStatus.QUEST_CHAPTER_START;
 
-    return message;
+    const additionalMessage = ready ?
+        " They have reached their destination." :
+        " Their journey continues...";
+
+    return `{HERO_FIRST} travels ${distance} miles.${additionalMessage}`;
 }
 
 function startFinale(hero) {
@@ -113,6 +128,7 @@ module.exports = {
     setOff,
     startChapter,
     endChapter,
+    travel,
     startFinale,
     endFinale,
     startRest,
@@ -159,4 +175,11 @@ function levelUp(hero) {
 function heroIsAlive(hero) {
     const deadStatuses = [HeroStatus.DYING, HeroStatus.OBITUARY, HeroStatus.DEAD];
     return !deadStatuses.includes(hero.status);
+}
+
+function addDistance(hero) {
+    const distance = randomUtil.pickRandomNumber(5, 15);
+    hero.distanceTravelled += distance;
+    hero.distanceTravelledTotal += distance;
+    return distance;
 }

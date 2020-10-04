@@ -6,13 +6,16 @@ const SET_OFF = 4;
 
 const QUEST_FIND = 10;
 const QUEST_NEW = 11;
-const QUEST_CHAPTER_START = 12;
-const QUEST_CHAPTER_END = 13;
-const QUEST_FINALE_START = 14;
-const QUEST_FINALE_END = 15;
+const QUEST_TRAVEL = 12;
 
-const REST_START = 50;
-const REST_END = 51;
+const QUEST_CHAPTER_START = 20;
+const QUEST_CHAPTER_END = 21;
+
+const QUEST_FINALE_START = 70;
+const QUEST_FINALE_END = 71;
+
+const REST_START = 80;
+const REST_END = 81;
 
 const DYING = 97;
 const OBITUARY = 98;
@@ -28,6 +31,7 @@ module.exports = {
     QUEST_NEW,
     QUEST_CHAPTER_START,
     QUEST_CHAPTER_END,
+    QUEST_TRAVEL,
     QUEST_FINALE_START,
     QUEST_FINALE_END,
     REST_START,

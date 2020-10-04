@@ -17,10 +17,9 @@ function finishChapterEvent(hero) {
     hero.completedChapterCodeLog.push(hero.currentChapterCode);
     hero.currentChapterCode = null;
 
-    const distance = addDistance(chapterEvent, hero);
     const flavorText = takeChapterPath(chapterEvent, hero);
 
-    return `${flavorText} {HERO_FIRST} travels ${distance} miles.`;
+    return `${flavorText}`;
 }
 
 function startFinaleEvent(hero) {
@@ -96,13 +95,6 @@ function applyFinaleChange(path, hero) {
         changeText = "They are unaffected.";
     }
     return changeText;
-}
-
-function addDistance(event, hero) {
-    const distance = randomUtil.pickRandomNumber(event.distanceMin, event.distanceMax);
-    hero.distanceTravelled += distance;
-    hero.distanceTravelledTotal += distance;
-    return distance;
 }
 
 function pickPath(event, hero) {

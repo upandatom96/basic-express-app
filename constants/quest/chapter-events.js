@@ -2,9 +2,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C1",
         intro: "{HERO_FIRST} is minding their own business hiking along when a goblin lunges at them.",
-        type: "SIMPLE",
-        distanceMin: 9,
-        distanceMax: 11,
+        type: "BRANCH_PATH",
         paths: [
             {
                 triggers: {
@@ -40,9 +38,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C2",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
-        type: "SIMPLE",
-        distanceMin: 5,
-        distanceMax: 7,
+        type: "BRANCH_PATH",
         paths: [
             {
                 triggers: {
@@ -60,9 +56,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C3",
         intro: "{HERO_FIRST} hears a whispering in the trees around them. They follow the voice and find a fairy.",
-        type: "SIMPLE",
-        distanceMin: 1,
-        distanceMax: 10,
+        type: "BRANCH_PATH",
         paths: [
             {
                 triggers: {
@@ -82,9 +76,25 @@ const CHAPTER_EVENTS = [
     {
         code: "C4",
         intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
-        type: "SIMPLE",
-        distanceMin: 5,
-        distanceMax: 7,
+        type: "BRANCH_PATH",
+        paths: [
+            {
+                triggers: {
+                    dexterityReq: 7,
+                },
+                text: "{HERO_FIRST} is agile enough to cross the bridge swiftly."
+            },
+            {
+                damageMin: 5,
+                damageMax: 10,
+                text: "{HERO_FIRST} falls while trying to cross the bridge."
+            }
+        ],
+    },
+    {
+        code: "C5",
+        intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
+        type: "BRANCH_PATH",
         paths: [
             {
                 triggers: {
