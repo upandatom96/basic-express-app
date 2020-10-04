@@ -51,10 +51,14 @@ function startChapter(hero) {
             hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
             break;
         case ChapterTypes.FLAVOR:
+            eventHandler.concludeChapter(hero);
             hero.status = HeroStatus.QUEST_TRAVEL;
             break;
         case ChapterTypes.CHOICE:
             hero.status = HeroStatus.QUEST_CHAPTER_CHOICE_END;
+            break;
+        case ChapterTypes.DIRECT:
+            hero.status = HeroStatus.QUEST_CHAPTER_DIRECT_END;
             break;
         default:
             hero.status = HeroStatus.ERR;
@@ -75,6 +79,15 @@ function endPathChapter(hero) {
 
 function endChoiceChapter(hero) {
     const message = eventHandler.finishChoiceEvent(hero);
+
+    hero.status = HeroStatus.QUEST_TRAVEL;
+    checkHealth(hero);
+
+    return message;
+}
+
+function endDirectChapter(hero) {
+    const message = eventHandler.finishDirectEvent(hero);
 
     hero.status = HeroStatus.QUEST_TRAVEL;
     checkHealth(hero);
@@ -152,6 +165,7 @@ module.exports = {
     startChapter,
     endPathChapter,
     endChoiceChapter,
+    endDirectChapter,
     travel,
     startFinale,
     endFinale,

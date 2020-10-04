@@ -5,6 +5,13 @@ const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const trigger = require('./trigger');
 
+function concludeChapter(hero) {
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    hero.completedChapterCodeLog.push(hero.currentChapterCode);
+    hero.currentChapterCode = null;
+    return chapterEvent;
+}
+
 function startChapterEvent(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
     hero.currentChapterCode = chapterEvent.code;
@@ -13,19 +20,18 @@ function startChapterEvent(hero) {
 }
 
 function finishPathEvent(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
-    hero.completedChapterCodeLog.push(hero.currentChapterCode);
-    hero.currentChapterCode = null;
-
+    const chapterEvent = concludeChapter(hero);
     return takeChapterPath(chapterEvent, hero);
 }
 
 function finishChoiceEvent(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
-    hero.completedChapterCodeLog.push(hero.currentChapterCode);
-    hero.currentChapterCode = null;
+    const chapterEvent = concludeChapter(hero);
+    return takeChapterChoice(chapterEvent, hero);
+}
 
-   return takeChapterChoice(chapterEvent, hero);
+function finishDirectEvent(hero) {
+    const chapterEvent = concludeChapter(hero);
+    return takeChapterDirect(chapterEvent, hero);
 }
 
 function startFinaleEvent(hero) {
@@ -45,6 +51,8 @@ module.exports = {
     startChapterEvent,
     finishPathEvent,
     finishChoiceEvent,
+    finishDirectEvent,
+    concludeChapter,
     startFinaleEvent,
     finishFinaleEvent,
 }
@@ -108,6 +116,11 @@ function takeChapterChoice(chapterEvent, hero) {
     const choice = randomUtil.pickRandom(chapterEvent.choices);
     const changeText = applyChanges(choice, hero);
     return `${choice.text} ${changeText}`;
+}
+
+function takeChapterDirect(chapterEvent, hero) {
+    const changeText = applyChanges(chapterEvent, hero);
+    return `${chapterEvent.text} ${changeText}`;
 }
 
 function takeFinalePath(chapterEvent, hero) {

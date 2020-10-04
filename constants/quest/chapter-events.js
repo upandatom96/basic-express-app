@@ -7,6 +7,14 @@ const CHAPTER_EVENTS = [
         type: ChapterTypes.FLAVOR,
     },
     {
+        code: "CAT",
+        intro: "As they walk, {HERO_FIRST} notices a stray cat.",
+        damageMin: 1,
+        damageMax: 2,
+        text: "The cat accepts pets for a moment, then bites {HERO_FIRST}.",
+        type: ChapterTypes.DIRECT,
+    },
+    {
         code: "TROLL_BRIDGE",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
         type: ChapterTypes.PATHS,
