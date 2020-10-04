@@ -44,7 +44,7 @@ function startNewQuest(hero) {
 function startChapter(hero) {
     const message = eventHandler.startChapterEvent(hero);
 
-    hero.status = HeroStatus.QUEST_CHAPTER_END;
+    hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
 
     return message;
 }

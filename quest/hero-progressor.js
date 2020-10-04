@@ -38,7 +38,7 @@ function progressHero(hero) {
             const chapterStartReport = action.startChapter(hero);
             bard.makeDirectAnnouncement(hero, chapterStartReport);
             break;
-        case HeroStatus.QUEST_CHAPTER_END:
+        case HeroStatus.QUEST_CHAPTER_PATH_END:
             const chapterEndReport = action.endChapter(hero);
             bard.makeDirectAnnouncement(hero, chapterEndReport);
             break;
