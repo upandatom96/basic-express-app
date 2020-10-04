@@ -39,8 +39,12 @@ function progressHero(hero) {
             bard.makeDirectAnnouncement(hero, chapterStartReport);
             break;
         case HeroStatus.QUEST_CHAPTER_PATH_END:
-            const chapterEndReport = action.endChapter(hero);
-            bard.makeDirectAnnouncement(hero, chapterEndReport);
+            const pathEndReport = action.endPathChapter(hero);
+            bard.makeDirectAnnouncement(hero, pathEndReport);
+            break;
+        case HeroStatus.QUEST_CHAPTER_CHOICE_END:
+            const choiceEndReport = action.endChoiceChapter(hero);
+            bard.makeDirectAnnouncement(hero, choiceEndReport);
             break;
         case HeroStatus.QUEST_TRAVEL:
             const travelReport = action.travel(hero);

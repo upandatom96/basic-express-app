@@ -53,6 +53,9 @@ function startChapter(hero) {
         case ChapterTypes.FLAVOR:
             hero.status = HeroStatus.QUEST_TRAVEL;
             break;
+        case ChapterTypes.CHOICE:
+            hero.status = HeroStatus.QUEST_CHAPTER_CHOICE_END;
+            break;
         default:
             hero.status = HeroStatus.ERR;
             console.log("INVALID CHAPTER TYPE: " + chapterEvent.type);
@@ -61,12 +64,20 @@ function startChapter(hero) {
     return chapterEvent.intro;
 }
 
-function endChapter(hero) {
-    const message = eventHandler.finishChapterEvent(hero);
-
-    checkHealth(hero);
+function endPathChapter(hero) {
+    const message = eventHandler.finishPathEvent(hero);
 
     hero.status = HeroStatus.QUEST_TRAVEL;
+    checkHealth(hero);
+
+    return message;
+}
+
+function endChoiceChapter(hero) {
+    const message = eventHandler.finishChoiceEvent(hero);
+
+    hero.status = HeroStatus.QUEST_TRAVEL;
+    checkHealth(hero);
 
     return message;
 }
@@ -139,7 +150,8 @@ module.exports = {
     startNewQuest,
     setOff,
     startChapter,
-    endChapter,
+    endPathChapter,
+    endChoiceChapter,
     travel,
     startFinale,
     endFinale,

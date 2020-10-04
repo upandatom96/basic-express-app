@@ -62,6 +62,21 @@ const CHAPTER_EVENTS = [
             }
         ],
     },
+    {
+        code: "BEANS",
+        intro: "A cloaked figure offers {HERO_FIRST} a handful of beans.",
+        type: ChapterTypes.CHOICE,
+        choices: [
+            {
+                healMin: 1,
+                healMax: 2,
+                text: "{HERO_FIRST} accepts the beans. They make for a nice snack."
+            },
+            {
+                text: "{HERO_FIRST} rejects the bean offer and continues walking."
+            },
+        ],
+    },
 ];
 
 module.exports = {
