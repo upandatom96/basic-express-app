@@ -9,7 +9,7 @@ function startChapterEvent(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
     hero.currentChapterCode = chapterEvent.code;
 
-    return chapterEvent.intro;
+    return chapterEvent;
 }
 
 function finishChapterEvent(hero) {

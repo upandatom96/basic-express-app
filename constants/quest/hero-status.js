@@ -21,6 +21,8 @@ const DYING = 97;
 const OBITUARY = 98;
 const DEAD = 99;
 
+const ERR = 100;
+
 module.exports = {
     REVEAL_HERO,
     REVEAL_BACKSTORY,
@@ -39,4 +41,5 @@ module.exports = {
     DYING,
     OBITUARY,
     DEAD,
+    ERR,
 }

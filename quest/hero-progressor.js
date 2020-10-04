@@ -1,6 +1,6 @@
 const bard = require('./bard');
 const action = require('./action');
-const HeroStatus = require('./hero-status');
+const HeroStatus = require('../constants/quest/hero-status');
 
 function progressHero(hero) {
     action.checkHealth(hero);

@@ -1,7 +1,9 @@
 const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const eventHandler = require('./event-handler');
-const HeroStatus = require('./hero-status');
+
+const HeroStatus = require('../constants/quest/hero-status');
+const ChapterTypes = require('../constants/quest/chapter-event-types');
 
 const randomUtil = require('../utilities/random.util');
 
@@ -42,11 +44,18 @@ function startNewQuest(hero) {
 }
 
 function startChapter(hero) {
-    const message = eventHandler.startChapterEvent(hero);
+    const chapterEvent = eventHandler.startChapterEvent(hero);
 
-    hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
+    switch (chapterEvent.type) {
+        case ChapterTypes.PATHS:
+            hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
+            break;
+        default:
+            hero.status = HeroStatus.ERR;
+            console.log("INVALID CHAPTER TYPE: " + chapterEvent.type);
+    }
 
-    return message;
+    return chapterEvent.intro;
 }
 
 function endChapter(hero) {

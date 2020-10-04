@@ -1,8 +1,10 @@
+const ChapterTypes = require('./chapter-event-types');
+
 const CHAPTER_EVENTS = [
     {
         code: "C1",
         intro: "{HERO_FIRST} is minding their own business hiking along when a goblin lunges at them.",
-        type: "PATHS",
+        type: ChapterTypes.PATHS,
         paths: [
             {
                 triggers: {
@@ -38,7 +40,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C2",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
-        type: "PATHS",
+        type: ChapterTypes.PATHS,
         paths: [
             {
                 triggers: {
@@ -56,7 +58,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C3",
         intro: "{HERO_FIRST} hears a whispering in the trees around them. They follow the voice and find a fairy.",
-        type: "PATHS",
+        type: ChapterTypes.PATHS,
         paths: [
             {
                 triggers: {
@@ -76,7 +78,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C4",
         intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
-        type: "PATHS",
+        type: ChapterTypes.PATHS,
         paths: [
             {
                 triggers: {
@@ -94,7 +96,7 @@ const CHAPTER_EVENTS = [
     {
         code: "C5",
         intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
-        type: "PATHS",
+        type: ChapterTypes.PATHS,
         paths: [
             {
                 triggers: {
