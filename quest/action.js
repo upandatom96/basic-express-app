@@ -50,6 +50,9 @@ function startChapter(hero) {
         case ChapterTypes.PATHS:
             hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
             break;
+        case ChapterTypes.FLAVOR:
+            hero.status = HeroStatus.QUEST_TRAVEL;
+            break;
         default:
             hero.status = HeroStatus.ERR;
             console.log("INVALID CHAPTER TYPE: " + chapterEvent.type);

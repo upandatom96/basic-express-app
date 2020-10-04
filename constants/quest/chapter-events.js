@@ -2,43 +2,12 @@ const ChapterTypes = require('./chapter-event-types');
 
 const CHAPTER_EVENTS = [
     {
-        code: "C1",
-        intro: "{HERO_FIRST} is minding their own business hiking along when a goblin lunges at them.",
-        type: ChapterTypes.PATHS,
-        paths: [
-            {
-                triggers: {
-                    strengthReq: 7,
-                    wisdomReq: 0,
-                    charismaReq: null,
-                    dexterityReq: null,
-                    advantageReq: [],
-                    disadvantageReq: null,
-                    itemReq: null,
-                    allyReq: null,
-                },
-                healMin: 0,
-                healMax: 0,
-                damageMin: 1,
-                damageMax: 2,
-                itemGain: null,
-                allyGain: null,
-                text: "{HERO_FIRST} is strong enough to fight back against the goblin."
-            },
-            {
-                triggers: null,
-                healMin: 0,
-                healMax: 0,
-                damageMin: 5,
-                damageMax: 8,
-                itemGain: null,
-                allyGain: null,
-                text: "{HERO_FIRST} takes some damage fighting off the goblin."
-            }
-        ],
+        code: "DOG",
+        intro: "{HERO_FIRST} walks by a traveller with a dog. With permission, they pet the dog.",
+        type: ChapterTypes.FLAVOR,
     },
     {
-        code: "C2",
+        code: "TROLL_BRIDGE",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
         type: ChapterTypes.PATHS,
         paths: [
@@ -56,7 +25,7 @@ const CHAPTER_EVENTS = [
         ],
     },
     {
-        code: "C3",
+        code: "FAIRY",
         intro: "{HERO_FIRST} hears a whispering in the trees around them. They follow the voice and find a fairy.",
         type: ChapterTypes.PATHS,
         paths: [
@@ -76,25 +45,7 @@ const CHAPTER_EVENTS = [
         ],
     },
     {
-        code: "C4",
-        intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
-        type: ChapterTypes.PATHS,
-        paths: [
-            {
-                triggers: {
-                    dexterityReq: 7,
-                },
-                text: "{HERO_FIRST} is agile enough to cross the bridge swiftly."
-            },
-            {
-                damageMin: 5,
-                damageMax: 10,
-                text: "{HERO_FIRST} falls while trying to cross the bridge."
-            }
-        ],
-    },
-    {
-        code: "C5",
+        code: "CHASM",
         intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
         type: ChapterTypes.PATHS,
         paths: [
