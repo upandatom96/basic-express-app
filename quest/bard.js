@@ -114,7 +114,7 @@ function getLastName(heroName) {
 
 function getAnnouncementClosing(hero) {
     const page = hero.journal.length + 1;
-    return `({HERO_FULL} ${hero.hp}/${hero.hpMax} hp #${page})`;
+    return `({HERO_FULL} ${hero.hp}/${hero.hpMax} hp) #${page}`;
 }
 
 function getUniqueInfo(hero) {
