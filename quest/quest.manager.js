@@ -188,11 +188,13 @@ function getHeroReport(heroDB) {
     const backstoryRevealed = heroDB.status > 1;
     const uniqueQuestCount = calcUtil.countUniqueItems(heroDB.completedQuestCodeLog);
     const uniqueChapterCount = calcUtil.countUniqueItems(heroDB.completedChapterCodeLog);
+    const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoveCodes);
     return {
         announcement,
         name: heroDB.name,
         level: heroDB.level,
         hpText: hpText,
+        specialMoves,
         stats,
         questInfo,
         distanceTravelled: heroDB.distanceTravelled,

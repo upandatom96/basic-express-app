@@ -11,6 +11,7 @@ function generateHero(firstName, pastHeroes) {
     const advantage = randomManager.pickAdvantage();
     const disadvantage = randomManager.pickDisadvantage();
     const backstory = randomManager.pickBackstory();
+    const specialMove = randomManager.pickSpecialMove();
     const stats = rollStats();
 
     const status = 0;
@@ -24,6 +25,7 @@ function generateHero(firstName, pastHeroes) {
     const distanceTravelled = 0;
     const completedQuestCodeLog = [];
     const completedChapterCodeLog = [];
+    const specialMoveCodes = [specialMove.code];
 
     return {
         name,
@@ -32,6 +34,7 @@ function generateHero(firstName, pastHeroes) {
         backstory,
         advantage,
         disadvantage,
+        specialMoveCodes,
         strength: stats.strength,
         wisdom: stats.wisdom,
         charisma: stats.charisma,

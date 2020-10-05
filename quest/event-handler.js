@@ -2,6 +2,9 @@ const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
 
 const MoveTypes = require('../constants/quest/move-types');
+const HeroMoves = require('../constants/quest/hero-moves');
+
+const codeRetriever = require('./code-retriever');
 
 const trigger = require('./trigger');
 
@@ -21,33 +24,9 @@ function finishDirectEvent(hero, event) {
 }
 
 function heroTurnEncounter(hero, event) {
-    const HERO_MOVES = [
-        {
-            type: MoveTypes.HEAL,
-            name: "HERO HEAL",
-            multiplier: 1,
-        },
-        {
-            type: MoveTypes.STRENGTH_ATTACK,
-            name: "HERO PUNCH",
-            multiplier: 1,
-        },
-        {
-            type: MoveTypes.STRENGTH_ATTACK,
-            name: "HERO KICK",
-            multiplier: 2,
-        },
-        {
-            type: MoveTypes.DEXTERITY_ATTACK,
-            name: "HERO SLAP",
-            multiplier: 1,
-        },
-        {
-            type: MoveTypes.FAIL,
-            name: "HERO TRIP",
-        },
-    ];
-    const move = randomUtil.pickRandom(HERO_MOVES);
+    const specialMoves = codeRetriever.findSpecialMoves(hero.specialMoveCodes);
+    const availableMoves = HeroMoves.STANDARD_MOVES.concat(specialMoves);
+    const move = randomUtil.pickRandom(availableMoves);
 
     let moveDetails = "";
     switch (move.type) {

@@ -19,7 +19,13 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeSpecialAnnouncement(hero) {
-    const announcement = `Fortunately, they are ${hero.advantage}. They will have to overcome being ${hero.disadvantage}.`;
+    const announcement = `Fortunately, {HERO_FIRST} is ${hero.advantage}. They will have to overcome being ${hero.disadvantage}.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeMoveAnnouncement(hero) {
+    const moveName = codeRetriever.findSpecialMoves(hero.specialMoveCodes)[0].name;
+    const announcement = `{HERO_FIRST} knows the special move ${moveName}.`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -75,6 +81,7 @@ module.exports = {
     makeBackstoryAnnouncement,
     makeStatsAnnouncement,
     makeSpecialAnnouncement,
+    makeMoveAnnouncement,
     makeSetOffAnnouncement,
     makeFindNewQuestAnnouncement,
     makeStartNewQuestAnnouncement,

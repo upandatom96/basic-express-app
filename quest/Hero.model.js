@@ -100,6 +100,11 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
+    specialMoveCodes: [
+        {
+            type: String
+        }
+    ],
     completedQuestCodeLog: [
         {
             type: String

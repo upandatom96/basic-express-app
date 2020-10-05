@@ -81,6 +81,10 @@ function pickBackstory() {
   return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.BACKSTORY);
 }
 
+function pickRandomSpecialMove() {
+  return randomUtil.pickRandom(constants.HERO_MOVES.SPECIAL_MOVES);
+}
+
 function pickNoun() {
   return randomUtil.pickRandom(constants.NOUNS);
 }
@@ -106,5 +110,6 @@ module.exports = {
   pickStoryBase: pickStorySynonym,
   pickNoun,
   pickLastName,
-  pickAdjective
+  pickAdjective,
+  pickSpecialMove: pickRandomSpecialMove,
 }

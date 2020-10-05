@@ -25,6 +25,10 @@ function revealStats(hero) {
 }
 
 function revealSpecial(hero) {
+    hero.status = HeroStatus.REVEAL_MOVE;
+}
+
+function revealMove(hero) {
     hero.status = HeroStatus.SET_OFF;
 }
 
@@ -204,6 +208,7 @@ module.exports = {
     revealBackstory,
     revealStats,
     revealSpecial,
+    revealMove,
     findNewQuest,
     startNewQuest,
     setOff,

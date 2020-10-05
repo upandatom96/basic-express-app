@@ -12,7 +12,14 @@ function findChapterEvent(code) {
     });
 }
 
+function findSpecialMoves(codes) {
+    return constantsManager.HERO_MOVES.SPECIAL_MOVES.filter((move) => {
+        return codes.includes(move.code);
+    });
+}
+
 module.exports = {
     findQuest,
     findChapterEvent,
+    findSpecialMoves,
 }

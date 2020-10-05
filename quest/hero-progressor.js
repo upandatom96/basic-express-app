@@ -22,6 +22,10 @@ function progressHero(hero) {
             action.revealSpecial(hero);
             bard.makeSpecialAnnouncement(hero);
             break;
+        case HeroStatus.REVEAL_MOVE:
+            action.revealMove(hero);
+            bard.makeMoveAnnouncement(hero);
+            break;
         case HeroStatus.SET_OFF:
             action.setOff(hero);
             bard.makeSetOffAnnouncement(hero);

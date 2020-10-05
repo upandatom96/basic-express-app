@@ -151,7 +151,76 @@ const ENCOUNTER_EVENTS = [
             },
             {
                 type: MoveTypes.FAIL,
+                name: "RUN IN PLACE",
+            },
+        ],
+    },
+    {
+        code: "FIRE_WIZARD",
+        intro: "A fireball flies in front of {HERO_FIRST}. There's a Fire Wizard nearby!",
+        enemyName: "Fire Wizard",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 3,
+        charisma: 3,
+        wisdom: 6,
+        strength: 3,
+        moves: [
+            {
+                type: MoveTypes.HEAL,
+                name: "HEALING FLAME",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "FIRE BALL",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "FIRE BALL",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "READ SPELL BOOK",
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "RECHARGE MAGIC",
+            },
+        ],
+    },
+    {
+        code: "TRICKSTER",
+        intro: "{HERO_FIRST} hears a menacing laugh. There's a Trickster nearby!",
+        enemyName: "Trickster",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 3,
+        charisma: 3,
+        wisdom: 3,
+        strength: 6,
+        moves: [
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "HURTFUL JOKE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "DANGEROUS PRANK",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.FAIL,
                 name: "TAUNT",
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "LAUGH",
             },
         ],
     },
