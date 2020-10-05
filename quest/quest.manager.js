@@ -148,20 +148,6 @@ function getQuestInfo(savedHero) {
     }
 }
 
-function getChapterInfo(savedHero) {
-    if (boolUtil.hasValue(savedHero.currentChapterCode)) {
-        const chapterEvent = codeRetriever.findChapterEvent(savedHero.currentChapterCode);
-        return {
-            title: "title TBD",
-            flavorText: `
-            ${chapterEvent.intro}
-            `,
-        };
-    } else {
-        return null;
-    }
-}
-
 function getLatestMessage(savedHero) {
     const lastJournalIndex = savedHero.journal.length - 1;
     return savedHero.journal[lastJournalIndex];
@@ -197,7 +183,6 @@ function getHeroReports(heroDBs) {
 function getHeroReport(heroDB) {
     const announcement = getLatestMessage(heroDB);
     const questInfo = getQuestInfo(heroDB);
-    const chapterInfo = getChapterInfo(heroDB);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
@@ -210,7 +195,6 @@ function getHeroReport(heroDB) {
         hpText: hpText,
         stats,
         questInfo,
-        chapterInfo,
         distanceTravelled: heroDB.distanceTravelled,
         distanceTravelledTotal: heroDB.distanceTravelledTotal,
         storyOver: heroDB.status === 99,
