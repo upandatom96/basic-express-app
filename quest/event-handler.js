@@ -1,6 +1,8 @@
 const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
 
+const MoveTypes = require('../constants/quest/move-types');
+
 const trigger = require('./trigger');
 
 function finishPathEvent(hero, event) {
@@ -19,17 +21,133 @@ function finishDirectEvent(hero, event) {
 }
 
 function heroTurnEncounter(hero, event) {
-    hero.enemyHp -= 1;
-    return `Hero Attacks, enemy -1 hp. (ENEMY ${hero.enemyHp}/${event.enemyHpMax})`
+    const HERO_MOVES = [
+        {
+            type: MoveTypes.HEAL,
+            name: "HERO HEAL",
+            multiplier: 1,
+        },
+        {
+            type: MoveTypes.STRENGTH_ATTACK,
+            name: "HERO PUNCH",
+            multiplier: 1,
+        },
+        {
+            type: MoveTypes.STRENGTH_ATTACK,
+            name: "HERO KICK",
+            multiplier: 2,
+        },
+        {
+            type: MoveTypes.DEXTERITY_ATTACK,
+            name: "HERO SLAP",
+            multiplier: 1,
+        },
+        {
+            type: MoveTypes.FAIL,
+            name: "HERO TRIP",
+        },
+    ];
+    const move = randomUtil.pickRandom(HERO_MOVES);
+
+    let moveDetails = "";
+    switch (move.type) {
+        case MoveTypes.HEAL:
+            const healAmount = randomUtil.pickRandomNumber(1, 5) * move.multiplier;
+            moveDetails = `heals ${healAmount} hp.`;
+
+            hero.hp += healAmount;
+            if (hero.hp > hero.hpMax) {
+                hero.hp = hero.hpMax;
+            }
+            break;
+        case MoveTypes.STRENGTH_ATTACK:
+            const strDmg = getStatDamage(hero.strength, event.strength) * move.multiplier;
+            moveDetails = `does ${strDmg} strength damage.`;
+
+            hero.enemyHp -= strDmg;
+            break;
+        case MoveTypes.DEXTERITY_ATTACK:
+            const dexDmg = getStatDamage(hero.dexterity, event.dexterity) * move.multiplier;
+            moveDetails = `does ${dexDmg} dexterity damage.`;
+
+            hero.enemyHp -= dexDmg;
+            break;
+        case MoveTypes.WISDOM_ATTACK:
+            const wisDmg = getStatDamage(hero.wisdom, event.wisdom) * move.multiplier;
+            moveDetails = `does ${wisDmg} wisdom damage.`;
+
+            hero.enemyHp -= wisDmg;
+            break;
+        case MoveTypes.CHARISMA_ATTACK:
+            const chrDmg = getStatDamage(hero.charisma, event.charisma) * move.multiplier;
+            moveDetails = `does ${chrDmg} charisma damage.`;
+
+            hero.enemyHp -= chrDmg;
+            break;
+        case MoveTypes.FAIL:
+            moveDetails = `nothing happens.`;
+            break;
+        default:
+            console.log("INVALID MOVE TYPE " + move.type);
+    }
+
+    const enemyHealth = getEnemyHealthMessage(event, hero);
+    const moveMessage = getMoveMessage(hero.name, move.name, moveDetails);
+    return `${moveMessage} ${enemyHealth}`;
 }
 
 function enemyTurnEncounter(hero, event) {
-    hero.hp -= 1;
-    return `Enemy Attacks, hero -1 hp. (ENEMY ${hero.enemyHp}/${event.enemyHpMax})`;
+    const move = randomUtil.pickRandom(event.moves);
+
+    let moveDetails = "";
+    switch (move.type) {
+        case MoveTypes.HEAL:
+            const healAmount = randomUtil.pickRandomNumber(1, 5) * move.multiplier;
+            moveDetails = `heals ${healAmount} hp.`;
+
+            hero.enemyHp += healAmount;
+            if (hero.enemyHp > event.enemyHpMax) {
+                hero.enemyHp = event.enemyHpMax;
+            }
+            break;
+        case MoveTypes.STRENGTH_ATTACK:
+            const strDmg = getStatDamage(event.strength, hero.strength) * move.multiplier;
+            moveDetails = `does ${strDmg} strength damage.`;
+
+            hero.hp -= strDmg;
+            break;
+        case MoveTypes.DEXTERITY_ATTACK:
+            const dexDmg = getStatDamage(event.dexterity, hero.dexterity) * move.multiplier;
+            moveDetails = `does ${dexDmg} dexterity damage.`;
+
+            hero.hp -= dexDmg;
+            break;
+        case MoveTypes.WISDOM_ATTACK:
+            const wisDmg = getStatDamage(event.wisdom, hero.wisdom) * move.multiplier;
+            moveDetails = `does ${wisDmg} wisdom damage.`;
+
+            hero.hp -= wisDmg;
+            break;
+        case MoveTypes.CHARISMA_ATTACK:
+            const chrDmg = getStatDamage(event.charisma, hero.charisma) * move.multiplier;
+            moveDetails = `does ${chrDmg} charisma damage.`;
+
+            hero.hp -= chrDmg;
+            break;
+        case MoveTypes.FAIL:
+            moveDetails = `nothing happens.`;
+            break;
+        default:
+            console.log("INVALID MOVE TYPE " + move.type);
+    }
+
+    const enemyHealth = getEnemyHealthMessage(event, hero);
+    const moveMessage = getMoveMessage(event.enemyName, move.name, moveDetails);
+    return `${moveMessage} ${enemyHealth}`;
 }
 
 function finishEncounterEvent(hero, event) {
-    return "encounter event ENDED";
+    return `${event.enemyName} has been defeated!`;
 }
 
 module.exports = {
@@ -90,4 +208,21 @@ function pickPath(event, hero) {
 function endEventWithChanges(hero, changeDetails) {
     const changeText = applyChanges(changeDetails, hero);
     return `${changeDetails.text} ${changeText}`;
+}
+
+function getEnemyHealthMessage(event, hero) {
+    if (hero.enemyHp < 0) {
+        hero.enemyHp = 0;
+    }
+    return `(${event.enemyName} ${hero.enemyHp}/${event.enemyHpMax} hp)`;
+}
+
+function getMoveMessage(characterName, moveName, moveDetails) {
+    return `${characterName} uses ${moveName} and ${moveDetails}`;
+}
+
+function getStatDamage(attackerStat, defenderStat) {
+    const damageDifference = (attackerStat + 1 - defenderStat);
+    const rawDamage = damageDifference > 0 ? damageDifference : 0;
+    return rawDamage + 1;
 }

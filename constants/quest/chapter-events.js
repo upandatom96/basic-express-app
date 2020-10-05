@@ -1,4 +1,5 @@
 const EventTypes = require('./event-types');
+const MoveTypes = require('./move-types');
 
 const FLAVOR_EVENTS = [
     {
@@ -96,6 +97,7 @@ const ENCOUNTER_EVENTS = [
     {
         code: "GOBLIN",
         intro: "A goblin blocks the path ahead. {HERO_FIRST} prepares to fight.",
+        enemyName: "Goblin",
         type: EventTypes.ENCOUNTER,
         enemyHpStart: 10,
         enemyHpMax: 10,
@@ -103,18 +105,35 @@ const ENCOUNTER_EVENTS = [
         charisma: 3,
         wisdom: 3,
         strength: 3,
+        moves: [
+            {
+                type: MoveTypes.HEAL,
+                name: "GOBLIN SNACKS",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "GOBLIN PUNCH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "GOBLIN ITCH",
+            },
+        ],
     },
-    {
-        code: "HEDGEHOG",
-        intro: "A hedgehog begins chasing after {HERO_FIRST}.",
-        type: EventTypes.ENCOUNTER,
-        enemyHpStart: 10,
-        enemyHpMax: 10,
-        dexterity: 12,
-        charisma: 3,
-        wisdom: 3,
-        strength: 3,
-    },
+    // {
+    //     code: "HEDGEHOG",
+    //     intro: "A hedgehog begins chasing after {HERO_FIRST}.",
+    //     enemyName: "Hedgehog",
+    //     type: EventTypes.ENCOUNTER,
+    //     enemyHpStart: 10,
+    //     enemyHpMax: 10,
+    //     dexterity: 12,
+    //     charisma: 3,
+    //     wisdom: 3,
+    //     strength: 3,
+    // },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
