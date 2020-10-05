@@ -5,13 +5,6 @@ const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const trigger = require('./trigger');
 
-function concludeChapter(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
-    hero.completedChapterCodeLog.push(hero.currentChapterCode);
-    hero.currentChapterCode = null;
-    return chapterEvent;
-}
-
 function startChapterEvent(hero) {
     const chapterEvent = randomManager.pickChapterEvent();
     hero.currentChapterCode = chapterEvent.code;
@@ -19,32 +12,33 @@ function startChapterEvent(hero) {
     return chapterEvent;
 }
 
+function startFinaleEvent(hero) {
+    return codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+}
+
 function finishPathEvent(hero) {
-    const chapterEvent = concludeChapter(hero);
-    return takeChapterPath(chapterEvent, hero);
+    const event = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    const path = pickPath(event, hero);
+
+    return endEventWithChanges(hero, path);
+}
+
+function finishFinalePathEvent(hero) {
+    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+    const path = pickPath(finaleEvent, hero);
+    return endEventWithChanges(hero, path);
 }
 
 function finishChoiceEvent(hero) {
-    const chapterEvent = concludeChapter(hero);
-    return takeChapterChoice(chapterEvent, hero);
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    const choice = randomUtil.pickRandom(chapterEvent.choices);
+
+    return endEventWithChanges(hero, choice);
 }
 
 function finishDirectEvent(hero) {
-    const chapterEvent = concludeChapter(hero);
-    return takeChapterDirect(chapterEvent, hero);
-}
-
-function startFinaleEvent(hero) {
-    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
-
-    return `{HERO_FIRST} reaches their destination. ${finaleEvent.intro}`;
-}
-
-function finishFinaleEvent(hero) {
-    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
-    const flavorText = takeFinalePath(finaleEvent, hero);
-
-    return `${flavorText}`;
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    return endEventWithChanges(hero, chapterEvent);
 }
 
 module.exports = {
@@ -52,9 +46,8 @@ module.exports = {
     finishPathEvent,
     finishChoiceEvent,
     finishDirectEvent,
-    concludeChapter,
     startFinaleEvent,
-    finishFinaleEvent,
+    finishFinalePathEvent,
 }
 
 function getHealthChangeAmount(changeMin, changeMax) {
@@ -91,13 +84,10 @@ function applyChanges(changes, hero) {
 }
 
 function handleDamage(hero, damage) {
-    const modifiedDamage = damage + getDamageModifier(hero.level);
+    const damageModifier = (hero.level - 1) * 2;
+    const modifiedDamage = damage + damageModifier;
     hero.hp -= modifiedDamage;
     return `They lose ${modifiedDamage}hp.`
-}
-
-function getDamageModifier(level) {
-    return (level - 1) * 2;
 }
 
 function pickPath(event, hero) {
@@ -106,25 +96,7 @@ function pickPath(event, hero) {
     });
 }
 
-function takeChapterPath(chapterEvent, hero) {
-    const path = pickPath(chapterEvent, hero);
-    const changeText = applyChanges(path, hero);
-    return `${path.text} ${changeText}`;
-}
-
-function takeChapterChoice(chapterEvent, hero) {
-    const choice = randomUtil.pickRandom(chapterEvent.choices);
-    const changeText = applyChanges(choice, hero);
-    return `${choice.text} ${changeText}`;
-}
-
-function takeChapterDirect(chapterEvent, hero) {
-    const changeText = applyChanges(chapterEvent, hero);
-    return `${chapterEvent.text} ${changeText}`;
-}
-
-function takeFinalePath(chapterEvent, hero) {
-    const path = pickPath(chapterEvent, hero);
-    const changeText = applyChanges(path, hero);
-    return `${path.text} ${changeText}`;
+function endEventWithChanges(hero, changeDetails) {
+    const changeText = applyChanges(changeDetails, hero);
+    return `${changeDetails.text} ${changeText}`;
 }

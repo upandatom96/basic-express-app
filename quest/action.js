@@ -3,7 +3,7 @@ const codeRetriever = require('./code-retriever');
 const eventHandler = require('./event-handler');
 
 const HeroStatus = require('../constants/quest/hero-status');
-const ChapterTypes = require('../constants/quest/chapter-event-types');
+const EventTypes = require('../constants/quest/event-types');
 
 const randomUtil = require('../utilities/random.util');
 
@@ -47,28 +47,26 @@ function startChapter(hero) {
     const chapterEvent = eventHandler.startChapterEvent(hero);
 
     switch (chapterEvent.type) {
-        case ChapterTypes.PATHS:
+        case EventTypes.PATHS:
             hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
             break;
-        case ChapterTypes.FLAVOR:
-            eventHandler.concludeChapter(hero);
+        case EventTypes.FLAVOR:
+            wrapUpChapter(hero);
             hero.status = HeroStatus.QUEST_TRAVEL;
             break;
-        case ChapterTypes.CHOICE:
+        case EventTypes.CHOICE:
             hero.status = HeroStatus.QUEST_CHAPTER_CHOICE_END;
             break;
-        case ChapterTypes.DIRECT:
+        case EventTypes.DIRECT:
             hero.status = HeroStatus.QUEST_CHAPTER_DIRECT_END;
             break;
-        case ChapterTypes.ENCOUNTER:
+        case EventTypes.ENCOUNTER:
             hero.enemyHp = chapterEvent.enemyHpStart;
 
             const heroFaster = hero.dexterity > chapterEvent.dexterity;
-            if (heroFaster) {
-                hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
-            } else {
-                hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
-            }
+            hero.status = heroFaster ?
+                HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO :
+                HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
 
             break;
         default:
@@ -82,27 +80,21 @@ function startChapter(hero) {
 function endPathChapter(hero) {
     const message = eventHandler.finishPathEvent(hero);
 
-    hero.status = HeroStatus.QUEST_TRAVEL;
-    checkHealth(hero);
-
+    wrapUpChapter(hero);
     return message;
 }
 
 function endChoiceChapter(hero) {
     const message = eventHandler.finishChoiceEvent(hero);
 
-    hero.status = HeroStatus.QUEST_TRAVEL;
-    checkHealth(hero);
-
+    wrapUpChapter(hero);
     return message;
 }
 
 function endDirectChapter(hero) {
     const message = eventHandler.finishDirectEvent(hero);
 
-    hero.status = HeroStatus.QUEST_TRAVEL;
-    checkHealth(hero);
-
+    wrapUpChapter(hero);
     return message;
 }
 
@@ -141,10 +133,10 @@ function chapterEncounterEnemyTurn(hero) {
 }
 
 function chapterEncounterEnd(hero) {
-    hero.status = HeroStatus.QUEST_TRAVEL;
-    hero.enemyHp = null;
+    const message = "End Encounter...";
 
-    return "End Encounter...";
+    wrapUpChapter(hero);
+    return message;
 }
 
 function travel(hero) {
@@ -163,15 +155,20 @@ function travel(hero) {
 }
 
 function startFinale(hero) {
-    const message = eventHandler.startFinaleEvent(hero);
+    const finaleEvent = eventHandler.startFinaleEvent(hero);
 
-    hero.status = HeroStatus.QUEST_FINALE_END;
+    if (finaleEvent.type === EventTypes.PATHS) {
+        hero.status = HeroStatus.QUEST_FINALE_PATH_END;
+    } else {
+        hero.status = HeroStatus.ERR;
+    }
 
-    return message;
+
+    return finaleEvent.intro;
 }
 
 function endFinale(hero) {
-    const message = eventHandler.finishFinaleEvent(hero);
+    const message = eventHandler.finishFinalePathEvent(hero);
 
     hero.status = HeroStatus.REST_START;
 
@@ -181,7 +178,7 @@ function endFinale(hero) {
 }
 
 function startRest(hero) {
-    levelUp(hero);
+    hero.level++;
 
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
     hero.currentQuestCode = null;
@@ -197,7 +194,6 @@ function endRest(hero) {
 
 function die(hero) {
     hero.status = HeroStatus.OBITUARY;
-    hero.quest
     hero.deathDate = new Date();
 }
 
@@ -245,7 +241,10 @@ function enforceMaxHealth(hero) {
 function checkHeartbeat(hero) {
     if (hero.hp <= 0) {
         hero.hp = 0;
-        if (heroIsAlive(hero)) {
+
+        const deadStatuses = [HeroStatus.DYING, HeroStatus.OBITUARY, HeroStatus.DEAD];
+        const heroIsAlive = !deadStatuses.includes(hero.status);
+        if (heroIsAlive) {
             hero.status = HeroStatus.DYING;
         }
     }
@@ -261,18 +260,17 @@ function restHealth(hero) {
     enforceMaxHealth(hero);
 }
 
-function levelUp(hero) {
-    hero.level++;
-}
-
-function heroIsAlive(hero) {
-    const deadStatuses = [HeroStatus.DYING, HeroStatus.OBITUARY, HeroStatus.DEAD];
-    return !deadStatuses.includes(hero.status);
-}
-
 function addDistance(hero) {
-    const distance = randomUtil.pickRandomNumber(5, 15);
+    const distance = randomUtil.pickRandomNumber(4, 11);
     hero.distanceTravelled += distance;
     hero.distanceTravelledTotal += distance;
     return distance;
+}
+
+function wrapUpChapter(hero) {
+    hero.status = HeroStatus.QUEST_TRAVEL;
+    hero.completedChapterCodeLog.push(hero.currentChapterCode);
+    hero.currentChapterCode = null;
+    hero.enemyHp = null;
+    checkHealth(hero);
 }

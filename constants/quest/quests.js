@@ -1,3 +1,5 @@
+const EventType = require('./event-types');
+
 const QUESTS = [
     {
         code: "Q1",
@@ -6,7 +8,7 @@ const QUESTS = [
         text: "slay the Red Dragon",
         distanceRequired: 25,
         finaleEvent: {
-            type: "SIMPLE",
+            type: EventType.PATHS,
             intro: "{HERO_FIRST} finds the Red Dragon in a cavern.",
             paths: [
                 {
@@ -24,7 +26,7 @@ const QUESTS = [
         text: "melt the Wicked Witch",
         distanceRequired: 25,
         finaleEvent: {
-            type: "SIMPLE",
+            type: EventType.PATHS,
             intro: "{HERO_FIRST} finds the Wicked Witch in an old hut.",
             paths: [
                 {

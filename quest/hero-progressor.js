@@ -70,7 +70,7 @@ function progressHero(hero) {
             const finaleStartReport = action.startFinale(hero);
             bard.makeDirectAnnouncement(hero, finaleStartReport);
             break;
-        case HeroStatus.QUEST_FINALE_END:
+        case HeroStatus.QUEST_FINALE_PATH_END:
             const finaleEndReport = action.endFinale(hero);
             bard.makeDirectAnnouncement(hero, finaleEndReport);
             break;
