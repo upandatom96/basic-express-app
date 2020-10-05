@@ -1,53 +1,44 @@
 const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
-const randomManager = require('../random/random.manager');
 
-const codeRetriever = require('./code-retriever');
 const trigger = require('./trigger');
 
-function startChapterEvent(hero) {
-    const chapterEvent = randomManager.pickChapterEvent();
-    hero.currentChapterCode = chapterEvent.code;
-
-    return chapterEvent;
-}
-
-function startFinaleEvent(hero) {
-    return codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
-}
-
-function finishPathEvent(hero) {
-    const event = codeRetriever.findChapterEvent(hero.currentChapterCode);
+function finishPathEvent(hero, event) {
     const path = pickPath(event, hero);
-
     return endEventWithChanges(hero, path);
 }
 
-function finishFinalePathEvent(hero) {
-    const finaleEvent = codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
-    const path = pickPath(finaleEvent, hero);
-    return endEventWithChanges(hero, path);
-}
-
-function finishChoiceEvent(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
-    const choice = randomUtil.pickRandom(chapterEvent.choices);
+function finishChoiceEvent(hero, event) {
+    const choice = randomUtil.pickRandom(event.choices);
 
     return endEventWithChanges(hero, choice);
 }
 
-function finishDirectEvent(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
-    return endEventWithChanges(hero, chapterEvent);
+function finishDirectEvent(hero, event) {
+    return endEventWithChanges(hero, event);
+}
+
+function heroTurnEncounter(hero, event) {
+    hero.enemyHp -= 1;
+    return `Hero Attacks, enemy -1 hp. (ENEMY ${hero.enemyHp}/${event.enemyHpMax})`
+}
+
+function enemyTurnEncounter(hero, event) {
+    hero.hp -= 1;
+    return `Enemy Attacks, hero -1 hp. (ENEMY ${hero.enemyHp}/${event.enemyHpMax})`;
+}
+
+function finishEncounterEvent(hero, event) {
+    return "encounter event ENDED";
 }
 
 module.exports = {
-    startChapterEvent,
     finishPathEvent,
     finishChoiceEvent,
     finishDirectEvent,
-    startFinaleEvent,
-    finishFinalePathEvent,
+    heroTurnEncounter,
+    enemyTurnEncounter,
+    finishEncounterEvent,
 }
 
 function getHealthChangeAmount(changeMin, changeMax) {

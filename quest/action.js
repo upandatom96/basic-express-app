@@ -44,7 +44,8 @@ function startNewQuest(hero) {
 }
 
 function startChapter(hero) {
-    const chapterEvent = eventHandler.startChapterEvent(hero);
+    const chapterEvent = randomManager.pickChapterEvent();
+    hero.currentChapterCode = chapterEvent.code;
 
     switch (chapterEvent.type) {
         case EventTypes.PATHS:
@@ -78,62 +79,56 @@ function startChapter(hero) {
 }
 
 function endPathChapter(hero) {
-    const message = eventHandler.finishPathEvent(hero);
+    const event = getChapterEvent(hero);
+
+    const message = eventHandler.finishPathEvent(hero, event);
 
     wrapUpChapter(hero);
     return message;
 }
 
 function endChoiceChapter(hero) {
-    const message = eventHandler.finishChoiceEvent(hero);
+    const event = getChapterEvent(hero);
+
+    const message = eventHandler.finishChoiceEvent(hero, event);
 
     wrapUpChapter(hero);
     return message;
 }
 
 function endDirectChapter(hero) {
-    const message = eventHandler.finishDirectEvent(hero);
+    const event = getChapterEvent(hero);
+
+    const message = eventHandler.finishDirectEvent(hero, event);
 
     wrapUpChapter(hero);
     return message;
 }
 
 function chapterEncounterHeroTurn(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    const event = getChapterEvent(hero);
 
-    hero.enemyHp -= 1;
+    const message = eventHandler.heroTurnEncounter(hero, event);
 
     hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
-
-    const enemyDead = hero.enemyHp <= 0;
-    if (enemyDead) {
-        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
-    }
-
-    checkHealth(hero);
-
-    return `Hero Attacks, enemy -1 hp. ENEMY ${hero.enemyHp}/${chapterEvent.enemyHpMax}`;
+    checkEncounterHealth(hero);
+    return message;
 }
 
 function chapterEncounterEnemyTurn(hero) {
-    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+    const event = getChapterEvent(hero);
 
-    hero.hp -= 1;
+    const message = eventHandler.enemyTurnEncounter(hero, event);
 
     hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
-
-    const enemyDead = hero.enemyHp <= 0;
-    if (enemyDead) {
-        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
-    }
-
-    checkHealth(hero);
-
-    return `Enemy Attacks, hero -1 hp. ENEMY ${hero.enemyHp}/${chapterEvent.enemyHpMax}`;
+    checkEncounterHealth(hero);
+    return message;
 }
 
 function chapterEncounterEnd(hero) {
-    const message = "End Encounter...";
+    const event = getChapterEvent(hero);
+
+    const message = eventHandler.finishEncounterEvent(hero, event);
 
     wrapUpChapter(hero);
     return message;
@@ -155,20 +150,22 @@ function travel(hero) {
 }
 
 function startFinale(hero) {
-    const finaleEvent = eventHandler.startFinaleEvent(hero);
+    const event = getFinaleEvent(hero);
 
-    if (finaleEvent.type === EventTypes.PATHS) {
+    if (event.type === EventTypes.PATHS) {
         hero.status = HeroStatus.QUEST_FINALE_PATH_END;
     } else {
         hero.status = HeroStatus.ERR;
     }
 
 
-    return finaleEvent.intro;
+    return event.intro;
 }
 
-function endFinale(hero) {
-    const message = eventHandler.finishFinalePathEvent(hero);
+function finalePathEnd(hero) {
+    const event = getFinaleEvent(hero);
+
+    const message = eventHandler.finishPathEvent(hero, event);
 
     hero.status = HeroStatus.REST_START;
 
@@ -219,7 +216,7 @@ module.exports = {
     chapterEncounterEnd,
     travel,
     startFinale,
-    endFinale,
+    finalePathEnd,
     startRest,
     endRest,
     die,
@@ -273,4 +270,20 @@ function wrapUpChapter(hero) {
     hero.currentChapterCode = null;
     hero.enemyHp = null;
     checkHealth(hero);
+}
+
+function checkEncounterHealth(hero) {
+    const enemyDead = hero.enemyHp <= 0;
+    if (enemyDead) {
+        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
+    }
+    checkHealth(hero);
+}
+
+function getChapterEvent(hero) {
+    return codeRetriever.findChapterEvent(hero.currentChapterCode);
+}
+
+function getFinaleEvent(hero) {
+    return codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
 }
