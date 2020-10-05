@@ -50,6 +50,18 @@ function progressHero(hero) {
             const directEndReport = action.endDirectChapter(hero);
             bard.makeDirectAnnouncement(hero, directEndReport);
             break;
+        case HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO:
+            const encounterHeroReport = action.chapterEncounterHeroTurn(hero);
+            bard.makeDirectAnnouncement(hero, encounterHeroReport);
+            break;
+        case HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY:
+            const encounterEnemyReport = action.chapterEncounterEnemyTurn(hero);
+            bard.makeDirectAnnouncement(hero, encounterEnemyReport);
+            break;
+        case HeroStatus.QUEST_CHAPTER_ENCOUNTER_END:
+            const encounterEndReport = action.chapterEncounterEnd(hero);
+            bard.makeDirectAnnouncement(hero, encounterEndReport);
+            break;
         case HeroStatus.QUEST_TRAVEL:
             const travelReport = action.travel(hero);
             bard.makeDirectAnnouncement(hero, travelReport);

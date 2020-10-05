@@ -82,6 +82,10 @@ const HeroSchema = new Schema({
         type: String,
         required: false,
     },
+    enemyHp: {
+        type: Number,
+        required: false,
+    },
     currentQuestCode: {
         type: String,
         required: false,

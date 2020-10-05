@@ -60,6 +60,17 @@ function startChapter(hero) {
         case ChapterTypes.DIRECT:
             hero.status = HeroStatus.QUEST_CHAPTER_DIRECT_END;
             break;
+        case ChapterTypes.ENCOUNTER:
+            hero.enemyHp = chapterEvent.enemyHpStart;
+
+            const heroFaster = hero.dexterity > chapterEvent.dexterity;
+            if (heroFaster) {
+                hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
+            } else {
+                hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
+            }
+
+            break;
         default:
             hero.status = HeroStatus.ERR;
             console.log("INVALID CHAPTER TYPE: " + chapterEvent.type);
@@ -93,6 +104,47 @@ function endDirectChapter(hero) {
     checkHealth(hero);
 
     return message;
+}
+
+function chapterEncounterHeroTurn(hero) {
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+
+    hero.enemyHp -= 1;
+
+    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
+
+    const enemyDead = hero.enemyHp <= 0;
+    if (enemyDead) {
+        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
+    }
+
+    checkHealth(hero);
+
+    return `Hero Attacks, enemy -1 hp. ENEMY ${hero.enemyHp}/${chapterEvent.enemyHpMax}`;
+}
+
+function chapterEncounterEnemyTurn(hero) {
+    const chapterEvent = codeRetriever.findChapterEvent(hero.currentChapterCode);
+
+    hero.hp -= 1;
+
+    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
+
+    const enemyDead = hero.enemyHp <= 0;
+    if (enemyDead) {
+        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
+    }
+
+    checkHealth(hero);
+
+    return `Enemy Attacks, hero -1 hp. ENEMY ${hero.enemyHp}/${chapterEvent.enemyHpMax}`;
+}
+
+function chapterEncounterEnd(hero) {
+    hero.status = HeroStatus.QUEST_TRAVEL;
+    hero.enemyHp = null;
+
+    return "End Encounter...";
 }
 
 function travel(hero) {
@@ -166,6 +218,9 @@ module.exports = {
     endPathChapter,
     endChoiceChapter,
     endDirectChapter,
+    chapterEncounterHeroTurn,
+    chapterEncounterEnemyTurn,
+    chapterEncounterEnd,
     travel,
     startFinale,
     endFinale,

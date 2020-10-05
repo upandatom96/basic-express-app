@@ -1,11 +1,13 @@
 const ChapterTypes = require('./chapter-event-types');
 
-const CHAPTER_EVENTS = [
+const FLAVOR_EVENTS = [
     {
         code: "DOG",
         intro: "{HERO_FIRST} walks by a traveller with a dog. With permission, they pet the dog.",
         type: ChapterTypes.FLAVOR,
     },
+];
+const DIRECT_EVENTS = [
     {
         code: "CAT",
         intro: "As they walk, {HERO_FIRST} notices a stray cat.",
@@ -14,6 +16,25 @@ const CHAPTER_EVENTS = [
         text: "The cat accepts pets for a moment, then bites {HERO_FIRST}.",
         type: ChapterTypes.DIRECT,
     },
+];
+const CHOICE_EVENTS = [
+    {
+        code: "BEANS",
+        intro: "A cloaked figure offers {HERO_FIRST} a handful of beans.",
+        type: ChapterTypes.CHOICE,
+        choices: [
+            {
+                healMin: 1,
+                healMax: 2,
+                text: "{HERO_FIRST} accepts the beans. They make for a nice snack."
+            },
+            {
+                text: "{HERO_FIRST} rejects the bean offer and continues walking."
+            },
+        ],
+    },
+];
+const PATH_EVENTS = [
     {
         code: "TROLL_BRIDGE",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
@@ -70,22 +91,33 @@ const CHAPTER_EVENTS = [
             }
         ],
     },
+];
+const ENCOUNTER_EVENTS = [
     {
-        code: "BEANS",
-        intro: "A cloaked figure offers {HERO_FIRST} a handful of beans.",
-        type: ChapterTypes.CHOICE,
-        choices: [
-            {
-                healMin: 1,
-                healMax: 2,
-                text: "{HERO_FIRST} accepts the beans. They make for a nice snack."
-            },
-            {
-                text: "{HERO_FIRST} rejects the bean offer and continues walking."
-            },
-        ],
+        code: "GOBLIN",
+        intro: "A goblin blocks the path ahead. {HERO_FIRST} prepares to fight.",
+        type: ChapterTypes.ENCOUNTER,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 3,
+        charisma: 3,
+        wisdom: 3,
+        strength: 3,
+    },
+    {
+        code: "HEDGEHOG",
+        intro: "A hedgehog begins chasing after {HERO_FIRST}.",
+        type: ChapterTypes.ENCOUNTER,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 12,
+        charisma: 3,
+        wisdom: 3,
+        strength: 3,
     },
 ];
+
+const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
 
 module.exports = {
     CHAPTER_EVENTS
