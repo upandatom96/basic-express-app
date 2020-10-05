@@ -104,7 +104,7 @@ const ENCOUNTER_EVENTS = [
         dexterity: 3,
         charisma: 3,
         wisdom: 3,
-        strength: 3,
+        strength: 6,
         moves: [
             {
                 type: MoveTypes.HEAL,
@@ -122,18 +122,39 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
-    // {
-    //     code: "HEDGEHOG",
-    //     intro: "A hedgehog begins chasing after {HERO_FIRST}.",
-    //     enemyName: "Hedgehog",
-    //     type: EventTypes.ENCOUNTER,
-    //     enemyHpStart: 10,
-    //     enemyHpMax: 10,
-    //     dexterity: 12,
-    //     charisma: 3,
-    //     wisdom: 3,
-    //     strength: 3,
-    // },
+    {
+        code: "HEDGEHOG",
+        intro: "A hedgehog begins chasing after {HERO_FIRST}.",
+        enemyName: "Hedgehog",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 6,
+        charisma: 3,
+        wisdom: 3,
+        strength: 3,
+        moves: [
+            {
+                type: MoveTypes.HEAL,
+                name: "HEDGEHOG HUDDLE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "DASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "TORNADO",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "TAUNT",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
