@@ -29,8 +29,33 @@ const DIRECT_QUESTS = [
         },
     },
 ];
-const CHOICE_QUESTS = [];
-const PATH_QUESTS = [
+const CHOICE_QUESTS = [
+    {
+        code: "LEAP",
+        name: "Leap of Faith",
+        text: "take a Leap of Faith",
+        destination: "the Wide Chasm",
+        distanceRequired: 50,
+        finaleEvent: {
+            intro: "{HERO_FIRST} approaches the ledge and contemplate taking a leap. They notice a pole next to the chasm.",
+            type: EventTypes.CHOICE,
+            choices: [
+                {
+                    damageMin: 10,
+                    damageMax: 20,
+                    text: "{HERO_FIRST} uses the pole to vault across the chasm. They make it, but land hard on the other end."
+                },
+                {
+                    text: "{HERO_FIRST} decides to truly use faith and make the leap without the pole. They make it gracefully."
+                },
+            ],
+        },
+    },
+];
+const PATH_QUESTS = [];
+const ENCOUNTER_QUESTS = [];
+
+const LEGACYQUESTS = [
     {
         code: "Q1",
         name: "Dragon's Bounty",
@@ -82,10 +107,9 @@ const PATH_QUESTS = [
         },
     },
 ];
-const ENCOUNTER_QUESTS = [];
 
 const QUESTS = PATH_QUESTS.concat(FLAVOR_QUESTS, DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS: DIRECT_QUESTS
+    QUESTS: CHOICE_QUESTS
 }
