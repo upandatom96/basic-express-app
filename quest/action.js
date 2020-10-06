@@ -218,7 +218,7 @@ function runEncounterHeroTurnFinale(hero) {
 
     const message = eventHandler.heroTurnEncounter(hero, event);
 
-    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
+    hero.status = HeroStatus.QUEST_FINALE_ENCOUNTER_ENEMY;
     checkEncounterHealth(hero, false);
     return message;
 }
@@ -228,7 +228,7 @@ function runEncounterEnemyTurnFinale(hero) {
 
     const message = eventHandler.enemyTurnEncounter(hero, event);
 
-    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
+    hero.status = HeroStatus.QUEST_FINALE_ENCOUNTER_HERO;
     checkEncounterHealth(hero, false);
     return message;
 }

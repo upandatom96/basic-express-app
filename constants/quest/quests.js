@@ -1,4 +1,5 @@
 const EventTypes = require('./event-types');
+const MoveTypes = require('./move-types');
 
 const FLAVOR_QUESTS = [
     {
@@ -86,7 +87,47 @@ const PATH_QUESTS = [
         },
     },
 ];
-const ENCOUNTER_QUESTS = [];
+const ENCOUNTER_QUESTS = [
+    {
+        code: "DRAGON",
+        name: "Dragon's Bounty",
+        text: "slay the Red Dragon",
+        destination: "the Dragon's Lair",
+        distanceRequired: 25,
+        finaleEvent: {
+            intro: "The Red Dragon notices {HERO_FIRST} and prepares to fight.",
+            enemyName: "Red Dragon",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 50,
+            enemyHpMax: 50,
+            dexterity: 5,
+            charisma: 5,
+            wisdom: 6,
+            strength: 7,
+            moves: [
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "CLAW SWIPE",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "LAIR TRAP",
+                    multiplier: 2,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "FIRE BREATH",
+                    multiplier: 3,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "GUARD TREASURE",
+                },
+            ],
+        },
+    },
+];
 
 const LEGACYQUESTS = [
     {
@@ -144,5 +185,5 @@ const LEGACYQUESTS = [
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS: PATH_QUESTS
+    QUESTS: ENCOUNTER_QUESTS
 }

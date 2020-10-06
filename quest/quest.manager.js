@@ -193,6 +193,7 @@ function getHeroReport(heroDB) {
         announcement,
         name: heroDB.name,
         level: heroDB.level,
+        status: heroDB.status,
         hpText: hpText,
         specialMoves,
         stats,
