@@ -13,6 +13,17 @@ const FLAVOR_QUESTS = [
             type: EventTypes.FLAVOR,
         },
     },
+    {
+        code: "LOVE_LETTER",
+        name: "Love Letter",
+        text: "deliver the Love Letter to the Princess",
+        destination: "the Tall Tower",
+        distanceRequired: 101,
+        finaleEvent: {
+            intro: "{HERO_FIRST} reaches the Tall Tower and gives the Love Letter to a guard. You are assured the guard will pass it to the Princess.",
+            type: EventTypes.FLAVOR,
+        },
+    },
 ];
 const DIRECT_QUESTS = [
     {

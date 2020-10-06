@@ -7,6 +7,46 @@ const FLAVOR_EVENTS = [
         intro: "{HERO_FIRST} walks by a traveller with a dog. With permission, they pet the dog.",
         type: EventTypes.FLAVOR,
     },
+    {
+        code: "AURA",
+        intro: "{HERO_FIRST} feels a strange aura as they pass an ancient obelisk. They decide it is better to ignore for now.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "NEWS_1",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, apparently the Prince has a new Princess.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "NEWS_2",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, chain mail is the new high fashion.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "NEWS_3",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, there are reports that the stars are fake.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "NEWS_4",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, supposedly the world is round.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "NEWS_5",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, rumor has it the King is actually a reptile.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "ROCK_ART",
+        intro: "{HERO_FIRST} examines rock carvings as they pass through a cave. They carve their name into the cave wall.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        code: "VIEW",
+        intro: "{HERO_FIRST} stops for a moment and enjoys the view as they pass through a valley.",
+        type: EventTypes.FLAVOR,
+    },
 ];
 const DIRECT_EVENTS = [
     {
