@@ -62,7 +62,8 @@ function makeRestEndAnnouncement(hero) {
 }
 
 function makeRestEmergeAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} sets off to seek another quest. Check up on their story here: ???.`;
+    const heroLink = "https://adam-on-the-internet.github.io/the-quest-bot-ui";
+    const announcement = `{HERO_FIRST} sets off to seek another quest. Check up on their story and other stories here: ${heroLink}.`;
     makeAnnouncement(hero, announcement);
 }
 
