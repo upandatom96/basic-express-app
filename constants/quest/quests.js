@@ -97,6 +97,7 @@ const ENCOUNTER_QUESTS = [
         finaleEvent: {
             intro: "The Red Dragon notices {HERO_FIRST} and prepares to fight.",
             enemyName: "Red Dragon",
+            defeat: "{HERO_FIRST} has slayed the dragon!",
             type: EventTypes.ENCOUNTER,
             enemyHpStart: 50,
             enemyHpMax: 50,
@@ -130,23 +131,6 @@ const ENCOUNTER_QUESTS = [
 ];
 
 const LEGACYQUESTS = [
-    {
-        code: "Q1",
-        name: "Dragon's Bounty",
-        text: "slay the Red Dragon",
-        distanceRequired: 25,
-        finaleEvent: {
-            type: EventTypes.PATHS,
-            intro: "{HERO_FIRST} finds the Red Dragon in a cavern.",
-            paths: [
-                {
-                    damageMin: 40,
-                    damageMax: 60,
-                    text: "{HERO_FIRST} fights the dragon. They take some damage but manage to defeat the dragon."
-                }
-            ],
-        },
-    },
     {
         code: "Q2",
         name: "Witch's Curse",

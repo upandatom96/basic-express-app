@@ -126,7 +126,7 @@ function enemyTurnEncounter(hero, event) {
 }
 
 function finishEncounterEvent(hero, event) {
-    return `${event.enemyName} has been defeated!`;
+    return event.defeat;
 }
 
 module.exports = {
