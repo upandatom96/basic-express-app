@@ -55,15 +55,15 @@ function progressHero(hero) {
             bard.makeDirectAnnouncement(hero, directEndReport);
             break;
         case HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO:
-            const encounterHeroReport = action.chapterEncounterHeroTurn(hero);
+            const encounterHeroReport = action.runEncounterHeroTurnChapter(hero);
             bard.makeDirectAnnouncement(hero, encounterHeroReport);
             break;
         case HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY:
-            const encounterEnemyReport = action.chapterEncounterEnemyTurn(hero);
+            const encounterEnemyReport = action.runEncounterEnemyTurnChapter(hero);
             bard.makeDirectAnnouncement(hero, encounterEnemyReport);
             break;
         case HeroStatus.QUEST_CHAPTER_ENCOUNTER_END:
-            const encounterEndReport = action.chapterEncounterEnd(hero);
+            const encounterEndReport = action.endEncounterChapter(hero);
             bard.makeDirectAnnouncement(hero, encounterEndReport);
             break;
         case HeroStatus.QUEST_TRAVEL:
@@ -75,8 +75,28 @@ function progressHero(hero) {
             bard.makeDirectAnnouncement(hero, finaleStartReport);
             break;
         case HeroStatus.QUEST_FINALE_PATH_END:
-            const finaleEndReport = action.finalePathEnd(hero);
-            bard.makeDirectAnnouncement(hero, finaleEndReport);
+            const finalePathReport = action.endPathFinale(hero);
+            bard.makeDirectAnnouncement(hero, finalePathReport);
+            break;
+        case HeroStatus.QUEST_FINALE_CHOICE_END:
+            const finaleChoiceEnd = action.endChoiceFinale(hero);
+            bard.makeDirectAnnouncement(hero, finaleChoiceEnd);
+            break;
+        case HeroStatus.QUEST_FINALE_DIRECT_END:
+            const finaleDirectEnd = action.endDirectFinale(hero);
+            bard.makeDirectAnnouncement(hero, finaleDirectEnd);
+            break;
+        case HeroStatus.QUEST_FINALE_ENCOUNTER_HERO:
+            const finaleEnemyHeroReport = action.runEncounterHeroTurnFinale(hero);
+            bard.makeDirectAnnouncement(hero, finaleEnemyHeroReport);
+            break;
+        case HeroStatus.QUEST_FINALE_ENCOUNTER_ENEMY:
+            const finaleEncounterEnemyReport = action.runEncounterEnemyTurnFinale(hero);
+            bard.makeDirectAnnouncement(hero, finaleEncounterEnemyReport);
+            break;
+        case HeroStatus.QUEST_FINALE_ENCOUNTER_END:
+            const finaleEncounterEndReport = action.endEncounterFinale(hero);
+            bard.makeDirectAnnouncement(hero, finaleEncounterEndReport);
             break;
         case HeroStatus.REST_START:
             action.startRest(hero);

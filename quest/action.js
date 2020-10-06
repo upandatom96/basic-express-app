@@ -48,16 +48,15 @@ function startNewQuest(hero) {
 }
 
 function startChapter(hero) {
-    const chapterEvent = randomManager.pickChapterEvent();
-    hero.currentChapterCode = chapterEvent.code;
+    const event = randomManager.pickChapterEvent();
+    hero.currentChapterCode = event.code;
 
-    switch (chapterEvent.type) {
+    switch (event.type) {
         case EventTypes.PATHS:
             hero.status = HeroStatus.QUEST_CHAPTER_PATH_END;
             break;
         case EventTypes.FLAVOR:
             wrapUpChapter(hero);
-            hero.status = HeroStatus.QUEST_TRAVEL;
             break;
         case EventTypes.CHOICE:
             hero.status = HeroStatus.QUEST_CHAPTER_CHOICE_END;
@@ -66,9 +65,9 @@ function startChapter(hero) {
             hero.status = HeroStatus.QUEST_CHAPTER_DIRECT_END;
             break;
         case EventTypes.ENCOUNTER:
-            hero.enemyHp = chapterEvent.enemyHpStart;
+            hero.enemyHp = event.enemyHpStart;
 
-            const heroFaster = hero.dexterity > chapterEvent.dexterity;
+            const heroFaster = hero.dexterity > event.dexterity;
             hero.status = heroFaster ?
                 HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO :
                 HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
@@ -76,10 +75,10 @@ function startChapter(hero) {
             break;
         default:
             hero.status = HeroStatus.ERR;
-            console.log("INVALID CHAPTER TYPE: " + chapterEvent.type);
+            console.log("INVALID EVENT TYPE: " + event.type);
     }
 
-    return chapterEvent.intro;
+    return event.intro;
 }
 
 function endPathChapter(hero) {
@@ -109,27 +108,27 @@ function endDirectChapter(hero) {
     return message;
 }
 
-function chapterEncounterHeroTurn(hero) {
+function runEncounterHeroTurnChapter(hero) {
     const event = getChapterEvent(hero);
 
     const message = eventHandler.heroTurnEncounter(hero, event);
 
     hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
-    checkEncounterHealth(hero);
+    checkEncounterHealth(hero, true);
     return message;
 }
 
-function chapterEncounterEnemyTurn(hero) {
+function runEncounterEnemyTurnChapter(hero) {
     const event = getChapterEvent(hero);
 
     const message = eventHandler.enemyTurnEncounter(hero, event);
 
     hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
-    checkEncounterHealth(hero);
+    checkEncounterHealth(hero, true);
     return message;
 }
 
-function chapterEncounterEnd(hero) {
+function endEncounterChapter(hero) {
     const event = getChapterEvent(hero);
 
     const message = eventHandler.finishEncounterEvent(hero, event);
@@ -156,25 +155,88 @@ function travel(hero) {
 function startFinale(hero) {
     const event = getFinaleEvent(hero);
 
-    if (event.type === EventTypes.PATHS) {
-        hero.status = HeroStatus.QUEST_FINALE_PATH_END;
-    } else {
-        hero.status = HeroStatus.ERR;
-    }
+    switch (event.type) {
+        case EventTypes.PATHS:
+            hero.status = HeroStatus.QUEST_FINALE_PATH_END;
+            break;
+        case EventTypes.FLAVOR:
+            wrapUpFinale(hero);
+            break;
+        case EventTypes.CHOICE:
+            hero.status = HeroStatus.QUEST_FINALE_CHOICE_END;
+            break;
+        case EventTypes.DIRECT:
+            hero.status = HeroStatus.QUEST_FINALE_DIRECT_END;
+            break;
+        case EventTypes.ENCOUNTER:
+            hero.enemyHp = event.enemyHpStart;
 
+            const heroFaster = hero.dexterity > event.dexterity;
+            hero.status = heroFaster ?
+                HeroStatus.QUEST_FINALE_ENCOUNTER_HERO :
+                HeroStatus.QUEST_FINALE_ENCOUNTER_ENEMY;
+            break;
+        default:
+            hero.status = HeroStatus.ERR;
+            console.log("INVALID EVENT TYPE: " + event.type);
+    }
 
     return event.intro;
 }
 
-function finalePathEnd(hero) {
+function endPathFinale(hero) {
     const event = getFinaleEvent(hero);
 
     const message = eventHandler.finishPathEvent(hero, event);
 
-    hero.status = HeroStatus.REST_START;
+    wrapUpFinale(hero);
+    return message;
+}
 
-    checkHealth(hero);
+function endChoiceFinale(hero) {
+    const event = getFinaleEvent(hero);
 
+    const message = eventHandler.finishChoiceEvent(hero, event);
+
+    wrapUpFinale(hero);
+    return message;
+}
+
+function endDirectFinale(hero) {
+    const event = getFinaleEvent(hero);
+
+    const message = eventHandler.finishDirectEvent(hero, event);
+
+    wrapUpFinale(hero);
+    return message;
+}
+
+function runEncounterHeroTurnFinale(hero) {
+    const event = getFinaleEvent(hero);
+
+    const message = eventHandler.heroTurnEncounter(hero, event);
+
+    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_ENEMY;
+    checkEncounterHealth(hero, false);
+    return message;
+}
+
+function runEncounterEnemyTurnFinale(hero) {
+    const event = getFinaleEvent(hero);
+
+    const message = eventHandler.enemyTurnEncounter(hero, event);
+
+    hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_HERO;
+    checkEncounterHealth(hero, false);
+    return message;
+}
+
+function endEncounterFinale(hero) {
+    const event = getFinaleEvent(hero);
+
+    const message = eventHandler.finishEncounterEvent(hero, event);
+
+    wrapUpFinale(hero);
     return message;
 }
 
@@ -216,12 +278,17 @@ module.exports = {
     endPathChapter,
     endChoiceChapter,
     endDirectChapter,
-    chapterEncounterHeroTurn,
-    chapterEncounterEnemyTurn,
-    chapterEncounterEnd,
+    runEncounterHeroTurnChapter,
+    runEncounterEnemyTurnChapter,
+    endEncounterChapter,
     travel,
     startFinale,
-    finalePathEnd,
+    endPathFinale,
+    endChoiceFinale,
+    endDirectFinale,
+    runEncounterHeroTurnFinale,
+    runEncounterEnemyTurnFinale,
+    endEncounterFinale,
     startRest,
     endRest,
     die,
@@ -277,10 +344,17 @@ function wrapUpChapter(hero) {
     checkHealth(hero);
 }
 
-function checkEncounterHealth(hero) {
+function wrapUpFinale(hero) {
+    hero.status = HeroStatus.REST_START;
+    checkHealth(hero);
+}
+
+function checkEncounterHealth(hero, chapterMode) {
     const enemyDead = hero.enemyHp <= 0;
     if (enemyDead) {
-        hero.status = HeroStatus.QUEST_CHAPTER_ENCOUNTER_END;
+        hero.status = chapterMode ?
+            HeroStatus.QUEST_CHAPTER_ENCOUNTER_END :
+            HeroStatus.QUEST_FINALE_ENCOUNTER_END;
     }
     checkHealth(hero);
 }
