@@ -106,6 +106,10 @@ function progressHero(hero) {
             action.endRest(hero);
             bard.makeRestEndAnnouncement(hero);
             break;
+        case HeroStatus.REST_EMERGE:
+            action.emergeRest(hero);
+            bard.makeRestEmergeAnnouncement(hero);
+            break;
         case HeroStatus.DYING:
             action.die(hero);
             bard.makeDeathAnnouncement(hero);

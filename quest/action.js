@@ -254,6 +254,10 @@ function startRest(hero) {
 function endRest(hero) {
     restHealth(hero);
 
+    hero.status = HeroStatus.REST_EMERGE;
+}
+
+function emergeRest(hero) {
     hero.status = HeroStatus.QUEST_FIND;
 }
 
@@ -293,6 +297,7 @@ module.exports = {
     endEncounterFinale,
     startRest,
     endRest,
+    emergeRest,
     die,
     obituary,
 }

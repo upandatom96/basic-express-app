@@ -52,14 +52,17 @@ function makeDirectAnnouncement(hero, report) {
 }
 
 function makeRestStartAnnouncement(hero) {
-    // completed quest, level up! more difficult
     const announcement = `{HERO_FIRST} completed their quest and takes some time to rest. They level up to LVL ${hero.level}. The world is a bit more dangerous for them now.`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestEndAnnouncement(hero) {
-    // rest, gain hp MAX regain health
     const announcement = `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax} and they regain some health up to ${hero.hp}/${hero.hpMax}.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeRestEmergeAnnouncement(hero) {
+    const announcement = `{HERO_FIRST} sets off to seek another quest. Check up on their story here: ???.`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -89,6 +92,7 @@ module.exports = {
     makeDirectAnnouncement,
     makeRestStartAnnouncement,
     makeRestEndAnnouncement,
+    makeRestEmergeAnnouncement,
     makeDeathAnnouncement,
     makeObituaryAnnouncement,
 }

@@ -27,6 +27,7 @@ const QUEST_FINALE_ENCOUNTER_END = 76;
 
 const REST_START = 80;
 const REST_END = 81;
+const REST_EMERGE = 82;
 
 const DYING = 97;
 const OBITUARY = 98;
@@ -60,6 +61,7 @@ module.exports = {
     QUEST_FINALE_ENCOUNTER_END,
     REST_START,
     REST_END,
+    REST_EMERGE,
     DYING,
     OBITUARY,
     DEAD,
