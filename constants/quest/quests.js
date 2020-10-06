@@ -1,6 +1,21 @@
-const EventType = require('./event-types');
+const EventTypes = require('./event-types');
 
-const QUESTS = [
+const FLAVOR_QUESTS = [
+    {
+        code: "EGG",
+        type: "STANDARD",
+        name: "Mysterious Egg",
+        text: "return the Mysterious Egg to its nest",
+        distanceRequired: 99,
+        finaleEvent: {
+            intro: "{HERO_FIRST} reaches a giant nest and sets the Mysterious Egg down. It hatches into a small dragon.",
+            type: EventTypes.FLAVOR,
+        },
+    },
+];
+const DIRECT_QUESTS = [];
+const CHOICE_QUESTS = [];
+const PATH_QUESTS = [
     {
         code: "Q1",
         type: "STANDARD",
@@ -8,7 +23,7 @@ const QUESTS = [
         text: "slay the Red Dragon",
         distanceRequired: 25,
         finaleEvent: {
-            type: EventType.PATHS,
+            type: EventTypes.PATHS,
             intro: "{HERO_FIRST} finds the Red Dragon in a cavern.",
             paths: [
                 {
@@ -26,7 +41,7 @@ const QUESTS = [
         text: "melt the Wicked Witch",
         distanceRequired: 25,
         finaleEvent: {
-            type: EventType.PATHS,
+            type: EventTypes.PATHS,
             intro: "{HERO_FIRST} finds the Wicked Witch in an old hut.",
             paths: [
                 {
@@ -54,7 +69,10 @@ const QUESTS = [
         },
     },
 ];
+const ENCOUNTER_QUESTS = [];
+
+const QUESTS = PATH_QUESTS.concat(FLAVOR_QUESTS, DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS
+    QUESTS: FLAVOR_QUESTS
 }

@@ -145,9 +145,10 @@ function travel(hero) {
         HeroStatus.QUEST_FINALE_START :
         HeroStatus.QUEST_CHAPTER_START;
 
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const additionalMessage = ready ?
-        " They have reached their destination." :
-        " Their journey continues...";
+        " They have reached their destination!" :
+        ` They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. Their journey continues...`;
 
     return `{HERO_FIRST} travels ${distance} miles.${additionalMessage}`;
 }
@@ -330,7 +331,16 @@ function restHealth(hero) {
 }
 
 function addDistance(hero) {
-    const distance = randomUtil.pickRandomNumber(4, 11);
+    const minDistance = 3;
+    const maxDistance = 13;
+    let distance = randomUtil.pickRandomNumber(minDistance, maxDistance);
+
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const remainingDistance = quest.distanceRequired - hero.distanceTravelled;
+    if (distance > remainingDistance) {
+        distance = remainingDistance;
+    }
+
     hero.distanceTravelled += distance;
     hero.distanceTravelledTotal += distance;
     return distance;
