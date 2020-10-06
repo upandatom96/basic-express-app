@@ -128,38 +128,42 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
-];
-
-const LEGACYQUESTS = [
     {
-        code: "Q2",
+        code: "WITCH",
         name: "Witch's Curse",
         text: "melt the Wicked Witch",
-        distanceRequired: 25,
+        destination: "the Witch's Hut",
+        distanceRequired: 30,
         finaleEvent: {
-            type: EventTypes.PATHS,
-            intro: "{HERO_FIRST} finds the Wicked Witch in an old hut.",
-            paths: [
+            intro: "The Witch notices {HERO_FIRST} and prepares to fight.",
+            enemyName: "Wicked Witch",
+            defeat: "{HERO_FIRST} has melted the witch!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 40,
+            enemyHpMax: 40,
+            dexterity: 3,
+            charisma: 3,
+            wisdom: 8,
+            strength: 3,
+            moves: [
                 {
-                    triggers: {
-                        advantageReq: ["BLESSED"],
-                    },
-                    damageMin: 10,
-                    damageMax: 20,
-                    text: "{HERO_FIRST} is blessed, and defeats the witch easily."
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "WIND SPELL",
+                    multiplier: 1,
                 },
                 {
-                    triggers: {
-                        disadvantageReq: ["CURSED"],
-                    },
-                    damageMin: 70,
-                    damageMax: 75,
-                    text: "{HERO_FIRST} is cursed, and defeats the witch with much difficulty."
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "ICE SPELL",
+                    multiplier: 2,
                 },
                 {
-                    damageMin: 30,
-                    damageMax: 50,
-                    text: "{HERO_FIRST} fights the witch and wins after taking some damage."
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "FIRE SPELL",
+                    multiplier: 3,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "PRACTICE SPELL",
                 },
             ],
         },
@@ -169,5 +173,5 @@ const LEGACYQUESTS = [
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS: ENCOUNTER_QUESTS
+    QUESTS
 }
