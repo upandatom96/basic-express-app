@@ -38,7 +38,7 @@ const CHOICE_QUESTS = [
         destination: "the Wide Chasm",
         distanceRequired: 50,
         finaleEvent: {
-            intro: "{HERO_FIRST} approaches the ledge and contemplate taking a leap. They notice a pole next to the chasm.",
+            intro: "{HERO_FIRST} approaches the ledge and contemplates taking a leap. They notice a pole next to the chasm.",
             type: EventTypes.CHOICE,
             choices: [
                 {
