@@ -42,7 +42,8 @@ function makeFindNewQuestAnnouncement(hero) {
 
 function makeStartNewQuestAnnouncement(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
-    const announcement = `For the quest, {HERO_FIRST} must travel ${quest.distanceRequired} miles and ${quest.text}.`;
+    const travelMessage = `travel ${quest.distanceRequired} miles to the ${quest.destination}`;
+    const announcement = `For the quest, {HERO_FIRST} must ${travelMessage} and ${quest.text}.`;
     makeAnnouncement(hero, announcement);
 }
 

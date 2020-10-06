@@ -3,22 +3,36 @@ const EventTypes = require('./event-types');
 const FLAVOR_QUESTS = [
     {
         code: "EGG",
-        type: "STANDARD",
         name: "Mysterious Egg",
-        text: "return the Mysterious Egg to its nest",
+        text: "return the Mysterious Egg",
+        destination: "the Giant Nest",
         distanceRequired: 99,
         finaleEvent: {
-            intro: "{HERO_FIRST} reaches a giant nest and sets the Mysterious Egg down. It hatches into a small dragon.",
+            intro: "{HERO_FIRST} reaches the Giant Nest and sets the Mysterious Egg down. It hatches into a small dragon.",
             type: EventTypes.FLAVOR,
         },
     },
 ];
-const DIRECT_QUESTS = [];
+const DIRECT_QUESTS = [
+    {
+        code: "BLOOD",
+        name: "Blood Sacrifice",
+        text: "make a Blood Sacrifice",
+        destination: "THE FORBIDDEN ALTAR",
+        distanceRequired: 66,
+        finaleEvent: {
+            intro: "THE FORBIDDEN ALTAR is glowing softly as {HERO_FIRST} approaches. Something feels wrong.",
+            damageMin: 1,
+            damageMax: 100,
+            text: "On THE FORBIDDEN ALTAR is a FORBIDDEN STONE. {HERO_FIRST} uses it to prick their finger. The altar's glow subsides.",
+            type: EventTypes.DIRECT,
+        },
+    },
+];
 const CHOICE_QUESTS = [];
 const PATH_QUESTS = [
     {
         code: "Q1",
-        type: "STANDARD",
         name: "Dragon's Bounty",
         text: "slay the Red Dragon",
         distanceRequired: 25,
@@ -36,7 +50,6 @@ const PATH_QUESTS = [
     },
     {
         code: "Q2",
-        type: "STANDARD",
         name: "Witch's Curse",
         text: "melt the Wicked Witch",
         distanceRequired: 25,
@@ -74,5 +87,5 @@ const ENCOUNTER_QUESTS = [];
 const QUESTS = PATH_QUESTS.concat(FLAVOR_QUESTS, DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS: FLAVOR_QUESTS
+    QUESTS: DIRECT_QUESTS
 }

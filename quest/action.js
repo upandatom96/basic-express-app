@@ -147,7 +147,7 @@ function travel(hero) {
 
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const additionalMessage = ready ?
-        " They have reached their destination!" :
+        ` They have reached their destination, the ${quest.destination}.` :
         ` They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. Their journey continues...`;
 
     return `{HERO_FIRST} travels ${distance} miles.${additionalMessage}`;
