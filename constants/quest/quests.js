@@ -52,7 +52,40 @@ const CHOICE_QUESTS = [
         },
     },
 ];
-const PATH_QUESTS = [];
+const PATH_QUESTS = [
+    {
+        code: "MAZE",
+        name: "Through the Maze",
+        text: "navigate through to the end",
+        destination: "the Maze",
+        distanceRequired: 50,
+        finaleEvent: {
+            intro: "{HERO_FIRST} begins walking through the Maze, unsure where they are headed.",
+            type: EventTypes.PATHS,
+            paths: [
+                {
+                    triggers: {
+                        wisdomReq: 7,
+                    },
+                    text: "{HERO_FIRST} is wise enough to always follow the left wall, they make it through easily."
+                },
+                {
+                    triggers: {
+                        wisdomReq: 4,
+                    },
+                    damageMin: 6,
+                    damageMax: 9,
+                    text: "{HERO_FIRST} makes marks on the wall as they go, and only falls in a couple traps."
+                },
+                {
+                    damageMin: 10,
+                    damageMax: 20,
+                    text: "{HERO_FIRST} does not know how to navigate the maze and falls into many traps."
+                }
+            ],
+        },
+    },
+];
 const ENCOUNTER_QUESTS = [];
 
 const LEGACYQUESTS = [
@@ -108,8 +141,8 @@ const LEGACYQUESTS = [
     },
 ];
 
-const QUESTS = PATH_QUESTS.concat(FLAVOR_QUESTS, DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
+const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
 
 module.exports = {
-    QUESTS: CHOICE_QUESTS
+    QUESTS: PATH_QUESTS
 }

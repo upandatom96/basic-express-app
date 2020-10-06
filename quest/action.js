@@ -150,7 +150,8 @@ function travel(hero) {
         ` They have reached their destination, the ${quest.destination}.` :
         ` They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. Their journey continues...`;
 
-    return `{HERO_FIRST} travels ${distance} miles.${additionalMessage}`;
+    const sOrNot = distance > 1 ? "s" : "";
+    return `{HERO_FIRST} travels ${distance} mile${sOrNot}.${additionalMessage}`;
 }
 
 function startFinale(hero) {
