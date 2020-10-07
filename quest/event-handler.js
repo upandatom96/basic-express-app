@@ -210,6 +210,11 @@ function getMoveMessage(characterName, moveName, moveDetails) {
 
 function getStatDamage(attackerStat, defenderStat) {
     const damageDifference = (attackerStat + 1 - defenderStat);
-    const rawDamage = damageDifference > 0 ? damageDifference : 0;
-    return rawDamage + 1;
+    const min = damageDifference > 0 ? damageDifference : 0;
+
+    const damageDifferenceCap = damageDifference + (5 + attackerStat);
+    const max = damageDifferenceCap > 0 ? damageDifferenceCap : 0;
+
+    const randomDamage = randomUtil.pickRandomNumber(min, max);
+    return randomDamage + 1;
 }
