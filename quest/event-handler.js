@@ -160,11 +160,19 @@ function applyChanges(changes, hero) {
         hero.hp += heal;
         changeText = `They heal ${heal}hp.`
     } else if (boolUtil.hasValue(changes.item)) {
-        hero.item = changes.item;
-        changeText = `They equip ${changes.item}.`
+        if (hero.inventory.includes(changes.item)) {
+            changeText = `They already have ${changes.item}, so nothing happens.`;
+        } else {
+            hero.inventory.push(changes.item);
+            changeText = `They equip ${changes.item}.`
+        }
     } else if (boolUtil.hasValue(changes.ally)) {
-        hero.ally = changes.ally;
-        changeText = `${changes.ally} joins the party.`
+        if (hero.party.includes(changes.ally)) {
+            changeText = `${changes.ally} is already with them, so nothing happens.`;
+        } else {
+            hero.party.push(changes.ally);
+            changeText = `${changes.ally} joins the party.`
+        }
     } else {
         changeText = "They are unaffected.";
     }

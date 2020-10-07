@@ -30,21 +30,31 @@ function areStatReqsMet(triggers, hero) {
     return strengthMet && wisdomMet && charismaMet && dexterityMet;
 }
 
-function checkSpecialReq(reqAttributeList, specialAttribute) {
+function checkHasOne(reqAttributeList, heroAttributes) {
     const noReq = BoolUtil.hasNoValue(reqAttributeList) || reqAttributeList.level === 0;
     if (noReq) {
         return true;
     }
     return reqAttributeList.some((advantageReq) => {
-        return advantageReq === specialAttribute;
+        return heroAttributes.includes(advantageReq);
+    });
+}
+
+function checkSpecialReq(reqAttributeList, heroAttribute) {
+    const noReq = BoolUtil.hasNoValue(reqAttributeList) || reqAttributeList.level === 0;
+    if (noReq) {
+        return true;
+    }
+    return reqAttributeList.some((advantageReq) => {
+        return advantageReq === heroAttribute;
     });
 }
 
 function areSpecialReqsMet(triggers, hero) {
     const advantageMet = checkSpecialReq(triggers.advantageReq, hero.advantage);
     const disadvantageMet = checkSpecialReq(triggers.disadvantageReq, hero.disadvantage);
-    const itemMet = checkSpecialReq(triggers.itemReq, hero.item);
-    const allyMet = checkSpecialReq(triggers.allyReq, hero.ally);
+    const itemMet = checkHasOne(triggers.itemReq, hero.inventory);
+    const allyMet = checkHasOne(triggers.allyReq, hero.party);
 
     return advantageMet && disadvantageMet && itemMet && allyMet;
 }

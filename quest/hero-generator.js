@@ -18,8 +18,8 @@ function generateHero(firstName, pastHeroes) {
     const hp = 100;
     const hpMax = 100;
     const level = 1;
-    const item = null;
-    const ally = null;
+    const inventory = [];
+    const party = [];
     const journal = [];
     const currentQuestCode = null;
     const distanceTravelled = 0;
@@ -42,8 +42,8 @@ function generateHero(firstName, pastHeroes) {
         hp,
         hpMax,
         level,
-        item,
-        ally,
+        inventory,
+        party,
         journal,
         currentQuestCode,
         distanceTravelled,

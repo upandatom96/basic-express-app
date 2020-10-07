@@ -166,8 +166,8 @@ function getStats(savedHero) {
         advantage: specialRevealed ? savedHero.advantage : "???",
         disadvantage: specialRevealed ? savedHero.disadvantage : "???",
         // holding stats
-        ally: savedHero.ally,
-        item: savedHero.item,
+        inventory: savedHero.inventory,
+        party: savedHero.party,
     };
 }
 

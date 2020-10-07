@@ -67,13 +67,17 @@ const HeroSchema = new Schema({
         required: true,
         default: "CURSED"
     },
-    item: {
-        type: String,
-    },
-    ally: {
-        type: String,
-    },
     journal: [
+        {
+            type: String
+        }
+    ],
+    inventory: [
+        {
+            type: String
+        }
+    ],
+    party: [
         {
             type: String
         }
