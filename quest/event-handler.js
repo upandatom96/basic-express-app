@@ -164,7 +164,7 @@ function applyChanges(changes, hero) {
             changeText = `They already have ${changes.item}, so nothing happens.`;
         } else {
             hero.inventory.push(changes.item);
-            changeText = `They equip ${changes.item}.`
+            changeText = `They put ${changes.item} in their inventory.`
         }
     } else if (boolUtil.hasValue(changes.ally)) {
         if (hero.party.includes(changes.ally)) {
