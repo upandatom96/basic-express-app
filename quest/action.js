@@ -7,6 +7,9 @@ const EventTypes = require('../constants/quest/event-types');
 
 const randomUtil = require('../utilities/random.util');
 
+const selectedQuestCodes = [];
+const selectedChapterCodes = [];
+
 function checkHealth(hero) {
     enforceMaxHealth(hero);
     checkHeartbeat(hero);
@@ -37,7 +40,7 @@ function setOff(hero) {
 }
 
 function findNewQuest(hero) {
-    const newQuest = randomManager.pickQuest();
+    const newQuest = randomManager.pickQuest(selectedQuestCodes);
     hero.currentQuestCode = newQuest.code;
     hero.distanceTravelled = 0;
     hero.status = HeroStatus.QUEST_NEW;
@@ -48,7 +51,7 @@ function startNewQuest(hero) {
 }
 
 function startChapter(hero) {
-    const event = randomManager.pickChapterEvent();
+    const event = randomManager.pickChapterEvent(selectedChapterCodes);
     hero.currentChapterCode = event.code;
 
     switch (event.type) {

@@ -2,114 +2,126 @@ const constants = require("../constants/constants.manager");
 const randomUtil = require("../utilities/random.util");
 
 function getOneNoun() {
-  return pickNoun();
+    return pickNoun();
 }
 
 function getOneAdjective() {
-  return pickAdjective();
+    return pickAdjective();
 }
 
 function getAllWords() {
-  const adjectives = constants.ADJECTIVES;
-  const nouns = constants.NOUNS;
-  return {
-    adjectives,
-    nouns,
-  };
+    const adjectives = constants.ADJECTIVES;
+    const nouns = constants.NOUNS;
+    return {
+        adjectives,
+        nouns,
+    };
 }
 
 function getWordCount() {
-  const adjectives = constants.ADJECTIVES;
-  const nouns = constants.NOUNS;
-  return {
-    nounCount: nouns.length,
-    adjectiveCount: adjectives.length,
-    phraseCount: nouns.length * adjectives.length
-  };
+    const adjectives = constants.ADJECTIVES;
+    const nouns = constants.NOUNS;
+    return {
+        nounCount: nouns.length,
+        adjectiveCount: adjectives.length,
+        phraseCount: nouns.length * adjectives.length
+    };
 }
 
 function getPhrase() {
-  return pickAdjective() + " " + pickNoun();
+    return pickAdjective() + " " + pickNoun();
 }
 
 function getNewPhrase(oldPhrases) {
-  let foundNewPhrase = false;
-  let phrase;
-  while (!foundNewPhrase) {
-    phrase = getPhrase();
-    if (!oldPhrases.includes(phrase)) {
-      foundNewPhrase = true;
+    let foundNewPhrase = false;
+    let phrase;
+    while (!foundNewPhrase) {
+        phrase = getPhrase();
+        if (!oldPhrases.includes(phrase)) {
+            foundNewPhrase = true;
+        }
     }
-  }
-  return phrase;
+    return phrase;
 }
 
 function pickStoryPrefix() {
-  return randomUtil.pickRandom(constants.STORY_PIECES.STORY_PREFIXES);
+    return randomUtil.pickRandom(constants.STORY_PIECES.STORY_PREFIXES);
 }
 
 function pickStorySynonym() {
-  return randomUtil.pickRandom(constants.STORY_PIECES.STORY_FOR_SYNONYMS);
+    return randomUtil.pickRandom(constants.STORY_PIECES.STORY_FOR_SYNONYMS);
 }
 
 function pickQuestWord() {
-  return randomUtil.pickRandom(constants.QUEST_PIECES.QUEST_WORDS);
+    return randomUtil.pickRandom(constants.QUEST_PIECES.QUEST_WORDS);
 }
 
 function pickLastName() {
-  const lastNames = constants.QUEST_PIECES.FAMILY_NAMES.concat(constants.TITLE_BASES.MANOR_NAMES);
-  return randomUtil.pickRandom(lastNames);
+    const lastNames = constants.QUEST_PIECES.FAMILY_NAMES.concat(constants.TITLE_BASES.MANOR_NAMES);
+    return randomUtil.pickRandom(lastNames);
 }
 
-function pickQuest() {
-  return randomUtil.pickRandom(constants.QUEST_QUESTS.QUESTS);
+function pickQuest(selectedCodes) {
+    let availableQuests = constants.QUEST_QUESTS.QUESTS;
+    if (selectedCodes.length > 0) {
+        availableQuests = availableQuests.filter((chapter) => {
+            return selectedCodes.includes(chapter.code);
+        });
+    }
+    return randomUtil.pickRandom(availableQuests);
 }
 
-function pickChapterEvent() {
-  return randomUtil.pickRandom(constants.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS);
+function pickChapterEvent(selectedCodes) {
+    let availableChapters = constants.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS
+    if (selectedCodes.length > 0) {
+        availableChapters = availableChapters.filter((chapter) => {
+            return selectedCodes.includes(chapter.code);
+        });
+    }
+    return randomUtil.pickRandom(availableChapters);
 }
 
 function pickAdvantage() {
-  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ADVANTAGES);
+    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ADVANTAGES);
 }
 
 function pickDisadvantage() {
-  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.DISADVANTAGES);
+    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.DISADVANTAGES);
 }
 
 function pickBackstory() {
-  return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.BACKSTORY);
+    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.BACKSTORY);
 }
 
 function pickRandomSpecialMove() {
-  return randomUtil.pickRandom(constants.HERO_MOVES.SPECIAL_MOVES);
+    return randomUtil.pickRandom(constants.HERO_MOVES.SPECIAL_MOVES);
 }
 
 function pickNoun() {
-  return randomUtil.pickRandom(constants.NOUNS);
+    return randomUtil.pickRandom(constants.NOUNS);
 }
 
 function pickAdjective() {
-  return randomUtil.pickRandom(constants.ADJECTIVES);
+    return randomUtil.pickRandom(constants.ADJECTIVES);
 }
 
 module.exports = {
-  getOneNoun,
-  getOneAdjective,
-  getAllWords,
-  getPhrase,
-  pickQuestWord,
-  getNewPhrase,
-  getWordCount,
-  pickQuest,
-  pickChapterEvent,
-  pickAdvantage,
-  pickDisadvantage,
-  pickBackstory,
-  pickStoryPrefix,
-  pickStoryBase: pickStorySynonym,
-  pickNoun,
-  pickLastName,
-  pickAdjective,
-  pickSpecialMove: pickRandomSpecialMove,
+    getOneNoun,
+    getOneAdjective,
+    getAllWords,
+    getPhrase,
+    pickQuestWord,
+    getNewPhrase,
+    getWordCount,
+    pickQuest,
+    pickChapterEvent,
+    pickAdvantage,
+    pickDisadvantage,
+    pickBackstory,
+    pickStoryPrefix,
+    pickStoryBase: pickStorySynonym,
+    pickNoun,
+    pickLastName,
+    pickAdjective,
+    pickSpecialMove: pickRandomSpecialMove,
 }
