@@ -342,7 +342,8 @@ function restHealth(hero) {
 function addDistance(hero) {
     const minDistance = 3;
     const maxDistance = 13;
-    let distance = randomUtil.pickRandomNumber(minDistance, maxDistance);
+    let distance = randomUtil.pickRandomNumber(minDistance, maxDistance) + hero.distanceBoost;
+    hero.distanceBoost = 0;
 
     const quest = codeRetriever.findQuest(hero.currentQuestCode);
     const remainingDistance = quest.distanceRequired - hero.distanceTravelled;

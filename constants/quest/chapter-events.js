@@ -110,12 +110,93 @@ const CHOICE_EVENTS = [
         type: EventTypes.CHOICE,
         choices: [
             {
-                healMin: 1,
-                healMax: 2,
+                healMin: 2,
+                healMax: 4,
                 text: "{HERO_FIRST} accepts the beans. They make for a nice snack."
             },
             {
                 text: "{HERO_FIRST} rejects the bean offer and continues walking."
+            },
+        ],
+    },
+    {
+        code: "FORKED_ROAD",
+        intro: "{HERO_FIRST} reaches a fork in the road, they can go East or West.",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                text: "{HERO_FIRST} goes West towards some Spooky Woods."
+            },
+            {
+                text: "{HERO_FIRST} goes East towards a Swampy River."
+            },
+        ],
+    },
+    {
+        code: "CARNIVAL",
+        intro: "{HERO_FIRST} stops by a carnival near a small town.",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                item: "TEDDY BEAR",
+                text: "{HERO_FIRST} plays Ring Toss and wins a TEDDY BEAR."
+            },
+            {
+                ally: "SAD CLOWN",
+                text: "{HERO_FIRST} watches a show and listens to a SAD CLOWN's story."
+            },
+            {
+                text: "{HERO_FIRST} has some not-very-nutritious carnival snacks."
+            },
+        ],
+    },
+    {
+        code: "DEMON_DEAL",
+        intro: "{HERO_FIRST} reaches a Crossroads and is met by a Demon. The Demon offers a deal.",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                text: "{HERO_FIRST} turns down the deal. The Demon is annoyed and disappears."
+            },
+            {
+                distanceBoost: 20,
+                luckBoost: 20,
+                xBoost: 20,
+                damageMin: 10,
+                damageMax: 20,
+                text: "{HERO_FIRST} accepts the deal. The Demon takes some of their soul... for what?",
+            },
+        ],
+    },
+    {
+        code: "FLOWER_GARDEN",
+        intro: "{HERO_FIRST} passes by a beautiful garden.",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                text: "{HERO_FIRST} takes a moment to smell the roses."
+            },
+            {
+                item: "BOUQUET",
+                text: "{HERO_FIRST} picks some flowers to carry with them.",
+            },
+        ],
+    },
+    {
+        code: "SWIM_BREAK",
+        intro: "{HERO_FIRST} sits for a moment by a river.",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                text: "{HERO_FIRST} decides to go for a swim. They have a pleasant swim",
+            },
+            {
+                damageMax: 5,
+                damageMin: 10,
+                text: "{HERO_FIRST} decides to go for a swim. As they get out, they notice they are covered in leeches.",
+            },
+            {
+                text: "{HERO_FIRST} decides to just sit there and listen to the river flow.",
             },
         ],
     },
@@ -310,6 +391,113 @@ const ENCOUNTER_EVENTS = [
             {
                 type: MoveTypes.FAIL,
                 name: "LAUGH",
+            },
+        ],
+    },
+    {
+        code: "BEAR",
+        intro: "{HERO_FIRST} hears a roar in the woods nearby. There is a bear!",
+        enemyName: "Bear",
+        defeat: "{HERO_FIRST} has defeated the bear!",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 6,
+        enemyHpMax: 6,
+        dexterity: 7,
+        charisma: 1,
+        wisdom: 1,
+        strength: 7,
+        moves: [
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "CLAW SWIPE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "BEAR RUSH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "ROAR",
+            },
+        ],
+    },
+    {
+        code: "SPIRIT",
+        intro: "{HERO_FIRST} feels a presence. There is a Spirit nearby!",
+        enemyName: "Spirit",
+        defeat: "{HERO_FIRST} has defeated the Spirit!",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 20,
+        enemyHpMax: 20,
+        dexterity: 8,
+        charisma: 1,
+        wisdom: 8,
+        strength: 1,
+        moves: [
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "GHASTLY TRICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "GHASTLY SPIN",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "GHASTLY VISION",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "REVEAL DARK SECRET",
+                multiplier: 3,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "MOAN",
+            },
+        ],
+    },
+    {
+        code: "GIANT_LIZARD",
+        intro: "{HERO_FIRST} sees a lizard that appears very close. Wait, no, it is a far away Lizard that is Giant!",
+        enemyName: "Giant Lizard",
+        defeat: "{HERO_FIRST} has defeated the Giant Lizard!",
+        type: EventTypes.ENCOUNTER,
+        enemyHpStart: 20,
+        enemyHpMax: 20,
+        dexterity: 2,
+        charisma: 3,
+        wisdom: 4,
+        strength: 8,
+        moves: [
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "REPTILIAN TRICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "REPTILIAN SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "REPTILIAN TRAP",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "LIZARD LICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "LOSE TAIL",
             },
         ],
     },

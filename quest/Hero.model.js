@@ -52,6 +52,21 @@ const HeroSchema = new Schema({
         required: true,
         default: 1
     },
+    distanceBoost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    luckBoost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    xBoost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     backstory: {
         type: String,
         required: true,
