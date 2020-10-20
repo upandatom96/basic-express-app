@@ -1,12 +1,5 @@
-const ADVANTAGES = [
-    "BLESSED",
-    "ATTRACTIVE",
-];
-
-const DISADVANTAGES = [
-    "CURSED",
-    "SMELLY",
-];
+const ADV = require('./hero-advantages');
+const DIS = require('./hero-disadvantages');
 
 const BACKSTORY = [
     "They are the king's secret child.",
@@ -14,7 +7,7 @@ const BACKSTORY = [
 ];
 
 module.exports = {
-    ADVANTAGES,
-    DISADVANTAGES,
+    DISADVANTAGES: [ADV.ATTRACTIVE, ADV.BLESSED],
+    ADVANTAGES: [DIS.SMELLY, DIS.CURSED],
     BACKSTORY
 }
