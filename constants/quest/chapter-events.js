@@ -261,6 +261,83 @@ const PATH_EVENTS = [
             }
         ],
     },
+    {
+        code: "WORRIED_MOTHER",
+        intro: "{HERO_FIRST} passes by a Mother looking for her child.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    allyReq: Allies.LOST_CHILD,
+                },
+                expPoints: 40,
+                text: "{HERO_FIRST} reunites the Lost Child and their Mother."
+            },
+            {
+                text: "{HERO_FIRST} will keep an eye out for any Lost Child."
+            }
+        ],
+    },
+    {
+        code: "GAMBLING",
+        intro: "{HERO_FIRST} finds a group of travellers gambling.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    itemReq: Items.DICE,
+                },
+                expPoints: 40,
+                text: "{HERO_FIRST} has their own dice and wins decisively... are the dice loaded?"
+            },
+            {
+                triggers: {
+                    wisdomReq: 5,
+                },
+                expPoints: 30,
+                text: "{HERO_FIRST} is clever enough to beat the others at the games."
+            },
+            {
+                text: "{HERO_FIRST} loses at the games and is a bit demoralized."
+            }
+        ],
+    },
+    {
+        code: "ORPHANAGE",
+        intro: "{HERO_FIRST} reaches an orphanage.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    itemReq: Items.TEDDY_BEAR,
+                },
+                expPoints: 40,
+                text: "{HERO_FIRST} donates their Teddy Bear to orphanage."
+            },
+            {
+                text: "{HERO_FIRST} passes by, unable to help the orphans."
+            }
+        ],
+    },
+    {
+        code: "LOCKBOX",
+        intro: "{HERO_FIRST} finds a small lockbox in their path.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    itemReq: Items.SMALL_KEY,
+                },
+                expPoints: 35,
+                healMin: 10,
+                healMax: 20,
+                text: "{HERO_FIRST} uses their small key and opens it, uncovering a Healing Potion."
+            },
+            {
+                text: "{HERO_FIRST} is unable to open the box so they leave it in the path."
+            }
+        ],
+    },
 ];
 const ENCOUNTER_EVENTS = [
     {
