@@ -385,6 +385,10 @@ function wrapUpChapter(hero) {
 }
 
 function wrapUpFinale(hero) {
+    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    if (boolUtil.hasValue(quest.expPoints)) {
+        hero.expPoints += quest.expPoints;
+    }
     hero.status = HeroStatus.REST_START;
     checkHealth(hero);
 }

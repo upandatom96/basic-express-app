@@ -8,6 +8,7 @@ const FLAVOR_QUESTS = [
         text: "return the Mysterious Egg",
         destination: "the Giant Nest",
         distanceRequired: 99,
+        expPoints: 50,
         finaleEvent: {
             intro: "{HERO_FIRST} reaches the Giant Nest and sets the Mysterious Egg down. It hatches into a small dragon.",
             type: EventTypes.FLAVOR,
@@ -19,6 +20,7 @@ const FLAVOR_QUESTS = [
         text: "deliver the Love Letter to the Princess",
         destination: "the Tall Tower",
         distanceRequired: 101,
+        expPoints: 50,
         finaleEvent: {
             intro: "{HERO_FIRST} reaches the Tall Tower and gives the Love Letter to a guard. You are assured the guard will pass it to the Princess.",
             type: EventTypes.FLAVOR,
@@ -32,6 +34,7 @@ const DIRECT_QUESTS = [
         text: "make a Blood Sacrifice",
         destination: "THE FORBIDDEN ALTAR",
         distanceRequired: 66,
+        expPoints: 30,
         finaleEvent: {
             intro: "THE FORBIDDEN ALTAR is glowing softly as {HERO_FIRST} approaches. Something feels wrong.",
             damageMin: 1,
@@ -48,6 +51,7 @@ const CHOICE_QUESTS = [
         text: "take a Leap of Faith",
         destination: "the Wide Chasm",
         distanceRequired: 50,
+        expPoints: 40,
         finaleEvent: {
             intro: "{HERO_FIRST} approaches the ledge and contemplates taking a leap. They notice a pole next to the chasm.",
             type: EventTypes.CHOICE,
@@ -71,6 +75,7 @@ const PATH_QUESTS = [
         text: "navigate through to the end",
         destination: "the Maze",
         distanceRequired: 50,
+        expPoints: 60,
         finaleEvent: {
             intro: "{HERO_FIRST} begins walking through the Maze, unsure where they are headed.",
             type: EventTypes.PATHS,
@@ -105,6 +110,7 @@ const ENCOUNTER_QUESTS = [
         text: "slay the Red Dragon",
         destination: "the Dragon's Lair",
         distanceRequired: 25,
+        expPoints: 70,
         finaleEvent: {
             intro: "The Red Dragon notices {HERO_FIRST} and prepares to fight.",
             enemyName: "Red Dragon",
@@ -145,6 +151,7 @@ const ENCOUNTER_QUESTS = [
         text: "melt the Wicked Witch",
         destination: "the Witch's Hut",
         distanceRequired: 30,
+        expPoints: 70,
         finaleEvent: {
             intro: "The Witch notices {HERO_FIRST} and prepares to fight.",
             enemyName: "Wicked Witch",

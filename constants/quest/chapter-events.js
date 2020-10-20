@@ -174,6 +174,7 @@ const CHOICE_EVENTS = [
         type: EventTypes.CHOICE,
         choices: [
             {
+                expPoints: 20,
                 text: "{HERO_FIRST} takes a moment to smell the roses."
             },
             {
@@ -188,6 +189,7 @@ const CHOICE_EVENTS = [
         type: EventTypes.CHOICE,
         choices: [
             {
+                expPoints: 20,
                 text: "{HERO_FIRST} decides to go for a swim. They have a pleasant swim",
             },
             {
@@ -266,6 +268,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Goblin",
         defeat: "{HERO_FIRST} has defeated the goblin!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 10,
         enemyHpMax: 10,
         dexterity: 3,
@@ -295,6 +298,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Hedgehog",
         defeat: "The hedgehog was not fast enough to beat {HERO_FIRST}!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 10,
         enemyHpMax: 10,
         dexterity: 6,
@@ -329,6 +333,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Fire Wizard",
         defeat: "{HERO_FIRST} has defeated the wizard!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 10,
         enemyHpMax: 10,
         dexterity: 3,
@@ -367,6 +372,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Trickster",
         defeat: "{HERO_FIRST} has defeated the trickster! Or did they?",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 10,
         enemyHpMax: 10,
         dexterity: 3,
@@ -400,6 +406,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Bear",
         defeat: "{HERO_FIRST} has defeated the bear!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 6,
         enemyHpMax: 6,
         dexterity: 7,
@@ -429,6 +436,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Spirit",
         defeat: "{HERO_FIRST} has defeated the Spirit!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 20,
         enemyHpMax: 20,
         dexterity: 8,
@@ -468,6 +476,7 @@ const ENCOUNTER_EVENTS = [
         enemyName: "Giant Lizard",
         defeat: "{HERO_FIRST} has defeated the Giant Lizard!",
         type: EventTypes.ENCOUNTER,
+        expPoints: 20,
         enemyHpStart: 20,
         enemyHpMax: 20,
         dexterity: 2,

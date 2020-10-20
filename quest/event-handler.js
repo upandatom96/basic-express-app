@@ -126,6 +126,9 @@ function enemyTurnEncounter(hero, event) {
 }
 
 function finishEncounterEvent(hero, event) {
+    if (boolUtil.hasValue(event.expPoints)) {
+        hero.expPoints += event.expPoints;
+    }
     return event.defeat;
 }
 
