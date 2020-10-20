@@ -140,8 +140,7 @@ function getQuestInfo(savedHero) {
             title: quest.name,
             distanceText: `${savedHero.distanceTravelled}/${quest.distanceRequired} miles`,
             flavorText: `
-            They must travel ${quest.distanceRequired} miles and ${quest.text}. 
-            So far, they have travelled ${savedHero.distanceTravelled} miles.
+            They must travel to ${quest.destination} and ${quest.text}.
             `,
         };
     } else {
