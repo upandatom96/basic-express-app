@@ -70,21 +70,21 @@ const DIRECT_EVENTS = [
     {
         code: "FIND_KEY",
         intro: "{HERO_FIRST} spots something shiny in the grass.",
-        item: "SMALL KEY",
+        item: Items.SMALL_KEY,
         text: "{HERO_FIRST} feels around the grass and finds a SMALL KEY.",
         type: EventTypes.DIRECT,
     },
     {
         code: "FIND_CHILD",
         intro: "{HERO_FIRST} finds a child wandering around the forest.",
-        ally: "LOST CHILD",
+        ally: Allies.LOST_CHILD,
         text: "{HERO_FIRST} decides to invite the LOST CHILD to come with them.",
         type: EventTypes.DIRECT,
     },
     {
         code: "DIRTY_DICE",
         intro: "{HERO_FIRST} notices some loose dirt along the path.",
-        item: "DICE",
+        item: Items.DICE,
         text: "{HERO_FIRST} digs at the loose dirt and finds DICE buried.",
         type: EventTypes.DIRECT,
     },
@@ -140,7 +140,7 @@ const CHOICE_EVENTS = [
         type: EventTypes.CHOICE,
         choices: [
             {
-                item: "TEDDY BEAR",
+                item: Items.TEDDY_BEAR,
                 text: "{HERO_FIRST} plays Ring Toss and wins a TEDDY BEAR."
             },
             {
