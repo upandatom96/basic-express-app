@@ -185,9 +185,6 @@ function applyChanges(changes, hero) {
     if (boolUtil.hasValue(changes.distanceBoost)) {
         hero.distanceBoost += changes.distanceBoost;
     }
-    if (boolUtil.hasValue(changes.luckBoost)) {
-        hero.luckBoost += changes.luckBoost;
-    }
     return changeText;
 }
 

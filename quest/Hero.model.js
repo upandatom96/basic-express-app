@@ -57,11 +57,6 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
-    luckBoost: {
-        type: Number,
-        required: true,
-        default: 0
-    },
     expPoints: {
         type: Number,
         required: true,

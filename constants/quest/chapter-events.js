@@ -1,5 +1,7 @@
 const EventTypes = require('./event-types');
 const MoveTypes = require('./move-types');
+const Items = require('./hero-items');
+const Allies = require('./hero-allies');
 
 const FLAVOR_EVENTS = [
     {
@@ -142,7 +144,7 @@ const CHOICE_EVENTS = [
                 text: "{HERO_FIRST} plays Ring Toss and wins a TEDDY BEAR."
             },
             {
-                ally: "SAD CLOWN",
+                ally: Allies.SAD_CLOWN,
                 text: "{HERO_FIRST} watches a show and listens to a SAD CLOWN's story."
             },
             {
@@ -160,7 +162,6 @@ const CHOICE_EVENTS = [
             },
             {
                 distanceBoost: 20,
-                luckBoost: 20,
                 expPoints: 20,
                 damageMin: 10,
                 damageMax: 20,
@@ -178,7 +179,7 @@ const CHOICE_EVENTS = [
                 text: "{HERO_FIRST} takes a moment to smell the roses."
             },
             {
-                item: "BOUQUET",
+                item: Items.BOUQUET,
                 text: "{HERO_FIRST} picks some flowers to carry with them.",
             },
         ],
