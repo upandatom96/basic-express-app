@@ -6,6 +6,7 @@ const HeroStatus = require('../constants/quest/hero-status');
 const EventTypes = require('../constants/quest/event-types');
 
 const randomUtil = require('../utilities/random.util');
+const boolUtil = require('../utilities/bool.util');
 
 const selectedQuestCodes = [];
 const selectedChapterCodes = [];
