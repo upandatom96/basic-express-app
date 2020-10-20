@@ -102,9 +102,21 @@ function progressHero(hero) {
             action.startRest(hero);
             bard.makeRestStartAnnouncement(hero);
             break;
-        case HeroStatus.REST_END:
-            action.endRest(hero);
-            bard.makeRestEndAnnouncement(hero);
+        case HeroStatus.REST_LEVEL_UP_PING:
+            action.advanceLevel(hero);
+            bard.makeRestLevelPingAnnouncement(hero);
+            break;
+        case HeroStatus.REST_LEVEL_UP_HEALTH:
+            action.gainMaxHealth(hero);
+            bard.makeRestLevelHealthAnnouncement(hero);
+            break;
+        case HeroStatus.REST_LEVEL_UP_PERK:
+            action.gainPerk(hero);
+            bard.makeRestLevelPerkAnnouncement(hero);
+            break;
+        case HeroStatus.REST_HEAL:
+            action.restHeal(hero);
+            bard.makeRestHealAnnouncement(hero);
             break;
         case HeroStatus.REST_EMERGE:
             action.emergeRest(hero);

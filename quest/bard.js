@@ -52,12 +52,27 @@ function makeDirectAnnouncement(hero, report) {
 }
 
 function makeRestStartAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} completed their quest and takes some time to rest. They level up to LVL ${hero.level}. The world is a bit more dangerous for them now.`;
+    const announcement = `{HERO_FIRST} completed their quest and takes some time to rest.`;
     makeAnnouncement(hero, announcement);
 }
 
-function makeRestEndAnnouncement(hero) {
-    const announcement = `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax} and they regain some health up to ${hero.hp}/${hero.hpMax}.`;
+function makeRestLevelPingAnnouncement(hero) {
+    const announcement = `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeRestLevelHealthAnnouncement(hero) {
+    const announcement = `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeRestLevelPerkAnnouncement(hero) {
+    const announcement = `{HERO_FIRST} PERK???`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeRestHealAnnouncement(hero) {
+    const announcement = `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -92,7 +107,10 @@ module.exports = {
     makeStartNewQuestAnnouncement,
     makeDirectAnnouncement,
     makeRestStartAnnouncement,
-    makeRestEndAnnouncement,
+    makeRestLevelPingAnnouncement,
+    makeRestLevelHealthAnnouncement,
+    makeRestLevelPerkAnnouncement,
+    makeRestHealAnnouncement,
     makeRestEmergeAnnouncement,
     makeDeathAnnouncement,
     makeObituaryAnnouncement,

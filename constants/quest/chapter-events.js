@@ -161,7 +161,7 @@ const CHOICE_EVENTS = [
             {
                 distanceBoost: 20,
                 luckBoost: 20,
-                xBoost: 20,
+                expPoints: 20,
                 damageMin: 10,
                 damageMax: 20,
                 text: "{HERO_FIRST} accepts the deal. The Demon takes some of their soul... for what?",

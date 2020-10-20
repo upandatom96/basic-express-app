@@ -194,6 +194,7 @@ function getHeroReport(heroDB) {
         name: heroDB.name,
         hpText,
         level: heroDB.level,
+        expPoints: heroDB.expPoints,
         status: heroDB.status,
         specialMoves,
         stats,

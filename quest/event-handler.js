@@ -176,8 +176,8 @@ function applyChanges(changes, hero) {
     } else {
         changeText = "They are unaffected.";
     }
-    if (boolUtil.hasValue(changes.xBoost)) {
-        hero.xBoost += changes.xBoost;
+    if (boolUtil.hasValue(changes.expPoints)) {
+        hero.expPoints += changes.expPoints;
     }
     if (boolUtil.hasValue(changes.distanceBoost)) {
         hero.distanceBoost += changes.distanceBoost;

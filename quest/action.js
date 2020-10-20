@@ -246,17 +246,35 @@ function endEncounterFinale(hero) {
 }
 
 function startRest(hero) {
-    hero.level++;
-
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
     hero.currentQuestCode = null;
 
-    hero.status = HeroStatus.REST_END;
+    const heroShouldLevelUp = true;
+    if (heroShouldLevelUp) {
+        hero.status = HeroStatus.REST_LEVEL_UP_PING;
+    } else {
+        hero.status = HeroStatus.REST_HEAL;
+    }
 }
 
-function endRest(hero) {
-    restHealth(hero);
+function advanceLevel(hero) {
+    hero.level++;
+    hero.status = HeroStatus.REST_LEVEL_UP_HEALTH;
+}
 
+function gainMaxHealth(hero) {
+    hero.hpMax += 5;
+    hero.hp += 5;
+    hero.status = HeroStatus.REST_LEVEL_UP_PERK;
+    enforceMaxHealth(hero);
+}
+
+function gainPerk(hero) {
+    hero.status = HeroStatus.REST_HEAL;
+}
+
+function restHeal(hero) {
+    restHealth(hero);
     hero.status = HeroStatus.REST_EMERGE;
 }
 
@@ -299,7 +317,10 @@ module.exports = {
     runEncounterEnemyTurnFinale,
     endEncounterFinale,
     startRest,
-    endRest,
+    advanceLevel,
+    gainMaxHealth,
+    gainPerk,
+    restHeal,
     emergeRest,
     die,
     obituary,
@@ -330,8 +351,6 @@ function checkHeartbeat(hero) {
 }
 
 function restHealth(hero) {
-    hero.hpMax += 5;
-
     const quarterHealth = hero.hpMax / 4;
     const someHealth = Math.floor(quarterHealth);
     hero.hp += someHealth;
