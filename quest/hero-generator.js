@@ -26,9 +26,11 @@ function generateHero(firstName, pastHeroes) {
     const completedQuestCodeLog = [];
     const completedChapterCodeLog = [];
     const specialMoveCodes = [specialMove.code];
+    const creator = null;
 
     return {
         name,
+        creator,
         seed,
         status,
         backstory,
