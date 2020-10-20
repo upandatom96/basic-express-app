@@ -138,6 +138,7 @@ function getQuestInfo(savedHero) {
         const quest = codeRetriever.findQuest(savedHero.currentQuestCode);
         return {
             title: quest.name,
+            distanceText: `${savedHero.distanceTravelled}/${quest.distanceRequired} miles`,
             flavorText: `
             They must travel ${quest.distanceRequired} miles and ${quest.text}. 
             So far, they have travelled ${savedHero.distanceTravelled} miles.
@@ -193,6 +194,7 @@ function getHeroReport(heroDB) {
         announcement,
         name: heroDB.name,
         hpText,
+        distanceText: boolUtil.hasValue(questInfo) ? questInfo.distanceText : "N/A",
         level: heroDB.level,
         expPoints: heroDB.expPoints,
         status: heroDB.status,

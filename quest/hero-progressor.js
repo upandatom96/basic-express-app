@@ -111,8 +111,8 @@ function progressHero(hero) {
             bard.makeRestLevelHealthAnnouncement(hero);
             break;
         case HeroStatus.REST_LEVEL_UP_PERK:
-            action.gainPerk(hero);
-            bard.makeRestLevelPerkAnnouncement(hero);
+            const perkMessage = action.gainPerk(hero);
+            bard.makeDirectAnnouncement(hero, perkMessage);
             break;
         case HeroStatus.REST_HEAL:
             action.restHeal(hero);

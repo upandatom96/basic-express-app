@@ -66,11 +66,6 @@ function makeRestLevelHealthAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
-function makeRestLevelPerkAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} PERK???`;
-    makeAnnouncement(hero, announcement);
-}
-
 function makeRestHealAnnouncement(hero) {
     const announcement = `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`;
     makeAnnouncement(hero, announcement);
@@ -109,7 +104,6 @@ module.exports = {
     makeRestStartAnnouncement,
     makeRestLevelPingAnnouncement,
     makeRestLevelHealthAnnouncement,
-    makeRestLevelPerkAnnouncement,
     makeRestHealAnnouncement,
     makeRestEmergeAnnouncement,
     makeDeathAnnouncement,

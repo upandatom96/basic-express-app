@@ -270,7 +270,9 @@ function gainMaxHealth(hero) {
 }
 
 function gainPerk(hero) {
+    const message = statBoost(hero);
     hero.status = HeroStatus.REST_HEAL;
+    return message;
 }
 
 function restHeal(hero) {
@@ -404,4 +406,29 @@ function getChapterEvent(hero) {
 
 function getFinaleEvent(hero) {
     return codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+}
+
+function statBoost(hero) {
+    let message = "{HERO_FIRST} gets a STAT BOOST. ";
+    const categoryNumber = randomUtil.pickRandomNumber(1, 4);
+    switch (categoryNumber) {
+        case 1:
+            hero.strength++;
+            message += `Their strength has risen from ${hero.strength - 1} to ${hero.strength}.`;
+            break;
+        case 2:
+            hero.wisdom++;
+            message += `Their wisdom has risen from ${hero.wisdom - 1} to ${hero.wisdom}.`;
+            break;
+        case 3:
+            hero.charisma++;
+            message += `Their charisma has risen from ${hero.charisma - 1} to ${hero.charisma}.`;
+            break;
+        case 4:
+            hero.dexterity++
+            message += `Their dexterity has risen from ${hero.dexterity - 1} to ${hero.dexterity}.`;
+            break;
+    }
+
+    return message;
 }
