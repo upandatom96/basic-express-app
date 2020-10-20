@@ -154,6 +154,7 @@ const PATH_QUESTS = [
                 {
                     triggers: {
                         itemReq: Items.BOUQUET,
+                        loseItem: true,
                     },
                     expPoints: 30,
                     text: "{HERO_FIRST} brought the Prince some flowers. He is delighted and thanks you."
@@ -185,6 +186,7 @@ const PATH_QUESTS = [
                 {
                     triggers: {
                         allyReq: Allies.SAD_CLOWN,
+                        loseAlly: false,
                     },
                     expPoints: 30,
                     text: "{HERO_FIRST} has the Sad Clown with them. The Sad Clown gives an impactful eulogy."

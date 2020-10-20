@@ -269,6 +269,7 @@ const PATH_EVENTS = [
             {
                 triggers: {
                     allyReq: Allies.LOST_CHILD,
+                    loseAlly: true,
                 },
                 expPoints: 40,
                 text: "{HERO_FIRST} reunites the Lost Child and their Mother."
@@ -286,6 +287,7 @@ const PATH_EVENTS = [
             {
                 triggers: {
                     itemReq: Items.DICE,
+                    loseItem: false,
                 },
                 expPoints: 40,
                 text: "{HERO_FIRST} has their own dice and wins decisively... are the dice loaded?"
@@ -310,6 +312,7 @@ const PATH_EVENTS = [
             {
                 triggers: {
                     itemReq: Items.TEDDY_BEAR,
+                    loseItem: true,
                 },
                 expPoints: 40,
                 text: "{HERO_FIRST} donates their Teddy Bear to orphanage."
@@ -327,6 +330,7 @@ const PATH_EVENTS = [
             {
                 triggers: {
                     itemReq: Items.SMALL_KEY,
+                    loseItem: false,
                 },
                 expPoints: 35,
                 healMin: 10,

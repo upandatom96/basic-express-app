@@ -54,8 +54,17 @@ function areSpecialReqsMet(triggers, hero) {
     const advantageMet = checkSpecialReq(triggers.advantageReq, hero.advantage);
     const disadvantageMet = checkSpecialReq(triggers.disadvantageReq, hero.disadvantage);
     const itemMet = checkHasOne(triggers.itemReq, hero.inventory);
+    if (itemMet && triggers.loseItem) {
+        hero.inventory = hero.inventory.filter((item) => {
+            return item !== triggers.itemReq;
+        })
+    }
     const allyMet = checkHasOne(triggers.allyReq, hero.party);
-
+    if (allyMet && triggers.loseAlly) {
+        hero.party = hero.party.filter((ally) => {
+            return ally !== triggers.allyReq;
+        })
+    }
     return advantageMet && disadvantageMet && itemMet && allyMet;
 }
 
