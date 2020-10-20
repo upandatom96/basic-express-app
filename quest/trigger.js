@@ -30,24 +30,22 @@ function areStatReqsMet(triggers, hero) {
     return strengthMet && wisdomMet && charismaMet && dexterityMet;
 }
 
-function checkHasOne(reqAttributeList, heroAttributes) {
-    const noReq = BoolUtil.hasNoValue(reqAttributeList) || reqAttributeList.level === 0;
+function checkHasOne(reqThing, heroThings) {
+    const noReq = BoolUtil.hasNoValue(reqThing);
     if (noReq) {
         return true;
     }
-    return reqAttributeList.some((advantageReq) => {
-        return heroAttributes.includes(advantageReq);
+    return heroThings.some((heroThing) => {
+        return reqThing === heroThing;
     });
 }
 
-function checkSpecialReq(reqAttributeList, heroAttribute) {
-    const noReq = BoolUtil.hasNoValue(reqAttributeList) || reqAttributeList.level === 0;
+function checkSpecialReq(reqAttribute, heroAttribute) {
+    const noReq = BoolUtil.hasNoValue(reqAttribute);
     if (noReq) {
         return true;
     }
-    return reqAttributeList.some((advantageReq) => {
-        return advantageReq === heroAttribute;
-    });
+    return reqAttribute === heroAttribute
 }
 
 function areSpecialReqsMet(triggers, hero) {
