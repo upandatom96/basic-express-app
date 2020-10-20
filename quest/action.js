@@ -249,8 +249,7 @@ function startRest(hero) {
     hero.completedQuestCodeLog.push(hero.currentQuestCode);
     hero.currentQuestCode = null;
 
-    const heroShouldLevelUp = true;
-    if (heroShouldLevelUp) {
+    if (shouldLevelUp(hero)) {
         hero.status = HeroStatus.REST_LEVEL_UP_PING;
     } else {
         hero.status = HeroStatus.REST_HEAL;
@@ -431,4 +430,9 @@ function statBoost(hero) {
     }
 
     return message;
+}
+
+function shouldLevelUp(hero) {
+    const levelThreshold = (hero.level * 100) + ((hero.level - 1) * (hero.level) * 10);
+    return hero.expPoints >= levelThreshold;
 }
