@@ -133,21 +133,6 @@ function advanceHero(hero, resolve) {
         });
 }
 
-function getQuestInfo(savedHero) {
-    if (boolUtil.hasValue(savedHero.currentQuestCode)) {
-        const quest = codeRetriever.findQuest(savedHero.currentQuestCode);
-        return {
-            title: quest.name,
-            distanceText: `${savedHero.distanceTravelled}/${quest.distanceRequired} miles`,
-            flavorText: `
-            They must travel to ${quest.destination} and ${quest.text}.
-            `,
-        };
-    } else {
-        return null;
-    }
-}
-
 function getLatestMessage(savedHero) {
     const lastJournalIndex = savedHero.journal.length - 1;
     return savedHero.journal[lastJournalIndex];
@@ -196,7 +181,8 @@ function getUniqueQuests(heroDB) {
 
 function getHeroReport(heroDB) {
     const announcement = getLatestMessage(heroDB);
-    const questInfo = getQuestInfo(heroDB);
+    const quest = codeRetriever.findQuest(heroDB.currentQuestCode);
+    const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterCode);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
@@ -208,13 +194,15 @@ function getHeroReport(heroDB) {
         name: heroDB.name,
         _id: heroDB._id,
         hpText,
-        distanceText: boolUtil.hasValue(questInfo) ? questInfo.distanceText : null,
+        distanceText: boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null,
+        currentQuest: boolUtil.hasValue(quest) ? quest.name : null,
+        currentQuestFlavor: boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null,
+        currentChapter: boolUtil.hasValue(chapter) ? chapter.name : null,
         level: heroDB.level,
         expPoints: heroDB.expPoints,
         status: heroDB.status,
         specialMoves,
         stats,
-        questInfo,
         storyOver: heroDB.status === 99,
         journal: heroDB.journal,
         backstory: backstoryRevealed ? heroDB.backstory : "???",
