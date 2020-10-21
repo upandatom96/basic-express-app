@@ -378,10 +378,12 @@ function addDistance(hero) {
 }
 
 function wrapUpChapter(hero) {
-    hero.status = HeroStatus.QUEST_TRAVEL;
-    hero.completedChapterCodeLog.push(hero.currentChapterCode);
+    if (hero.hp > 0) {
+        hero.completedChapterCodeLog.push(hero.currentChapterCode);
+    }
     hero.currentChapterCode = null;
     hero.enemyHp = null;
+    hero.status = HeroStatus.QUEST_TRAVEL;
     checkHealth(hero);
 }
 
