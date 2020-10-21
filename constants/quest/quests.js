@@ -7,7 +7,6 @@ const Dis = require('./hero-disadvantages');
 
 const FLAVOR_QUESTS = [
     {
-        code: "EGG",
         name: "Mysterious Egg",
         text: "return the Mysterious Egg",
         destination: "the Giant Nest",
@@ -19,7 +18,6 @@ const FLAVOR_QUESTS = [
         },
     },
     {
-        code: "LOVE_LETTER",
         name: "Love Letter",
         text: "deliver the Love Letter to the Princess",
         destination: "the Tall Tower",
@@ -33,7 +31,6 @@ const FLAVOR_QUESTS = [
 ];
 const DIRECT_QUESTS = [
     {
-        code: "BLOOD",
         name: "Blood Sacrifice",
         text: "make a Blood Sacrifice",
         destination: "THE FORBIDDEN ALTAR",
@@ -48,7 +45,6 @@ const DIRECT_QUESTS = [
         },
     },
     {
-        code: "PROTECT_PRINCESS",
         name: "Protect the Princess",
         text: "ensure the Princess arrives safely",
         destination: "the Small Tower",
@@ -65,7 +61,6 @@ const DIRECT_QUESTS = [
 ];
 const CHOICE_QUESTS = [
     {
-        code: "LEAP",
         name: "Leap of Faith",
         text: "take a Leap of Faith",
         destination: "the Wide Chasm",
@@ -87,7 +82,6 @@ const CHOICE_QUESTS = [
         },
     },
     {
-        code: "BURIED_TREASURE",
         name: "Buried Treasure",
         text: "find the Captain's buried treasure",
         destination: "the Sunken Cave",
@@ -110,7 +104,6 @@ const CHOICE_QUESTS = [
 ];
 const PATH_QUESTS = [
     {
-        code: "MAZE",
         name: "Through the Maze",
         text: "navigate through to the end",
         destination: "the Maze",
@@ -143,7 +136,6 @@ const PATH_QUESTS = [
         },
     },
     {
-        code: "PRINCE_PARTY",
         name: "The Prince's Party",
         text: "celebrate the Prince's greatness",
         destination: "the Prince's Castle",
@@ -183,7 +175,6 @@ const PATH_QUESTS = [
         },
     },
     {
-        code: "KING_FUNERAL",
         name: "The King's Funeral",
         text: "celebrate the King's life",
         destination: "the King's Grave",
@@ -217,7 +208,6 @@ const PATH_QUESTS = [
 ];
 const ENCOUNTER_QUESTS = [
     {
-        code: "DRAGON",
         name: "Dragon's Bounty",
         text: "slay the Red Dragon",
         destination: "the Dragon's Lair",
@@ -258,7 +248,6 @@ const ENCOUNTER_QUESTS = [
         },
     },
     {
-        code: "WITCH",
         name: "Witch's Curse",
         text: "melt the Wicked Witch",
         destination: "the Witch's Hut",
@@ -299,7 +288,6 @@ const ENCOUNTER_QUESTS = [
         },
     },
     {
-        code: "SHADOW_PRINCE",
         name: "Shadow Prince's Rise",
         text: "defeat the Shadow Prince",
         destination: "the Dark Forest",
