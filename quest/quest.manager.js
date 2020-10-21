@@ -180,14 +180,28 @@ function getHeroReports(heroDBs) {
     return heroReports;
 }
 
+function getUniqueChapters(heroDB) {
+    return calcUtil.getUniqueItems(heroDB.completedChapterCodeLog)
+        .map((chapter) => {
+            return codeRetriever.findChapterEvent(chapter);
+        });
+}
+
+function getUniqueQuests(heroDB) {
+    return calcUtil.getUniqueItems(heroDB.completedQuestCodeLog)
+        .map((quest) => {
+        return codeRetriever.findQuest(quest);
+    });
+}
+
 function getHeroReport(heroDB) {
     const announcement = getLatestMessage(heroDB);
     const questInfo = getQuestInfo(heroDB);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
-    const uniqueQuestCount = calcUtil.countUniqueItems(heroDB.completedQuestCodeLog);
-    const uniqueChapterCount = calcUtil.countUniqueItems(heroDB.completedChapterCodeLog);
+    const uniqueQuests = getUniqueQuests(heroDB);
+    const uniqueChapters = getUniqueChapters(heroDB);
     const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoveCodes);
     return {
         announcement,
@@ -206,8 +220,8 @@ function getHeroReport(heroDB) {
         backstory: backstoryRevealed ? heroDB.backstory : "???",
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
-        uniqueQuestCount,
-        uniqueChapterCount,
+        uniqueQuests,
+        uniqueChapters,
         distanceTravelledTotal: heroDB.distanceTravelledTotal,
         age: heroDB.journal.length,
         seed: heroDB.seed,
