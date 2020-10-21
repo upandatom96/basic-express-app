@@ -150,9 +150,6 @@ function getStats(savedHero) {
         // special stats
         advantage: specialRevealed ? savedHero.advantage : "???",
         disadvantage: specialRevealed ? savedHero.disadvantage : "???",
-        // holding stats
-        inventory: savedHero.inventory,
-        party: savedHero.party,
     };
 }
 
@@ -165,18 +162,18 @@ function getHeroReports(heroDBs) {
     return heroReports;
 }
 
-function getUniqueChapters(heroDB) {
-    return calcUtil.getUniqueItems(heroDB.completedChapterCodeLog)
+function getCompletedChapters(heroDB) {
+    return heroDB.completedChapterCodeLog
         .map((chapter) => {
             return codeRetriever.findChapterEvent(chapter).name;
         });
 }
 
-function getUniqueQuests(heroDB) {
-    return calcUtil.getUniqueItems(heroDB.completedQuestCodeLog)
+function getCompletedQuests(heroDB) {
+    return heroDB.completedQuestCodeLog
         .map((quest) => {
-        return codeRetriever.findQuest(quest).name;
-    });
+            return codeRetriever.findQuest(quest).name;
+        });
 }
 
 function getHeroReport(heroDB) {
@@ -186,30 +183,40 @@ function getHeroReport(heroDB) {
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
-    const uniqueQuests = getUniqueQuests(heroDB);
-    const uniqueChapters = getUniqueChapters(heroDB);
+    const completedQuests = getCompletedQuests(heroDB);
+    const completedChapters = getCompletedChapters(heroDB);
+    const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
+    const uniqueCompletedChapters = calcUtil.getUniqueItems(completedChapters);
     const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoveCodes);
+    const distanceText = boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null;
+    const currentQuest = boolUtil.hasValue(quest) ? quest.name : null;
+    const currentQuestDetails = boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null;
+    const currentChapter = boolUtil.hasValue(chapter) ? chapter.name : null;
     return {
         announcement,
         name: heroDB.name,
         _id: heroDB._id,
         hpText,
-        distanceText: boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null,
-        currentQuest: boolUtil.hasValue(quest) ? quest.name : null,
-        currentQuestFlavor: boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null,
-        currentChapter: boolUtil.hasValue(chapter) ? chapter.name : null,
+        distanceText,
+        currentQuest,
+        currentQuestDetails,
+        currentChapter,
         level: heroDB.level,
         expPoints: heroDB.expPoints,
         status: heroDB.status,
         specialMoves,
         stats,
+        inventory: heroDB.inventory,
+        party: heroDB.party,
         storyOver: heroDB.status === 99,
         journal: heroDB.journal,
         backstory: backstoryRevealed ? heroDB.backstory : "???",
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
-        uniqueQuests,
-        uniqueChapters,
+        completedChapters,
+        completedQuests,
+        uniqueCompletedChapters,
+        uniqueCompletedQuests,
         distanceTravelledTotal: heroDB.distanceTravelledTotal,
         age: heroDB.journal.length,
         seed: heroDB.seed,

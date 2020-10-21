@@ -144,8 +144,8 @@ function endEncounterChapter(hero) {
 function travel(hero) {
     if (boolUtil.hasValue(hero.currentChapterCode)) {
         hero.completedChapterCodeLog.push(hero.currentChapterCode);
+        hero.currentChapterCode = null;
     }
-    hero.currentChapterCode = null;
     const distance = addDistance(hero);
     const ready = isReadyForFinale(hero);
 
