@@ -2,6 +2,8 @@ const EventTypes = require('./event-types');
 const MoveTypes = require('./move-types');
 const Items = require('./hero-items');
 const Allies = require('./hero-allies');
+const Adv = require('./hero-advantages');
+const Dis = require('./hero-disadvantages');
 
 const FLAVOR_QUESTS = [
     {

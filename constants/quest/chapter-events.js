@@ -2,50 +2,61 @@ const EventTypes = require('./event-types');
 const MoveTypes = require('./move-types');
 const Items = require('./hero-items');
 const Allies = require('./hero-allies');
+const Adv = require('./hero-advantages');
+const Dis = require('./hero-disadvantages');
 
 const FLAVOR_EVENTS = [
     {
         code: "DOG",
+        name: "Pet the Dog",
         intro: "{HERO_FIRST} walks by a traveller with a dog. With permission, they pet the dog.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "AURA",
+        name: "The Strange Aura",
         intro: "{HERO_FIRST} feels a strange aura as they pass an ancient obelisk. They decide it is better to ignore for now.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "NEWS_1",
+        name: "News: Princess",
         intro: "{HERO_FIRST} walks past a Bard who tells them the news, apparently the Prince has a new Princess.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "NEWS_2",
+        name: "News: Chain Mail",
         intro: "{HERO_FIRST} walks past a Bard who tells them the news, chain mail is the new high fashion.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "NEWS_3",
+        name: "News: Stars",
         intro: "{HERO_FIRST} walks past a Bard who tells them the news, there are reports that the stars are fake.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "NEWS_4",
+        name: "News: World",
         intro: "{HERO_FIRST} walks past a Bard who tells them the news, supposedly the world is round.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "NEWS_5",
+        name: "News: Reptile",
         intro: "{HERO_FIRST} walks past a Bard who tells them the news, rumor has it the King is actually a reptile.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "ROCK_ART",
+        name: "Rock Art",
         intro: "{HERO_FIRST} examines rock carvings as they pass through a cave. They carve their name into the cave wall.",
         type: EventTypes.FLAVOR,
     },
     {
         code: "VIEW",
+        name: "Pleasant View",
         intro: "{HERO_FIRST} stops for a moment and enjoys the view as they pass through a valley.",
         type: EventTypes.FLAVOR,
     },
@@ -53,6 +64,7 @@ const FLAVOR_EVENTS = [
 const DIRECT_EVENTS = [
     {
         code: "CAT",
+        name: "Stray Cat",
         intro: "As they walk, {HERO_FIRST} notices a stray cat.",
         damageMin: 4,
         damageMax: 8,
@@ -61,6 +73,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "TRIP_FALL",
+        name: "Trip and Fall",
         intro: "{HERO_FIRST} gets distracted as they walk.",
         damageMin: 5,
         damageMax: 7,
@@ -69,6 +82,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "FIND_KEY",
+        name: "Find a Small Key",
         intro: "{HERO_FIRST} spots something shiny in the grass.",
         item: Items.SMALL_KEY,
         text: "{HERO_FIRST} feels around the grass and finds a SMALL KEY.",
@@ -76,6 +90,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "FIND_CHILD",
+        name: "Find a Lost Child",
         intro: "{HERO_FIRST} finds a child wandering around the forest.",
         ally: Allies.LOST_CHILD,
         text: "{HERO_FIRST} decides to invite the LOST CHILD to come with them.",
@@ -83,6 +98,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "DIRTY_DICE",
+        name: "Find Dice",
         intro: "{HERO_FIRST} notices some loose dirt along the path.",
         item: Items.DICE,
         text: "{HERO_FIRST} digs at the loose dirt and finds DICE buried.",
@@ -90,6 +106,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "RED_BERRIES",
+        name: "Red Berries",
         intro: "{HERO_FIRST} spots a Red Berry Bush near the path. They pick a handful.",
         healMin: 4,
         healMax: 7,
@@ -98,6 +115,7 @@ const DIRECT_EVENTS = [
     },
     {
         code: "MAROON_BERRIES",
+        name: "Maroon Berries",
         intro: "{HERO_FIRST} spots a Red Berry Bush near the path. They pick a handful.",
         damageMin: 4,
         damageMax: 7,
@@ -108,6 +126,7 @@ const DIRECT_EVENTS = [
 const CHOICE_EVENTS = [
     {
         code: "BEANS",
+        name: "Bean Offer",
         intro: "A cloaked figure offers {HERO_FIRST} a handful of beans.",
         type: EventTypes.CHOICE,
         choices: [
@@ -123,6 +142,7 @@ const CHOICE_EVENTS = [
     },
     {
         code: "FORKED_ROAD",
+        name: "Forked Road",
         intro: "{HERO_FIRST} reaches a fork in the road, they can go East or West.",
         type: EventTypes.CHOICE,
         choices: [
@@ -136,6 +156,7 @@ const CHOICE_EVENTS = [
     },
     {
         code: "CARNIVAL",
+        name: "Carnival",
         intro: "{HERO_FIRST} stops by a carnival near a small town.",
         type: EventTypes.CHOICE,
         choices: [
@@ -154,6 +175,7 @@ const CHOICE_EVENTS = [
     },
     {
         code: "DEMON_DEAL",
+        name: "Demon's Deal",
         intro: "{HERO_FIRST} reaches a Crossroads and is met by a Demon. The Demon offers a deal.",
         type: EventTypes.CHOICE,
         choices: [
@@ -171,6 +193,7 @@ const CHOICE_EVENTS = [
     },
     {
         code: "FLOWER_GARDEN",
+        name: "Flower Garden",
         intro: "{HERO_FIRST} passes by a beautiful garden.",
         type: EventTypes.CHOICE,
         choices: [
@@ -186,6 +209,7 @@ const CHOICE_EVENTS = [
     },
     {
         code: "SWIM_BREAK",
+        name: "Swim Break",
         intro: "{HERO_FIRST} sits for a moment by a river.",
         type: EventTypes.CHOICE,
         choices: [
@@ -207,6 +231,7 @@ const CHOICE_EVENTS = [
 const PATH_EVENTS = [
     {
         code: "TROLL_BRIDGE",
+        name: "Troll Bridge",
         intro: "As {HERO_FIRST} crosses a small bridge, a troll stops them.",
         type: EventTypes.PATHS,
         paths: [
@@ -225,6 +250,7 @@ const PATH_EVENTS = [
     },
     {
         code: "FAIRY",
+        name: "Fairy",
         intro: "{HERO_FIRST} hears a whispering in the trees around them. They follow the voice and find a fairy.",
         type: EventTypes.PATHS,
         paths: [
@@ -245,6 +271,7 @@ const PATH_EVENTS = [
     },
     {
         code: "CHASM",
+        name: "Chasm",
         intro: "{HERO_FIRST} reaches a chasm. The only way across is an old wooden bridge.",
         type: EventTypes.PATHS,
         paths: [
@@ -263,6 +290,7 @@ const PATH_EVENTS = [
     },
     {
         code: "WORRIED_MOTHER",
+        name: "Worried Mother",
         intro: "{HERO_FIRST} passes by a Mother looking for her child.",
         type: EventTypes.PATHS,
         paths: [
@@ -281,6 +309,7 @@ const PATH_EVENTS = [
     },
     {
         code: "GAMBLING",
+        name: "Gambling Travellers",
         intro: "{HERO_FIRST} finds a group of travellers gambling.",
         type: EventTypes.PATHS,
         paths: [
@@ -306,6 +335,7 @@ const PATH_EVENTS = [
     },
     {
         code: "ORPHANAGE",
+        name: "Orphanage",
         intro: "{HERO_FIRST} reaches an orphanage.",
         type: EventTypes.PATHS,
         paths: [
@@ -324,6 +354,7 @@ const PATH_EVENTS = [
     },
     {
         code: "LOCKBOX",
+        name: "Lockbox",
         intro: "{HERO_FIRST} finds a small lockbox in their path.",
         type: EventTypes.PATHS,
         paths: [
@@ -346,6 +377,7 @@ const PATH_EVENTS = [
 const ENCOUNTER_EVENTS = [
     {
         code: "GOBLIN",
+        name: "Goblin Greeting",
         intro: "A goblin blocks the path ahead. {HERO_FIRST} prepares to fight.",
         enemyName: "Goblin",
         defeat: "{HERO_FIRST} has defeated the goblin!",
@@ -376,6 +408,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "HEDGEHOG",
+        name: "Hedgehog Hijinx",
         intro: "A hedgehog begins chasing after {HERO_FIRST}.",
         enemyName: "Hedgehog",
         defeat: "The hedgehog was not fast enough to beat {HERO_FIRST}!",
@@ -411,6 +444,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "FIRE_WIZARD",
+        name: "Fire Wizard",
         intro: "A fireball flies in front of {HERO_FIRST}. There's a Fire Wizard nearby!",
         enemyName: "Fire Wizard",
         defeat: "{HERO_FIRST} has defeated the wizard!",
@@ -450,6 +484,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "TRICKSTER",
+        name: "Tricky Trickster",
         intro: "{HERO_FIRST} hears a menacing laugh. There's a Trickster nearby!",
         enemyName: "Trickster",
         defeat: "{HERO_FIRST} has defeated the trickster! Or did they?",
@@ -484,6 +519,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "BEAR",
+        name: "Bear Battle",
         intro: "{HERO_FIRST} hears a roar in the woods nearby. There is a bear!",
         enemyName: "Bear",
         defeat: "{HERO_FIRST} has defeated the bear!",
@@ -514,6 +550,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "SPIRIT",
+        name: "Spirit Smash",
         intro: "{HERO_FIRST} feels a presence. There is a Spirit nearby!",
         enemyName: "Spirit",
         defeat: "{HERO_FIRST} has defeated the Spirit!",
@@ -554,6 +591,7 @@ const ENCOUNTER_EVENTS = [
     },
     {
         code: "GIANT_LIZARD",
+        name: "Lizard Attack",
         intro: "{HERO_FIRST} sees a lizard that appears very close. Wait, no, it is a far away Lizard that is Giant!",
         enemyName: "Giant Lizard",
         defeat: "{HERO_FIRST} has defeated the Giant Lizard!",
