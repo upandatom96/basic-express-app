@@ -155,6 +155,14 @@ const PATH_QUESTS = [
             paths: [
                 {
                     triggers: {
+                        disadvantageReq: Dis.SMELLY,
+                    },
+                    damageMin: 5,
+                    damageMax: 10,
+                    text: "{HERO_FIRST} smells bad and is thrown out of the party forcefully."
+                },
+                {
+                    triggers: {
                         itemReq: Items.BOUQUET,
                         loseItem: true,
                     },

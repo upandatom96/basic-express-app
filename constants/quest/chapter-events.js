@@ -237,6 +237,12 @@ const PATH_EVENTS = [
         paths: [
             {
                 triggers: {
+                    advantageReq: Adv.ATTRACTIVE,
+                },
+                text: "{HERO_FIRST} is so beautiful that the troll allows them to pass."
+            },
+            {
+                triggers: {
                     wisdomReq: 7,
                 },
                 text: "{HERO_FIRST} is wise enough to trick the troll into letting them pass."
@@ -341,6 +347,13 @@ const PATH_EVENTS = [
         paths: [
             {
                 triggers: {
+                    advantageReq: Adv.BLESSED
+                },
+                expPoints: 50,
+                text: "The blessed {HERO_FIRST} comforts a sick orphan and the orphan heals miraculously."
+            },
+            {
+                triggers: {
                     itemReq: Items.TEDDY_BEAR,
                     loseItem: true,
                 },
@@ -360,6 +373,14 @@ const PATH_EVENTS = [
         paths: [
             {
                 triggers: {
+                    disadvantageReq: Dis.CURSED
+                },
+                damageMin: 20,
+                damageMax: 30,
+                text: "The box opens on its own for the cursed {HERO_FIRST}. A Demon emerges and attacks them."
+            },
+            {
+                triggers: {
                     itemReq: Items.SMALL_KEY,
                     loseItem: false,
                 },
@@ -367,6 +388,15 @@ const PATH_EVENTS = [
                 healMin: 10,
                 healMax: 20,
                 text: "{HERO_FIRST} uses their small key and opens it, uncovering a Healing Potion."
+            },
+            {
+                triggers: {
+                    strengthReq: 7
+                },
+                expPoints: 35,
+                healMin: 10,
+                healMax: 20,
+                text: "{HERO_FIRST} uses their strength to force the box open, uncovering a Healing Potion."
             },
             {
                 text: "{HERO_FIRST} is unable to open the box so they leave it in the path."
