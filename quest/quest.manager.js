@@ -183,14 +183,14 @@ function getHeroReports(heroDBs) {
 function getUniqueChapters(heroDB) {
     return calcUtil.getUniqueItems(heroDB.completedChapterCodeLog)
         .map((chapter) => {
-            return codeRetriever.findChapterEvent(chapter);
+            return codeRetriever.findChapterEvent(chapter).name;
         });
 }
 
 function getUniqueQuests(heroDB) {
     return calcUtil.getUniqueItems(heroDB.completedQuestCodeLog)
         .map((quest) => {
-        return codeRetriever.findQuest(quest);
+        return codeRetriever.findQuest(quest).name;
     });
 }
 
