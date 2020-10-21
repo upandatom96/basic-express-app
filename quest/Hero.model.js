@@ -96,7 +96,7 @@ const HeroSchema = new Schema({
             type: String
         }
     ],
-    currentChapterCode: {
+    currentChapterName: {
         type: String,
         required: false,
     },
@@ -104,7 +104,7 @@ const HeroSchema = new Schema({
         type: Number,
         required: false,
     },
-    currentQuestCode: {
+    currentQuestName: {
         type: String,
         required: false,
     },
@@ -118,17 +118,17 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
-    specialMoveCodes: [
+    specialMoves: [
         {
             type: String
         }
     ],
-    completedQuestCodeLog: [
+    completedQuestLog: [
         {
             type: String
         }
     ],
-    completedChapterCodeLog: [
+    completedChapterLog: [
         {
             type: String
         }

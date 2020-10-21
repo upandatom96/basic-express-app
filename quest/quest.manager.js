@@ -163,23 +163,23 @@ function getHeroReports(heroDBs) {
 }
 
 function getCompletedChapters(heroDB) {
-    return heroDB.completedChapterCodeLog
-        .map((chapter) => {
-            return codeRetriever.findChapterEvent(chapter).name;
+    return heroDB.completedChapterLog
+        .map((chapterName) => {
+            return codeRetriever.findChapterEvent(chapterName).name;
         });
 }
 
 function getCompletedQuests(heroDB) {
-    return heroDB.completedQuestCodeLog
-        .map((quest) => {
-            return codeRetriever.findQuest(quest).name;
+    return heroDB.completedQuestLog
+        .map((questName) => {
+            return codeRetriever.findQuest(questName).name;
         });
 }
 
 function getHeroReport(heroDB) {
     const announcement = getLatestMessage(heroDB);
-    const quest = codeRetriever.findQuest(heroDB.currentQuestCode);
-    const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterCode);
+    const quest = codeRetriever.findQuest(heroDB.currentQuestName);
+    const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterName);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const backstoryRevealed = heroDB.status > 1;
@@ -187,7 +187,7 @@ function getHeroReport(heroDB) {
     const completedChapters = getCompletedChapters(heroDB);
     const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
     const uniqueCompletedChapters = calcUtil.getUniqueItems(completedChapters);
-    const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoveCodes);
+    const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoves);
     const distanceText = boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null;
     const currentQuest = boolUtil.hasValue(quest) ? quest.name : null;
     const currentQuestDetails = boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null;

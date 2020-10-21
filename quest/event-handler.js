@@ -24,7 +24,7 @@ function finishDirectEvent(hero, event) {
 }
 
 function heroTurnEncounter(hero, event) {
-    const specialMoves = codeRetriever.findSpecialMoves(hero.specialMoveCodes);
+    const specialMoves = codeRetriever.findSpecialMoves(hero.specialMoves);
     const availableMoves = HeroMoves.STANDARD_MOVES.concat(specialMoves);
     const move = randomUtil.pickRandom(availableMoves);
 

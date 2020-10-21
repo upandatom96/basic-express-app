@@ -1,20 +1,20 @@
 const constantsManager = require('../constants/constants.manager');
 
-function findQuest(code) {
+function findQuest(name) {
     return constantsManager.QUEST_QUESTS.QUESTS.find((quest) => {
-        return quest.code === code;
+        return quest.name === name;
     });
 }
 
-function findChapterEvent(code) {
+function findChapterEvent(name) {
     return constantsManager.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS.find((event) => {
-        return event.code === code;
+        return event.name === name;
     });
 }
 
-function findSpecialMoves(codes) {
+function findSpecialMoves(names) {
     return constantsManager.HERO_MOVES.SPECIAL_MOVES.filter((move) => {
-        return codes.includes(move.code);
+        return names.includes(move.name);
     });
 }
 

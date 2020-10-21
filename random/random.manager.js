@@ -61,21 +61,21 @@ function pickLastName() {
     return randomUtil.pickRandom(lastNames);
 }
 
-function pickQuest(selectedCodes) {
+function pickQuest(selectedNames) {
     let availableQuests = constants.QUEST_QUESTS.QUESTS;
-    if (selectedCodes.length > 0) {
+    if (selectedNames.length > 0) {
         availableQuests = availableQuests.filter((chapter) => {
-            return selectedCodes.includes(chapter.code);
+            return selectedNames.includes(chapter.name);
         });
     }
     return randomUtil.pickRandom(availableQuests);
 }
 
-function pickChapterEvent(selectedCodes) {
+function pickChapterEvent(selectedNames) {
     let availableChapters = constants.QUEST_CHAPTER_EVENTS.CHAPTER_EVENTS
-    if (selectedCodes.length > 0) {
+    if (selectedNames.length > 0) {
         availableChapters = availableChapters.filter((chapter) => {
-            return selectedCodes.includes(chapter.code);
+            return selectedNames.includes(chapter.name);
         });
     }
     return randomUtil.pickRandom(availableChapters);

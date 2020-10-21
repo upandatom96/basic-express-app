@@ -24,7 +24,7 @@ function makeSpecialAnnouncement(hero) {
 }
 
 function makeMoveAnnouncement(hero) {
-    const moveName = codeRetriever.findSpecialMoves(hero.specialMoveCodes)[0].name;
+    const moveName = codeRetriever.findSpecialMoves(hero.specialMoves)[0].name;
     const announcement = `{HERO_FIRST} knows the special move ${moveName}.`;
     makeAnnouncement(hero, announcement);
 }
@@ -35,13 +35,13 @@ function makeSetOffAnnouncement(hero) {
 }
 
 function makeFindNewQuestAnnouncement(hero) {
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const announcement = `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`;
     makeAnnouncement(hero, announcement);
 }
 
 function makeStartNewQuestAnnouncement(hero) {
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const travelMessage = `travel ${quest.distanceRequired} miles to the ${quest.destination}`;
     const announcement = `For the quest, {HERO_FIRST} must ${travelMessage} and ${quest.text}.`;
     makeAnnouncement(hero, announcement);
@@ -143,10 +143,10 @@ function getAnnouncementClosing(hero) {
 }
 
 function getUniqueInfo(hero) {
-    const uniqueQuestCount = calcUtil.countUniqueItems(hero.completedQuestCodeLog);
+    const uniqueQuestCount = calcUtil.countUniqueItems(hero.completedQuestLog);
     const questS = uniqueQuestCount === 1 ? "" : "s";
 
-    const uniqueChapterCount = calcUtil.countUniqueItems(hero.completedChapterCodeLog);
+    const uniqueChapterCount = calcUtil.countUniqueItems(hero.completedChapterLog);
     const chapterS = uniqueChapterCount === 1 ? "" : "s";
 
     return `They finished ${uniqueQuestCount} unique quest${questS} and had ${uniqueChapterCount} unique encounter${chapterS} along the way.`;

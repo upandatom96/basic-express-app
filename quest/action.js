@@ -8,8 +8,8 @@ const EventTypes = require('../constants/quest/event-types');
 const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
 
-const selectedQuestCodes = [];
-const selectedChapterCodes = [];
+const selectedQuestNames = [];
+const selectedChapterNames = [];
 
 function checkHealth(hero) {
     enforceMaxHealth(hero);
@@ -41,8 +41,8 @@ function setOff(hero) {
 }
 
 function findNewQuest(hero) {
-    const newQuest = randomManager.pickQuest(selectedQuestCodes);
-    hero.currentQuestCode = newQuest.code;
+    const newQuest = randomManager.pickQuest(selectedQuestNames);
+    hero.currentQuestName = newQuest.name;
     hero.distanceTravelled = 0;
     hero.status = HeroStatus.QUEST_NEW;
 }
@@ -52,8 +52,8 @@ function startNewQuest(hero) {
 }
 
 function startChapter(hero) {
-    const event = randomManager.pickChapterEvent(selectedChapterCodes);
-    hero.currentChapterCode = event.code;
+    const event = randomManager.pickChapterEvent(selectedChapterNames);
+    hero.currentChapterName = event.name;
 
     switch (event.type) {
         case EventTypes.PATHS:
@@ -142,9 +142,9 @@ function endEncounterChapter(hero) {
 }
 
 function travel(hero) {
-    if (boolUtil.hasValue(hero.currentChapterCode)) {
-        hero.completedChapterCodeLog.push(hero.currentChapterCode);
-        hero.currentChapterCode = null;
+    if (boolUtil.hasValue(hero.currentChapterName)) {
+        hero.completedChapterLog.push(hero.currentChapterName);
+        hero.currentChapterName = null;
     }
     const distance = addDistance(hero);
     const ready = isReadyForFinale(hero);
@@ -153,7 +153,7 @@ function travel(hero) {
         HeroStatus.QUEST_FINALE_START :
         HeroStatus.QUEST_CHAPTER_START;
 
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const additionalMessage = ready ?
         ` They have reached their destination, the ${quest.destination}.` :
         ` They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. Their journey continues...`;
@@ -251,8 +251,8 @@ function endEncounterFinale(hero) {
 }
 
 function startRest(hero) {
-    hero.completedQuestCodeLog.push(hero.currentQuestCode);
-    hero.currentQuestCode = null;
+    hero.completedQuestLog.push(hero.currentQuestName);
+    hero.currentQuestName = null;
 
     if (shouldLevelUp(hero)) {
         hero.status = HeroStatus.REST_LEVEL_UP_PING;
@@ -333,7 +333,7 @@ module.exports = {
 }
 
 function isReadyForFinale(hero) {
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const distanceReq = quest.distanceRequired;
     return hero.distanceTravelled >= distanceReq;
 }
@@ -370,7 +370,7 @@ function addDistance(hero) {
     let distance = randomUtil.pickRandomNumber(minDistance, maxDistance) + hero.distanceBoost;
     hero.distanceBoost = 0;
 
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const remainingDistance = quest.distanceRequired - hero.distanceTravelled;
     if (distance > remainingDistance) {
         distance = remainingDistance;
@@ -388,7 +388,7 @@ function wrapUpChapter(hero) {
 }
 
 function wrapUpFinale(hero) {
-    const quest = codeRetriever.findQuest(hero.currentQuestCode);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     if (boolUtil.hasValue(quest.expPoints)) {
         hero.expPoints += quest.expPoints;
     }
@@ -407,11 +407,11 @@ function checkEncounterHealth(hero, chapterMode) {
 }
 
 function getChapterEvent(hero) {
-    return codeRetriever.findChapterEvent(hero.currentChapterCode);
+    return codeRetriever.findChapterEvent(hero.currentChapterName);
 }
 
 function getFinaleEvent(hero) {
-    return codeRetriever.findQuest(hero.currentQuestCode).finaleEvent;
+    return codeRetriever.findQuest(hero.currentQuestName).finaleEvent;
 }
 
 function statBoost(hero) {

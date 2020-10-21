@@ -21,11 +21,11 @@ function generateHero(firstName, pastHeroes) {
     const inventory = [];
     const party = [];
     const journal = [];
-    const currentQuestCode = null;
+    const currentQuestName = null;
     const distanceTravelled = 0;
-    const completedQuestCodeLog = [];
-    const completedChapterCodeLog = [];
-    const specialMoveCodes = [specialMove.code];
+    const completedQuestLog = [];
+    const completedChapterLog = [];
+    const specialMoves = [specialMove.name];
     const creator = null;
 
     return {
@@ -36,7 +36,7 @@ function generateHero(firstName, pastHeroes) {
         backstory,
         advantage,
         disadvantage,
-        specialMoveCodes,
+        specialMoves,
         strength: stats.strength,
         wisdom: stats.wisdom,
         charisma: stats.charisma,
@@ -47,10 +47,10 @@ function generateHero(firstName, pastHeroes) {
         inventory,
         party,
         journal,
-        currentQuestCode,
+        currentQuestName,
         distanceTravelled,
-        completedQuestCodeLog,
-        completedChapterCodeLog,
+        completedQuestLog,
+        completedChapterLog,
     };
 }
 
