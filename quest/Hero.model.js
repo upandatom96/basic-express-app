@@ -113,6 +113,11 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
+    damageTakenTotal: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     specialMoves: [
         {
             type: String

@@ -94,24 +94,28 @@ function enemyTurnEncounter(hero, event) {
             moveDetails = `does ${strDmg} strength damage.`;
 
             hero.hp -= strDmg;
+            hero.damageTakenTotal += strDmg;
             break;
         case MoveTypes.DEXTERITY_ATTACK:
             const dexDmg = getStatDamage(event.dexterity, hero.dexterity) * move.multiplier;
             moveDetails = `does ${dexDmg} dexterity damage.`;
 
             hero.hp -= dexDmg;
+            hero.damageTakenTotal += dexDmg;
             break;
         case MoveTypes.WISDOM_ATTACK:
             const wisDmg = getStatDamage(event.wisdom, hero.wisdom) * move.multiplier;
             moveDetails = `does ${wisDmg} wisdom damage.`;
 
             hero.hp -= wisDmg;
+            hero.damageTakenTotal += wisDmg;
             break;
         case MoveTypes.CHARISMA_ATTACK:
             const chrDmg = getStatDamage(event.charisma, hero.charisma) * move.multiplier;
             moveDetails = `does ${chrDmg} charisma damage.`;
 
             hero.hp -= chrDmg;
+            hero.damageTakenTotal += chrDmg;
             break;
         case MoveTypes.FAIL:
             moveDetails = `nothing happens.`;
@@ -192,6 +196,7 @@ function handleDamage(hero, damage) {
     const damageModifier = (hero.level - 1) * hero.level;
     const modifiedDamage = damage + damageModifier;
     hero.hp -= modifiedDamage;
+    hero.damageTakenTotal += modifiedDamage;
     return `They lose ${modifiedDamage}hp.`
 }
 

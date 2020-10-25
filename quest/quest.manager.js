@@ -216,6 +216,7 @@ function getHeroReport(heroDB) {
         uniqueCompletedChapters,
         uniqueCompletedQuests,
         distanceTravelledTotal: heroDB.distanceTravelledTotal,
+        damageTakenTotal: heroDB.damageTakenTotal,
         age: heroDB.journal.length,
         seed: heroDB.seed,
     };
