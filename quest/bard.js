@@ -15,7 +15,8 @@ function makeBackstoryAnnouncement(hero) {
         "They are the chosen one.",
     ];
     const backstory = randomUtil.pickRandom(BACKSTORY_CHOICES);
-    const announcement = `{HERO_FIRST} was destined to become a hero. ${backstory}`;
+    const alignment = getAlignment(hero);
+    const announcement = `{HERO_FIRST} is ${alignment}. They were destined to become a hero. ${backstory}`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -162,4 +163,12 @@ function getUniqueInfo(hero) {
     const chapterS = uniqueChapterCount === 1 ? "" : "s";
 
     return `They finished ${uniqueQuestCount} unique quest${questS} and had ${uniqueChapterCount} unique encounter${chapterS} along the way.`;
+}
+
+function getAlignment(hero) {
+    if (hero.alignmentGoodVsEvil === "NEUTRAL" && hero.alignmentLawVsChaos === "NEUTRAL") {
+        return "TRUE NEUTRAL";
+    } else {
+        return `${hero.alignmentLawVsChaos} ${hero.alignmentGoodVsEvil}`;
+    }
 }

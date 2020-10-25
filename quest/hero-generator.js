@@ -9,6 +9,8 @@ function generateHero(firstName, pastHeroes) {
 
     const seed = randomUtil.pickRandomNumber(0, 100);
     const race = randomManager.pickRace();
+    const alignmentLawVsChaos = randomUtil.pickRandom(["LAWFUL", "NEUTRAL", "CHAOTIC"]);
+    const alignmentGoodVsEvil = randomUtil.pickRandom(["GOOD", "NEUTRAL", "EVIL"]);
     const advantage = randomManager.pickAdvantage();
     const disadvantage = randomManager.pickDisadvantage();
     const specialMove = randomManager.pickSpecialMove();
@@ -31,6 +33,8 @@ function generateHero(firstName, pastHeroes) {
     return {
         name,
         race,
+        alignmentLawVsChaos,
+        alignmentGoodVsEvil,
         creator,
         seed,
         status,

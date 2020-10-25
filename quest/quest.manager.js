@@ -138,6 +138,14 @@ function getLatestMessage(savedHero) {
     return savedHero.journal[lastJournalIndex];
 }
 
+function getAlignment(hero) {
+    if (hero.alignmentGoodVsEvil === "NEUTRAL" && hero.alignmentLawVsChaos === "NEUTRAL") {
+        return "TRUE NEUTRAL";
+    } else {
+        return `${hero.alignmentLawVsChaos} ${hero.alignmentGoodVsEvil}`;
+    }
+}
+
 function getStats(savedHero) {
     const specialRevealed = savedHero.status > 3;
     const baseStatsRevealed = savedHero.status > 2;
@@ -178,6 +186,7 @@ function getCompletedQuests(heroDB) {
 
 function getHeroReport(heroDB) {
     const announcement = getLatestMessage(heroDB);
+    const alignment = getAlignment(heroDB);
     const quest = codeRetriever.findQuest(heroDB.currentQuestName);
     const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterName);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
@@ -195,6 +204,7 @@ function getHeroReport(heroDB) {
         announcement,
         name: heroDB.name,
         race: heroDB.race,
+        alignment: alignment,
         _id: heroDB._id,
         hpText,
         distanceText,

@@ -12,6 +12,16 @@ const HeroSchema = new Schema({
         required: true,
         default: "Human"
     },
+    alignmentLawVsChaos: {
+        type: String,
+        required: true,
+        default: "Neutral"
+    },
+    alignmentGoodVsEvil: {
+        type: String,
+        required: true,
+        default: "Neutral"
+    },
     creator: {
         type: String,
         default: null
