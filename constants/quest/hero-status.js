@@ -1,9 +1,10 @@
 const REVEAL_HERO = 0;
 const REVEAL_BACKSTORY = 1;
-const REVEAL_STATS = 2;
-const REVEAL_SPECIAL = 3;
-const REVEAL_MOVE = 4;
-const SET_OFF = 5;
+const REVEAL_LOADOUT = 2;
+const REVEAL_STATS = 3;
+const REVEAL_SPECIAL = 4;
+const REVEAL_MOVE = 5;
+const SET_OFF = 6;
 
 const QUEST_FIND = 10;
 const QUEST_NEW = 11;
@@ -41,6 +42,7 @@ const ERR = 100;
 module.exports = {
     REVEAL_HERO,
     REVEAL_BACKSTORY,
+    REVEAL_LOADOUT,
     REVEAL_STATS,
     REVEAL_SPECIAL,
     REVEAL_MOVE,

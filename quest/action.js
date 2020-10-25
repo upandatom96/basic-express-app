@@ -21,6 +21,10 @@ function revealHero(hero) {
 }
 
 function revealBackstory(hero) {
+    hero.status = HeroStatus.REVEAL_LOADOUT;
+}
+
+function revealLoadout(hero) {
     hero.status = HeroStatus.REVEAL_STATS;
 }
 
@@ -301,6 +305,7 @@ module.exports = {
     checkHealth,
     revealHero,
     revealBackstory,
+    revealLoadout,
     revealStats,
     revealSpecial,
     revealMove,

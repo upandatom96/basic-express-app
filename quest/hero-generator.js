@@ -17,8 +17,8 @@ function generateHero(firstName, pastHeroes) {
     const hp = 100;
     const hpMax = 100;
     const level = 1;
-    const inventory = [];
-    const party = [];
+    const inventory = [randomManager.pickStarterItem()];
+    const party = [randomManager.pickStarterAlly()];
     const journal = [];
     const currentQuestName = null;
     const distanceTravelled = 0;

@@ -1,7 +1,8 @@
 const ATTRACTIVE = "ATTRACTIVE";
 const BLESSED = "BLESSED";
-const THOUGHTFUL = "THOUGHTFUL"; //unused
-const GLAMOROUS = "GLAMOROUS"; //unused
+//unused
+const THOUGHTFUL = "THOUGHTFUL";
+const GLAMOROUS = "GLAMOROUS";
 
 module.exports = {
     BLESSED,

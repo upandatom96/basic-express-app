@@ -14,6 +14,10 @@ function progressHero(hero) {
             action.revealBackstory(hero);
             bard.makeBackstoryAnnouncement(hero);
             break;
+        case HeroStatus.REVEAL_LOADOUT:
+            action.revealLoadout(hero);
+            bard.makeLoadoutAnnouncement(hero);
+            break;
         case HeroStatus.REVEAL_STATS:
             action.revealStats(hero);
             bard.makeStatsAnnouncement(hero);

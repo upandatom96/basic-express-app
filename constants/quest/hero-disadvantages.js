@@ -1,7 +1,8 @@
 const CURSED = "CURSED";
 const SMELLY = "SMELLY";
-const RECKLESS = "RECKLESS"; //unused
-const CONFUSED = "CONFUSED"; //unused
+//unused
+const RECKLESS = "RECKLESS";
+const CONFUSED = "CONFUSED";
 
 module.exports = {
     CURSED,

@@ -89,6 +89,14 @@ function pickDisadvantage() {
     return randomUtil.pickRandom(constants.DISADVANTAGES);
 }
 
+function pickStarterAlly() {
+    return randomUtil.pickRandom(constants.STARTER_ALLIES);
+}
+
+function pickStarterItem() {
+    return randomUtil.pickRandom(constants.STARTER_ITEMS);
+}
+
 function pickRandomSpecialMove() {
     return randomUtil.pickRandom(constants.HERO_MOVES.SPECIAL_MOVES);
 }
@@ -111,6 +119,8 @@ module.exports = {
     getWordCount,
     pickQuest,
     pickChapterEvent,
+    pickStarterAlly,
+    pickStarterItem,
     pickAdvantage,
     pickDisadvantage,
     pickStoryPrefix,

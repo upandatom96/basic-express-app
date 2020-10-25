@@ -19,6 +19,11 @@ function makeBackstoryAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function makeLoadoutAnnouncement(hero) {
+    const announcement = `{HERO_FIRST} has ${hero.inventory[0]} in their inventory. They are joined by a ${hero.party[0]}.`;
+    makeAnnouncement(hero, announcement);
+}
+
 function makeStatsAnnouncement(hero) {
     const announcement = `{HERO_FIRST} has ${hero.strength} Strength, ${hero.wisdom} Wisdom, ${hero.charisma} Charisma, and ${hero.dexterity} Dexterity.`;
     makeAnnouncement(hero, announcement);
@@ -100,6 +105,7 @@ function makeObituaryAnnouncement(hero) {
 module.exports = {
     makeNameAnnouncement,
     makeBackstoryAnnouncement,
+    makeLoadoutAnnouncement,
     makeStatsAnnouncement,
     makeSpecialAnnouncement,
     makeMoveAnnouncement,

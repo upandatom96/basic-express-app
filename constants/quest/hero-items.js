@@ -2,10 +2,14 @@ const BOUQUET = "BOUQUET";
 const SMALL_KEY = "SMALL KEY";
 const TEDDY_BEAR = "TEDDY BEAR";
 const DICE = "DICE";
+//unused
+const WOODEN_SWORD = "WOODEN SWORD";
+const WOODEN_SHIELD = "WOODEN SHIELD";
 
 module.exports = {
     BOUQUET,
     SMALL_KEY,
     TEDDY_BEAR,
     DICE,
+    STARTER_ITEMS: [WOODEN_SWORD, WOODEN_SHIELD],
 };
