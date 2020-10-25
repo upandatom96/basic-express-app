@@ -7,6 +7,11 @@ const HeroSchema = new Schema({
         required: true,
         default: "Gribnar Bleck"
     },
+    race: {
+        type: String,
+        required: true,
+        default: "Human"
+    },
     creator: {
         type: String,
         default: null

@@ -194,6 +194,7 @@ function getHeroReport(heroDB) {
     return {
         announcement,
         name: heroDB.name,
+        race: heroDB.race,
         _id: heroDB._id,
         hpText,
         distanceText,

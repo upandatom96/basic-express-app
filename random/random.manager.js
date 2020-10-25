@@ -81,6 +81,10 @@ function pickChapterEvent(selectedNames) {
     return randomUtil.pickRandom(availableChapters);
 }
 
+function pickRace() {
+    return randomUtil.pickRandom(constants.RACES);
+}
+
 function pickAdvantage() {
     return randomUtil.pickRandom(constants.ADVANTAGES);
 }
@@ -121,6 +125,7 @@ module.exports = {
     pickChapterEvent,
     pickStarterAlly,
     pickStarterItem,
+    pickRace,
     pickAdvantage,
     pickDisadvantage,
     pickStoryPrefix,
