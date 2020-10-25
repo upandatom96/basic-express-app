@@ -66,11 +66,6 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
-    backstory: {
-        type: String,
-        required: true,
-        default: "They are the king's secret child."
-    },
     advantage: {
         type: String,
         required: true,

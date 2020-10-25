@@ -182,7 +182,6 @@ function getHeroReport(heroDB) {
     const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterName);
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
-    const backstoryRevealed = heroDB.status > 1;
     const completedQuests = getCompletedQuests(heroDB);
     const completedChapters = getCompletedChapters(heroDB);
     const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
@@ -210,7 +209,6 @@ function getHeroReport(heroDB) {
         party: heroDB.party,
         storyOver: heroDB.status === 99,
         journal: heroDB.journal,
-        backstory: backstoryRevealed ? heroDB.backstory : "???",
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
         completedChapters,

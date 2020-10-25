@@ -2,6 +2,7 @@ const codeRetriever = require('./code-retriever');
 
 const stringUtil = require('../utilities/string.util');
 const calcUtil = require('../utilities/calc.util');
+const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
     const announcement = `Once Upon a Time, ${hero.name} packed up their things and prepared for adventure.`;
@@ -9,7 +10,12 @@ function makeNameAnnouncement(hero) {
 }
 
 function makeBackstoryAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} was destined to become a hero. ${hero.backstory}`;
+    const BACKSTORY_CHOICES = [
+        "They are the king's secret child.",
+        "They are the chosen one.",
+    ];
+    const backstory = randomUtil.pickRandom(BACKSTORY_CHOICES);
+    const announcement = `{HERO_FIRST} was destined to become a hero. ${backstory}`;
     makeAnnouncement(hero, announcement);
 }
 

@@ -10,7 +10,6 @@ function generateHero(firstName, pastHeroes) {
     const seed = randomUtil.pickRandomNumber(0, 100);
     const advantage = randomManager.pickAdvantage();
     const disadvantage = randomManager.pickDisadvantage();
-    const backstory = randomManager.pickBackstory();
     const specialMove = randomManager.pickSpecialMove();
     const stats = rollStats();
 
@@ -33,7 +32,6 @@ function generateHero(firstName, pastHeroes) {
         creator,
         seed,
         status,
-        backstory,
         advantage,
         disadvantage,
         specialMoves,

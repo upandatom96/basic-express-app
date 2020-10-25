@@ -82,15 +82,11 @@ function pickChapterEvent(selectedNames) {
 }
 
 function pickAdvantage() {
-    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.ADVANTAGES);
+    return randomUtil.pickRandom(constants.ADVANTAGES);
 }
 
 function pickDisadvantage() {
-    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.DISADVANTAGES);
-}
-
-function pickBackstory() {
-    return randomUtil.pickRandom(constants.QUEST_ATTRIBUTES.BACKSTORY);
+    return randomUtil.pickRandom(constants.DISADVANTAGES);
 }
 
 function pickRandomSpecialMove() {
@@ -117,7 +113,6 @@ module.exports = {
     pickChapterEvent,
     pickAdvantage,
     pickDisadvantage,
-    pickBackstory,
     pickStoryPrefix,
     pickStoryBase: pickStorySynonym,
     pickNoun,

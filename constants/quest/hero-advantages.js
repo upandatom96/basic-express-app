@@ -1,7 +1,12 @@
 const ATTRACTIVE = "ATTRACTIVE";
 const BLESSED = "BLESSED";
+const THOUGHTFUL = "THOUGHTFUL"; //unused
+const GLAMOROUS = "GLAMOROUS"; //unused
 
 module.exports = {
     BLESSED,
     ATTRACTIVE,
+    THOUGHTFUL,
+    GLAMOROUS,
+    ALL_ADV: [ATTRACTIVE, BLESSED, THOUGHTFUL, GLAMOROUS],
 }
