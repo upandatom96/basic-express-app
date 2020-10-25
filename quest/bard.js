@@ -5,7 +5,7 @@ const calcUtil = require('../utilities/calc.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
-    const announcement = `Once Upon a Time, ${hero.name} packed up their things and prepared for adventure.`;
+    const announcement = `Once Upon a Time, a young ${hero.race.toLowerCase()} named ${hero.name} packed up their things and prepared for adventure.`;
     makeAnnouncement(hero, announcement);
 }
 
