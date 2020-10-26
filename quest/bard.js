@@ -5,18 +5,35 @@ const calcUtil = require('../utilities/calc.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
-    const announcement = `Once Upon a Time, a young ${hero.race.toLowerCase()} named ${hero.name} packed up their things and prepared for adventure.`;
+    const NAME_TEMPLATES = [
+        `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} packed up their things and prepared for adventure.`,
+        `{HERO_FULL} was a {HERO_RACE} who had been training for a mission. It was time for them to take action.`,
+    ];
+    const announcement = randomUtil.pickRandom(NAME_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeBackstoryAnnouncement(hero) {
     const BACKSTORY_CHOICES = [
-        "They are the king's secret child.",
-        "They are the chosen one.",
+        "{HERO_FIRST} is the king's secret child.",
+        "{HERO_FIRST} the chosen one.",
     ];
     const backstory = randomUtil.pickRandom(BACKSTORY_CHOICES);
+    const announcement = `${backstory}`;
+    makeAnnouncement(hero, announcement);
+}
+
+function makeAlignmentAnnouncement(hero) {
     const alignment = getAlignment(hero);
-    const announcement = `{HERO_FIRST} is ${alignment}. They were destined to become a hero. ${backstory}`;
+    let destinyMessage = "";
+    if (hero.alignmentGoodVsEvil === "GOOD") {
+        destinyMessage = "They were destined to become a hero.";
+    } else if (hero.alignmentGoodVsEvil === "EVIL") {
+        destinyMessage = "They were destined to rule the world.";
+    } else {
+        destinyMessage = "They were destined to achieve greatness.";
+    }
+    const announcement = `{HERO_FIRST} is ${alignment}. ${destinyMessage}`;
     makeAnnouncement(hero, announcement);
 }
 
@@ -106,6 +123,7 @@ function makeObituaryAnnouncement(hero) {
 module.exports = {
     makeNameAnnouncement,
     makeBackstoryAnnouncement,
+    makeAlignmentAnnouncement,
     makeLoadoutAnnouncement,
     makeStatsAnnouncement,
     makeSpecialAnnouncement,
@@ -129,6 +147,7 @@ function interpolate(fullAnnouncement, hero) {
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FULL}`, hero.name);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FIRST}`, firstName);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_LAST}`, lastName);
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_RACE}`, hero.race.toLowerCase());
     return fullAnnouncement;
 }
 
