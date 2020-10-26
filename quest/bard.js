@@ -65,25 +65,39 @@ function makeMoveAnnouncement(hero) {
     const MOVE_TEMPLATES = [
         `{HERO_FIRST} knows the special move ${moveName}.`,
         `{HERO_FIRST} trained for years to learn the special move ${moveName}.`,
-        `Enemies were terrified of {HERO_FIRST}'s special move ${moveName}.`,
+        `Enemies are terrified of {HERO_FIRST}'s special move ${moveName}.`,
     ];
     const announcement = randomUtil.pickRandom(MOVE_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeSetOffAnnouncement(hero) {
-    const MOVE_TEMPLATES = [
+    const SET_OFF_TEMPLATES = [
         `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`,
         `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} Farmstead behind forever.`,
         `{HERO_FIRST} put on their boots and walked through their front door one last time.`
     ];
-    const announcement = randomUtil.pickRandom(MOVE_TEMPLATES);
+    const announcement = randomUtil.pickRandom(SET_OFF_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeFindNewQuestAnnouncement(hero) {
     const quest = codeRetriever.findQuest(hero.currentQuestName);
-    const announcement = `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`;
+    const FIND_QUEST_TEMPLATES = [
+        `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`,
+        `{HERO_FIRST} finds a scroll detailing a quest called ${quest.name}.`,
+        `{HERO_FIRST} talks to a young woman who sends them on a quest called ${quest.name}.`,
+        `{HERO_FIRST} learns of a bounty for quest called ${quest.name}.`,
+        `{HERO_FIRST} is given a quest called ${quest.name} by guards outside of a castle.`,
+        `{HERO_FIRST} has a sudden vision of a quest called ${quest.name}.`,
+        `{HERO_FIRST} finds a poster with the title '${quest.name}' that requests help with a quest.`,
+        `{HERO_FIRST} talks to a child who sends them on a quest called ${quest.name}.`,
+        `{HERO_FIRST} remembers a story from childhood involving a quest called ${quest.name}.`,
+        `A strange man begs {HERO_FIRST} to take a quest called ${quest.name}.`,
+        `A long-forgotten relative sends {HERO_FIRST} on a quest called ${quest.name}.`,
+        `{HERO_FIRST} takes the initiative to send themself on a quest called ${quest.name}.`,
+    ];
+    const announcement = randomUtil.pickRandom(FIND_QUEST_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 

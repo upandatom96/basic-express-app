@@ -154,20 +154,40 @@ function travel(hero) {
         hero.completedChapterLog.push(hero.currentChapterName);
         hero.currentChapterName = null;
     }
-    const distance = addDistance(hero);
+    const message = getTravelBaseMessage(hero);
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
     const ready = isReadyForFinale(hero);
 
-    hero.status = ready ?
-        HeroStatus.QUEST_FINALE_START :
-        HeroStatus.QUEST_CHAPTER_START;
-
-    const quest = codeRetriever.findQuest(hero.currentQuestName);
-    const additionalMessage = ready ?
-        ` They have reached their destination, the ${quest.destination}.` :
-        ` They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. Their journey continues...`;
-
-    const sOrNot = distance > 1 ? "s" : "";
-    return `{HERO_FIRST} travels ${distance} mile${sOrNot}.${additionalMessage}`;
+    if (ready) {
+        hero.status = HeroStatus.QUEST_FINALE_START;
+        const TEMPLATES = [
+            `They breathe a sigh of relief.`,
+            `They made it!`,
+            `Finally, they can complete their quest.`,
+        ];
+        const endMsg = randomUtil.pickRandom(TEMPLATES);
+        return `${message} They have reached their destination, the ${quest.destination}. ${endMsg}`
+    } else {
+        hero.status = HeroStatus.QUEST_CHAPTER_START;
+        const TEMPLATES = [
+            `Their journey continues...`,
+            `They need to go just a bit further...`,
+            `What will happen next?`,
+            `They are tired but they must carry on.`,
+            `They take their next step...`,
+            `They wonder how long this will go on.`,
+            `They continue bravely and confidently.`,
+            `They pick up the pace.`,
+            `They hope they didn't leave the stove on.`,
+            `They swear they've passed this spot before...`,
+            `They worry it may rain soon.`,
+            `The skies clear as they continue onward`,
+            `Night begins, but they continue.`,
+            `They hear whispers around them but keep moving.`,
+        ];
+        const endMsg = randomUtil.pickRandom(TEMPLATES);
+        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${endMsg}`
+    }
 }
 
 function startFinale(hero) {
@@ -452,4 +472,10 @@ function statBoost(hero) {
 function shouldLevelUp(hero) {
     const levelThreshold = (hero.level * 100) + ((hero.level - 1) * (hero.level) * 10);
     return hero.expPoints >= levelThreshold;
+}
+
+function getTravelBaseMessage(hero) {
+    const distance = addDistance(hero);
+    const sOrNot = distance > 1 ? "s" : "";
+    return `{HERO_FIRST} travels ${distance} mile${sOrNot}.`;
 }
