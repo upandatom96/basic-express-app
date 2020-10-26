@@ -100,6 +100,4 @@ chitChatController.delete('/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, 
         });
 });
 
-// TODO delete chit chat
-
 module.exports = chitChatController;

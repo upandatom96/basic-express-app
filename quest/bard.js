@@ -6,8 +6,9 @@ const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
     const NAME_TEMPLATES = [
-        `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} packed up their things and prepared for adventure.`,
-        `{HERO_FULL} was a {HERO_RACE} who had been training for a mission. It was time for them to take action.`,
+        `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} would embark on a journey.`,
+        `Our story begins with {HERO_FULL}, the {HERO_RACE}.`,
+        `As the sun rose again one day, {HERO_FULL} the {HERO_RACE} would with a new feeling.`,
     ];
     const announcement = randomUtil.pickRandom(NAME_TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -15,11 +16,13 @@ function makeNameAnnouncement(hero) {
 
 function makeBackstoryAnnouncement(hero) {
     const BACKSTORY_CHOICES = [
-        "{HERO_FIRST} is the king's secret child.",
-        "{HERO_FIRST} the chosen one.",
+        `{HERO_FIRST} packed up their things and prepared for adventure. They had been training for this moment.`,
+        `{HERO_FIRST} was reluctant to start a journey, but they had no choice after their father's murder.`,
+        `{HERO_FIRST} is the King's secret child. The only people alive that knew were the King and {HERO_FIRST}.`,
+        `{HERO_FIRST} is the chosen one. The gods has selected them for greatness from birth.`,
+        `{HERO_FIRST} was the most adventurous member of their generation. Everyone expected them to make an incredible journey.`,
     ];
-    const backstory = randomUtil.pickRandom(BACKSTORY_CHOICES);
-    const announcement = `${backstory}`;
+    const announcement = randomUtil.pickRandom(BACKSTORY_CHOICES);
     makeAnnouncement(hero, announcement);
 }
 
@@ -48,18 +51,33 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeSpecialAnnouncement(hero) {
-    const announcement = `Fortunately, {HERO_FIRST} is ${hero.advantage}. They will have to overcome being ${hero.disadvantage}.`;
+    const SPECIAL_TEMPLATES = [
+        `Fortunately, {HERO_FIRST} is {ADV}. Unfortunately, they are {DIS}.`,
+        `{HERO_FIRST} is well known for being {ADV} and {DIS}.`,
+        `It works in {HERO_FIRST}'s favor that they are {ADV}. They will have to overcome being {DIS}.`,
+    ];
+    const announcement = randomUtil.pickRandom(SPECIAL_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeMoveAnnouncement(hero) {
     const moveName = codeRetriever.findSpecialMoves(hero.specialMoves)[0].name;
-    const announcement = `{HERO_FIRST} knows the special move ${moveName}.`;
+    const MOVE_TEMPLATES = [
+        `{HERO_FIRST} knows the special move ${moveName}.`,
+        `{HERO_FIRST} trained for years to learn the special move ${moveName}.`,
+        `Enemies were terrified of {HERO_FIRST}'s special move ${moveName}.`,
+    ];
+    const announcement = randomUtil.pickRandom(MOVE_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeSetOffAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`;
+    const MOVE_TEMPLATES = [
+        `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`,
+        `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} Farmstead behind forever.`,
+        `{HERO_FIRST} put on their boots and walked through their front door one last time.`
+    ];
+    const announcement = randomUtil.pickRandom(MOVE_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
@@ -148,6 +166,8 @@ function interpolate(fullAnnouncement, hero) {
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FIRST}`, firstName);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_LAST}`, lastName);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_RACE}`, hero.race.toLowerCase());
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{ADV}`, hero.advantage);
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{DIS}`, hero.disadvantage);
     return fullAnnouncement;
 }
 
