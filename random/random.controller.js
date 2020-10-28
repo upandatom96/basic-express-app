@@ -27,4 +27,20 @@ randomController.get('/wordCount', (req, res) => {
   res.send(wordCount);
 });
 
+randomController.get('/d/:diceLimit', (req, res) => {
+  const diceLimit = Number(req.params.diceLimit);
+  const result = randomManager.rollDie(diceLimit);
+  res.send(result);
+});
+
+randomController.get('/d20', (req, res) => {
+  const result = randomManager.rollDie(20);
+  res.send(result);
+});
+
+randomController.get('/d6', (req, res) => {
+  const result = randomManager.rollDie(6);
+  res.send(result);
+});
+
 module.exports = randomController;

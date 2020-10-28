@@ -113,6 +113,10 @@ function pickAdjective() {
     return randomUtil.pickRandom(constants.ADJECTIVES);
 }
 
+function rollDie(diceLimit) {
+    return randomUtil.pickRandomNumber(1, diceLimit).toString();
+}
+
 module.exports = {
     getOneNoun,
     getOneAdjective,
@@ -134,4 +138,5 @@ module.exports = {
     pickLastName,
     pickAdjective,
     pickSpecialMove: pickRandomSpecialMove,
+    rollDie,
 }
