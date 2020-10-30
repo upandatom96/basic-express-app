@@ -74,7 +74,7 @@ function makeSetOffAnnouncement(hero) {
     const SET_OFF_TEMPLATES = [
         `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`,
         `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} Farmstead behind forever.`,
-        `{HERO_FIRST} put on their boots and walked through their front door one last time.`
+        `{HERO_FIRST} put on their boots and walked through their front door one last time.`,
     ];
     const announcement = randomUtil.pickRandom(SET_OFF_TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -118,7 +118,7 @@ function makeDirectAnnouncement(hero, report) {
 
 function makeRestStartAnnouncement(hero) {
     const TEMPLATES = [
-        `{HERO_FIRST} completed their quest and takes some time to rest.`
+        `{HERO_FIRST} completed their quest and takes some time to rest.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -126,7 +126,7 @@ function makeRestStartAnnouncement(hero) {
 
 function makeRestLevelPingAnnouncement(hero) {
     const TEMPLATES = [
-        `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`
+        `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -134,7 +134,7 @@ function makeRestLevelPingAnnouncement(hero) {
 
 function makeRestLevelHealthAnnouncement(hero) {
     const TEMPLATES = [
-        `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`
+        `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -142,16 +142,15 @@ function makeRestLevelHealthAnnouncement(hero) {
 
 function makeRestHealAnnouncement(hero) {
     const TEMPLATES = [
-        `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`
+        `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestEmergeAnnouncement(hero) {
-    const heroLink = "https://adam-on-the-internet.github.io/the-quest-bot-ui";
     const TEMPLATES = [
-        `{HERO_FIRST} sets off to seek another quest. Check up on their story and other stories here: ${heroLink}.`
+        `{HERO_FIRST} sets off to seek another quest.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
