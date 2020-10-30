@@ -4,6 +4,7 @@ const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
+    // TODO dialogue
     const NAME_TEMPLATES = [
         `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} would embark on a journey.`,
         `Our story begins with {HERO_FULL}, the {HERO_RACE}.`,
@@ -14,6 +15,7 @@ function makeNameAnnouncement(hero) {
 }
 
 function makeBackstoryAnnouncement(hero) {
+    // TODO dialogue
     const BACKSTORY_CHOICES = [
         `{HERO_FIRST} packed up their things and prepared for adventure. They had been training for this moment.`,
         `{HERO_FIRST} was reluctant to start a journey, but they had no choice after their father's murder.`,
@@ -50,6 +52,7 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeSpecialAnnouncement(hero) {
+    // TODO dialogue
     const SPECIAL_TEMPLATES = [
         `Fortunately, {HERO_FIRST} is {ADV}. Unfortunately, they are {DIS}.`,
         `{HERO_FIRST} is well known for being {ADV} and {DIS}.`,
@@ -60,6 +63,7 @@ function makeSpecialAnnouncement(hero) {
 }
 
 function makeMoveAnnouncement(hero) {
+    // TODO dialogue
     const moveName = codeRetriever.findSpecialMoves(hero.specialMoves)[0].name;
     const MOVE_TEMPLATES = [
         `{HERO_FIRST} knows the special move ${moveName}.`,
@@ -71,6 +75,7 @@ function makeMoveAnnouncement(hero) {
 }
 
 function makeSetOffAnnouncement(hero) {
+    // TODO dialogue
     const SET_OFF_TEMPLATES = [
         `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`,
         `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} Farmstead behind forever.`,
@@ -81,6 +86,7 @@ function makeSetOffAnnouncement(hero) {
 }
 
 function makeFindNewQuestAnnouncement(hero) {
+    // TODO dialogue
     const quest = codeRetriever.findQuest(hero.currentQuestName);
     const FIND_QUEST_TEMPLATES = [
         `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`,
@@ -101,6 +107,7 @@ function makeFindNewQuestAnnouncement(hero) {
 }
 
 function makeStartNewQuestAnnouncement(hero) {
+    // TODO dialogue
     const quest = codeRetriever.findQuest(hero.currentQuestName);
     const travelMessage = `travel ${quest.distanceRequired} miles to the ${quest.destination} and ${quest.text}`;
     const TEMPLATES = [
@@ -117,6 +124,7 @@ function makeDirectAnnouncement(hero, report) {
 }
 
 function makeRestStartAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `{HERO_FIRST} completed their quest and takes some time to rest.`,
     ];
@@ -125,6 +133,7 @@ function makeRestStartAnnouncement(hero) {
 }
 
 function makeRestLevelPingAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`,
     ];
@@ -133,6 +142,7 @@ function makeRestLevelPingAnnouncement(hero) {
 }
 
 function makeRestLevelHealthAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`,
     ];
@@ -141,6 +151,7 @@ function makeRestLevelHealthAnnouncement(hero) {
 }
 
 function makeRestHealAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`,
     ];
@@ -149,6 +160,7 @@ function makeRestHealAnnouncement(hero) {
 }
 
 function makeRestEmergeAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `{HERO_FIRST} sets off to seek another quest.`,
     ];
@@ -157,6 +169,7 @@ function makeRestEmergeAnnouncement(hero) {
 }
 
 function makeDeathAnnouncement(hero) {
+    // TODO dialogue
     const TEMPLATES = [
         `{HERO_FIRST} collapses as their hp drops to zero. Their journey ends abruptly, but they will be remembered for ages.`,
     ];
@@ -165,11 +178,9 @@ function makeDeathAnnouncement(hero) {
 }
 
 function makeObituaryAnnouncement(hero) {
-    const uniqueInfo = getQuestCount(hero);
-
+    const questCount = getQuestCount(hero);
     const mainInfo = `They reached Level ${hero.level} and travelled ${hero.distanceTravelledTotal} miles.`;
-
-    const announcement = `RIP {HERO_FULL}. ${mainInfo} ${uniqueInfo}`;
+    const announcement = `RIP {HERO_FULL}. ${mainInfo} ${questCount}`;
     makeAnnouncement(hero, announcement);
 }
 
