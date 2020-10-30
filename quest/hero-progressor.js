@@ -139,6 +139,8 @@ function progressHero(hero) {
             bard.makeObituaryAnnouncement(hero);
             break;
         default:
+            action.error(hero);
+            bard.makeErrorAnnouncement(hero);
             console.log("INVALID HERO STATUS: " + hero.status);
     }
     return hero;

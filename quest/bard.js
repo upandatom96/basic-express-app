@@ -1,7 +1,6 @@
 const codeRetriever = require('./code-retriever');
 
 const stringUtil = require('../utilities/string.util');
-const calcUtil = require('../utilities/calc.util');
 const randomUtil = require('../utilities/random.util');
 
 function makeNameAnnouncement(hero) {
@@ -118,43 +117,66 @@ function makeDirectAnnouncement(hero, report) {
 }
 
 function makeRestStartAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} completed their quest and takes some time to rest.`;
+    const TEMPLATES = [
+        `{HERO_FIRST} completed their quest and takes some time to rest.`
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestLevelPingAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`;
+    const TEMPLATES = [
+        `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestLevelHealthAnnouncement(hero) {
-    const announcement = `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`;
+    const TEMPLATES = [
+        `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestHealAnnouncement(hero) {
-    const announcement = `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`;
+    const TEMPLATES = [
+        `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeRestEmergeAnnouncement(hero) {
     const heroLink = "https://adam-on-the-internet.github.io/the-quest-bot-ui";
-    const announcement = `{HERO_FIRST} sets off to seek another quest. Check up on their story and other stories here: ${heroLink}.`;
+    const TEMPLATES = [
+        `{HERO_FIRST} sets off to seek another quest. Check up on their story and other stories here: ${heroLink}.`
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeDeathAnnouncement(hero) {
-    const announcement = `{HERO_FIRST} collapses as their hp drops to zero. Their journey ends abruptly, but they will be remembered for ages.`;
+    const TEMPLATES = [
+        `{HERO_FIRST} collapses as their hp drops to zero. Their journey ends abruptly, but they will be remembered for ages.`,
+    ];
+    const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeObituaryAnnouncement(hero) {
-    const uniqueInfo = getUniqueInfo(hero);
+    const uniqueInfo = getQuestCount(hero);
 
     const mainInfo = `They reached Level ${hero.level} and travelled ${hero.distanceTravelledTotal} miles.`;
 
     const announcement = `RIP {HERO_FULL}. ${mainInfo} ${uniqueInfo}`;
     makeAnnouncement(hero, announcement);
+}
+
+function makeErrorAnnouncement(hero) {
+    const errorDeath = "A portal to hell suddenly opens and {HERO_FIRST} is pulled in.";
+    makeAnnouncement(hero, errorDeath);
 }
 
 module.exports = {
@@ -176,6 +198,7 @@ module.exports = {
     makeRestEmergeAnnouncement,
     makeDeathAnnouncement,
     makeObituaryAnnouncement,
+    makeErrorAnnouncement,
 }
 
 function interpolate(fullAnnouncement, hero) {
@@ -213,14 +236,11 @@ function getAnnouncementClosing(hero) {
     return `({HERO_FULL} ${hero.hp}/${hero.hpMax} hp) #${page}`;
 }
 
-function getUniqueInfo(hero) {
-    const uniqueQuestCount = calcUtil.countUniqueItems(hero.completedQuestLog);
-    const questS = uniqueQuestCount === 1 ? "" : "s";
+function getQuestCount(hero) {
+    const questCount = hero.completedQuestLog;
+    const questS = questCount === 1 ? "" : "s";
 
-    const uniqueChapterCount = calcUtil.countUniqueItems(hero.completedChapterLog);
-    const chapterS = uniqueChapterCount === 1 ? "" : "s";
-
-    return `They finished ${uniqueQuestCount} unique quest${questS} and had ${uniqueChapterCount} unique encounter${chapterS} along the way.`;
+    return `They finished ${questCount} quest${questS}.`;
 }
 
 function getAlignment(hero) {

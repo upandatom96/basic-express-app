@@ -321,6 +321,10 @@ function die(hero) {
     hero.deathDate = new Date();
 }
 
+function error(hero) {
+    hero.hp = 0;
+}
+
 function obituary(hero) {
     hero.status = HeroStatus.DEAD;
 }
@@ -360,6 +364,7 @@ module.exports = {
     emergeRest,
     die,
     obituary,
+    error,
 }
 
 function isReadyForFinale(hero) {
