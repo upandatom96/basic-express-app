@@ -181,7 +181,7 @@ function applyChanges(changes, hero) {
             changeText = `${changes.ally} joins the party.`
         }
     } else {
-        changeText = "They are unaffected.";
+        changeText = "They appear unaffected.";
     }
     if (boolUtil.hasValue(changes.expPoints)) {
         hero.expPoints += changes.expPoints;

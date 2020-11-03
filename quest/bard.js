@@ -3,19 +3,22 @@ const codeRetriever = require('./code-retriever');
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
 
+const questWords = require('../constants/quest/quest-words');
+const adjectives = require('../constants/words/adjectives');
+
 function makeNameAnnouncement(hero) {
-    // TODO dialogue
     const NAME_TEMPLATES = [
         `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} would embark on a journey.`,
         `Our story begins with {HERO_FULL}, the {HERO_RACE}.`,
         `As the sun rose again one day, {HERO_FULL} the {HERO_RACE} would with a new feeling.`,
+        `{HERO_FULL} the {HERO_RACE} is set to do great things.`,
+        `Have you heard the story of {HERO_FULL} the {HERO_RACE}?.`,
     ];
     const announcement = randomUtil.pickRandom(NAME_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeBackstoryAnnouncement(hero) {
-    // TODO dialogue
     const BACKSTORY_CHOICES = [
         `{HERO_FIRST} packed up their things and prepared for adventure. They had been training for this moment.`,
         `{HERO_FIRST} was reluctant to start a journey, but they had no choice after their father's murder.`,
@@ -27,16 +30,19 @@ function makeBackstoryAnnouncement(hero) {
     makeAnnouncement(hero, announcement);
 }
 
+function getDestinyMessage(hero) {
+    if (hero.alignmentGoodVsEvil === "GOOD") {
+        return "They were destined to become a hero.";
+    } else if (hero.alignmentGoodVsEvil === "EVIL") {
+        return "They were destined to rule the world.";
+    } else {
+        return "They were destined to achieve greatness.";
+    }
+}
+
 function makeAlignmentAnnouncement(hero) {
     const alignment = getAlignment(hero);
-    let destinyMessage = "";
-    if (hero.alignmentGoodVsEvil === "GOOD") {
-        destinyMessage = "They were destined to become a hero.";
-    } else if (hero.alignmentGoodVsEvil === "EVIL") {
-        destinyMessage = "They were destined to rule the world.";
-    } else {
-        destinyMessage = "They were destined to achieve greatness.";
-    }
+    const destinyMessage = getDestinyMessage(hero);
     const announcement = `{HERO_FIRST} is ${alignment}. ${destinyMessage}`;
     makeAnnouncement(hero, announcement);
 }
@@ -52,9 +58,10 @@ function makeStatsAnnouncement(hero) {
 }
 
 function makeSpecialAnnouncement(hero) {
-    // TODO dialogue
     const SPECIAL_TEMPLATES = [
         `Fortunately, {HERO_FIRST} is {ADV}. Unfortunately, they are {DIS}.`,
+        `While {HERO_FIRST} is {ADV}, they are also {DIS}.`,
+        `Growing up, {HERO_FIRST} was loved for being {ADV}, but hated for being {DIS}.`,
         `{HERO_FIRST} is well known for being {ADV} and {DIS}.`,
         `It works in {HERO_FIRST}'s favor that they are {ADV}. They will have to overcome being {DIS}.`,
     ];
@@ -63,10 +70,11 @@ function makeSpecialAnnouncement(hero) {
 }
 
 function makeMoveAnnouncement(hero) {
-    // TODO dialogue
     const moveName = codeRetriever.findSpecialMoves(hero.specialMoves)[0].name;
     const MOVE_TEMPLATES = [
+        `{HERO_FIRST} was born knowing how to use the special move ${moveName}.`,
         `{HERO_FIRST} knows the special move ${moveName}.`,
+        `{HERO_FIRST} invented the special move ${moveName}.`,
         `{HERO_FIRST} trained for years to learn the special move ${moveName}.`,
         `Enemies are terrified of {HERO_FIRST}'s special move ${moveName}.`,
     ];
@@ -75,20 +83,22 @@ function makeMoveAnnouncement(hero) {
 }
 
 function makeSetOffAnnouncement(hero) {
-    // TODO dialogue
+    const homeType = randomUtil.pickRandom(questWords.HOME_NAMES);
     const SET_OFF_TEMPLATES = [
-        `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} Estate, looking for any quest they could find.`,
-        `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} Farmstead behind forever.`,
-        `{HERO_FIRST} put on their boots and walked through their front door one last time.`,
+        `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} ${homeType}, looking for any quest they could find.`,
+        `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} ${homeType} behind forever.`,
+        `{HERO_FIRST} put on their boots and walked through the front door of the {HERO_LAST} ${homeType} one last time.`,
+        `{HERO_FIRST} was suddenly kicked out of the {HERO_LAST} ${homeType}. They would have to make it on their own.`,
+        `The {HERO_LAST} ${homeType} burned down in mysterious circumstances. {HERO_FIRST} was now without a home.`,
     ];
     const announcement = randomUtil.pickRandom(SET_OFF_TEMPLATES);
     makeAnnouncement(hero, announcement);
 }
 
 function makeFindNewQuestAnnouncement(hero) {
-    // TODO dialogue
     const quest = codeRetriever.findQuest(hero.currentQuestName);
     const FIND_QUEST_TEMPLATES = [
+        `{HERO_FIRST} meets a spirit in a dream who tells them of a quest called ${quest.name}.`,
         `{HERO_FIRST} meets an old man who offers them a quest called ${quest.name}.`,
         `{HERO_FIRST} finds a scroll detailing a quest called ${quest.name}.`,
         `{HERO_FIRST} talks to a young woman who sends them on a quest called ${quest.name}.`,
@@ -107,13 +117,13 @@ function makeFindNewQuestAnnouncement(hero) {
 }
 
 function makeStartNewQuestAnnouncement(hero) {
-    // TODO dialogue
     const quest = codeRetriever.findQuest(hero.currentQuestName);
     const travelMessage = `travel ${quest.distanceRequired} miles to the ${quest.destination} and ${quest.text}`;
     const TEMPLATES = [
         `For the quest, {HERO_FIRST} must ${travelMessage}.`,
         `The quest requires that {HERO_FIRST} ${travelMessage}.`,
         `{HERO_FIRST} must ${travelMessage} to complete the quest.`,
+        `{HERO_FIRST} begins their quest to ${travelMessage}.`,
     ];
     const announcement = randomUtil.pickRandom(TEMPLATES);
     makeAnnouncement(hero, announcement);
@@ -124,57 +134,105 @@ function makeDirectAnnouncement(hero, report) {
 }
 
 function makeRestStartAnnouncement(hero) {
-    // TODO dialogue
     const TEMPLATES = [
-        `{HERO_FIRST} completed their quest and takes some time to rest.`,
+        `{HERO_FIRST} completed their quest and takes some time to rest`,
+        `With their quest completed, {HERO_FIRST} takes some time to recharge`,
+        `After completing their quest, {HERO_FIRST} meditates for a moment`,
+        `{HERO_FIRST} celebrates the completed quest with a moment of solitude`,
+        `{HERO_FIRST} catches their breath after a difficult quest`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const introPiece = randomUtil.pickRandom(TEMPLATES);
+    const adjective = randomUtil.pickRandom(adjectives.ADJECTIVES);
+    const location = randomUtil.pickRandom(questWords.AREA_NAMES);
+    makeAnnouncement(hero, `${introPiece} near a ${adjective} ${location}.`);
 }
 
 function makeRestLevelPingAnnouncement(hero) {
-    // TODO dialogue
-    const TEMPLATES = [
-        `{HERO_FIRST} levels up to LVL ${hero.level}. The world is a bit more dangerous for them now.`,
+    const LEVEL_TEMPLATES = [
+        `{HERO_FIRST} levels up to LVL ${hero.level}.`,
+        `{HERO_FIRST} reaches LVL ${hero.level}.`,
+        `{HERO_FIRST} achieves LVL ${hero.level}.`,
+        `Ping! {HERO_FIRST} is now LVL ${hero.level}.`,
+        `{HERO_FIRST} celebrates reaching LVL ${hero.level}.`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const levelPiece = randomUtil.pickRandom(LEVEL_TEMPLATES);
+    const DANGER_TEMPLATES = [
+        `The world is a bit more dangerous for them now.`,
+        `They will now face fiercer enemies.`,
+        `Things will be more difficult now.`,
+        `From here on out, things will not be getting easier...`,
+        `But their enemies are growing stronger as well.`,
+    ];
+    const dangerPiece = randomUtil.pickRandom(DANGER_TEMPLATES);
+    makeAnnouncement(hero, `${levelPiece} ${dangerPiece}`);
 }
 
 function makeRestLevelHealthAnnouncement(hero) {
-    // TODO dialogue
     const TEMPLATES = [
-        `With their new level, {HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`,
+        `With their new level,`,
+        `After levelling up,`,
+        `As they grow stronger,`,
+        `With their new experience,`,
+        `For their accomplishments,`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const intro = randomUtil.pickRandom(TEMPLATES);
+    const healthNotes = `{HERO_FIRST} gains 5 HP Max from ${hero.hpMax - 5} to ${hero.hpMax}.`;
+    makeAnnouncement(hero, `${intro} ${healthNotes}`);
 }
 
 function makeRestHealAnnouncement(hero) {
-    // TODO dialogue
     const TEMPLATES = [
-        `As they rest, {HERO_FIRST} regains some health up to ${hero.hp}/${hero.hpMax}.`,
+        `As they rest,`,
+        `As they recover,`,
+        `As they recharge,`,
+        `Through taking time to rest,`,
+        `After taking a moment to collect their thoughts,`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const intro = randomUtil.pickRandom(TEMPLATES);
+    const healthNotes = `{HERO_FIRST} heals up to ${hero.hp}/${hero.hpMax}.`;
+    makeAnnouncement(hero, `${intro} ${healthNotes}`);
 }
 
 function makeRestEmergeAnnouncement(hero) {
-    // TODO dialogue
-    const TEMPLATES = [
-        `{HERO_FIRST} sets off to seek another quest.`,
+    const questWord = randomUtil.pickRandom(questWords.QUEST_WORDS);
+    const INTRO_TEMPLATES = [
+        `Feeling renewed,`,
+        `Feeling refreshed,`,
+        `Decently recharged,`,
+        `Recovered from their last quest,`,
+        `Ready for more adventure,`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const introPiece = randomUtil.pickRandom(INTRO_TEMPLATES);
+    const END_TEMPLATES = [
+        `{HERO_FIRST} sets off to seek another ${questWord}.`,
+        `{HERO_FIRST} seeks one more ${questWord}.`,
+        `{HERO_FIRST} begins looking for another ${questWord}.`,
+        `{HERO_FIRST} decides it is time for a new ${questWord}.`,
+        `{HERO_FIRST} asks around for another ${questWord}.`,
+    ];
+    const endPiece = randomUtil.pickRandom(END_TEMPLATES);
+    makeAnnouncement(hero, `${introPiece} ${endPiece}`);
 }
 
 function makeDeathAnnouncement(hero) {
-    // TODO dialogue
-    const TEMPLATES = [
-        `{HERO_FIRST} collapses as their hp drops to zero. Their journey ends abruptly, but they will be remembered for ages.`,
+    const INTRO_TEMPLATES = [
+        `{HERO_FIRST} collapses as their hp drops to zero.`,
+        `{HERO_FIRST} takes their last breath as their hp drops to zero.`,
+        `{HERO_FIRST} feels their life leave their body as their hp drops to zero.`,
+        `{HERO_FIRST} relives their happiest moments as their hp reaches zero.`,
+        `{HERO_FIRST} wishes they could have completed one more quest as their hp hits zero.`,
+        `{HERO_FIRST} has no regrets as their hp hits zero.`,
     ];
-    const announcement = randomUtil.pickRandom(TEMPLATES);
-    makeAnnouncement(hero, announcement);
+    const introPiece = randomUtil.pickRandom(INTRO_TEMPLATES);
+    const END_TEMPLATES = [
+        `Their journey ends abruptly, but they will be remembered for ages.`,
+        `Their life ends abruptly, but they have changed the world.`,
+        `Their adventure ends abruptly, but more adventurers will live with their memory.`,
+        `It will be a sad day in the kingdom, but also a celebration of their life.`,
+        `All those they have helped mourn for the loss of a great hero.`,
+    ];
+    const endPiece = randomUtil.pickRandom(END_TEMPLATES);
+    makeAnnouncement(hero, `${introPiece} ${endPiece}`);
 }
 
 function makeObituaryAnnouncement(hero) {

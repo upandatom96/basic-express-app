@@ -32,7 +32,36 @@ const FAMILY_NAMES = [
     "Gibnar"
 ];
 
+const HOME_NAMES = [
+    "Manor",
+    "Farmstead",
+    "Homestead",
+    "Castle",
+    "Ranch",
+    "Estate",
+    "Tower",
+];
+
+const AREA_NAMES = [
+    "mountain",
+    "lake",
+    "valley",
+    "grotto",
+    "tower",
+    "cavern",
+    "village",
+    "stone",
+    "hill",
+    "coast",
+    "forest",
+    "jungle",
+    "pond",
+    "river",
+];
+
 module.exports = {
     QUEST_WORDS,
-    FAMILY_NAMES
+    FAMILY_NAMES,
+    HOME_NAMES,
+    AREA_NAMES,
 }
