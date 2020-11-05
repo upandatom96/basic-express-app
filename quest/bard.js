@@ -287,7 +287,7 @@ function makeAnnouncement(hero, announcement) {
     const closing = getAnnouncementClosing(hero);
     let fullAnnouncement = `${announcement} ${closing}`;
     fullAnnouncement = interpolate(fullAnnouncement, hero);
-    tweetManager.makeQuestTweet(fullAnnouncement);
+    // tweetManager.makeQuestTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");
     hero.journal.push(fullAnnouncement);
