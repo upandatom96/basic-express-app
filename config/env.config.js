@@ -43,6 +43,11 @@ if (runningProd) {
   clueAccessToken = process.env.CLUE_ACCESS_TOKEN;
   clueAccessTokenSecret = process.env.CLUE_ACCESS_TOKEN_SECRET;
 
+  questConsumerKey = process.env.QUEST_CONSUMER_KEY;
+  questConsumerSecret = process.env.QUEST_CONSUMER_SECRET;
+  questAccessToken = process.env.QUEST_ACCESS_TOKEN;
+  questAccessTokenSecret = process.env.QUEST_ACCESS_TOKEN_SECRET;
+
   orderConsumerKey = process.env.ORDER_CONSUMER_KEY;
   orderConsumerSecret = process.env.ORDER_CONSUMER_SECRET;
   orderAccessToken = process.env.ORDER_ACCESS_TOKEN;
@@ -69,6 +74,10 @@ if (runningProd) {
       CLUE_CONSUMER_SECRET,
       CLUE_ACCESS_TOKEN,
       CLUE_ACCESS_TOKEN_SECRET,
+      QUEST_CONSUMER_KEY,
+      QUEST_CONSUMER_SECRET,
+      QUEST_ACCESS_TOKEN,
+      QUEST_ACCESS_TOKEN_SECRET,
       ORDER_CONSUMER_KEY,
       ORDER_CONSUMER_SECRET,
       ORDER_ACCESS_TOKEN,
@@ -96,6 +105,11 @@ if (runningProd) {
     clueConsumerSecret = CLUE_CONSUMER_SECRET;
     clueAccessToken = CLUE_ACCESS_TOKEN;
     clueAccessTokenSecret = CLUE_ACCESS_TOKEN_SECRET;
+
+    questConsumerKey = QUEST_CONSUMER_KEY;
+    questConsumerSecret = QUEST_CONSUMER_SECRET;
+    questAccessToken = QUEST_ACCESS_TOKEN;
+    questAccessTokenSecret = QUEST_ACCESS_TOKEN_SECRET;
 
     orderConsumerKey = ORDER_CONSUMER_KEY;
     orderConsumerSecret = ORDER_CONSUMER_SECRET;
@@ -134,5 +148,9 @@ module.exports = {
   clueConsumerSecret,
   clueAccessToken,
   clueAccessTokenSecret,
+  questConsumerKey,
+  questConsumerSecret,
+  questAccessToken,
+  questAccessTokenSecret,
   test: test
 };

@@ -4,7 +4,8 @@ const {
     aotiCredentials,
     storyCredentials,
     clueCredentials,
-    orderCredentials
+    orderCredentials,
+    questCredentials,
 } = require("../config/twit.config");
 
 let twitConnection;
@@ -21,6 +22,10 @@ function makeOrderTweet(message) {
     makeTweet(message, orderCredentials);
 }
 
+function makeQuestTweet(message) {
+    makeTweet(message, questCredentials);
+}
+
 function makeClueTweet(message) {
     makeTweet(message, clueCredentials);
 }
@@ -29,7 +34,8 @@ module.exports = {
     makeAotiTweet,
     makeStoryTweet,
     makeClueTweet,
-    makeOrderTweet
+    makeOrderTweet,
+    makeQuestTweet,
 }
 
 function makeTweet(message, twitterCredentials) {
