@@ -222,7 +222,6 @@ function getHeroReport(heroDB) {
         inventory: heroDB.inventory,
         party: heroDB.party,
         storyOver: heroDB.status === 99,
-        journal: heroDB.journal,
         startDate: heroDB.startDate,
         deathDate: heroDB.deathDate,
         completedChapters,
@@ -233,5 +232,6 @@ function getHeroReport(heroDB) {
         damageTakenTotal: heroDB.damageTakenTotal,
         age: heroDB.journal.length,
         seed: heroDB.seed,
+        journal: heroDB.journal,
     };
 }
