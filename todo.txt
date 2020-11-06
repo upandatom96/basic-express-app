@@ -1,0 +1,18 @@
+Features:
+1. Secret Stats: include some stats that are hidden and influence random things
+2. Hero Images: provide images randomly for the heroes
+3. Perks: add perks to happen on level up
+4. use SEED: use the random number to make minor changes throughout
+5. allow DECISION events: allow people voting on twitter to control the outcome
+6. user-made heroes: allow users to make their own heroes outside of the normal flow
+
+Content:
+1. chapters
+2. quests
+3. items
+4. allies
+5. special moves
+6. advantages
+7. disadvantages
+8. special moves
+9. perks
