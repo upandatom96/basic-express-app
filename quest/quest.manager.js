@@ -147,17 +147,15 @@ function getAlignment(hero) {
 }
 
 function getStats(savedHero) {
-    const specialRevealed = savedHero.status > 3;
-    const baseStatsRevealed = savedHero.status > 2;
     return {
         // base stats
-        strength: baseStatsRevealed ? savedHero.strength : "???",
-        wisdom: baseStatsRevealed ? savedHero.wisdom : "???",
-        dexterity: baseStatsRevealed ? savedHero.dexterity : "???",
-        charisma: baseStatsRevealed ? savedHero.charisma : "???",
+        strength: savedHero.strength,
+        wisdom: savedHero.wisdom,
+        dexterity: savedHero.dexterity,
+        charisma: savedHero.charisma,
         // special stats
-        advantage: specialRevealed ? savedHero.advantage : "???",
-        disadvantage: specialRevealed ? savedHero.disadvantage : "???",
+        advantage: savedHero.advantage,
+        disadvantage: savedHero.disadvantage,
     };
 }
 
@@ -189,13 +187,15 @@ function getHeroReport(heroDB) {
     const alignment = getAlignment(heroDB);
     const quest = codeRetriever.findQuest(heroDB.currentQuestName);
     const chapter = codeRetriever.findChapterEvent(heroDB.currentChapterName);
-    const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const stats = getStats(heroDB);
     const completedQuests = getCompletedQuests(heroDB);
     const completedChapters = getCompletedChapters(heroDB);
     const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
     const uniqueCompletedChapters = calcUtil.getUniqueItems(completedChapters);
     const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoves);
+    const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
+    const levelThreshold = (heroDB.level * 100) + ((heroDB.level - 1) * (heroDB.level) * 10);
+    const expText = `${heroDB.expPoints}/${levelThreshold} exp`;
     const distanceText = boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null;
     const currentQuest = boolUtil.hasValue(quest) ? quest.name : null;
     const currentQuestDetails = boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null;
@@ -207,6 +207,7 @@ function getHeroReport(heroDB) {
         alignment: alignment,
         _id: heroDB._id,
         hpText,
+        expText,
         distanceText,
         currentQuest,
         currentQuestDetails,
