@@ -14,6 +14,10 @@ function pickRandomNumber(min, max) {
     return Math.floor(fullRandom);
 }
 
+function trueOrFalse() {
+    return pickRandom([true, false]);
+}
+
 function pickRandom(array) {
     const shuffledArray = shuffleArray(array);
     return shuffledArray[0];
@@ -46,6 +50,7 @@ function shuffleArray(array) {
 
 module.exports = {
     generateRandomPassword,
+    trueOrFalse,
     shuffleArray,
     pickRandomNumber,
     pickRandom,

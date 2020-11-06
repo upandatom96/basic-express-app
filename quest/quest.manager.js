@@ -7,6 +7,8 @@ const nameManager = require('./quest-name.manager');
 const heroProgressor = require('./hero-progressor');
 const codeRetriever = require('./code-retriever');
 
+const HeroMoves = require('../constants/quest/hero-moves');
+
 const boolUtil = require('../utilities/bool.util');
 const calcUtil = require('../utilities/calc.util');
 
@@ -193,6 +195,7 @@ function getHeroReport(heroDB) {
     const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
     const uniqueCompletedChapters = calcUtil.getUniqueItems(completedChapters);
     const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoves);
+    const standardMoves = HeroMoves.STANDARD_MOVES;
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const levelThreshold = (heroDB.level * 100) + ((heroDB.level - 1) * (heroDB.level) * 10);
     const expText = `${heroDB.expPoints}/${levelThreshold} exp`;
@@ -216,6 +219,7 @@ function getHeroReport(heroDB) {
         expPoints: heroDB.expPoints,
         status: heroDB.status,
         specialMoves,
+        standardMoves,
         stats,
         inventory: heroDB.inventory,
         party: heroDB.party,

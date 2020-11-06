@@ -4,6 +4,7 @@ const eventHandler = require('./event-handler');
 
 const HeroStatus = require('../constants/quest/hero-status');
 const EventTypes = require('../constants/quest/event-types');
+const HeroMoves = require('../constants/quest/hero-moves');
 
 const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
@@ -301,10 +302,28 @@ function gainMaxHealth(hero) {
     enforceMaxHealth(hero);
 }
 
+function getUnlearnedMoves(hero) {
+    return HeroMoves.SPECIAL_MOVES.filter((move) => {
+        return !hero.specialMoves.includes(move.name);
+    });
+}
+
+function shouldLearnNewMove(hero) {
+    const unlearnedMoves = getUnlearnedMoves(hero);
+    const hasMovesToLearn = unlearnedMoves.length > 0;
+    return hasMovesToLearn && randomUtil.trueOrFalse();
+}
+
 function gainPerk(hero) {
-    const message = statBoost(hero);
     hero.status = HeroStatus.REST_HEAL;
-    return message;
+
+    if (shouldLearnNewMove(hero)) {
+        // PERK 1: NEW MOVE
+        return applyNewMove(hero);
+    } else {
+        // PERK 2: STAT BOOST
+        return applyStatBoost(hero);
+    }
 }
 
 function restHeal(hero) {
@@ -449,7 +468,14 @@ function getFinaleEvent(hero) {
     return codeRetriever.findQuest(hero.currentQuestName).finaleEvent;
 }
 
-function statBoost(hero) {
+function applyNewMove(hero) {
+    const unlearnedMoves = getUnlearnedMoves(hero);
+    const newMove = randomUtil.pickRandom(unlearnedMoves).name;
+    hero.specialMoves.push(newMove);
+    return `{HERO_FIRST} learns a SPECIAL MOVE called ${newMove}.`;
+}
+
+function applyStatBoost(hero) {
     let message = "{HERO_FIRST} gets a STAT BOOST. ";
     const categoryNumber = randomUtil.pickRandomNumber(1, 4);
     switch (categoryNumber) {
