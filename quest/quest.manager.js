@@ -156,6 +156,7 @@ function getStats(savedHero) {
         // special stats
         advantage: savedHero.advantage,
         disadvantage: savedHero.disadvantage,
+        specialAdjective: savedHero.specialAdjective,
     };
 }
 

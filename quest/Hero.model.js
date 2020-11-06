@@ -91,6 +91,11 @@ const HeroSchema = new Schema({
         required: true,
         default: "CURSED"
     },
+    specialAdjective: {
+        type: String,
+        required: true,
+        default: "PURPLE"
+    },
     journal: [
         {
             type: String

@@ -22,6 +22,7 @@ function generateHero(firstName, pastHeroes) {
     const level = 1;
     const inventory = [randomManager.pickStarterItem()];
     const party = [randomManager.pickStarterAlly()];
+    const specialAdjective = randomManager.pickAdjective();
     const journal = [];
     const currentQuestName = null;
     const distanceTravelled = 0;
@@ -40,6 +41,7 @@ function generateHero(firstName, pastHeroes) {
         status,
         advantage,
         disadvantage,
+        specialAdjective,
         specialMoves,
         strength: stats.strength,
         wisdom: stats.wisdom,
