@@ -5,6 +5,7 @@ const Hero = mongoose.model('hero');
 const heroGenerator = require('./hero-generator');
 const nameManager = require('./quest-name.manager');
 const heroProgressor = require('./hero-progressor');
+const questStatHelper = require('./quest-stat-helper');
 const codeRetriever = require('./code-retriever');
 
 const HeroMoves = require('../constants/quest/hero-moves');
@@ -36,14 +37,11 @@ function getFallenHeroes() {
 
 function getHeroStats() {
     return new Promise((resolve, reject) => {
-        Hero.find({
-            status: 99
-        })
+        Hero.find({})
             .then((heroes) => {
                 const heroReports = getHeroReports(heroes);
-                resolve({
-                    fallenHeroes: heroReports.length
-                });
+                const heroStats = questStatHelper.getStatsForHeroes(heroReports);
+                resolve(heroStats);
             });
     });
 }

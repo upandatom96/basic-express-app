@@ -2,6 +2,7 @@ const express = require('express');
 const questController = express.Router();
 const questNameManager = require("./quest-name.manager");
 const questManager = require("./quest.manager");
+const tweetManager = require("../tweet/tweet.manager");
 const authUtil = require('../utilities/auth.util');
 
 questController.get('/currentHero', async (req, res) => {
@@ -37,6 +38,7 @@ questController.get('/fallenHeroes', async (req, res) => {
 questController.get('/heroStats', async (req, res) => {
     try {
         const heroStats = await questManager.getHeroStats();
+        tweetQuest(req.query.tweet, heroStats.message);
         res.send(heroStats);
     } catch (err) {
         res.statusCode = 500;
@@ -96,3 +98,9 @@ questController.get('/randomHeroName', async (req, res) => {
 });
 
 module.exports = questController;
+
+function tweetQuest(tweetParam, message) {
+    if (tweetParam && tweetParam.toUpperCase() === "TRUE") {
+        tweetManager.makeQuestTweet(message);
+    }
+}
