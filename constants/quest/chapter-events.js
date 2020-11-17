@@ -624,6 +624,87 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "Medusa's Aunt",
+        intro: "{HERO_FIRST} hears a hissing in some bushes. It's Medusa! No... It's Medusa's Aunt!",
+        enemyName: "Medusa's Aunt",
+        defeat: "{HERO_FIRST} has defeated Medusa's Aunt!",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 30,
+        enemyHpStart: 30,
+        enemyHpMax: 35,
+        dexterity: 3,
+        charisma: 5,
+        wisdom: 5,
+        strength: 5,
+        moves: [
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "TAIL WHIP",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "STONEY KISS",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "LEGENDARY SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "STONEY STARE",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "STONEY HIT",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "SNAKE DISCUSSION",
+            },
+            {
+                type: MoveTypes.HEAL,
+                name: "UNGODLY HEAL",
+                multiplier: 2,
+            },
+        ],
+    },
+    {
+        name: "INVISIBLE ENEMY",
+        intro: "{HERO_FIRST} feels a tap on their shoulder, but they see no one. There must be an invisible enemy!",
+        enemyName: "Invisible Enemy",
+        defeat: "{HERO_FIRST} has defeated an Invisible Enemy... they think. Hard to be sure.",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 20,
+        enemyHpStart: 15,
+        enemyHpMax: 15,
+        dexterity: 5,
+        charisma: 1,
+        wisdom: 1,
+        strength: 1,
+        moves: [
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "UNSEEN PUNCH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "INVISIBLE SHOVE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "HIDDEN KICK",
+                multiplier: 2,
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
