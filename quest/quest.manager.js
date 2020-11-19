@@ -129,6 +129,7 @@ function advanceHero(hero, resolve) {
     updatedHero.save()
         .then((savedHero) => {
             const heroReport = getHeroReport(savedHero);
+            delete heroReport.journal;
             resolve(heroReport);
         });
 }
