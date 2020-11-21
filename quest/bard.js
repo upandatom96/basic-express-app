@@ -307,7 +307,7 @@ function getAnnouncementClosing(hero) {
 }
 
 function getQuestCount(hero) {
-    const questCount = hero.completedQuestLog;
+    const questCount = hero.completedQuestLog.length;
     const questS = questCount === 1 ? "" : "s";
 
     return `They finished ${questCount} quest${questS}.`;
