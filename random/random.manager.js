@@ -85,6 +85,13 @@ function pickRace() {
     return randomUtil.pickRandom(constants.RACES);
 }
 
+function pickColor() {
+    return randomUtil.pickRandom([
+        "red", "orange", "yellow", "green", "blue", "purple", "white", "black", "brown",
+        "maroon", "teal", "mustard", "indigo", "pink", "navy", "gray",
+    ]);
+}
+
 function pickAdvantage() {
     return randomUtil.pickRandom(constants.ADVANTAGES);
 }
@@ -129,6 +136,7 @@ module.exports = {
     pickChapterEvent,
     pickStarterAlly,
     pickStarterItem,
+    pickColor,
     pickRace,
     pickAdvantage,
     pickDisadvantage,

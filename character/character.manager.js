@@ -5,20 +5,45 @@ const randomManager = require('../random/random.manager');
 async function getRandomCharacter() {
     try {
         return {
+            // all characters
             name: await getName(),
             gender: getGender(),
-            alignment: getAlignment(),
-            race: "",
-            title: "",
-            age: "",
-            height: "",
-            weight: "",
-            hobby: "",
-            occupation: "",
-            favoriteColor: "",
-            traits: [],
+            favoriteColor: randomManager.pickColor(),
+            traits: getTraits(),
             dndStats: getDndStats(),
             additionalStats: getAdditionalStats(),
+            age: getAge(),
+            alignment: getAlignment(),
+            religion: getReligion(),
+            height: getHeight(),
+            weight: getWeight(),
+            hobby: getHobby(),
+            story: getStory(),
+            secret: getSecret(),
+            inventory: getInventory(),
+            home: "",
+            equipment: "",
+            maxHealth: "",
+            currentHealth: "",
+            moves: [],
+            wealth: getWealth(),
+            race: randomManager.pickRace().toLowerCase(),
+            // npc or pc
+            occupation: getOccupation(),
+            title: getTitle(),
+            class: "",
+            // npc only
+            demeanor: "",
+            // pc only
+            experience: "",
+            // enemy only
+            descriptor: "", // angry (descriptor + race = enemy type)
+            questExpGain: "", // +20exp
+            questStats: "", // roll stats for quest bot
+            questHealth: "", // roll health for quest bot
+            questIntro: "", // what to say on intro
+            questDefeat: "", // what to say on defeat
+            questMoves: [], // use descriptor
         };
     } catch (error) {
         console.error(error);
@@ -36,7 +61,18 @@ async function getName() {
 }
 
 function getGender() {
-    return randomUtil.pickRandom(["male","male", "male", "female","female", "female", "unknown", "non-binary"]);
+    return randomUtil.pickRandom(["male", "male", "male", "female", "female", "female", "unknown", "non-binary"]);
+}
+
+function getTitle() {
+    return randomUtil.pickRandom([
+        "", "", "", "", "", "", "", "", "", "", "", "",
+        "Doctor", "Professor", "The Honorable", "The Infamous",
+    ]);
+}
+
+function getAge() {
+    return randomUtil.pickRandomNumber(18, 81);
 }
 
 function getAlignment() {
@@ -60,6 +96,16 @@ function getAlignmentGoodVsEvil() {
     return randomUtil.pickRandom(["good", "neutral", "evil"]);
 }
 
+function getTraits() {
+    return [
+        randomManager.pickAdvantage().toLowerCase(),
+        randomManager.pickDisadvantage().toLowerCase(),
+        randomManager.pickAdjective(),
+        randomManager.pickAdjective(),
+        randomManager.pickAdjective(),
+    ];
+}
+
 function getDndStats() {
     // TODO roll stats
     return {
@@ -76,5 +122,42 @@ function getAdditionalStats() {
     // TODO roll stats
     return {
         courage: 0,
+        speed: 0,
     };
+}
+
+function getSecret() {
+    return "They are the king's secret child.";
+}
+
+function getInventory() {
+    return [];
+}
+
+function getWealth() {
+    return "100 silver";
+}
+
+function getStory() {
+    return "They lost their memory.";
+}
+
+function getOccupation() {
+    return "";
+}
+
+function getHobby() {
+    return "";
+}
+
+function getWeight() {
+    return "";
+}
+
+function getHeight() {
+    return "";
+}
+
+function getReligion() {
+    return "";
 }
