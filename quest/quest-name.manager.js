@@ -16,7 +16,7 @@ function getRandomQuestName() {
 
 async function getRandomHeroName() {
     try {
-        const rareNames = await nameyConnector.findRareNames(3, false);
+        const rareNames = await nameyConnector.findRareNames(4, false);
         const commonNames = await nameyConnector.findCommonNames(1, false);
         return randomUtil.pickRandom(rareNames.concat(commonNames));
     } catch (error) {

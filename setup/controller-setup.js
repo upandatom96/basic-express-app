@@ -65,6 +65,9 @@ function setupControllers(app) {
 
   const contactController = require('../contact/contact.controller');
   app.use('/contact', contactController);
+
+  const characterController = require('../character/character.controller');
+  app.use('/character', characterController);
 }
 
 module.exports = {
