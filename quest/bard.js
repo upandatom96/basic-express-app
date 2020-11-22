@@ -12,7 +12,7 @@ function makeNameAnnouncement(hero) {
     const NAME_TEMPLATES = [
         `Once Upon a Time, a young {HERO_RACE} named {HERO_FULL} would embark on a journey.`,
         `Our story begins with {HERO_FULL}, the {HERO_RACE}.`,
-        `As the sun rose again one day, {HERO_FULL} the {HERO_RACE} would with a new feeling.`,
+        `As the sun rose again one day, {HERO_FULL} the {HERO_RACE} woke up with a new feeling.`,
         `{HERO_FULL} the {HERO_RACE} is set to do great things.`,
         `Have you heard the story of {HERO_FULL} the {HERO_RACE}?.`,
     ];
