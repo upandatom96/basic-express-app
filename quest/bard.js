@@ -7,6 +7,7 @@ const randomUtil = require('../utilities/random.util');
 
 const questWords = require('../constants/quest/quest-words');
 const adjectives = require('../constants/words/adjectives');
+const characterRoller = require('../character/character.roller');
 
 function makeNameAnnouncement(hero) {
     const NAME_TEMPLATES = [
@@ -314,9 +315,5 @@ function getQuestCount(hero) {
 }
 
 function getAlignment(hero) {
-    if (hero.alignmentGoodVsEvil === "NEUTRAL" && hero.alignmentLawVsChaos === "NEUTRAL") {
-        return "TRUE NEUTRAL";
-    } else {
-        return `${hero.alignmentLawVsChaos} ${hero.alignmentGoodVsEvil}`;
-    }
+    return characterRoller.getFullAlignment(hero.alignmentGoodVsEvil, hero.alignmentLawVsChaos);
 }

@@ -1,49 +1,27 @@
 const nameyManager = require('../api-connector/namey.connector');
 const randomUtil = require('../utilities/random.util');
 const randomManager = require('../random/random.manager');
+const characterRoller = require('../character/character.roller');
 
-async function getRandomCharacter() {
+async function getGenericCharacter() {
     try {
         return {
-            // all characters
-            name: await getName(),
+            name: await nameyManager.findRandomCharacterName(),
+            type: "generic character",
+            descriptor: randomManager.getOneAdjective(),
             gender: getGender(),
             favoriteColor: randomManager.pickColor(),
-            traits: getTraits(),
-            dndStats: getDndStats(),
-            additionalStats: getAdditionalStats(),
             age: getAge(),
             alignment: getAlignment(),
-            religion: getReligion(),
+            traits: getTraits(),
             height: getHeight(),
             weight: getWeight(),
-            hobby: getHobby(),
-            story: getStory(),
-            secret: getSecret(),
-            inventory: getInventory(),
-            home: "",
-            equipment: "",
-            maxHealth: "",
-            currentHealth: "",
-            moves: [],
-            wealth: getWealth(),
-            race: randomManager.pickRace().toLowerCase(),
-            // npc or pc
-            occupation: getOccupation(),
-            title: getTitle(),
-            class: "",
-            // npc only
-            demeanor: "",
-            // pc only
-            experience: "",
-            // enemy only
-            descriptor: "", // angry (descriptor + race = enemy type)
-            questExpGain: "", // +20exp
-            questStats: "", // roll stats for quest bot
-            questHealth: "", // roll health for quest bot
-            questIntro: "", // what to say on intro
-            questDefeat: "", // what to say on defeat
-            questMoves: [], // use descriptor
+            // hobby: getHobby(),
+            // story: getStory(),
+            // secret: getSecret(),
+            // inventory: getInventory(),
+            // home: "",
+            // equipment: "",
         };
     } catch (error) {
         console.error(error);
@@ -51,13 +29,68 @@ async function getRandomCharacter() {
     }
 }
 
+async function getQuestBotEnemy() {
+    try {
+        const character = await getGenericCharacter();
+        character.type = "quest bot enemy"
+        character.stats = characterRoller.rollStats();
+        character.hpMax = randomUtil.pickRandomNumber(15,35);
+        character.hpStart = character.hpMax - randomUtil.pickRandomNumber(0,5);
+        character.expGain = character.hpMax + randomUtil.pickRandomNumber(0,10);
+        character.intro = null;
+        character.defeat = null;
+        character.moves = [];
+        character.enemyType = characterRoller.chooseEnemyType();
+        character.appearance = `${character.descriptor} ${character.enemyType}`;
+        return character;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+async function getNpc() {
+    try {
+        const character = await getGenericCharacter();
+        character.type = "non-playable character";
+        setupCharacterBasics(character);
+        character.demeanor = characterRoller.chooseDemeanor();
+        return character;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+async function getPc() {
+    try {
+        const character = await getGenericCharacter();
+        character.type = "playable character";
+        setupCharacterBasics(character);
+        character.experience = 0;
+        return character;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
 module.exports = {
-    getRandomCharacter,
+    getGenericCharacter,
+    getQuestBotEnemy,
+    getNpc,
+    getPc,
 };
 
-async function getName() {
-    const names = await nameyManager.findRareNames(1, true);
-    return names[0];
+function setupCharacterBasics(character) {
+    character.hpMax = "";
+    character.hpCurrent = "";
+    character.dndStats = null;
+    character.additionalStats = null;
+    character.race = randomManager.pickRace().toLowerCase();
+    character.occupation = getOccupation();
+    character.title = getTitle();
+    character.class = "";
 }
 
 function getGender() {
@@ -80,20 +113,9 @@ function getAlignment() {
     if (isUnaligned) {
         return "unaligned";
     }
-    const goodVsEvil = getAlignmentGoodVsEvil();
-    const lawVsChaos = getAlignmentLawVsChaos();
-    if (goodVsEvil === "neutral" && lawVsChaos === "neutral") {
-        return "true neutral";
-    }
-    return `${lawVsChaos} ${goodVsEvil}`;
-}
-
-function getAlignmentLawVsChaos() {
-    return randomUtil.pickRandom(["lawful", "neutral", "chaotic"]);
-}
-
-function getAlignmentGoodVsEvil() {
-    return randomUtil.pickRandom(["good", "neutral", "evil"]);
+    const goodVsEvil = characterRoller.chooseGoodVsEvil();
+    const lawVsChaos = characterRoller.chooseLawVsChaos();
+    return characterRoller.getFullAlignment(goodVsEvil, lawVsChaos);
 }
 
 function getTraits() {
@@ -151,13 +173,12 @@ function getHobby() {
 }
 
 function getWeight() {
-    return "";
+    const weight = randomUtil.pickRandomNumber(100, 300);
+    return `${weight} lbs`;
 }
 
 function getHeight() {
-    return "";
-}
-
-function getReligion() {
-    return "";
+    const foot = randomUtil.pickRandom(["4","5","5","5","5","6"]);
+    const inches = randomUtil.pickRandom(["0","1","2","3","4","6","7","8","9","10","11"]);
+    return `${foot} foot ${inches} inches`;
 }

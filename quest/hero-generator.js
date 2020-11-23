@@ -1,5 +1,6 @@
 const randomUtil = require('../utilities/random.util');
 const randomManager = require('../random/random.manager');
+const characterRoller = require('../character/character.roller');
 
 function generateHero(firstName, pastHeroes) {
     const previousNames = getPreviousHeroNames(pastHeroes);
@@ -14,7 +15,7 @@ function generateHero(firstName, pastHeroes) {
     const advantage = randomManager.pickAdvantage();
     const disadvantage = randomManager.pickDisadvantage();
     const specialMove = randomManager.pickSpecialMove();
-    const stats = rollStats();
+    const stats = characterRoller.rollStats();
 
     const status = 0;
     const hp = 100;
@@ -61,7 +62,7 @@ function generateHero(firstName, pastHeroes) {
 }
 
 module.exports = {
-    generateHero
+    generateHero,
 }
 
 function pickNewName(firstName, previousNames) {
@@ -83,36 +84,4 @@ function getPreviousHeroNames(previousHeroes) {
         previousNames.push(hero.name);
     });
     return previousNames;
-}
-
-function rollStats() {
-    let strength = 1;
-    let wisdom = 1;
-    let charisma = 1;
-    let dexterity = 1;
-
-    for (let i = 16; i > 0; i--) {
-        const categoryNumber = randomUtil.pickRandomNumber(1, 4);
-        switch (categoryNumber) {
-            case 1:
-                strength++;
-                break;
-            case 2:
-                wisdom++;
-                break;
-            case 3:
-                charisma++;
-                break;
-            case 4:
-                dexterity++
-                break;
-        }
-    }
-
-    return {
-        strength,
-        wisdom,
-        charisma,
-        dexterity
-    };
 }

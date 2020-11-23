@@ -1,5 +1,10 @@
 const request = require('request');
 
+async function findRandomCharacterName() {
+    const names = await findRareNames(1, true);
+    return names[0];
+}
+
 function findRareNames(nameCount, withSurname) {
     const url = buildNameyUrl(nameCount, "rare", withSurname);
     return queryNamey(url);
@@ -17,6 +22,7 @@ function findCommonNames(nameCount, withSurname) {
 
 module.exports = {
     findRareNames,
+    findRandomCharacterName,
     findAnyNames,
     findCommonNames,
 }

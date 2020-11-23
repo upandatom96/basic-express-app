@@ -7,6 +7,7 @@ const nameManager = require('./quest-name.manager');
 const heroProgressor = require('./hero-progressor');
 const questStatHelper = require('./quest-stat-helper');
 const codeRetriever = require('./code-retriever');
+const characterRoller = require('../character/character.roller');
 
 const HeroMoves = require('../constants/quest/hero-moves');
 
@@ -140,11 +141,7 @@ function getLatestMessage(savedHero) {
 }
 
 function getAlignment(hero) {
-    if (hero.alignmentGoodVsEvil === "NEUTRAL" && hero.alignmentLawVsChaos === "NEUTRAL") {
-        return "TRUE NEUTRAL";
-    } else {
-        return `${hero.alignmentLawVsChaos} ${hero.alignmentGoodVsEvil}`;
-    }
+    return characterRoller.getFullAlignment(hero.alignmentGoodVsEvil, hero.alignmentLawVsChaos);
 }
 
 function getStats(savedHero) {
