@@ -37,8 +37,8 @@ const FLAVOR_EVENTS = [
         type: EventTypes.FLAVOR,
     },
     {
-        name: "News: Reptile",
-        intro: "{HERO_FIRST} walks past a Bard who tells them the news, rumor has it the King is actually a reptile.",
+        name: "News: Demon",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, rumor has it the King is actually a demon.",
         type: EventTypes.FLAVOR,
     },
     {
