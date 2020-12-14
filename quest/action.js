@@ -170,9 +170,9 @@ function travel(hero) {
         return `${message} They have reached their destination, the ${quest.destination}. ${endMsg}`
     } else {
         hero.status = HeroStatus.QUEST_CHAPTER_START;
-        const message = runTravelScenario(hero);
+        const endMessage = runTravelScenario(hero);
         checkHealth(hero);
-        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${message}`
+        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${endMessage}`
     }
 }
 
