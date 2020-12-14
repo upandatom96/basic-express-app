@@ -170,24 +170,9 @@ function travel(hero) {
         return `${message} They have reached their destination, the ${quest.destination}. ${endMsg}`
     } else {
         hero.status = HeroStatus.QUEST_CHAPTER_START;
-        const TEMPLATES = [
-            `Their journey continues...`,
-            `They need to go just a bit further...`,
-            `What will happen next?`,
-            `They are tired but they must carry on.`,
-            `They take their next step...`,
-            `They wonder how long this will go on.`,
-            `They continue bravely and confidently.`,
-            `They pick up the pace.`,
-            `They hope they didn't leave the stove on.`,
-            `They swear they've passed this spot before...`,
-            `They worry it may rain soon.`,
-            `The skies clear as they continue onward`,
-            `Night begins, but they continue.`,
-            `They hear whispers around them but keep moving.`,
-        ];
-        const endMsg = randomUtil.pickRandom(TEMPLATES);
-        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${endMsg}`
+        const message = runTravelScenario(hero);
+        checkHealth(hero);
+        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${message}`
     }
 }
 
@@ -509,4 +494,33 @@ function getTravelBaseMessage(hero) {
     const distance = addDistance(hero);
     const sOrNot = distance > 1 ? "s" : "";
     return `{HERO_FIRST} travels ${distance} mile${sOrNot}.`;
+}
+function runTravelScenario(hero) {
+    // TODO use CHECK_WORLD instead of random #
+    const randomNumber = randomUtil.pickRandomNumber(0, 100);
+    if (randomNumber > 90) {
+        hero.hp += 5;
+        return "They find an apple and recover some health.";
+    } else if (randomNumber < 10) {
+        hero.hp -= 5;
+        return "They trip over a snake and loss some health.";
+    } else {
+        const TEMPLATES = [
+            `Their journey continues...`,
+            `They need to go just a bit further...`,
+            `What will happen next?`,
+            `They are tired but they must carry on.`,
+            `They take their next step...`,
+            `They wonder how long this will go on.`,
+            `They continue bravely and confidently.`,
+            `They pick up the pace.`,
+            `They hope they didn't leave the stove on.`,
+            `They swear they've passed this spot before...`,
+            `They worry it may rain soon.`,
+            `The skies clear as they continue onward`,
+            `Night begins, but they continue.`,
+            `They hear whispers around them but keep moving.`,
+        ];
+        return randomUtil.pickRandom(TEMPLATES);
+    }
 }
