@@ -170,14 +170,14 @@ function getHeroReports(heroDBs) {
 function getCompletedChapters(heroDB) {
     return heroDB.completedChapterLog
         .map((chapterName) => {
-            return codeRetriever.findChapterEvent(chapterName).name;
+            return chapterName;
         });
 }
 
 function getCompletedQuests(heroDB) {
     return heroDB.completedQuestLog
         .map((questName) => {
-            return codeRetriever.findQuest(questName).name;
+            return questName;
         });
 }
 
