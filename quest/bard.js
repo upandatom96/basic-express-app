@@ -91,7 +91,7 @@ function makeSetOffAnnouncement(hero) {
         `{HERO_FIRST} finished preparing and set off away from the {HERO_LAST} ${homeType}, looking for any quest they could find.`,
         `{HERO_FIRST} set off for greatness, leaving the {HERO_LAST} ${homeType} behind forever.`,
         `{HERO_FIRST} put on their boots and walked through the front door of the {HERO_LAST} ${homeType} one last time.`,
-        `{HERO_FIRST} was suddenly kicked out of the {HERO_LAST} ${homeType}. They would have to make it on their own.`,
+        `{HERO_FIRST} was suddenly kicked out of the {HERO_LAST} ${homeType}. They woke have to make it on their own.`,
         `The {HERO_LAST} ${homeType} burned down in mysterious circumstances. {HERO_FIRST} was now without a home.`,
     ];
     const announcement = randomUtil.pickRandom(SET_OFF_TEMPLATES);

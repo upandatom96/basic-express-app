@@ -432,6 +432,101 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Horrid Lich",
+        text: "banish the Lich",
+        destination: "the forest of the dead",
+        distanceRequired: 20,
+        expPoints: 100,
+        finaleEvent: {
+            intro: "The Lich rises from the ground and approaches {HERO_FIRST}.",
+            enemyName: "the Lich",
+            defeat: "{HERO_FIRST} has banished the Lich!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 200,
+            enemyHpMax: 200,
+            dexterity: 1,
+            charisma: 1,
+            wisdom: 10,
+            strength: 2,
+            moves: [
+                {
+                    type: MoveTypes.DEXTERITY_ATTACK,
+                    name: "SHIFTING SOIL",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "SONG OF THE DEAD",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "VISION OF DEATH",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "DEATH'S GRASP",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "RETURN TO THE EARTH",
+                },
+                {
+                    type: MoveTypes.HEAL,
+                    name: "ESSENCE OF DEATH",
+                    multiplier: 2,
+                },
+            ],
+        },
+    },
+    {
+        name: "Myth of Hydra",
+        text: "seek and defeat the Hydra",
+        destination: "the Hydra's hideout",
+        distanceRequired: 100,
+        expPoints: 250,
+        finaleEvent: {
+            intro: "The Hydra screeches as {HERO_FIRST} approaches.",
+            enemyName: "the Hydra",
+            defeat: "{HERO_FIRST} has defeated the Hydra!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 15,
+            enemyHpMax: 1000,
+            dexterity: 2,
+            charisma: 2,
+            wisdom: 2,
+            strength: 6,
+            moves: [
+                {
+                    type: MoveTypes.HEAL,
+                    name: "GROW HEAD",
+                    multiplier: 3,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "FIRE BREATH",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "HORRIFYING BITE",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "HEAD BASH",
+                    multiplier: 2,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "HEAD-TO-HEAD CONVERSATION",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
