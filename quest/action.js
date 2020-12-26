@@ -536,16 +536,20 @@ function travelMaintenance(hero) {
 
     // switch weather
     const weatherMod = randomUtil.pickRandomNumber(0,100);
-    const switchWeather = weatherMod > 75;
+    const switchWeather = weatherMod > 65;
     if (switchWeather) {
         if (weatherMod > 90) {
             hero.weather = null;
         } else if (weatherMod > 85) {
-            hero.weather = "Rainy";
+            hero.weather = "rainy";
         } else if (weatherMod > 80) {
-            hero.weather = "Sunny";
+            hero.weather = "sunny";
         } else if (weatherMod > 75) {
-            hero.weather = "Foggy";
+            hero.weather = "foggy";
+        } else if (weatherMod > 70) {
+            hero.weather = "stormy";
+        } else if (weatherMod > 65) {
+            hero.weather = "snowy";
         }
     }
 

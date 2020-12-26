@@ -4,6 +4,7 @@ const codeRetriever = require('./code-retriever');
 
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
+const boolUtil = require('../utilities/bool.util');
 
 const questWords = require('../constants/quest/quest-words');
 const adjectives = require('../constants/words/adjectives');
@@ -275,12 +276,16 @@ module.exports = {
 function interpolate(fullAnnouncement, hero) {
     const firstName = getFirstName(hero.name);
     const lastName = getLastName(hero.name);
+    const weather = getWeather(hero.weather);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FULL}`, hero.name);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FIRST}`, firstName);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_LAST}`, lastName);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_RACE}`, hero.race.toLowerCase());
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{ADV}`, hero.advantage);
     fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{DIS}`, hero.disadvantage);
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{RA}`, hero.randomAdjective.toLowerCase());
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{RN}`, hero.randomNoun.toLowerCase());
+    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{WEATHER}`, weather);
     return fullAnnouncement;
 }
 
@@ -300,6 +305,14 @@ function getFirstName(heroName) {
 
 function getLastName(heroName) {
     return heroName.split(' ').slice(-1).join(' ');
+}
+
+function getWeather(weather) {
+    if (boolUtil.hasNoValue(weather)) {
+        return randomUtil.pickRandom(["cloudy", "clear"]);
+    } else {
+        return weather;
+    }
 }
 
 function getAnnouncementClosing(hero) {
