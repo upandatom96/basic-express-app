@@ -46,6 +46,17 @@ questController.get('/heroStats', async (req, res) => {
     }
 });
 
+questController.get('/world', async (req, res) => {
+    try {
+        const worldStatus = await questManager.getWorldStatus();
+        // tweetQuest(req.query.tweet, worldStatus.message);
+        res.send(worldStatus);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 questController.post('/advanceCurrentHero', async (req, res) => {
     try {
         const message = await questManager.advanceCurrentHero();

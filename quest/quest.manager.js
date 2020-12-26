@@ -47,6 +47,17 @@ function getHeroStats() {
     });
 }
 
+function getWorldStatus() {
+    return new Promise((resolve, reject) => {
+        Hero.find({})
+            .then((heroes) => {
+                const heroReports = getHeroReports(heroes);
+                const worldStatus = questStatHelper.getWorldStatus(heroes);
+                resolve(worldStatus);
+            });
+    });
+}
+
 function getCurrentHero() {
     return new Promise((resolve, reject) => {
         Hero.find({status: {$ne: 99}})
@@ -103,6 +114,7 @@ module.exports = {
     getAllHeroes,
     getFallenHeroes,
     getHeroStats,
+    getWorldStatus,
     getCurrentHero,
     deleteHero,
     deleteAll,
