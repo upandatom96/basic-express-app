@@ -51,7 +51,6 @@ function getWorldStatus() {
     return new Promise((resolve, reject) => {
         Hero.find({})
             .then((heroes) => {
-                const heroReports = getHeroReports(heroes);
                 const worldStatus = questStatHelper.getWorldStatus(heroes);
                 resolve(worldStatus);
             });
