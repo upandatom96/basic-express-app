@@ -1,6 +1,7 @@
 const randomManager = require('../random/random.manager');
 const codeRetriever = require('./code-retriever');
 const eventHandler = require('./event-handler');
+const interpolator = require('./hero-interpolate');
 
 const HeroStatus = require('../constants/quest/hero-status');
 const EventTypes = require('../constants/quest/event-types');
@@ -485,7 +486,7 @@ function runTravelScenario(hero) {
     } else if (hero.path === "SNAKE") {
         hero.path = null;
         hero.hp -= 5;
-        return "They trip over a snake and loss some health.";
+        return "They trip over a snake and lose some health.";
     } else {
         const TEMPLATES = [
             `Their journey continues...`,
@@ -530,6 +531,13 @@ function getTravelUpdate(hero) {
 }
 
 function travelMaintenance(hero) {
+    // switch chapter before changing setting
+    if (boolUtil.hasValue(hero.currentChapterName)) {
+        const interpolatedChapter = interpolator.interpolate(hero.currentChapterName, hero);
+        hero.completedChapterLog.push(interpolatedChapter);
+        hero.currentChapterName = null;
+    }
+
     // switch random words
     hero.randomNoun = randomManager.getOneNoun();
     hero.randomAdjective = randomManager.getOneAdjective();
@@ -551,11 +559,5 @@ function travelMaintenance(hero) {
         } else if (weatherMod > 65) {
             hero.weather = "snowy";
         }
-    }
-
-    // switch chapter
-    if (boolUtil.hasValue(hero.currentChapterName)) {
-        hero.completedChapterLog.push(hero.currentChapterName);
-        hero.currentChapterName = null;
     }
 }

@@ -42,6 +42,21 @@ const FLAVOR_EVENTS = [
         type: EventTypes.FLAVOR,
     },
     {
+        name: "News: Science",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the news, scientists have invented a {RA} {RN}.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        name: "News: Weather",
+        intro: "{HERO_FIRST} walks past a Bard who tells them the weather, it is {WEATHER} right now.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        name: "Fortune Teller",
+        intro: "{HERO_FIRST} encounters a fortune teller who predicts they will have a {RA} day.",
+        type: EventTypes.FLAVOR,
+    },
+    {
         name: "Rock Art",
         intro: "{HERO_FIRST} examines rock carvings as they pass through a cave. They carve their name into the cave wall.",
         type: EventTypes.FLAVOR,
@@ -871,6 +886,42 @@ const ENCOUNTER_EVENTS = [
             {
                 type: MoveTypes.HEAL,
                 name: "REFORM",
+                multiplier: 1,
+            },
+        ],
+    },
+    {
+        name: "{RAFC} Ooze",
+        intro: "{HERO_FIRST} notices a slimy trail. They follow it to some {RAFC} Ooze",
+        enemyName: "{RAFC} Ooze",
+        defeat: "{HERO_FIRST} dissolves the {RAFC} Ooze.",
+        type: EventTypes.ENCOUNTER,
+        distanceBoost: 5,
+        expPoints: 35,
+        enemyHpStart: 20,
+        enemyHpMax: 150,
+        dexterity: 3,
+        charisma: 1,
+        wisdom: 1,
+        strength: 6,
+        moves: [
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "{RAC} ENGULF",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "{RAC} ABSORB",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "{RAC} DISSIPATE",
+            },
+            {
+                type: MoveTypes.HEAL,
+                name: "{RAC} REFORM",
                 multiplier: 1,
             },
         ],

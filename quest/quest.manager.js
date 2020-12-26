@@ -5,6 +5,7 @@ const Hero = mongoose.model('hero');
 const heroGenerator = require('./hero-generator');
 const nameManager = require('./quest-name.manager');
 const heroProgressor = require('./hero-progressor');
+const interpolator = require('./hero-interpolate');
 const questStatHelper = require('./quest-stat-helper');
 const codeRetriever = require('./code-retriever');
 const characterRoller = require('../character/character.roller');
@@ -239,7 +240,7 @@ function getHeroReport(heroDB) {
     const distanceText = boolUtil.hasValue(quest) ? `${heroDB.distanceTravelled}/${quest.distanceRequired} miles` : null;
     const currentQuest = boolUtil.hasValue(quest) ? quest.name : null;
     const currentQuestDetails = boolUtil.hasValue(quest) ? `They must travel to ${quest.destination} and ${quest.text}.` : null;
-    const currentChapter = boolUtil.hasValue(chapter) ? chapter.name : null;
+    const currentChapter = boolUtil.hasValue(chapter) ? interpolator.interpolate(chapter.name, heroDB) : null;
     return {
         announcement,
         name: heroDB.name,

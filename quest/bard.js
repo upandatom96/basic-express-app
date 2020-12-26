@@ -1,10 +1,10 @@
 const tweetManager = require('../tweet/tweet.manager');
 
 const codeRetriever = require('./code-retriever');
+const interpolator = require('./hero-interpolate');
 
 const stringUtil = require('../utilities/string.util');
 const randomUtil = require('../utilities/random.util');
-const boolUtil = require('../utilities/bool.util');
 
 const questWords = require('../constants/quest/quest-words');
 const adjectives = require('../constants/words/adjectives');
@@ -273,46 +273,14 @@ module.exports = {
     makeErrorAnnouncement,
 }
 
-function interpolate(fullAnnouncement, hero) {
-    const firstName = getFirstName(hero.name);
-    const lastName = getLastName(hero.name);
-    const weather = getWeather(hero.weather);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FULL}`, hero.name);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_FIRST}`, firstName);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_LAST}`, lastName);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{HERO_RACE}`, hero.race.toLowerCase());
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{ADV}`, hero.advantage);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{DIS}`, hero.disadvantage);
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{RA}`, hero.randomAdjective.toLowerCase());
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{RN}`, hero.randomNoun.toLowerCase());
-    fullAnnouncement = stringUtil.replaceGlobally(fullAnnouncement, `{WEATHER}`, weather);
-    return fullAnnouncement;
-}
-
 function makeAnnouncement(hero, announcement) {
     const closing = getAnnouncementClosing(hero);
     let fullAnnouncement = `${announcement} ${closing}`;
-    fullAnnouncement = interpolate(fullAnnouncement, hero);
+    fullAnnouncement = interpolator.interpolate(fullAnnouncement, hero);
     tweetManager.makeQuestTweet(fullAnnouncement);
     console.log(fullAnnouncement);
     console.log(fullAnnouncement.length + " characters");
     hero.journal.push(fullAnnouncement);
-}
-
-function getFirstName(heroName) {
-    return heroName.split(' ').slice(0, -1).join(' ');
-}
-
-function getLastName(heroName) {
-    return heroName.split(' ').slice(-1).join(' ');
-}
-
-function getWeather(weather) {
-    if (boolUtil.hasNoValue(weather)) {
-        return randomUtil.pickRandom(["cloudy", "clear"]);
-    } else {
-        return weather;
-    }
 }
 
 function getAnnouncementClosing(hero) {
