@@ -88,6 +88,7 @@ function getWorldStatus(heroes) {
         law: lawPts,
         chaos: chaosPts,
         progress: allPts,
+        worldState,
         message,
     };
 }
