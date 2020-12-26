@@ -79,7 +79,7 @@ function getWorldStatus(heroes) {
     const day = Math.floor(hours / 24) + 1;
     const hoursToday = hours % 24;
     const worldState = getWorldState(goodPts, evilPts, lawPts, chaosPts);
-    const message = `It is day ${day}. The world is ${worldState}.`;
+    const message = `It is day ${day} hour ${hoursToday}. The world is ${worldState}.`;
 
     return {
         hours: hours,
