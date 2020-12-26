@@ -111,6 +111,11 @@ const HeroSchema = new Schema({
         required: false,
         default: null
     },
+    weather: {
+        type: String,
+        required: false,
+        default: null
+    },
     journal: [
         {
             type: String

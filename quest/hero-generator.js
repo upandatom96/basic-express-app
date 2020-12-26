@@ -49,6 +49,7 @@ function generateHero(firstName, pastHeroes) {
         randomAdjective,
         randomNoun,
         path: null,
+        weather: null,
         specialMoves,
         strength: stats.strength,
         wisdom: stats.wisdom,

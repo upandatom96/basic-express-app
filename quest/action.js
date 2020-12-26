@@ -534,6 +534,21 @@ function travelMaintenance(hero) {
     hero.randomNoun = randomManager.getOneNoun();
     hero.randomAdjective = randomManager.getOneAdjective();
 
+    // switch weather
+    const weatherMod = randomUtil.pickRandomNumber(0,100);
+    const switchWeather = weatherMod > 75;
+    if (switchWeather) {
+        if (weatherMod > 90) {
+            hero.weather = null;
+        } else if (weatherMod > 85) {
+            hero.weather = "Rainy";
+        } else if (weatherMod > 80) {
+            hero.weather = "Sunny";
+        } else if (weatherMod > 75) {
+            hero.weather = "Foggy";
+        }
+    }
+
     // switch chapter
     if (boolUtil.hasValue(hero.currentChapterName)) {
         hero.completedChapterLog.push(hero.currentChapterName);
