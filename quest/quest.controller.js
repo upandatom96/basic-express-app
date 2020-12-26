@@ -67,6 +67,17 @@ questController.post('/advanceCurrentHero', async (req, res) => {
     }
 });
 
+questController.post('/path/:item', async (req, res) => {
+    try {
+        const item = req.params.item;
+        const message = await questManager.throwItemInPath(item);
+        res.send(message);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
 questController.delete('/hero/:id', authUtil.jwtAuthenticated, authUtil.jwtAdmin, async (req, res) => {
     try {
         const id = req.params.id;

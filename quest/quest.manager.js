@@ -85,6 +85,25 @@ function advanceCurrentHero() {
     });
 }
 
+function throwItemInPath(item) {
+    return new Promise((resolve, reject) => {
+        Hero.find({status: {$ne: 99}})
+            .then((livingHeroes) => {
+                const allowedItems = ["SNAKE", "APPLE"];
+                if (livingHeroes.length === 0) {
+                    reject("No hero available.");
+                } else if (boolUtil.hasNoValue(item)) {
+                    reject("No item selected.");
+                } else if (!allowedItems.includes(item.toUpperCase())) {
+                    reject("Given item not available.");
+                } else {
+                    const livingHero = livingHeroes[0];
+                    updateWithItem(livingHero, item.toUpperCase(), resolve);
+                }
+            });
+    });
+}
+
 function deleteHero(id) {
     return new Promise((resolve, reject) => {
         Hero.deleteOne({
@@ -117,7 +136,8 @@ module.exports = {
     getCurrentHero,
     deleteHero,
     deleteAll,
-    advanceCurrentHero
+    advanceCurrentHero,
+    throwItemInPath,
 }
 
 function createNewHero(resolve) {
@@ -143,6 +163,14 @@ function advanceHero(hero, resolve) {
             const heroReport = getHeroReport(savedHero);
             delete heroReport.journal;
             resolve(heroReport);
+        });
+}
+
+function updateWithItem(hero, item, resolve) {
+    hero.path = item;
+    hero.save()
+        .then((savedHero) => {
+            resolve(`${item} thrown in path.`);
         });
 }
 
@@ -223,6 +251,8 @@ function getHeroReport(heroDB) {
         currentQuest,
         currentQuestDetails,
         currentChapter,
+        path: heroDB.path,
+        weather: heroDB.weather,
         level: heroDB.level,
         expPoints: heroDB.expPoints,
         status: heroDB.status,
