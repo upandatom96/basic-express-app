@@ -96,6 +96,21 @@ const HeroSchema = new Schema({
         required: true,
         default: "PURPLE"
     },
+    randomAdjective: {
+        type: String,
+        required: false,
+        default: "DIRTY"
+    },
+    randomNoun: {
+        type: String,
+        required: false,
+        default: "ROCK"
+    },
+    path: {
+        type: String,
+        required: false,
+        default: null
+    },
     journal: [
         {
             type: String

@@ -32,6 +32,9 @@ function generateHero(firstName, pastHeroes) {
     const specialMoves = [specialMove.name];
     const creator = null;
 
+    const randomAdjective = randomManager.getOneAdjective();
+    const randomNoun = randomManager.getOneNoun();
+
     return {
         name,
         race,
@@ -43,6 +46,9 @@ function generateHero(firstName, pastHeroes) {
         advantage,
         disadvantage,
         specialAdjective,
+        randomAdjective,
+        randomNoun,
+        path: null,
         specialMoves,
         strength: stats.strength,
         wisdom: stats.wisdom,

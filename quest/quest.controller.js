@@ -49,7 +49,7 @@ questController.get('/heroStats', async (req, res) => {
 questController.get('/world', async (req, res) => {
     try {
         const worldStatus = await questManager.getWorldStatus();
-        // tweetQuest(req.query.tweet, worldStatus.message);
+        tweetQuest(req.query.tweet, worldStatus.message);
         res.send(worldStatus);
     } catch (err) {
         res.statusCode = 500;

@@ -151,29 +151,10 @@ function endEncounterChapter(hero) {
 }
 
 function travel(hero) {
-    if (boolUtil.hasValue(hero.currentChapterName)) {
-        hero.completedChapterLog.push(hero.currentChapterName);
-        hero.currentChapterName = null;
-    }
+    travelMaintenance(hero);
     const message = getTravelBaseMessage(hero);
-    const quest = codeRetriever.findQuest(hero.currentQuestName);
-    const ready = isReadyForFinale(hero);
-
-    if (ready) {
-        hero.status = HeroStatus.QUEST_FINALE_START;
-        const TEMPLATES = [
-            `They breathe a sigh of relief.`,
-            `They made it!`,
-            `Finally, they can complete their quest.`,
-        ];
-        const endMsg = randomUtil.pickRandom(TEMPLATES);
-        return `${message} They have reached their destination, the ${quest.destination}. ${endMsg}`
-    } else {
-        hero.status = HeroStatus.QUEST_CHAPTER_START;
-        const endMessage = runTravelScenario(hero);
-        checkHealth(hero);
-        return `${message} They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${endMessage}`
-    }
+    const update = getTravelUpdate(hero);
+    return `${message} ${update}`;
 }
 
 function startFinale(hero) {
@@ -495,13 +476,14 @@ function getTravelBaseMessage(hero) {
     const sOrNot = distance > 1 ? "s" : "";
     return `{HERO_FIRST} travels ${distance} mile${sOrNot}.`;
 }
+
 function runTravelScenario(hero) {
-    // TODO use CHECK_WORLD instead of random #
-    const randomNumber = randomUtil.pickRandomNumber(0, 100);
-    if (randomNumber > 90) {
+    if (hero.path === "APPLE") {
+        hero.path = null;
         hero.hp += 5;
         return "They find an apple and recover some health.";
-    } else if (randomNumber < 10) {
+    } else if (hero.path === "SNAKE") {
+        hero.path = null;
         hero.hp -= 5;
         return "They trip over a snake and loss some health.";
     } else {
@@ -522,5 +504,39 @@ function runTravelScenario(hero) {
             `They hear whispers around them but keep moving.`,
         ];
         return randomUtil.pickRandom(TEMPLATES);
+    }
+}
+
+function getTravelUpdate(hero) {
+    const quest = codeRetriever.findQuest(hero.currentQuestName);
+    const ready = isReadyForFinale(hero);
+    let update;
+    if (ready) {
+        hero.status = HeroStatus.QUEST_FINALE_START;
+        const TEMPLATES = [
+            `They breathe a sigh of relief.`,
+            `They made it!`,
+            `Finally, they can complete their quest.`,
+        ];
+        const endMsg = randomUtil.pickRandom(TEMPLATES);
+        update = `They have reached their destination, the ${quest.destination}. ${endMsg}`
+    } else {
+        hero.status = HeroStatus.QUEST_CHAPTER_START;
+        const endMessage = runTravelScenario(hero);
+        checkHealth(hero);
+        update = `They have travelled ${hero.distanceTravelled} of ${quest.distanceRequired} miles. ${endMessage}`
+    }
+    return update;
+}
+
+function travelMaintenance(hero) {
+    // switch random words
+    hero.randomNoun = randomManager.getOneNoun();
+    hero.randomAdjective = randomManager.getOneAdjective();
+
+    // switch chapter
+    if (boolUtil.hasValue(hero.currentChapterName)) {
+        hero.completedChapterLog.push(hero.currentChapterName);
+        hero.currentChapterName = null;
     }
 }
