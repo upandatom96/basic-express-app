@@ -170,7 +170,8 @@ function updateWithItem(hero, item, resolve) {
     hero.path = item;
     hero.save()
         .then((savedHero) => {
-            resolve(`${item} thrown in path.`);
+            const message = `${item} thrown in path.`;
+            resolve({message});
         });
 }
 
