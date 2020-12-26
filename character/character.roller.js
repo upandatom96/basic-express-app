@@ -12,7 +12,7 @@ function getFullAlignment(goodVsEvil, lawVsChaos) {
     if (goodVsEvil === "NEUTRAL" && lawVsChaos === "NEUTRAL") {
         return "TRUE NEUTRAL";
     } else {
-        return `${goodVsEvil} ${lawVsChaos}`;
+        return `${lawVsChaos} ${goodVsEvil}`;
     }
 }
 
