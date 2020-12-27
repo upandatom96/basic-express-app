@@ -16,6 +16,10 @@ const BlockDeckSchema = new Schema({
         type: String,
         required: true,
     },
+    deckRule: {
+        type: String,
+        required: false,
+    },
     description: {
         type: String,
         required: true,

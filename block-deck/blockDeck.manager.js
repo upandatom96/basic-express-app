@@ -51,6 +51,7 @@ function addBlockDeck(blockDeck) {
                 type: blockDeck.type,
                 creator: blockDeck.creator,
                 tags: blockDeck.tags,
+                deckRule: blockDeck.deckRule,
                 blocks: blockDeck.blocks,
             })
                 .save()
@@ -83,6 +84,7 @@ function editBlockDeck(blockDeck) {
                         foundBlockDeck.description = blockDeck.description;
                         foundBlockDeck.type = blockDeck.type;
                         foundBlockDeck.tags = blockDeck.tags;
+                        foundBlockDeck.deckRule = blockDeck.deckRule;
                         foundBlockDeck.blocks = blockDeck.blocks;
 
                         foundBlockDeck.save()
