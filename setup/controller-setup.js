@@ -66,6 +66,9 @@ function setupControllers(app) {
   const contactController = require('../contact/contact.controller');
   app.use('/contact', contactController);
 
+  const blockController = require('../block/block.controller');
+  app.use('/block', blockController);
+
   const characterController = require('../character/character.controller');
   app.use('/character', characterController);
 }
