@@ -54,7 +54,6 @@ function addBlockDeck(blockDeck) {
                 blocks: blockDeck.blocks,
             })
                 .save()
-                .populate('blocks')
                 .then((newBlockDeck) => {
                     resolve(newBlockDeck);
                 });
@@ -87,7 +86,6 @@ function editBlockDeck(blockDeck) {
                         foundBlockDeck.blocks = blockDeck.blocks;
 
                         foundBlockDeck.save()
-                            .populate('blocks')
                             .then((editedBlockDeck) => {
                                 resolve(editedBlockDeck);
                             });
