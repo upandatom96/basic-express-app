@@ -69,6 +69,9 @@ function setupControllers(app) {
   const blockController = require('../block/block.controller');
   app.use('/block', blockController);
 
+  const blockDeckController = require('../block-deck/blockDeck.controller');
+  app.use('/blockDeck', blockDeckController);
+
   const characterController = require('../character/character.controller');
   app.use('/character', characterController);
 }
