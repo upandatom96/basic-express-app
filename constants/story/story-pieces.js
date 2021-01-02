@@ -98,10 +98,8 @@ const STORY_FOR_SYNONYMS = [
     "Charlotte's {Web}",
     "The Fault in Our {Stars}",
     "The Grapes of {Wrath}",
-];
-
-const STORY_PREFIXES = [
-    // TITLES
+]; // [this line number] - 2 = COUNT (101 - 2 = 99)
+const TITLES = [
     "Sherlock Holmes and the Case of the {A1} {N1}",
     "Star Wars: Episode VI - {N1} of the Jedi",
     "Harry Potter and the Sorcerer's {N1}",
@@ -173,7 +171,8 @@ const STORY_PREFIXES = [
     "The Legend of Zelda: Majora's {N1}",
     "Super Mario {N1}",
     "{A1} Souls",
-    // QUOTES
+]; // [this line number] - 103 = COUNT (174 - 103 = 71)
+const QUOTES = [
     `"Frankly, my dear, I don't give a {N1}." - Gone With The Wind (1940)`,
     `"You're gonna need a bigger {N1}." - Jaws (1975)`,
     `"A martini. Shaken, not {A1}." - Goldfinger (1964)`,
@@ -207,9 +206,11 @@ const STORY_PREFIXES = [
     "Star Trek: The Next {N1}",
     "Mister Rogers' {N1}",
     "{N1} of Cards",
-];
+]; // [this line number] - 176 = COUNT (209 - 176 = 33)
+
+// [this line number] - 8 = COUNT (211 - 8 = 203)
 
 module.exports = {
-    STORY_PREFIXES,
+    STORY_PREFIXES: TITLES.concat(QUOTES),
     STORY_FOR_SYNONYMS
 }
