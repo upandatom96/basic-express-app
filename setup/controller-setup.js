@@ -69,6 +69,9 @@ function setupControllers(app) {
   const blockController = require('../block/block.controller');
   app.use('/block', blockController);
 
+  const sparksBotController = require('../sparks-bot/sparks-bot.controller');
+  app.use('/sparks', sparksBotController);
+
   const blockDeckController = require('../block-deck/blockDeck.controller');
   app.use('/blockDeck', blockDeckController);
 
