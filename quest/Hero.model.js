@@ -71,6 +71,16 @@ const HeroSchema = new Schema({
         required: true,
         default: 1
     },
+    attackBoost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    defenseBoost: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     distanceBoost: {
         type: Number,
         required: true,

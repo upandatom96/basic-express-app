@@ -90,7 +90,11 @@ function throwItemInPath(item) {
     return new Promise((resolve, reject) => {
         Hero.find({status: {$ne: 99}})
             .then((livingHeroes) => {
-                const allowedItems = ["SNAKE", "APPLE"];
+                const allowedItems = [
+                    "SNAKE", "APPLE", "BOX",
+                    "MUSHROOM", "BOOTS", "ORB",
+                    "ARMOR", "AMULET"
+                ];
                 if (livingHeroes.length === 0) {
                     reject("No hero available.");
                 } else if (boolUtil.hasNoValue(item)) {

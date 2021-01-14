@@ -40,27 +40,31 @@ function heroTurnEncounter(hero, event) {
             }
             break;
         case MoveTypes.STRENGTH_ATTACK:
-            const strDmg = getStatDamage(hero.strength, event.strength) * move.multiplier;
+            const strDmg = getStatDamage(hero.strength + hero.attackBoost, event.strength) * move.multiplier;
             moveDetails = `does ${strDmg} strength damage.`;
 
+            hero.attackBoost = 0;
             hero.enemyHp -= strDmg;
             break;
         case MoveTypes.DEXTERITY_ATTACK:
-            const dexDmg = getStatDamage(hero.dexterity, event.dexterity) * move.multiplier;
+            const dexDmg = getStatDamage(hero.dexterity + hero.attackBoost, event.dexterity) * move.multiplier;
             moveDetails = `does ${dexDmg} dexterity damage.`;
 
+            hero.attackBoost = 0;
             hero.enemyHp -= dexDmg;
             break;
         case MoveTypes.WISDOM_ATTACK:
-            const wisDmg = getStatDamage(hero.wisdom, event.wisdom) * move.multiplier;
+            const wisDmg = getStatDamage(hero.wisdom + hero.attackBoost, event.wisdom) * move.multiplier;
             moveDetails = `does ${wisDmg} wisdom damage.`;
 
+            hero.attackBoost = 0;
             hero.enemyHp -= wisDmg;
             break;
         case MoveTypes.CHARISMA_ATTACK:
-            const chrDmg = getStatDamage(hero.charisma, event.charisma) * move.multiplier;
+            const chrDmg = getStatDamage(hero.charisma + hero.attackBoost, event.charisma) * move.multiplier;
             moveDetails = `does ${chrDmg} charisma damage.`;
 
+            hero.attackBoost = 0;
             hero.enemyHp -= chrDmg;
             break;
         case MoveTypes.FAIL:
@@ -90,30 +94,34 @@ function enemyTurnEncounter(hero, event) {
             }
             break;
         case MoveTypes.STRENGTH_ATTACK:
-            const strDmg = getStatDamage(event.strength, hero.strength) * move.multiplier;
+            const strDmg = getStatDamage(event.strength, hero.strength + hero.defenseBoost) * move.multiplier;
             moveDetails = `does ${strDmg} strength damage.`;
 
+            hero.defenseBoost = 0;
             hero.hp -= strDmg;
             hero.damageTakenTotal += strDmg;
             break;
         case MoveTypes.DEXTERITY_ATTACK:
-            const dexDmg = getStatDamage(event.dexterity, hero.dexterity) * move.multiplier;
+            const dexDmg = getStatDamage(event.dexterity, hero.dexterity + hero.defenseBoost) * move.multiplier;
             moveDetails = `does ${dexDmg} dexterity damage.`;
 
+            hero.defenseBoost = 0;
             hero.hp -= dexDmg;
             hero.damageTakenTotal += dexDmg;
             break;
         case MoveTypes.WISDOM_ATTACK:
-            const wisDmg = getStatDamage(event.wisdom, hero.wisdom) * move.multiplier;
+            const wisDmg = getStatDamage(event.wisdom, hero.wisdom + hero.defenseBoost) * move.multiplier;
             moveDetails = `does ${wisDmg} wisdom damage.`;
 
+            hero.defenseBoost = 0;
             hero.hp -= wisDmg;
             hero.damageTakenTotal += wisDmg;
             break;
         case MoveTypes.CHARISMA_ATTACK:
-            const chrDmg = getStatDamage(event.charisma, hero.charisma) * move.multiplier;
+            const chrDmg = getStatDamage(event.charisma, hero.charisma + hero.defenseBoost) * move.multiplier;
             moveDetails = `does ${chrDmg} charisma damage.`;
 
+            hero.defenseBoost = 0;
             hero.hp -= chrDmg;
             hero.damageTakenTotal += chrDmg;
             break;

@@ -487,6 +487,36 @@ function runTravelScenario(hero) {
         hero.path = null;
         hero.hp -= 5;
         return "They trip over a snake and lose some health.";
+    } else if (hero.path === "BOX") {
+        hero.path = null;
+        if (randomUtil.trueOrFalse()) {
+            hero.hp -= 10;
+            return "They find a box. When they open it, the box explodes and they lose some health.";
+        } else {
+            hero.hp += 10;
+            return "They find a box. They find a potion inside and take it to recover some health.";
+        }
+    } else if (hero.path === "MUSHROOM") {
+        hero.path = null;
+        hero.attackBoost += 1;
+        return "They find and eat a mushroom and feel a bit more aggressive.";
+    } else if (hero.path === "BOOTS") {
+        hero.path = null;
+        hero.distanceBoost += 5;
+        return "They find some sturdy boots and travel a bit faster.";
+    } else if (hero.path === "ORB") {
+        hero.path = null;
+        hero.expPoints += 10;
+        return "They find a glowing orb that helps them reflect on their experience.";
+    } else if (hero.path === "ARMOR") {
+        hero.path = null;
+        hero.defenseboost += 1;
+        return "They find some armor and feel a bit more protected.";
+    } else if (hero.path === "AMULET") {
+        hero.path = null;
+        hero.defenseboost -= 1;
+        hero.attackBoost -= 1;
+        return "They find an amulet. They put it on and feel a bit strange.";
     } else {
         const TEMPLATES = [
             `Their journey continues...`,
