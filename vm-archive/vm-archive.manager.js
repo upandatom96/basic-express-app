@@ -2,7 +2,6 @@ const csv = require('csv-parser');
 const fs = require('fs');
 
 const boolUtil = require('../utilities/bool.util');
-const csvUtil = require('../utilities/csv.util');
 
 function getShowsForDay(date, month) {
     return new Promise(async (resolve, reject) => {
@@ -34,7 +33,8 @@ function getShows() {
             fs.createReadStream("vm-archive/vm-shows.csv")
                 .pipe(csv())
                 .on('data', (show) => {
-                    if (boolUtil.hasValue(show) && !boolUtil.isEmpty(show)) {
+                    const validShow = boolUtil.hasValue(show) && !boolUtil.isEmpty(show);
+                    if (validShow) {
                         initialShows.push(show);
                     }
                 })
@@ -43,15 +43,6 @@ function getShows() {
                     const convertedShows = convertShows(initialShows);
                     resolve(convertedShows);
                 });
-            // fs.readFile("vm-archive/vm-shows.csv", function read(err, data) {
-            //     if (err) {
-            //         throw err;
-            //     }
-            //     const shows = csvUtil.readCsv(data + "");
-            //     console.log(shows.length + " show(s)...");
-            //     const convertedShows = convertShows(shows);
-            //     resolve(convertedShows);
-            // });
         } catch (err) {
             reject(err);
         }

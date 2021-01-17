@@ -65,7 +65,7 @@ function translateBooleanString(value) {
 }
 
 function isEmpty(map) {
-  for(var key in map) {
+  for (let key in map) {
     if (map.hasOwnProperty(key)) {
       return false;
     }
