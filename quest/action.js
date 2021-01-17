@@ -386,8 +386,8 @@ function restHealth(hero) {
 }
 
 function addDistance(hero) {
-    const minDistance = 3;
-    const maxDistance = 13;
+    const minDistance = 1 + hero.dexterity;
+    const maxDistance = 12 + hero.dexterity;
     let distance = randomUtil.pickRandomNumber(minDistance, maxDistance) + hero.distanceBoost;
     hero.distanceBoost = 0;
 
