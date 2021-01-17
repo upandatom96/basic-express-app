@@ -35,6 +35,7 @@ function getShows() {
                 }
                 const shows = csvUtil.readCsv(data + "");
                 const convertedShows = convertShows(shows);
+                console.log(convertedShows.level + " show(s)...");
                 resolve(convertedShows);
             });
         } catch (err) {
