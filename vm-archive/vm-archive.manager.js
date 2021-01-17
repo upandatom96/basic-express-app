@@ -14,6 +14,17 @@ function getShowsForDay(date, month) {
     });
 }
 
+function getShowsForAct(act) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const fittingShows = await getShowsForActName(act);
+            resolve(fittingShows);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 function getShowsToday() {
     return new Promise(async (resolve, reject) => {
         try {
@@ -53,6 +64,7 @@ module.exports = {
     getShows,
     getShowsToday,
     getShowsForDay,
+    getShowsForAct,
 }
 
 function convertShows(shows) {
@@ -88,5 +100,15 @@ async function getShowsForDate(date, month) {
         })
         .filter((show) => {
             return show.month.toLowerCase() === getMonthName(month).toLowerCase();
+        });
+}
+
+async function getShowsForActName(searchAct) {
+    const shows = await getShows();
+    return shows
+        .filter((show) => {
+            return show.acts.some((act) => {
+                return act.toLowerCase().includes(searchAct.toLowerCase());
+            })
         });
 }

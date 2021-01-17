@@ -22,7 +22,18 @@ controller.get('/today', async (req, res) => {
     }
 });
 
-controller.get('/:month/:date', async (req, res) => {
+controller.get('/act/:act', async (req, res) => {
+    try {
+        const act = req.params.act.replace("_", " ");
+        const shows = await vmArchiveManager.getShowsForAct(act);
+        res.send(shows);
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+});
+
+controller.get('/month/:month/date/:date', async (req, res) => {
     try {
         const date = Number(req.params.date);
         const month = Number(req.params.month) - 1;
