@@ -4,6 +4,7 @@ function readCsv(csv) {
 
     const headers = lines[0].split(",");
 
+    console.log(lines.length + " line(s)...");
     lines.forEach((line, index) => {
         if (index === 0) {
             return; // headers
@@ -13,11 +14,8 @@ function readCsv(csv) {
 
         headers.forEach((header, index) => {
             obj[header] = currentLine[index];
-        })
+        });
 
-        if (index < 10) {
-            console.log(obj);
-        }
         result.push(obj);
     });
 
