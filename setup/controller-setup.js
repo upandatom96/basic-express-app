@@ -77,6 +77,9 @@ function setupControllers(app) {
 
   const characterController = require('../character/character.controller');
   app.use('/character', characterController);
+
+  const vmArchiveController = require('../vm-archive/vm-archive.controller');
+  app.use('/vmArchive', vmArchiveController);
 }
 
 module.exports = {
