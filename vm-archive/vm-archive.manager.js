@@ -33,8 +33,8 @@ function getShows() {
                 if (err) {
                     throw err;
                 }
-                console.log(data + "");
                 const shows = csvUtil.readCsv(data + "");
+                console.log(shows.length + " show(s)...");
                 const convertedShows = convertShows(shows);
                 console.log(convertedShows.length + " show(s)...");
                 resolve(convertedShows);

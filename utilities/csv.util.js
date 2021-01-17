@@ -15,6 +15,9 @@ function readCsv(csv) {
             obj[header] = currentLine[index];
         })
 
+        if (index < 10) {
+            console.log(obj);
+        }
         result.push(obj);
     });
 
