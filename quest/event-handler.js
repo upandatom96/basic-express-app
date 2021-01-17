@@ -31,9 +31,11 @@ function heroTurnEncounter(hero, event) {
     let moveDetails = "";
     switch (move.type) {
         case MoveTypes.HEAL:
-            const healAmount = randomUtil.pickRandomNumber(1, 5) * move.multiplier;
+            const maxHeal = hero.wisdom * (4 + hero.healBoost);
+            const healAmount = randomUtil.pickRandomNumber(1, maxHeal) * move.multiplier;
             moveDetails = `heals ${healAmount} hp.`;
 
+            hero.healBoost = 0;
             hero.hp += healAmount;
             if (hero.hp > hero.hpMax) {
                 hero.hp = hero.hpMax;

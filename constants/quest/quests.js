@@ -346,7 +346,7 @@ const ENCOUNTER_QUESTS = [
         finaleEvent: {
             intro: "A INDESCRIBABLE BEAST comes out of the Rift as {HERO_FIRST} approaches.",
             enemyName: "Indescribable Beast",
-            defeat: "{HERO_FIRST} the Beast disappears as the Rift closes!",
+            defeat: "{HERO_FIRST} sighs as the Beast disappears as the Rift closes!",
             type: EventTypes.ENCOUNTER,
             enemyHpStart: 99,
             enemyHpMax: 99,

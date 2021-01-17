@@ -93,7 +93,7 @@ function throwItemInPath(item) {
                 const allowedItems = [
                     "SNAKE", "APPLE", "BOX",
                     "MUSHROOM", "BOOTS", "ORB",
-                    "ARMOR", "AMULET"
+                    "ARMOR", "AMULET", "BANDAGE"
                 ];
                 if (livingHeroes.length === 0) {
                     reject("No hero available.");

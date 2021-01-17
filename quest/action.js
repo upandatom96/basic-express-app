@@ -517,6 +517,10 @@ function runTravelScenario(hero) {
         hero.defenseboost -= 1;
         hero.attackBoost -= 1;
         return "They find an amulet. They put it on and feel a bit strange.";
+    } else if (hero.path === "BANDAGE") {
+        hero.path = null;
+        hero.healBoost += 1;
+        return "They find some bandages, which may come in handy.";
     } else {
         const TEMPLATES = [
             `Their journey continues...`,
