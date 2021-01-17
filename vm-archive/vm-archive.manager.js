@@ -1,3 +1,4 @@
+const csv = require('csv-parser');
 const fs = require('fs');
 
 const boolUtil = require('../utilities/bool.util');
@@ -29,15 +30,28 @@ function getShowsToday() {
 function getShows() {
     return new Promise(async (resolve, reject) => {
         try {
-            fs.readFile("vm-archive/vm-shows.csv", function read(err, data) {
-                if (err) {
-                    throw err;
-                }
-                const shows = csvUtil.readCsv(data + "");
-                console.log(shows.length + " show(s)...");
-                const convertedShows = convertShows(shows);
-                resolve(convertedShows);
-            });
+            const initialShows = [];
+            fs.createReadStream("vm-archive/vm-shows.csv")
+                .pipe(csv())
+                .on('data', (show) => {
+                    if (boolUtil.hasValue(show) && !boolUtil.isEmpty(show)) {
+                        initialShows.push(show);
+                    }
+                })
+                .on('end', () => {
+                    console.log(initialShows.length + " show(s)...")
+                    const convertedShows = convertShows(initialShows);
+                    resolve(convertedShows);
+                });
+            // fs.readFile("vm-archive/vm-shows.csv", function read(err, data) {
+            //     if (err) {
+            //         throw err;
+            //     }
+            //     const shows = csvUtil.readCsv(data + "");
+            //     console.log(shows.length + " show(s)...");
+            //     const convertedShows = convertShows(shows);
+            //     resolve(convertedShows);
+            // });
         } catch (err) {
             reject(err);
         }
@@ -52,9 +66,6 @@ module.exports = {
 
 function convertShows(shows) {
     return shows
-        .filter((show) => {
-            return show.year !== "";
-        })
         .map((show) => {
             show.year = Number(show.year);
             show.date = Number(show.date);

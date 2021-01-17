@@ -64,7 +64,17 @@ function translateBooleanString(value) {
   return value.toLowerCase() === "true";
 }
 
+function isEmpty(map) {
+  for(var key in map) {
+    if (map.hasOwnProperty(key)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 module.exports = {
+  isEmpty,
   hasBoolValue,
   howManyHaveValue,
   anyHasValue,
