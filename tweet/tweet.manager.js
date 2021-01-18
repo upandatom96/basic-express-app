@@ -27,12 +27,12 @@ function makeQuestTweet(message) {
 }
 
 function makeSparksTweet(message) {
-    console.log(message);
+    console.log("tweet: " + message);
     // makeTweet(message, sparksCredentials);
 }
 
 function makeVMTweet(message) {
-    console.log(message);
+    console.log("tweet: " + message);
     // makeTweet(message, vmCredentials);
 }
 
