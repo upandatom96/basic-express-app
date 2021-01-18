@@ -11,6 +11,7 @@ const codeRetriever = require('./code-retriever');
 const characterRoller = require('../character/character.roller');
 
 const HeroMoves = require('../constants/quest/hero-moves');
+const PathItems = require('../constants/quest/path-items');
 
 const boolUtil = require('../utilities/bool.util');
 const calcUtil = require('../utilities/calc.util');
@@ -90,16 +91,11 @@ function throwItemInPath(item) {
     return new Promise((resolve, reject) => {
         Hero.find({status: {$ne: 99}})
             .then((livingHeroes) => {
-                const allowedItems = [
-                    "SNAKE", "APPLE", "BOX",
-                    "MUSHROOM", "BOOTS", "ORB",
-                    "ARMOR", "AMULET", "BANDAGE"
-                ];
                 if (livingHeroes.length === 0) {
                     reject("No hero available.");
                 } else if (boolUtil.hasNoValue(item)) {
                     reject("No item selected.");
-                } else if (!allowedItems.includes(item.toUpperCase())) {
+                } else if (!PathItems.PATH_ITEMS.includes(item.toUpperCase())) {
                     reject("Given item not available.");
                 } else {
                     const livingHero = livingHeroes[0];

@@ -6,6 +6,7 @@ const interpolator = require('./hero-interpolate');
 const HeroStatus = require('../constants/quest/hero-status');
 const EventTypes = require('../constants/quest/event-types');
 const HeroMoves = require('../constants/quest/hero-moves');
+const PathItems = require('../constants/quest/path-items');
 
 const randomUtil = require('../utilities/random.util');
 const boolUtil = require('../utilities/bool.util');
@@ -479,15 +480,15 @@ function getTravelBaseMessage(hero) {
 }
 
 function runTravelScenario(hero) {
-    if (hero.path === "APPLE") {
+    if (hero.path === PathItems.APPLE) {
         hero.path = null;
         hero.hp += 5;
         return "They find an apple and recover some health.";
-    } else if (hero.path === "SNAKE") {
+    } else if (hero.path === PathItems.SNAKE) {
         hero.path = null;
         hero.hp -= 5;
         return "They trip over a snake and lose some health.";
-    } else if (hero.path === "BOX") {
+    } else if (hero.path === PathItems.BOX) {
         hero.path = null;
         if (randomUtil.trueOrFalse()) {
             hero.hp -= 10;
@@ -496,28 +497,28 @@ function runTravelScenario(hero) {
             hero.hp += 10;
             return "They find a box. They find a potion inside and take it to recover some health.";
         }
-    } else if (hero.path === "MUSHROOM") {
+    } else if (hero.path === PathItems.MUSHROOM) {
         hero.path = null;
         hero.attackBoost += 1;
         return "They find and eat a mushroom and feel a bit more aggressive.";
-    } else if (hero.path === "BOOTS") {
+    } else if (hero.path === PathItems.BOOTS) {
         hero.path = null;
         hero.distanceBoost += 5;
         return "They find some sturdy boots and travel a bit faster.";
-    } else if (hero.path === "ORB") {
+    } else if (hero.path === PathItems.ORB) {
         hero.path = null;
         hero.expPoints += 10;
         return "They find a glowing orb that helps them reflect on their experience.";
-    } else if (hero.path === "ARMOR") {
+    } else if (hero.path === PathItems.ARMOR) {
         hero.path = null;
         hero.defenseboost += 1;
         return "They find some armor and feel a bit more protected.";
-    } else if (hero.path === "AMULET") {
+    } else if (hero.path === PathItems.AMULET) {
         hero.path = null;
         hero.defenseboost -= 1;
         hero.attackBoost -= 1;
         return "They find an amulet. They put it on and feel a bit strange.";
-    } else if (hero.path === "BANDAGE") {
+    } else if (hero.path === PathItems.BANDAGE) {
         hero.path = null;
         hero.healBoost += 1;
         return "They find some bandages, which may come in handy.";
