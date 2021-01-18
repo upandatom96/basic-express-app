@@ -403,6 +403,66 @@ const PATH_EVENTS = [
             }
         ],
     },
+    {
+        name: "Suspicious Creature",
+        intro: "{HERO_FIRST} notices a suspicious creature with {RA} claws following them. The creature tackles them to the ground.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    charismaReq: 7,
+                },
+                text: "{HERO_FIRST} talks smoothly and convinces the creature to let them go."
+            },
+            {
+                triggers: {
+                    charismaReq: 6,
+                },
+                damageMin: 1,
+                damageMax: 3,
+                text: "{HERO_FIRST} talks smoothly and convinces the creature to let them go after a few scratches."
+            },
+            {
+                triggers: {
+                    charismaReq: 5,
+                },
+                damageMin: 3,
+                damageMax: 8,
+                text: "{HERO_FIRST} begs for mercy as the creature scratches them. The creature eventually yields."
+            },
+            {
+                damageMin: 8,
+                damageMax: 11,
+                text: "{HERO_FIRST} is scratched by the creature for a few minutes before a loud noise scares the creature off."
+            }
+        ],
+    },
+    {
+        name: "The Royal Parade",
+        intro: "{HERO_FIRST} passes by a carriage containing some members of the royal court.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    charismaReq: 7,
+                },
+                healMin: 5,
+                healMax: 10,
+                text: "{HERO_FIRST} presents himself well to the parade. The royalty sends a guard to heal them."
+            },
+            {
+                triggers: {
+                    charismaReq: 5,
+                },
+                text: "{HERO_FIRST} presents himself decently to the parade."
+            },
+            {
+                damageMin: 3,
+                damageMax: 8,
+                text: "{HERO_FIRST} presents himself poorly to the parade and the royal guards push him away."
+            },
+        ],
+    },
 ];
 const ENCOUNTER_EVENTS = [
     {
