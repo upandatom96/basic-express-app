@@ -1027,6 +1027,37 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "{RAFC} Fighter",
+        intro: "A {RAFC} Fighter jumps out in front of {HERO_FIRST}!",
+        enemyName: "{RAFC} Fighter",
+        defeat: "{HERO_FIRST} defeats the {RAFC} Fighter.",
+        type: EventTypes.ENCOUNTER,
+        distanceBoost: 10,
+        expPoints: 45,
+        enemyHpStart: 35,
+        enemyHpMax: 35,
+        dexterity: 3,
+        charisma: 3,
+        wisdom: 3,
+        strength: 6,
+        moves: [
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "{RAC} PUNCH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "{RAC} UPPERCUT",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "{RAC} RECOVERY",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
