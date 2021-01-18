@@ -1,0 +1,32 @@
+A Muppet has:
+
+! required
+    ** Objective traits **
+    * Name
+    * First Appearance
+    * Movie/Show list
+    * Main Series (Muppet Show, Sesame Street, etc)
+    * Appearance (color, etc)
+    * Animal (Pig, Frog, etc)
+    * Size
+    * Commonality: (Common, Uncommon, Rare)
+    * Core Adjective (Personality)
+    * Has Ability to Speak?
+
+    ** Subjective traits **
+    * HP
+    * MP
+    * Flaws
+    * Strengths
+    * Muppet Stats: Star Quality, Cuteness, Fuzziness, Imagination, Aloofness, Floppiness, Humor, Storytelling, something w/ chaos, softness, fuzziness
+    * Other Stats: Power Level, (Criminality?), (Character?), (Will?), (Luck?), (Alertness?), (Courage?)
+    * List of Adjectives (traits)
+    * DND stats: Strength, Intelligence, Wisdom, Dexterity, Constitution, & Charisma
+    * DND Alignment
+    * Skills
+    * Ranking (out of 10)
+
+? optional
+    * Notes
+    * Images
+    * Quotes
