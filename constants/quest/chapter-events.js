@@ -1058,6 +1058,37 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "{RAFC} Golem",
+        intro: "A {RAFC} Golem blocks the path of {HERO_FIRST}!",
+        enemyName: "{RAFC} Golem",
+        defeat: "{HERO_FIRST} defeats the {RAFC} Golem.",
+        type: EventTypes.ENCOUNTER,
+        distanceBoost: 10,
+        expPoints: 45,
+        enemyHpStart: 35,
+        enemyHpMax: 35,
+        dexterity: 3,
+        charisma: 3,
+        wisdom: 4,
+        strength: 5,
+        moves: [
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "{RAC} SMASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "{RAC} ROCKSLIDE",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "{RAC} GROUNDING",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
