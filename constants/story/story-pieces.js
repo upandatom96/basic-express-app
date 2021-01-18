@@ -110,7 +110,10 @@ const STORY_FOR_SYNONYMS = [
     "Kiki's Delivery {Service}",
     "Nausicaä of the {Valley} of the Wind",
     "Nausicaä of the Valley of the {Wind}",
-]; // [this line number] - 2 = COUNT (101 - 2 = 99)
+    "True {Detective}",
+    "{True} Detective",
+    "{Wonder} Woman",
+];
 const TITLES = [
     "Of Mice and {N2}",
     "Of {N1} and Men",
@@ -196,7 +199,7 @@ const TITLES = [
     "Kiki's Delivery {N1}",
     "Nausicaä of the {N1} of the Wind",
     "Nausicaä of the Valley of the {N1}",
-]; // [this line number] - 103 = COUNT (174 - 103 = 71)
+];
 const QUOTES = [
     '"E.T. phone {N1}." - E.T. (1982)',
     '"Leave the {N1}. Take the cannoli." - The Godfather (1972)',
@@ -256,9 +259,11 @@ const QUOTES = [
     "Star Trek: The Next {N1}",
     "Mister Rogers' {N1}",
     "{N1} of Cards",
-]; // [this line number] - 176 = COUNT (209 - 176 = 33)
+    "{A1} Detective",
+    "True {N1}",
+];
 
-// [this line number] - 8 = COUNT (261 - 8 = 253)
+// [this line number] - 8 = COUNT (266 - 8 = 258)
 
 module.exports = {
     STORY_PREFIXES: TITLES.concat(QUOTES),
