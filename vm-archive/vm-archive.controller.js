@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = express.Router();
 const vmArchiveManager = require('./vm-archive.manager');
+const tweetManager = require('../tweet/tweet.manager');
 
 controller.get('/', async (req, res) => {
     try {
@@ -15,6 +16,7 @@ controller.get('/', async (req, res) => {
 controller.get('/today', async (req, res) => {
     try {
         const shows = await vmArchiveManager.getShowsToday();
+        tweetShow(req.query.tweet, shows);
         res.send(shows);
     } catch (err) {
         res.statusCode = 500;
@@ -46,3 +48,12 @@ controller.get('/month/:month/date/:date', async (req, res) => {
 });
 
 module.exports = controller;
+
+function tweetShow(tweetParam, shows) {
+    if (tweetParam && tweetParam.toUpperCase() === "TRUE") {
+        if (shows.length > 0) {
+            const tweet = vmArchiveManager.getTweetForShows(shows);
+            tweetManager.makeVMTweet(tweet);
+        }
+    }
+}

@@ -31,6 +31,11 @@ function makeSparksTweet(message) {
     // makeTweet(message, sparksCredentials);
 }
 
+function makeVMTweet(message) {
+    console.log(message);
+    // makeTweet(message, vmCredentials);
+}
+
 function makeClueTweet(message) {
     makeTweet(message, clueCredentials);
 }
@@ -42,6 +47,7 @@ module.exports = {
     makeOrderTweet,
     makeQuestTweet,
     makeSparksTweet,
+    makeVMTweet,
 }
 
 function makeTweet(message, twitterCredentials) {

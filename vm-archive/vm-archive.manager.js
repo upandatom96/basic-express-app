@@ -2,6 +2,7 @@ const csv = require('csv-parser');
 const fs = require('fs');
 
 const boolUtil = require('../utilities/bool.util');
+const randomUtil = require('../utilities/random.util');
 
 function getShowsForDay(date, month) {
     return new Promise(async (resolve, reject) => {
@@ -60,11 +61,27 @@ function getShows() {
     });
 }
 
+function getTweetForShows(shows) {
+    const show = randomUtil.pickRandom(shows);
+    let lineup = "";
+    show.acts.forEach((act, i) => {
+        if (i > 0) {
+            lineup += ", ";
+            if (i === show.acts.length - 1) {
+                lineup += "and ";
+            }
+        }
+        lineup += act;
+    })
+    return `On this day (${show.month} ${show.date}) in ${show.year} at the Vaudeville Mews: ${lineup} (showtime at ${show.time})`;
+}
+
 module.exports = {
     getShows,
     getShowsToday,
     getShowsForDay,
     getShowsForAct,
+    getTweetForShows,
 }
 
 function convertShows(shows) {
