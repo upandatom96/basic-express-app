@@ -134,7 +134,14 @@ const DIRECT_EVENTS = [
         text: "{HERO_FIRST} takes a drink from the fountain.",
         type: EventTypes.DIRECT,
     },
-
+    {
+        name: "ROCKSLIDE",
+        intro: "{HERO_FIRST} feels a rumbling and turns towards the source, a nearby cliff.",
+        damageMin: 5,
+        damageMax: 25,
+        text: "Boulders fall from the cliff, it's a rockslide! A few hit {HERO_FIRST}.",
+        type: EventTypes.DIRECT,
+    },
 ];
 const CHOICE_EVENTS = [
     {
@@ -338,6 +345,65 @@ const PATH_EVENTS = [
             },
             {
                 text: "{HERO_FIRST} loses at the games and is a bit demoralized."
+            }
+        ],
+    },
+    {
+        name: "Training Camp",
+        intro: "{HERO_FIRST} finds a group young adventurers training.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    itemReq: Items.WOODEN_SHIELD,
+                    loseItem: true,
+                },
+                expPoints: 50,
+                text: "{HERO_FIRST} trains with their Wooden Shield until it breaks."
+            },
+            {
+                triggers: {
+                    itemReq: Items.WOODEN_SWORD,
+                    loseItem: true,
+                },
+                expPoints: 50,
+                text: "{HERO_FIRST} trains with their Wooden Sword until it breaks."
+            },
+            {
+                text: "{HERO_FIRST} watches some training before carrying on."
+            }
+        ],
+    },
+    {
+        name: "The {RAFC} Goat Tavern",
+        intro: "{HERO_FIRST} reaches The {RAFC} Goat Tavern.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    allyReq: Allies.BARD,
+                    loseItem: false,
+                },
+                expPoints: 10,
+                distanceBoost: 10,
+                attackBoost: 1,
+                defenseBoost: 1,
+                healBoost: 1,
+                text: "{HERO_FIRST} stops in the tavern for a drink, the Bard leads the crowd in a joyful song."
+            },
+            {
+                triggers: {
+                    allyReq: Allies.HUNTER,
+                    loseItem: false,
+                },
+                expPoints: 10,
+                attackBoost: 2,
+                defenseBoost: 2,
+                text: "{HERO_FIRST} stops in the tavern. The Hunter tells hunting stories to the crowd as they drink."
+            },
+            {
+                expPoints: 10,
+                text: "{HERO_FIRST} stops in the tavern for a drink."
             }
         ],
     },
