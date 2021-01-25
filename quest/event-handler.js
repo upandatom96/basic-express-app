@@ -240,14 +240,11 @@ function getStatDamage(attackerStat, defenderStat) {
     const max = damageDifferenceCap > 0 ? damageDifferenceCap : 0;
 
     const baseDamage = randomUtil.pickRandomNumber(min, max);
-    return baseDamage + 1 + rollCritical();
+    return (baseDamage + 1) * rollCritical(5);
 }
 
-function rollCritical() {
-    const roll = randomUtil.pickRandomNumber(1, 100) - 90;
-    if (roll <= 0) {
-        return 0;
-    } else {
-        return (roll + 1) * 10;
-    }
+function rollCritical(chance) {
+    const criticalChance = randomUtil.pickRandomNumber(1, 100);
+    const hitCritical = criticalChance > (100 - chance);
+    return hitCritical ? 2 : 1;
 }
