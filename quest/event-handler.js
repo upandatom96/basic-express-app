@@ -31,8 +31,7 @@ function heroTurnEncounter(hero, event) {
     let moveDetails = "";
     switch (move.type) {
         case MoveTypes.HEAL:
-            const maxHeal = hero.wisdom * (4 + hero.healBoost);
-            const healAmount = randomUtil.pickRandomNumber(1, maxHeal) * move.multiplier;
+            const healAmount = rollHeal(hero, move);
             moveDetails = `heals ${healAmount} hp.`;
 
             hero.healBoost = 0;
@@ -247,4 +246,10 @@ function rollCritical(chance) {
     const criticalChance = randomUtil.pickRandomNumber(1, 100);
     const hitCritical = criticalChance > (100 - chance);
     return hitCritical ? 2 : 1;
+}
+
+function rollHeal(hero, move) {
+    const minHeal = 2 + hero.wisdom;
+    const maxHeal = minHeal * (2 + hero.healBoost);
+    return randomUtil.pickRandomNumber(minHeal, maxHeal) * move.multiplier;
 }
