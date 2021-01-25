@@ -28,6 +28,28 @@ const FLAVOR_QUESTS = [
             type: EventTypes.FLAVOR,
         },
     },
+    {
+        name: "The Ring of Evil",
+        text: "throw the Ring of Evil into a nearby volcano",
+        destination: "a nearby volcano",
+        distanceRequired: 75,
+        expPoints: 40,
+        finaleEvent: {
+            intro: "{HERO_FIRST} reaches a nearby volcano and throws the ring in, avoiding temptation (and style).",
+            type: EventTypes.FLAVOR,
+        },
+    },
+    {
+        name: "Long-Distance Diplomacy",
+        text: "delivery a peace treaty to a nearby castle",
+        destination: "a nearby castle",
+        distanceRequired: 85,
+        expPoints: 45,
+        finaleEvent: {
+            intro: "{HERO_FIRST} delivers the treaty to castle guards, establishing (some) peace.",
+            type: EventTypes.FLAVOR,
+        },
+    },
 ];
 const DIRECT_QUESTS = [
     {
