@@ -113,6 +113,11 @@ const STORY_FOR_SYNONYMS = [
     "True {Detective}",
     "{True} Detective",
     "{Wonder} Woman",
+    "{Toy} Story",
+    "Toy {Story}",
+    "Inside {Out}",
+    "Ghost in the {Shell}",
+    "{Ghost} in the Shell",
 ];
 const TITLES = [
     "Of Mice and {N2}",
@@ -261,9 +266,13 @@ const QUOTES = [
     "{N1} of Cards",
     "{A1} Detective",
     "True {N1}",
+    "{N1} Story",
+    "{N1} in the Shell",
+    "Ghost in the {N1}",
+    "{A1} Hero 6",
 ];
 
-// [this line number] - 8 = COUNT (266 - 8 = 258)
+// [this line number] - 8 = COUNT (275 - 8 = 267)
 
 module.exports = {
     STORY_PREFIXES: TITLES.concat(QUOTES),
