@@ -1155,6 +1155,68 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "{RAFC} Bandit",
+        intro: "A {RAFC} Bandit stops {HERO_FIRST} in their tracks!",
+        enemyName: "{RAFC} Bandit",
+        defeat: "{HERO_FIRST} defeats the {RAFC} Bandit.",
+        type: EventTypes.ENCOUNTER,
+        distanceBoost: 3,
+        expPoints: 30,
+        enemyHpStart: 20,
+        enemyHpMax: 20,
+        dexterity: 5,
+        charisma: 5,
+        wisdom: 3,
+        strength: 3,
+        moves: [
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "{RAC} SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "{RAC} TRICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "{RAC} TAUNT",
+            },
+        ],
+    },
+    {
+        name: "Grey Wolf",
+        intro: "A Grey Wolf stops {HERO_FIRST} in their tracks!",
+        enemyName: "Grey Wolf",
+        defeat: "{HERO_FIRST} defeats the Grey Wolf.",
+        type: EventTypes.ENCOUNTER,
+        distanceBoost: 3,
+        expPoints: 20,
+        enemyHpStart: 15,
+        enemyHpMax: 15,
+        dexterity: 4,
+        charisma: 4,
+        wisdom: 2,
+        strength: 4,
+        moves: [
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "CLAW SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "PUMMEL",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "HOWL AT THE MOON",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);
