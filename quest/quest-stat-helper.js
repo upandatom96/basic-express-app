@@ -66,9 +66,9 @@ function getWorldStatus(heroes) {
         }
 
         // count law vs chaos
-        if (hero.alignmentGoodVsEvil === "CHAOTIC") {
+        if (hero.alignmentLawVsChaos === "CHAOTIC") {
             chaosPts += hero.level;
-        } else if (hero.alignmentGoodVsEvil === "LAWFUL") {
+        } else if (hero.alignmentLawVsChaos === "LAWFUL") {
             lawPts += hero.level;
         }
 
