@@ -1,4 +1,11 @@
 const STORY_FOR_SYNONYMS = [
+    "{Dungeons} & Dragons",
+    "Dungeons & {Dragons}",
+    "Super Mario {Sunshine}",
+    "{Settlers} of Catan",
+    "{Betrayal} at House on the Hill",
+    "Betrayal at {House} on the Hill",
+    "Betrayal at House on the {Hill}",
     "Of {Mice} and Men",
     "Of Mice and {Men}",
     "{Great} Expectations",
