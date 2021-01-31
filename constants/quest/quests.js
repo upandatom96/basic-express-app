@@ -549,6 +549,106 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Beholder's Scheme",
+        text: "seek and defeat the Beholder",
+        destination: "the Beholder's hideout",
+        distanceRequired: 50,
+        expPoints: 300,
+        finaleEvent: {
+            intro: "The Beholder glares as {HERO_FIRST} approaches.",
+            enemyName: "the Beholder",
+            defeat: "{HERO_FIRST} has defeated the Beholder!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 75,
+            enemyHpMax: 75,
+            dexterity: 4,
+            charisma: 7,
+            wisdom: 9,
+            strength: 4,
+            moves: [
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "DISINTEGRATION RAY",
+                    multiplier: 3,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "FEAR RAY",
+                    multiplier: 2,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "TELEKINETIC RAY",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "HEAT RAY",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "PETRIFICATION RAY",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "CHARM RAY",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "CONSIDER CRIMES",
+                },
+            ],
+        },
+    },
+    {
+        name: "The Diabolical Dwarf",
+        text: "stop a nefarious Dwarf's misdeeds",
+        destination: "Mount Dwarvious",
+        distanceRequired: 100,
+        expPoints: 200,
+        finaleEvent: {
+            intro: "The Diabolical Dwarf grunts as {HERO_FIRST} approaches.",
+            enemyName: "the Diabolical Dwarf",
+            defeat: "{HERO_FIRST} has defeated the Diabolical Dwarf!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 30,
+            enemyHpMax: 30,
+            dexterity: 4,
+            charisma: 5,
+            wisdom: 4,
+            strength: 9,
+            moves: [
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "THROW DIAMOND",
+                    multiplier: 2,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "SWING PICK-AXE",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "THROW COAL",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "DIABOLICAL BARGAIN",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "MINE",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
