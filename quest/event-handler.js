@@ -239,7 +239,7 @@ function getStatDamage(attackerStat, defenderStat) {
     const max = damageDifferenceCap > 0 ? damageDifferenceCap : 0;
 
     const baseDamage = randomUtil.pickRandomNumber(min, max);
-    return (baseDamage + 1) * rollCritical(10);
+    return (baseDamage + 1) * rollCritical(15);
 }
 
 function rollCritical(chance) {
