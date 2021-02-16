@@ -10,7 +10,7 @@ function makeIntroAnnouncement(clueBot) {
 }
 
 function makeStatsAnnouncement(clueBot, solvedCount) {
-    const announcement = `After solving ${solvedCount + 1} murder mysteries, someone else has been killed! For statistics and solved mysteries, go to https://adam-on-the-internet.github.io/the-clue-bot-ui/`;
+    const announcement = `After solving ${solvedCount + 1} murder mysteries, someone else has been killed! For statistics and solved mysteries, go to https://adam-on-the-internet.github.io/the-clue-bot/`;
     makeAnnouncement(clueBot, announcement);
 }
 
