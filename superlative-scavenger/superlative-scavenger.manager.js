@@ -42,6 +42,11 @@ function getNoun() {
         "Castle",
         "Aunt",
         "Doctor",
+        "Stairway",
+        "Hallway",
+        "Couch",
+        "Plant",
+        "Bird",
     ]);
 }
 
