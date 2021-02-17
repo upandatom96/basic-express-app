@@ -80,6 +80,9 @@ function setupControllers(app) {
 
   const vmArchiveController = require('../vm-archive/vm-archive.controller');
   app.use('/vmArchive', vmArchiveController);
+
+  const superlativeController = require('../superlative-scavenger/superlative-scavenger.controller');
+  app.use('/superlativeScavenger', superlativeController);
 }
 
 module.exports = {
