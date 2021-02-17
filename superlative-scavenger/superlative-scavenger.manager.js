@@ -21,6 +21,12 @@ function getAdjective() {
         "Prettiest",
         "Smelliest",
         "Toughest",
+        "Saddest",
+        "Happiest",
+        "Shiniest",
+        "Most Glamorous",
+        "Most Gothic",
+        "Most Futuristic",
     ]);
 }
 
@@ -32,6 +38,10 @@ function getNoun() {
         "Cat",
         "House",
         "Mouse",
+        "T-Shirt",
+        "Castle",
+        "Aunt",
+        "Doctor",
     ]);
 }
 
