@@ -13,12 +13,32 @@ const STANDARD_MOVES = [
     },
     {
         type: MoveTypes.STRENGTH_ATTACK,
+        name: "HEROIC JAB",
+        multiplier: 1,
+    },
+    {
+        type: MoveTypes.STRENGTH_ATTACK,
         name: "HEROIC KICK",
         multiplier: 2,
     },
     {
         type: MoveTypes.DEXTERITY_ATTACK,
         name: "HEROIC SLAP",
+        multiplier: 1,
+    },
+    {
+        type: MoveTypes.DEXTERITY_ATTACK,
+        name: "HEROIC SWIPE",
+        multiplier: 1,
+    },
+    {
+        type: MoveTypes.WISDOM_ATTACK,
+        name: "HEROIC MAGIC BLAST",
+        multiplier: 1,
+    },
+    {
+        type: MoveTypes.CHARISMA_ATTACK,
+        name: "HEROIC BAIT AND SWITCH",
         multiplier: 1,
     },
     {
