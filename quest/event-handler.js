@@ -201,8 +201,14 @@ function applyChanges(changes, hero) {
     return changeText;
 }
 
+function getDamageModifier(hero) {
+    const damageModifierMin = (hero.level - 1) * hero.level;
+    const damageModifierMax = hero.level * hero.level;
+    return randomUtil.pickRandomNumber(damageModifierMin, damageModifierMax);
+}
+
 function handleDamage(hero, damage) {
-    const damageModifier = ((hero.level - 1) * hero.level) + hero.level;
+    const damageModifier = getDamageModifier(hero);
     const modifiedDamage = damage + damageModifier;
     hero.hp -= modifiedDamage;
     hero.damageTakenTotal += modifiedDamage;
