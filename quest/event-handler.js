@@ -202,7 +202,7 @@ function applyChanges(changes, hero) {
 }
 
 function handleDamage(hero, damage) {
-    const damageModifier = (hero.level - 1) * hero.level;
+    const damageModifier = ((hero.level - 1) * hero.level) + hero.level;
     const modifiedDamage = damage + damageModifier;
     hero.hp -= modifiedDamage;
     hero.damageTakenTotal += modifiedDamage;
