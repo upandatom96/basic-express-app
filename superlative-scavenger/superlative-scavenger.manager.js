@@ -27,11 +27,21 @@ function getAdjective() {
         "Most Glamorous",
         "Most Gothic",
         "Most Futuristic",
+        "Most Likable",
+        "Most Colorful",
+        "Most Elegant",
+        "Cutest",
     ]);
 }
 
 function getNoun() {
     return randomUtil.pickRandom([
+        "Person",
+        "Guitar",
+        "Dress",
+        "Wallpaper",
+        "Plant",
+        "Bird",
         "Dog",
         "Log",
         "Hat",
