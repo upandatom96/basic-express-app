@@ -31,11 +31,15 @@ function getAdjective() {
         "Most Colorful",
         "Most Elegant",
         "Cutest",
+        "Oldest",
+        "More Futuristic",
     ]);
 }
 
 function getNoun() {
     return randomUtil.pickRandom([
+        "Painting",
+        "Statue",
         "Person",
         "Guitar",
         "Dress",
