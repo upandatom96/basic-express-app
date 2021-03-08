@@ -1,4 +1,9 @@
 const STORY_FOR_SYNONYMS = [
+    "{Rhythm} Heaven",
+    "Rhythm {Heaven}",
+    "Gossip {Girl}",
+    "{Gossip} Girl",
+    "Among {Us}",
     "{Dungeons} & Dragons",
     "Dungeons & {Dragons}",
     "Super Mario {Sunshine}",
