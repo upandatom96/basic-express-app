@@ -71,6 +71,21 @@ const FLAVOR_EVENTS = [
         intro: "{HERO_FIRST} stops for a moment and enjoys the view as they pass through a valley.",
         type: EventTypes.FLAVOR,
     },
+    {
+        name: "No Time for a Festival",
+        intro: "{HERO_FIRST} notices an exciting festival near their path! But they're on a mission, so they keep moving.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        name: "Bzzzzzz",
+        intro: "{HERO_FIRST} hears a buzzing in the trees nearby. They keep walking, not eager to get stung.",
+        type: EventTypes.FLAVOR,
+    },
+    {
+        name: "Whose Goat?",
+        intro: "{HERO_FIRST} finds a {RA} goat wandering in their path. They pet the goat and carry on.",
+        type: EventTypes.FLAVOR,
+    },
 ];
 const DIRECT_EVENTS = [
     {

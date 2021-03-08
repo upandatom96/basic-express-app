@@ -649,6 +649,51 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Bees",
+        text: "defeat the evil bee spirit",
+        destination: "the Evil Hive",
+        distanceRequired: 50,
+        expPoints: 150,
+        finaleEvent: {
+            intro: "The Bee Spirit Beezlebuzz grunts as {HERO_FIRST} steps in a honey pool.",
+            enemyName: "Beezlebuzz",
+            defeat: "{HERO_FIRST} has defeated Beezlebuzz!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 30,
+            enemyHpMax: 30,
+            dexterity: 6,
+            charisma: 5,
+            wisdom: 3,
+            strength: 3,
+            moves: [
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "STINGING CURSE",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.DEXTERITY_ATTACK,
+                    name: "SHOOTING STINGER",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "COMMAND BEES",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "MAKE HONEY",
+                },
+                {
+                    type: MoveTypes.HEAL,
+                    name: "CONSUME HONEY",
+                    multiplier: 2
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
