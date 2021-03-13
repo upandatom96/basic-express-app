@@ -83,6 +83,9 @@ function setupControllers(app) {
 
   const superlativeController = require('../superlative-scavenger/superlative-scavenger.controller');
   app.use('/superlativeScavenger', superlativeController);
+
+  const muppetController = require('../muppet/muppet.controller');
+  app.use('/muppet', muppetController);
 }
 
 module.exports = {
