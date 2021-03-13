@@ -694,6 +694,78 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Barron's Empire",
+        text: "assassinate the Barron",
+        destination: "the Barron's Mansion",
+        distanceRequired: 75,
+        expPoints: 100,
+        finaleEvent: {
+            intro: "The Barron scoffs as {HERO_FIRST} steps into the mansion.",
+            enemyName: "the Barron",
+            defeat: "{HERO_FIRST} has defeated the Barron!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 10,
+            enemyHpMax: 10,
+            dexterity: 1,
+            charisma: 1,
+            wisdom: 1,
+            strength: 1,
+            moves: [
+                {
+                    type: MoveTypes.FAIL,
+                    name: "SCOFF",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "DAYDREAM ABOUT EMPIRE",
+                },
+            ],
+        },
+    },
+    {
+        name: "The Construct",
+        text: "turn off the Construct",
+        destination: "the Abandoned Lab",
+        distanceRequired: 50,
+        expPoints: 100,
+        finaleEvent: {
+            intro: "The Construct beeps as {HERO_FIRST} steps into the lab.",
+            enemyName: "the Construct",
+            defeat: "{HERO_FIRST} has turned off the Construct!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 50,
+            enemyHpMax: 50,
+            dexterity: 3,
+            charisma: 3,
+            wisdom: 10,
+            strength: 10,
+            moves: [
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "SMASH FEELINGS",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "COMPUTE FEELINGS",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "FEEL SADNESS",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "FEEL CONFUSION",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "FEEL LONGING",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);

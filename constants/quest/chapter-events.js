@@ -544,6 +544,65 @@ const PATH_EVENTS = [
             },
         ],
     },
+    {
+        name: "The Graveyard",
+        intro: "{HERO_FIRST} passes by a graveyard.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    wisdomReq: 10,
+                },
+                criticalBoost: 5,
+                healBoost: 5,
+                defenseBoost: 5,
+                distanceBoost: 5,
+                attackBoost: 5,
+                text: "{HERO_FIRST} pays respect to the Heroes who have fallen before him, knowing their history."
+            },
+            {
+                triggers: {
+                    wisdomReq: 5,
+                },
+                criticalBoost: 2,
+                healBoost: 2,
+                defenseBoost: 2,
+                distanceBoost: 2,
+                attackBoost: 2,
+                text: "{HERO_FIRST} recognizes a few names and pays respect to the dead."
+            },
+            {
+                text: "{HERO_FIRST} looks at some graves but does not recognize any names."
+            },
+        ],
+    },
+    {
+        name: "The Sad Person",
+        intro: "{HERO_FIRST} passes by a sad person.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    charismaReq: 10,
+                },
+                criticalBoost: 10,
+                healBoost: 10,
+                text: "{HERO_FIRST} cheers up the sad person, now they are having a great day."
+            },
+            {
+                triggers: {
+                    charismaReq: 5,
+                },
+                criticalBoost: 5,
+                healBoost: 5,
+                text: "{HERO_FIRST} talks to them and puts a smile on their face."
+            },
+            {
+                criticalBoost: -5,
+                text: "{HERO_FIRST} feels sad just seeing them."
+            },
+        ],
+    },
 ];
 const ENCOUNTER_EVENTS = [
     {

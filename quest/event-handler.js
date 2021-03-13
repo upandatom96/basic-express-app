@@ -27,13 +27,15 @@ function heroTurnEncounter(hero, event) {
     const specialMoves = codeRetriever.findSpecialMoves(hero.specialMoves);
     const availableMoves = HeroMoves.STANDARD_MOVES.concat(specialMoves);
     const move = randomUtil.pickRandom(availableMoves);
+    const heroCriticalChance = 15 + hero.criticalBoost;
 
     let moveDetails = "";
     switch (move.type) {
         case MoveTypes.HEAL:
-            const healAmount = rollHeal(hero, move);
+            const healAmount = rollHeal(hero, move, heroCriticalChance);
             moveDetails = `heals ${healAmount} hp.`;
 
+            hero.criticalBoost = 0;
             hero.healBoost = 0;
             hero.hp += healAmount;
             if (hero.hp > hero.hpMax) {
@@ -41,30 +43,34 @@ function heroTurnEncounter(hero, event) {
             }
             break;
         case MoveTypes.STRENGTH_ATTACK:
-            const strDmg = getStatDamage(hero.strength + hero.attackBoost, event.strength) * move.multiplier;
+            const strDmg = getStatDamage(hero.strength + hero.attackBoost, event.strength, heroCriticalChance) * move.multiplier;
             moveDetails = `does ${strDmg} strength damage.`;
 
+            hero.criticalBoost = 0;
             hero.attackBoost = 0;
             hero.enemyHp -= strDmg;
             break;
         case MoveTypes.DEXTERITY_ATTACK:
-            const dexDmg = getStatDamage(hero.dexterity + hero.attackBoost, event.dexterity) * move.multiplier;
+            const dexDmg = getStatDamage(hero.dexterity + hero.attackBoost, event.dexterity, heroCriticalChance) * move.multiplier;
             moveDetails = `does ${dexDmg} dexterity damage.`;
 
+            hero.criticalBoost = 0;
             hero.attackBoost = 0;
             hero.enemyHp -= dexDmg;
             break;
         case MoveTypes.WISDOM_ATTACK:
-            const wisDmg = getStatDamage(hero.wisdom + hero.attackBoost, event.wisdom) * move.multiplier;
+            const wisDmg = getStatDamage(hero.wisdom + hero.attackBoost, event.wisdom, heroCriticalChance) * move.multiplier;
             moveDetails = `does ${wisDmg} wisdom damage.`;
 
+            hero.criticalBoost = 0;
             hero.attackBoost = 0;
             hero.enemyHp -= wisDmg;
             break;
         case MoveTypes.CHARISMA_ATTACK:
-            const chrDmg = getStatDamage(hero.charisma + hero.attackBoost, event.charisma) * move.multiplier;
+            const chrDmg = getStatDamage(hero.charisma + hero.attackBoost, event.charisma, heroCriticalChance) * move.multiplier;
             moveDetails = `does ${chrDmg} charisma damage.`;
 
+            hero.criticalBoost = 0;
             hero.attackBoost = 0;
             hero.enemyHp -= chrDmg;
             break;
@@ -82,6 +88,7 @@ function heroTurnEncounter(hero, event) {
 
 function enemyTurnEncounter(hero, event) {
     const move = randomUtil.pickRandom(event.moves);
+    const enemyCriticalChance = 15;
 
     let moveDetails = "";
     switch (move.type) {
@@ -95,7 +102,7 @@ function enemyTurnEncounter(hero, event) {
             }
             break;
         case MoveTypes.STRENGTH_ATTACK:
-            const strDmg = getStatDamage(event.strength, hero.strength + hero.defenseBoost) * move.multiplier;
+            const strDmg = getStatDamage(event.strength, hero.strength + hero.defenseBoost, enemyCriticalChance) * move.multiplier;
             moveDetails = `does ${strDmg} strength damage.`;
 
             hero.defenseBoost = 0;
@@ -103,7 +110,7 @@ function enemyTurnEncounter(hero, event) {
             hero.damageTakenTotal += strDmg;
             break;
         case MoveTypes.DEXTERITY_ATTACK:
-            const dexDmg = getStatDamage(event.dexterity, hero.dexterity + hero.defenseBoost) * move.multiplier;
+            const dexDmg = getStatDamage(event.dexterity, hero.dexterity + hero.defenseBoost, enemyCriticalChance) * move.multiplier;
             moveDetails = `does ${dexDmg} dexterity damage.`;
 
             hero.defenseBoost = 0;
@@ -111,7 +118,7 @@ function enemyTurnEncounter(hero, event) {
             hero.damageTakenTotal += dexDmg;
             break;
         case MoveTypes.WISDOM_ATTACK:
-            const wisDmg = getStatDamage(event.wisdom, hero.wisdom + hero.defenseBoost) * move.multiplier;
+            const wisDmg = getStatDamage(event.wisdom, hero.wisdom + hero.defenseBoost, enemyCriticalChance) * move.multiplier;
             moveDetails = `does ${wisDmg} wisdom damage.`;
 
             hero.defenseBoost = 0;
@@ -119,7 +126,7 @@ function enemyTurnEncounter(hero, event) {
             hero.damageTakenTotal += wisDmg;
             break;
         case MoveTypes.CHARISMA_ATTACK:
-            const chrDmg = getStatDamage(event.charisma, hero.charisma + hero.defenseBoost) * move.multiplier;
+            const chrDmg = getStatDamage(event.charisma, hero.charisma + hero.defenseBoost, enemyCriticalChance) * move.multiplier;
             moveDetails = `does ${chrDmg} charisma damage.`;
 
             hero.defenseBoost = 0;
@@ -198,6 +205,18 @@ function applyChanges(changes, hero) {
     if (boolUtil.hasValue(changes.distanceBoost)) {
         hero.distanceBoost += changes.distanceBoost;
     }
+    if (boolUtil.hasValue(changes.attackBoost)) {
+        hero.attackBoost += changes.attackBoost;
+    }
+    if (boolUtil.hasValue(changes.criticalBoost)) {
+        hero.criticalBoost += changes.criticalBoost;
+    }
+    if (boolUtil.hasValue(changes.healBoost)) {
+        hero.healBoost += changes.healBoost;
+    }
+    if (boolUtil.hasValue(changes.defenseBoost)) {
+        hero.defenseBoost += changes.defenseBoost;
+    }
     return changeText;
 }
 
@@ -237,7 +256,7 @@ function getMoveMessage(characterName, moveName, moveDetails) {
     return `${characterName} uses ${moveName} and ${moveDetails}`;
 }
 
-function getStatDamage(attackerStat, defenderStat) {
+function getStatDamage(attackerStat, defenderStat, criticalChance) {
     const damageDifference = (attackerStat + 1 - defenderStat);
     const min = damageDifference > 0 ? damageDifference : 0;
 
@@ -245,7 +264,7 @@ function getStatDamage(attackerStat, defenderStat) {
     const max = damageDifferenceCap > 0 ? damageDifferenceCap : 0;
 
     const baseDamage = randomUtil.pickRandomNumber(min, max);
-    return (baseDamage + 1) * rollCritical(15);
+    return (baseDamage + 1) * rollCritical(criticalChance);
 }
 
 function rollCritical(chance) {
@@ -254,8 +273,8 @@ function rollCritical(chance) {
     return hitCritical ? 3 : 1;
 }
 
-function rollHeal(hero, move) {
+function rollHeal(hero, move, criticalChance) {
     const minHeal = 2 + hero.wisdom;
     const maxHeal = minHeal * (1 + hero.healBoost);
-    return randomUtil.pickRandomNumber(minHeal, maxHeal) * move.multiplier;
+    return randomUtil.pickRandomNumber(minHeal, maxHeal) * move.multiplier * rollCritical(criticalChance);
 }
