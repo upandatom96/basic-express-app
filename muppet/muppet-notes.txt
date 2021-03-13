@@ -1,3 +1,2 @@
-* muppet power level = add up all stats (/100)
-
-* deep validations: commonality, muppet stats (of 10), alignment
+* muppet stat endpoint
+* random muppet endpoint
