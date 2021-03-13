@@ -14,6 +14,28 @@ controller.get('/', (req, res) => {
         });
 });
 
+controller.get('/stats', (req, res) => {
+    manager.getStats()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
+controller.get('/random', (req, res) => {
+    manager.getRandom()
+        .then((response) => {
+            res.send(response);
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.send(err);
+        });
+});
+
 controller.get('/:id', (req, res) => {
     const id = req.params.id;
     manager.getById(id)

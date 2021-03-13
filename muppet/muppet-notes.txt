@@ -1,2 +1,1 @@
 * muppet stat endpoint
-* random muppet endpoint

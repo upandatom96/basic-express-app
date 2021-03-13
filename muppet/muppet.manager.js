@@ -3,6 +3,7 @@ require('./Muppet.model');
 const Muppet = mongoose.model('muppet');
 const validator = require('./muppet.validator');
 const copyUtil = require('../utilities/copy.util');
+const randomUtil = require('../utilities/random.util');
 
 function getAll() {
     return new Promise((resolve, reject) => {
@@ -10,6 +11,26 @@ function getAll() {
             .then((all) => {
                 const allReports = all.map(item => getMuppetReport(item));
                 resolve(allReports);
+            });
+    });
+}
+
+function getStats() {
+    return new Promise((resolve, reject) => {
+        Muppet.find({})
+            .then((all) => {
+                const stats = calculateStats(all);
+                resolve(stats);
+            });
+    });
+}
+
+function getRandom() {
+    return new Promise((resolve, reject) => {
+        Muppet.find({})
+            .then((all) => {
+                const picked = randomUtil.pickRandom(all);
+                resolve(picked);
             });
     });
 }
@@ -150,6 +171,8 @@ function edit(muppet) {
 module.exports = {
     getAll,
     getById,
+    getRandom,
+    getStats,
     add,
     deleteOne,
     edit,
@@ -172,4 +195,10 @@ function getMuppetPowerLevel(muppet) {
         muppet.fuzziness +
         muppet.softness +
         muppet.imagination;
+}
+
+function calculateStats(all) {
+    return {
+        muppetCount: all.length
+    };
 }
