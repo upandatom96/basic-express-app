@@ -11,10 +11,12 @@ function getStatsForHeroes(heroReports) {
         .reduce((a, b) => a + b, 0);
     const heroesCreated = heroReports.length;
     const message = `${heroesCreated} heroes have completed ${chaptersCompleted} chapters and ${questsCompleted} quests.`;
+    const maxHeroLevel = Math.max.apply(Math, heroReports.map(function(o) { return o.level; }));
     return {
         heroesCreated,
         questsCompleted,
         chaptersCompleted,
+        maxHeroLevel,
         message,
     };
 }
