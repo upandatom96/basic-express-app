@@ -17,11 +17,34 @@ function checkForEditErrors(muppet) {
 }
 
 function checkForGeneralErrors(muppet) {
-    let errors = [];
-    if (boolUtil.hasNoValue(muppet.name)) {
-        errors.push({ text: 'Please add a name' });
-    }
-    return errors;
+    const fields = [
+        "name",
+        "debutYear",
+        "commonality",
+        "speechType",
+        "mainSeries",
+        "creature",
+        "starQuality",
+        "cuteness",
+        "imagination",
+        "storytelling",
+        "humor",
+        "aloofness",
+        "mischief",
+        "floppiness",
+        "fuzziness",
+        "softness",
+        "strength",
+        "wisdom",
+        "intelligence",
+        "constitution",
+        "charisma",
+        "dexterity",
+        "muppetRank",
+        "alignment",
+        "archived",
+    ];
+    return boolUtil.collectErrors(muppet, fields);
 }
 
 module.exports = {

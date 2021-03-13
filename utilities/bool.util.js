@@ -10,6 +10,16 @@ function isEmptyText(value) {
   return value === "";
 }
 
+function collectErrors(item, fields) {
+  const errors = [];
+  fields.forEach((field) => {
+    if (hasNoValue(item[field])) {
+      errors.push({text: 'Please add field: ' + field});
+    }
+  });
+  return errors;
+}
+
 function hasNoValue(value) {
   return isNull(value) || isUndefined(value) || isEmptyText(value);
 }
@@ -85,5 +95,6 @@ module.exports = {
   hasNumberValue,
   hasNoNumberValue,
   stringHasBooleanValue,
-  translateBooleanString
+  translateBooleanString,
+  collectErrors,
 }
