@@ -1,4 +1,8 @@
 const STORY_FOR_SYNONYMS = [
+    "Super Mario 3D {Land}",
+    "Super Mario 3D {World}",
+    "{Swamp} Thing",
+    "Swamp {Thing}",
     "{Rhythm} Heaven",
     "Rhythm {Heaven}",
     "Gossip {Girl}",
