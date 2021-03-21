@@ -1,4 +1,6 @@
 const STORY_FOR_SYNONYMS = [
+    "In A {Sentimental} Mood",
+    "In A Sentimental {Mood}",
     "Super Mario 3D {Land}",
     "Super Mario 3D {World}",
     "{Swamp} Thing",
@@ -286,6 +288,8 @@ const QUOTES = [
     "{N1} in the Shell",
     "Ghost in the {N1}",
     "{A1} Hero 6",
+    "In A {A1} Mood",
+    "In A Sentimental {N1}",
 ];
 
 // [this line number] - 8 = COUNT (275 - 8 = 267)
