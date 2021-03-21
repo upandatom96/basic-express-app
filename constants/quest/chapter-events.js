@@ -157,6 +157,14 @@ const DIRECT_EVENTS = [
         text: "Boulders fall from the cliff, it's a rockslide! A few hit {HERO_FIRST}.",
         type: EventTypes.DIRECT,
     },
+    {
+        name: "Pit Trap",
+        intro: "{HERO_FIRST} steps on a pile of leaves... wait...",
+        damageMin: 10,
+        damageMax: 20,
+        text: "{HERO_FIRST} realizes their mistake as they land at the bottom of a pit trap.",
+        type: EventTypes.DIRECT,
+    },
 ];
 const CHOICE_EVENTS = [
     {

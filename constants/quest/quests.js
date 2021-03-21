@@ -766,6 +766,50 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Evil Sponge",
+        text: "destroy the evil sponge",
+        destination: "the swampy swamp",
+        distanceRequired: 50,
+        expPoints: 150,
+        finaleEvent: {
+            intro: "The Sponge grows as {HERO_FIRST} steps into the swamp.",
+            enemyName: "the Sponge",
+            defeat: "{HERO_FIRST} has destroyed the sponge!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 100,
+            enemyHpMax: 1000,
+            dexterity: 1,
+            charisma: 1,
+            wisdom: 1,
+            strength: 1,
+            moves: [
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "ROLL",
+                    multiplier: 3,
+                },
+                {
+                    type: MoveTypes.HEAL,
+                    name: "GROW",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.HEAL,
+                    name: "FILTER FEED",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "REST",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "PAUSE",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);

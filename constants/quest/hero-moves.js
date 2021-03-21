@@ -49,6 +49,15 @@ const STANDARD_MOVES = [
 
 const SPECIAL_MOVES = [
     {
+        type: MoveTypes.FAIL,
+        name: "COUGH",
+    },
+    {
+        type: MoveTypes.HEAL,
+        name: "RECOVER",
+        multiplier: 1,
+    },
+    {
         type: MoveTypes.WISDOM_ATTACK,
         name: "DIFFICULT RIDDLE",
         multiplier: 1,
