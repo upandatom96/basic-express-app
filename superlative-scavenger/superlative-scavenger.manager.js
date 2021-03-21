@@ -33,6 +33,7 @@ function getAdjective() {
         "Cutest",
         "Oldest",
         "More Futuristic",
+        "Strongest",
     ]);
 }
 
@@ -55,12 +56,14 @@ function getNoun() {
         "T-Shirt",
         "Castle",
         "Aunt",
+        "Uncle",
         "Doctor",
         "Stairway",
         "Hallway",
         "Couch",
         "Plant",
         "Bird",
+        "Athlete",
     ]);
 }
 
