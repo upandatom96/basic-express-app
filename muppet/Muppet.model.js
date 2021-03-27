@@ -51,6 +51,11 @@ const MuppetSchema = new Schema({
             type: String
         }
     ],
+    tags: [
+        {
+            type: String
+        }
+    ],
     starQuality: {
         type: Number,
         required: true,

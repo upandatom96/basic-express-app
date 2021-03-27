@@ -68,6 +68,7 @@ function add(muppet) {
                 creature: muppet.creature,
                 appearanceAdjectives: muppet.appearanceAdjectives,
                 attitudeAdjectives: muppet.attitudeAdjectives,
+                tags: muppet.tags,
                 notes: muppet.notes,
                 quotes: muppet.quotes,
                 starQuality: muppet.starQuality,
@@ -135,6 +136,7 @@ function edit(muppet) {
                         foundItem.creature = muppet.creature;
                         foundItem.appearanceAdjectives = muppet.appearanceAdjectives;
                         foundItem.attitudeAdjectives = muppet.attitudeAdjectives;
+                        foundItem.tags = muppet.tags;
                         foundItem.imageLinks = muppet.imageLinks;
                         foundItem.notes = muppet.notes;
                         foundItem.quotes = muppet.quotes;

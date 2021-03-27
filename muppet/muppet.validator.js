@@ -29,6 +29,14 @@ function checkForGeneralErrors(muppet) {
         "passion",
         "softness",
     ];
+    const dndStats = [
+        "strength",
+        "dexterity",
+        "wisdom",
+        "intelligence",
+        "constitution",
+        "charisma",
+    ];
     const fields = [
         "name",
         "debutYear",
@@ -69,7 +77,12 @@ function checkForGeneralErrors(muppet) {
     }
     muppetStats.forEach((stat) => {
         if (muppet[stat] && (muppet[stat] < 0 || muppet[stat] > 10)) {
-            errs.push("Invalid " + stat);
+            errs.push("Invalid muppet stat " + stat);
+        }
+    });
+    dndStats.forEach((stat) => {
+        if (muppet[stat] && (muppet[stat] < 0 || muppet[stat] > 10)) {
+            errs.push("Invalid dnd stat " + stat);
         }
     });
     return errs;
