@@ -55,7 +55,7 @@ const MuppetSchema = new Schema({
         type: Number,
         required: true,
     },
-    cuteness: {
+    friendliness: {
         type: Number,
         required: true,
     },
@@ -63,7 +63,7 @@ const MuppetSchema = new Schema({
         type: Number,
         required: true,
     },
-    storytelling: {
+    showmanship: {
         type: Number,
         required: true,
     },
@@ -71,7 +71,7 @@ const MuppetSchema = new Schema({
         type: Number,
         required: true,
     },
-    aloofness: {
+    absentmindedness: {
         type: Number,
         required: true,
     },
@@ -83,7 +83,7 @@ const MuppetSchema = new Schema({
         type: Number,
         required: true,
     },
-    fuzziness: {
+    passion: {
         type: Number,
         required: true,
     },

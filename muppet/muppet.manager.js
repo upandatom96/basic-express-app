@@ -71,14 +71,14 @@ function add(muppet) {
                 notes: muppet.notes,
                 quotes: muppet.quotes,
                 starQuality: muppet.starQuality,
-                cuteness: muppet.cuteness,
+                friendliness: muppet.friendliness,
                 imagination: muppet.imagination,
-                storytelling: muppet.storytelling,
+                showmanship: muppet.showmanship,
                 humor: muppet.humor,
-                aloofness: muppet.aloofness,
+                absentmindedness: muppet.absentmindedness,
                 mischief: muppet.mischief,
                 floppiness: muppet.floppiness,
-                fuzziness: muppet.fuzziness,
+                passion: muppet.passion,
                 softness: muppet.softness,
                 strength: muppet.strength,
                 wisdom: muppet.wisdom,
@@ -139,14 +139,14 @@ function edit(muppet) {
                         foundItem.notes = muppet.notes;
                         foundItem.quotes = muppet.quotes;
                         foundItem.starQuality = muppet.starQuality;
-                        foundItem.cuteness = muppet.cuteness;
+                        foundItem.friendliness = muppet.friendliness;
                         foundItem.imagination = muppet.imagination;
-                        foundItem.storytelling = muppet.storytelling;
+                        foundItem.showmanship = muppet.showmanship;
                         foundItem.humor = muppet.humor;
-                        foundItem.aloofness = muppet.aloofness;
+                        foundItem.absentmindedness = muppet.absentmindedness;
                         foundItem.mischief = muppet.mischief;
                         foundItem.floppiness = muppet.floppiness;
-                        foundItem.fuzziness = muppet.fuzziness;
+                        foundItem.passion = muppet.passion;
                         foundItem.softness = muppet.softness;
                         foundItem.strength = muppet.strength;
                         foundItem.wisdom = muppet.wisdom;
@@ -186,13 +186,13 @@ function getMuppetReport(muppet) {
 
 function getMuppetPowerLevel(muppet) {
     return muppet.starQuality +
-        muppet.cuteness +
-        muppet.storytelling +
+        muppet.friendliness +
+        muppet.showmanship +
         muppet.humor +
-        muppet.aloofness +
+        muppet.absentmindedness +
         muppet.mischief +
         muppet.floppiness +
-        muppet.fuzziness +
+        muppet.passion +
         muppet.softness +
         muppet.imagination;
 }

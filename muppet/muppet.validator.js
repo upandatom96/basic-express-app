@@ -19,14 +19,14 @@ function checkForEditErrors(muppet) {
 function checkForGeneralErrors(muppet) {
     const muppetStats = [
         "starQuality",
-        "cuteness",
+        "friendliness",
         "imagination",
-        "storytelling",
+        "showmanship",
         "humor",
-        "aloofness",
+        "absentmindedness",
         "mischief",
         "floppiness",
-        "fuzziness",
+        "passion",
         "softness",
     ];
     const fields = [
