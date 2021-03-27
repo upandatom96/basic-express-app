@@ -67,6 +67,7 @@ function add(muppet) {
                 mainSeries: muppet.mainSeries,
                 creature: muppet.creature,
                 appearanceAdjectives: muppet.appearanceAdjectives,
+                imageLinks: muppet.imageLinks,
                 attitudeAdjectives: muppet.attitudeAdjectives,
                 tags: muppet.tags,
                 notes: muppet.notes,
