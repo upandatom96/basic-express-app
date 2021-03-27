@@ -64,6 +64,9 @@ function checkForGeneralErrors(muppet) {
     if (muppet.alignment && !ALIGNMENTS.includes(muppet.alignment.toUpperCase())) {
         errs.push("Invalid alignment");
     }
+    if (muppet.muppetRank && (muppet.muppetRank < 0 || muppet.muppetRank > 100)) {
+        errs.push("Invalid muppet rank");
+    }
     muppetStats.forEach((stat) => {
         if (muppet[stat] && (muppet[stat] < 0 || muppet[stat] > 10)) {
             errs.push("Invalid " + stat);
