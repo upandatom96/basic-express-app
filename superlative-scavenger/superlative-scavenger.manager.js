@@ -32,8 +32,9 @@ function getAdjective() {
         "Most Elegant",
         "Cutest",
         "Oldest",
-        "More Futuristic",
+        "Most Futuristic",
         "Strongest",
+        "Most Intricate",
     ]);
 }
 
@@ -64,6 +65,8 @@ function getNoun() {
         "Plant",
         "Bird",
         "Athlete",
+        "Puzzle",
+        "Bridge",
     ]);
 }
 

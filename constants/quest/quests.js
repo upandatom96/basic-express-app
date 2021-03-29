@@ -2,7 +2,6 @@ const EventTypes = require('./event-types');
 const MoveTypes = require('./move-types');
 const Items = require('./hero-items');
 const Allies = require('./hero-allies');
-const Adv = require('./hero-advantages');
 const Dis = require('./hero-disadvantages');
 
 const FLAVOR_QUESTS = [
@@ -41,12 +40,23 @@ const FLAVOR_QUESTS = [
     },
     {
         name: "Long-Distance Diplomacy",
-        text: "delivery a peace treaty to a nearby castle",
+        text: "deliver a peace treaty to a nearby castle",
         destination: "a nearby castle",
         distanceRequired: 85,
         expPoints: 45,
         finaleEvent: {
             intro: "{HERO_FIRST} delivers the treaty to castle guards, establishing (some) peace.",
+            type: EventTypes.FLAVOR,
+        },
+    },
+    {
+        name: "The Bard's Big Gig",
+        text: "attend a show The Local Bard is putting on",
+        destination: "a nearby theatre",
+        distanceRequired: 50,
+        expPoints: 25,
+        finaleEvent: {
+            intro: "{HERO_FIRST} listens to the {RA} sounds of the Bard's music and claps when appropriate.",
             type: EventTypes.FLAVOR,
         },
     },

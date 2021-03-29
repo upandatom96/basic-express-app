@@ -252,7 +252,7 @@ const CHOICE_EVENTS = [
         choices: [
             {
                 expPoints: 20,
-                text: "{HERO_FIRST} decides to go for a swim. They have a pleasant swim",
+                text: "{HERO_FIRST} decides to go for a swim. They have a pleasant swim.",
             },
             {
                 damageMax: 5,
@@ -261,6 +261,33 @@ const CHOICE_EVENTS = [
             },
             {
                 text: "{HERO_FIRST} decides to just sit there and listen to the river flow.",
+            },
+        ],
+    },
+    {
+        name: "The Coal Mine",
+        intro: "{HERO_FIRST} notices a Coal Mine slightly off the path",
+        type: EventTypes.CHOICE,
+        choices: [
+            {
+                item: Items.ODD_GEM,
+                expPoints: 20,
+                text: "{HERO_FIRST} spends some time mining and finds an ODD GEM.",
+            },
+            {
+                exp: 100,
+                text: "{HERO_FIRST} spends some time mining and finds some diamonds. Nice!",
+            },
+            {
+                exp: 100,
+                text: "{HERO_FIRST} spends some time mining and helps unionize the miners. Cool!",
+            },
+            {
+                exp: 1,
+                text: "{HERO_FIRST} spends some time mining and finds some coal. Alright!",
+            },
+            {
+                text: "{HERO_FIRST} decides to walk past the mine.",
             },
         ],
     },

@@ -1,4 +1,7 @@
 const STORY_FOR_SYNONYMS = [
+    "{Field} of Dreams",
+    "The {Walking} Dead",
+    "The Walking {Dead}",
     "In A {Sentimental} Mood",
     "In A Sentimental {Mood}",
     "Super Mario 3D {Land}",
