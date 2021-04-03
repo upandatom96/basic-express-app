@@ -57,6 +57,11 @@ const FLAVOR_EVENTS = [
         type: EventTypes.FLAVOR,
     },
     {
+        name: "News: Discovery",
+        intro: "{HERO_FIRST} walks past a Bard who tells them about the recent discovery of a {RA} creature.",
+        type: EventTypes.FLAVOR,
+    },
+    {
         name: "Fortune Teller",
         intro: "{HERO_FIRST} encounters a fortune teller who predicts they will have a {RA} day.",
         type: EventTypes.FLAVOR,

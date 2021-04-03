@@ -60,6 +60,17 @@ const FLAVOR_QUESTS = [
             type: EventTypes.FLAVOR,
         },
     },
+    {
+        name: "The Prayer",
+        text: "travel to a temple and praise your god",
+        destination: "a nearby temple",
+        distanceRequired: 20,
+        expPoints: 10,
+        finaleEvent: {
+            intro: "{HERO_FIRST} enters a {RA} temple and prays to their god.",
+            type: EventTypes.FLAVOR,
+        },
+    },
 ];
 const DIRECT_QUESTS = [
     {
