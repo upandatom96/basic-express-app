@@ -35,6 +35,7 @@ function getAdjective() {
         "Most Futuristic",
         "Strongest",
         "Most Intricate",
+        "Funniest",
     ]);
 }
 
@@ -67,6 +68,7 @@ function getNoun() {
         "Athlete",
         "Puzzle",
         "Bridge",
+        "Pants",
     ]);
 }
 

@@ -1,4 +1,7 @@
 const STORY_FOR_SYNONYMS = [
+    "Birds of {Prey}",
+    "{Monster} Hunter",
+    "Monster {Hunter}",
     "{Field} of Dreams",
     "The {Walking} Dead",
     "The Walking {Dead}",
