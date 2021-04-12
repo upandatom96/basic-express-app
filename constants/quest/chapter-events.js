@@ -1331,6 +1331,96 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "Medusa's Uncle",
+        intro: "{HERO_FIRST} hears a hissing behind some barrels. It's Medusa! No... It's Medusa's Uncle!",
+        enemyName: "Medusa's Uncle",
+        defeat: "{HERO_FIRST} has defeated Medusa's Uncle!",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 30,
+        enemyHpStart: 30,
+        enemyHpMax: 35,
+        dexterity: 3,
+        charisma: 5,
+        wisdom: 5,
+        strength: 5,
+        moves: [
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "TAIL SWING",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "STOIC KISS",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "ANNOYING SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "GLARING STARE",
+                multiplier: 2,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "ROCK-HARD HIT",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "SNAKE MEETING",
+            },
+            {
+                type: MoveTypes.HEAL,
+                name: "MYSTERIOUS HEAL",
+                multiplier: 2,
+            },
+        ],
+    },
+    {
+        name: "Lizard Attack 2",
+        intro: "{HERO_FIRST} sees a lizard that appears very far away. Wait, no, it is a close Lizard that is Tiny!",
+        enemyName: "Tiny Lizard",
+        defeat: "{HERO_FIRST} has defeated the Tiny Lizard!",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 10,
+        enemyHpStart: 10,
+        enemyHpMax: 10,
+        dexterity: 4,
+        charisma: 2,
+        wisdom: 3,
+        strength: 3,
+        moves: [
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "REPTILIAN TRICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "REPTILIAN SLASH",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "REPTILIAN TRAP",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "LIZARD LICK",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "LOSE TAIL",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);

@@ -139,7 +139,7 @@ const SPECIAL_MOVES = [
     },
     {
         type: MoveTypes.DRAIN,
-        name: "SUCK BLOOD",
+        name: "DRAIN ENERGY",
         drainMin: 5,
         drainMax: 15,
         healFactor: 0.666,

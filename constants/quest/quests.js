@@ -144,6 +144,28 @@ const CHOICE_QUESTS = [
             ],
         },
     },
+    {
+        name: "Dominion's Pizza",
+        text: "deliver a Dominion's Pizza.",
+        destination: "the Bard College Dorms",
+        distanceRequired: 75,
+        expPoints: 60,
+        finaleEvent: {
+            intro: "{HERO_FIRST} reaches the Bard College Dorms and hands off the Pizza.",
+            type: EventTypes.CHOICE,
+            choices: [
+                {
+                    expPoints: 100,
+                    text: "{HERO_FIRST} receives a large tip for delivering the pizza fresh and hot!"
+                },
+                {
+                    damageMin: 10,
+                    damageMax: 20,
+                    text: "The customer glares at {HERO_FIRST}, the pizza is cold! The customer gives a 1-star rating."
+                },
+            ],
+        },
+    },
 ];
 const PATH_QUESTS = [
     {
