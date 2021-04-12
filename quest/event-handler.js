@@ -74,6 +74,14 @@ function heroTurnEncounter(hero, event) {
             hero.attackBoost = 0;
             hero.enemyHp -= chrDmg;
             break;
+        case MoveTypes.DRAIN:
+            const drainDamage = randomUtil.pickRandomNumber(move.drainMin, move.drainMax);
+            const drainHeal = Math.floor(drainDamage * move.healFactor);
+            moveDetails = `drains ${drainDamage} damage and heals ${drainHeal}.`;
+
+            hero.enemyHp -= drainDamage;
+            hero.hp += drainHeal;
+            break;
         case MoveTypes.FAIL:
             moveDetails = `nothing happens.`;
             break;
@@ -132,6 +140,14 @@ function enemyTurnEncounter(hero, event) {
             hero.defenseBoost = 0;
             hero.hp -= chrDmg;
             hero.damageTakenTotal += chrDmg;
+            break;
+        case MoveTypes.DRAIN:
+            const drainDamage = randomUtil.pickRandomNumber(move.drainMin, move.drainMax);
+            const drainHeal = Math.floor(drainDamage * move.healFactor);
+            moveDetails = `drains ${drainDamage} damage and heals ${drainHeal}.`;
+
+            hero.hp -= drainDamage;
+            hero.enemyHp += drainHeal;
             break;
         case MoveTypes.FAIL:
             moveDetails = `nothing happens.`;

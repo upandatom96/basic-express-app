@@ -1,4 +1,5 @@
 const HEAL = "HEAL";
+const DRAIN = "DRAIN";
 const STRENGTH_ATTACK = "STRENGTH_ATTACK";
 const DEXTERITY_ATTACK = "DEXTERITY_ATTACK";
 const WISDOM_ATTACK = "WISDOM_ATTACK";
@@ -7,6 +8,7 @@ const FAIL = "FAIL";
 
 module.exports = {
     HEAL,
+    DRAIN,
     STRENGTH_ATTACK,
     DEXTERITY_ATTACK,
     WISDOM_ATTACK,

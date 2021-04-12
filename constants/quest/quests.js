@@ -831,6 +831,62 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Dracula",
+        text: "defeat the infamous vampire",
+        destination: "Dracula's Castle",
+        distanceRequired: 50,
+        expPoints: 175,
+        finaleEvent: {
+            intro: "The Dracula answers their door and politely welcomes {HERO_FIRST}.",
+            enemyName: "the Dracula",
+            defeat: "{HERO_FIRST} has defeated the Dracula!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 75,
+            enemyHpMax: 100,
+            dexterity: 5,
+            charisma: 10,
+            wisdom: 5,
+            strength: 4,
+            moves: [
+                {
+                    type: MoveTypes.DRAIN,
+                    name: "SUCK BLOOD",
+                    drainMin: 10,
+                    drainMax: 20,
+                    healFactor: 0.666,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "SCARY STORY",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "CASTLE BOOBY TRAP",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "SPOOKY SHOVE",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.DEXTERITY_ATTACK,
+                    name: "BITE AS BAT",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "MONOLOGUE",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "DUST OFF CAPE",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);

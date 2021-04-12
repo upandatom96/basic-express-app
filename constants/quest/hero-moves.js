@@ -137,6 +137,13 @@ const SPECIAL_MOVES = [
         name: "RUNNING PUNCH",
         multiplier: 3,
     },
+    {
+        type: MoveTypes.DRAIN,
+        name: "SUCK BLOOD",
+        drainMin: 5,
+        drainMax: 15,
+        healFactor: 0.666,
+    },
 ];
 
 module.exports = {
