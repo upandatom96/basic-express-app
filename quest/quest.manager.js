@@ -232,7 +232,7 @@ function getHeroReport(heroDB) {
     const completedChapters = getCompletedChapters(heroDB);
     const uniqueCompletedQuests = calcUtil.getUniqueItems(completedQuests);
     const uniqueCompletedChapters = calcUtil.getUniqueItems(completedChapters);
-    const specialMoves = codeRetriever.findSpecialMoves(heroDB.specialMoves);
+    const specialMoves = codeRetriever.findAdditionalHeroMoves(heroDB);
     const standardMoves = HeroMoves.STANDARD_MOVES;
     const hpText = `${heroDB.hp}/${heroDB.hpMax} hp`;
     const levelThreshold = (heroDB.level * 100) + ((heroDB.level - 1) * (heroDB.level) * 10);

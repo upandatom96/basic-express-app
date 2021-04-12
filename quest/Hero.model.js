@@ -159,6 +159,11 @@ const HeroSchema = new Schema({
         type: Number,
         required: false,
     },
+    enemyConditions: [
+        {
+            type: String
+        }
+    ],
     currentQuestName: {
         type: String,
         required: false,
@@ -178,6 +183,11 @@ const HeroSchema = new Schema({
         required: true,
         default: 0
     },
+    conditions: [
+        {
+            type: String
+        }
+    ],
     specialMoves: [
         {
             type: String

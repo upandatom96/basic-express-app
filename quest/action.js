@@ -81,6 +81,7 @@ function startChapter(hero) {
             break;
         case EventTypes.ENCOUNTER:
             hero.enemyHp = event.enemyHpStart;
+            hero.enemyConditions = [];
 
             const heroFaster = hero.dexterity > event.dexterity;
             hero.status = heroFaster ?
@@ -177,6 +178,7 @@ function startFinale(hero) {
             break;
         case EventTypes.ENCOUNTER:
             hero.enemyHp = event.enemyHpStart;
+            hero.enemyConditions = [];
 
             const heroFaster = hero.dexterity > event.dexterity;
             hero.status = heroFaster ?
@@ -405,6 +407,7 @@ function addDistance(hero) {
 
 function wrapUpChapter(hero) {
     hero.enemyHp = null;
+    hero.enemyConditions = [];
     hero.status = HeroStatus.QUEST_TRAVEL;
     checkHealth(hero);
 }

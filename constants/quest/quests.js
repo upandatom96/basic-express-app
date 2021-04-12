@@ -1,5 +1,6 @@
 const EventTypes = require('./event-types');
 const MoveTypes = require('./move-types');
+const Conditions = require('./conditions');
 const Items = require('./hero-items');
 const Allies = require('./hero-allies');
 const Dis = require('./hero-disadvantages');
@@ -871,6 +872,11 @@ const ENCOUNTER_QUESTS = [
             wisdom: 5,
             strength: 4,
             moves: [
+                {
+                    type: MoveTypes.CONDITION,
+                    condition: Conditions.VAMPIRISM,
+                    name: "BITE NECK",
+                },
                 {
                     type: MoveTypes.DRAIN,
                     name: "SUCK BLOOD",

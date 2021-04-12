@@ -24,7 +24,7 @@ function finishDirectEvent(hero, event) {
 }
 
 function heroTurnEncounter(hero, event) {
-    const specialMoves = codeRetriever.findSpecialMoves(hero.specialMoves);
+    const specialMoves = codeRetriever.findAdditionalHeroMoves(hero);
     const availableMoves = HeroMoves.STANDARD_MOVES.concat(specialMoves);
     const move = randomUtil.pickRandom(availableMoves);
     const heroCriticalChance = 15 + hero.criticalBoost;
@@ -82,6 +82,17 @@ function heroTurnEncounter(hero, event) {
             hero.enemyHp -= drainDamage;
             hero.hp += drainHeal;
             break;
+        case MoveTypes.CONDITION:
+            const condition = move.condition;
+            const alreadyHasCondition = hero.enemyConditions.includes(condition);
+
+            if (alreadyHasCondition) {
+                moveDetails = `tries to inflict ${condition}, but nothing happens.`;
+            } else {
+                moveDetails = `inflicts ${condition}.`;
+                hero.enemyConditions.push(condition);
+            }
+            break;
         case MoveTypes.FAIL:
             moveDetails = `nothing happens.`;
             break;
@@ -95,7 +106,10 @@ function heroTurnEncounter(hero, event) {
 }
 
 function enemyTurnEncounter(hero, event) {
-    const move = randomUtil.pickRandom(event.moves);
+    const standardMoves = event.moves;
+    const additionalMoves = codeRetriever.findAdditionalEnemyMoves(hero);
+    const availableMoves = standardMoves.concat(additionalMoves);
+    const move = randomUtil.pickRandom(availableMoves);
     const enemyCriticalChance = 15;
 
     let moveDetails = "";
@@ -148,6 +162,17 @@ function enemyTurnEncounter(hero, event) {
 
             hero.hp -= drainDamage;
             hero.enemyHp += drainHeal;
+            break;
+        case MoveTypes.CONDITION:
+            const condition = move.condition;
+            const alreadyHasCondition = hero.conditions.includes(condition);
+
+            if (alreadyHasCondition) {
+                moveDetails = `tries to inflict ${condition}, but nothing happens.`;
+            } else {
+                moveDetails = `inflicts ${condition}.`;
+                hero.conditions.push(condition);
+            }
             break;
         case MoveTypes.FAIL:
             moveDetails = `nothing happens.`;

@@ -29,6 +29,8 @@ function generateHero(firstName, pastHeroes) {
     const distanceTravelled = 0;
     const completedQuestLog = [];
     const completedChapterLog = [];
+    const conditions = [];
+    const enemyConditions = [];
     const specialMoves = [specialMove.name];
     const creator = null;
 
@@ -61,6 +63,8 @@ function generateHero(firstName, pastHeroes) {
         inventory,
         party,
         journal,
+        conditions,
+        enemyConditions,
         currentQuestName,
         distanceTravelled,
         completedQuestLog,

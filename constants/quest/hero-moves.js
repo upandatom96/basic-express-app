@@ -1,4 +1,20 @@
 const MoveTypes = require('./move-types');
+const Conditions = require('./conditions');
+
+const VAMPIRISM_MOVES = [
+    {
+        type: MoveTypes.CONDITION,
+        condition: Conditions.VAMPIRISM,
+        name: "BITE NECK",
+    },
+    {
+        type: MoveTypes.DRAIN,
+        name: "SUCK BLOOD",
+        drainMin: 9,
+        drainMax: 19,
+        healFactor: 0.666,
+    },
+];
 
 const STANDARD_MOVES = [
     {
@@ -149,4 +165,5 @@ const SPECIAL_MOVES = [
 module.exports = {
     STANDARD_MOVES,
     SPECIAL_MOVES,
+    VAMPIRISM_MOVES,
 }
