@@ -253,6 +253,7 @@ function getHeroReport(heroDB) {
         currentQuest,
         currentQuestDetails,
         currentChapter,
+        conditions: heroDB.conditions,
         path: heroDB.path,
         weather: heroDB.weather,
         level: heroDB.level,
