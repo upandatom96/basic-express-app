@@ -11,6 +11,7 @@ const SATYR = "SATYR";
 const ORC = "ORC";
 const BUGBEAR = "BUGBEAR";
 const HOBOGOBLIN = "HOBOGOBLIN";
+const HOBGOBLIN = "HOBGOBLIN";
 
 module.exports = {
     HUMAN,
@@ -26,6 +27,7 @@ module.exports = {
     ORC,
     BUGBEAR,
     HOBOGOBLIN,
+    HOBGOBLIN,
     ALL_RACES: [
         HUMAN,
         DRAGONBORN,
@@ -40,5 +42,6 @@ module.exports = {
         ORC,
         BUGBEAR,
         HOBOGOBLIN,
+        HOBGOBLIN,
     ]
 };
