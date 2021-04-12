@@ -36,6 +36,7 @@ function getAdjective() {
         "Strongest",
         "Most Intricate",
         "Funniest",
+        "Scariest",
     ]);
 }
 
@@ -69,6 +70,7 @@ function getNoun() {
         "Puzzle",
         "Bridge",
         "Pants",
+        "Vampire",
     ]);
 }
 

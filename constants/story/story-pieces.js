@@ -1,4 +1,9 @@
 const STORY_FOR_SYNONYMS = [
+    "{Final} Destination",
+    "Final {Destination}",
+    "{Epic} Movie",
+    "{Scary} Movie",
+    "Howard the {Duck}",
     "Birds of {Prey}",
     "{Monster} Hunter",
     "Monster {Hunter}",
