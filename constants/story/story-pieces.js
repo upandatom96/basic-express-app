@@ -1,4 +1,8 @@
 const STORY_FOR_SYNONYMS = [
+    "The {Green} Mile",
+    "The Green {Mile}",
+    "{People} of Earth",
+    "People of {Earth}",
     "{Final} Destination",
     "Final {Destination}",
     "{Epic} Movie",

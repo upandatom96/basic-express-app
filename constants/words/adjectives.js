@@ -1,7 +1,6 @@
 const ADJECTIVES = [
     "red",
     "blue",
-    "yellow",
     "purple",
     "blue",
     "grey",
