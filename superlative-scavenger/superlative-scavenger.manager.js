@@ -37,6 +37,9 @@ function getAdjective() {
         "Most Intricate",
         "Funniest",
         "Scariest",
+        "Darkest",
+        "Brightest",
+        "Most Green",
     ]);
 }
 
@@ -71,6 +74,8 @@ function getNoun() {
         "Bridge",
         "Pants",
         "Vampire",
+        "Ghost",
+        "Monster",
     ]);
 }
 
