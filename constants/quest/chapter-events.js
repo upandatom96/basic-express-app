@@ -1421,6 +1421,46 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "Sandworm",
+        intro: "The ground rumbles... a Sandworm pops out of the ground in front of {HERO_FIRST}!",
+        enemyName: "Sandworm",
+        defeat: "{HERO_FIRST} has sent the Sandworm back into the ground!",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 30,
+        enemyHpStart: 20,
+        enemyHpMax: 20,
+        dexterity: 4,
+        charisma: 1,
+        wisdom: 1,
+        strength: 4,
+        moves: [
+            {
+                type: MoveTypes.CHARISMA_ATTACK,
+                name: "TERRIFYING ROAR",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.DEXTERITY_ATTACK,
+                name: "CHARGE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.WISDOM_ATTACK,
+                name: "EARTHQUAKE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.STRENGTH_ATTACK,
+                name: "BITE",
+                multiplier: 1,
+            },
+            {
+                type: MoveTypes.FAIL,
+                name: "BRUSH TEETH",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);

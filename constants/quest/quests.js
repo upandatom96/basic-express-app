@@ -271,6 +271,55 @@ const PATH_QUESTS = [
             ],
         },
     },
+    {
+        name: "Horse Certification",
+        text: "renew their expired Horse License",
+        destination: "the Horse DMV",
+        distanceRequired: 100,
+        expPoints: 50,
+        finaleEvent: {
+            intro: "{HERO_FIRST} arrives at the Horse DMV and gets in line.",
+            type: EventTypes.PATHS,
+            paths: [
+                {
+                    triggers: {
+                        itemReq: Items.SADDLE,
+                        loseItem: false,
+                    },
+                    expPoints: 30,
+                    distanceBoost: 30,
+                    text: "{HERO_FIRST} used their own SADDLE and passed the test with flying colors!"
+                },
+                {
+                    triggers: {
+                        dexterityReq: 7,
+                    },
+                    expPoints: 30,
+                    text: "{HERO_FIRST} performs excellently and passes the test!"
+                },
+                {
+                    triggers: {
+                        dexterityReq: 5,
+                    },
+                    expPoints: 10,
+                    text: "{HERO_FIRST} makes a few mistakes but manages to pass the test."
+                },
+                {
+                    triggers: {
+                        dexterityReq: 3,
+                    },
+                    damageMin: 10,
+                    damageMax: 20,
+                    text: "{HERO_FIRST} fails to parallel-park the horse. They narrowly fail."
+                },
+                {
+                    damageMin: 20,
+                    damageMax: 40,
+                    text: "{HERO_FIRST} gets kicked in the face by the horse. They fail"
+                }
+            ],
+        },
+    },
 ];
 const ENCOUNTER_QUESTS = [
     {
@@ -911,6 +960,61 @@ const ENCOUNTER_QUESTS = [
                 {
                     type: MoveTypes.FAIL,
                     name: "DUST OFF CAPE",
+                },
+            ],
+        },
+    },
+    {
+        name: "The Fighting Pits",
+        text: "defeat The Champion",
+        destination: "the Fighting Pits",
+        distanceRequired: 75,
+        expPoints: 250,
+        finaleEvent: {
+            intro: "{HERO_FIRST} steps into the fighting pits. Crowd cheers as The Champion cracks their knuckles.",
+            enemyName: "The Champion",
+            defeat: "{HERO_FIRST} has defeated The Champion!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 50,
+            enemyHpMax: 50,
+            dexterity: 5,
+            charisma: 10,
+            wisdom: 2,
+            strength: 10,
+            moves: [
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "SHOW-OFF",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.CHARISMA_ATTACK,
+                    name: "PLAY OF THE GAME",
+                    multiplier: 2,
+                },
+                {
+                    type: MoveTypes.STRENGTH_ATTACK,
+                    name: "SUCKER PUNCH",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.DEXTERITY_ATTACK,
+                    name: "HIGH KICK",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.WISDOM_ATTACK,
+                    name: "WELL-TIMED BLOW",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.HEAL,
+                    name: "FOOD FROM THE FANS",
+                    multiplier: 1,
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "POSE FOR THE FANS",
                 },
             ],
         },
