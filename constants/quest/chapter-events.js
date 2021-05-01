@@ -1461,6 +1461,26 @@ const ENCOUNTER_EVENTS = [
             },
         ],
     },
+    {
+        name: "Boulder",
+        intro: "The path ahead of {HERO_FIRST} is blocked by an angry-looking boulder!",
+        enemyName: "Boulder",
+        defeat: "{HERO_FIRST} chipped the Boulder into pieces!",
+        type: EventTypes.ENCOUNTER,
+        expPoints: 100,
+        enemyHpStart: 100,
+        enemyHpMax: 100,
+        dexterity: 1,
+        charisma: 1,
+        wisdom: 1,
+        strength: 1,
+        moves: [
+            {
+                type: MoveTypes.FAIL,
+                name: "BLOCK",
+            },
+        ],
+    },
 ];
 
 const CHAPTER_EVENTS = FLAVOR_EVENTS.concat(DIRECT_EVENTS, CHOICE_EVENTS, PATH_EVENTS, ENCOUNTER_EVENTS);

@@ -19,6 +19,7 @@ function getAdjective() {
         "Best",
         "Coolest",
         "Prettiest",
+        "Friendliest",
         "Smelliest",
         "Toughest",
         "Saddest",
@@ -76,6 +77,7 @@ function getNoun() {
         "Vampire",
         "Ghost",
         "Monster",
+        "Pet",
     ]);
 }
 

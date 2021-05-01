@@ -1,4 +1,7 @@
 const STORY_FOR_SYNONYMS = [
+    "The {Little} Things",
+    "The Little {Things}",
+    "{Kill} Bill",
     "The {Green} Mile",
     "The Green {Mile}",
     "{People} of Earth",

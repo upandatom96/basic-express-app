@@ -1019,6 +1019,47 @@ const ENCOUNTER_QUESTS = [
             ],
         },
     },
+    {
+        name: "Diamond Dragon Statue",
+        text: "destroy the cursed Diamond Dragon Statue",
+        destination: "the Gallery",
+        distanceRequired: 10,
+        expPoints: 500,
+        finaleEvent: {
+            intro: "{HERO_FIRST} arrives at the Gallery and finds the Impenetrable Statue.",
+            enemyName: "The Statue",
+            defeat: "{HERO_FIRST} has destroyed the statue!",
+            type: EventTypes.ENCOUNTER,
+            enemyHpStart: 500,
+            enemyHpMax: 500,
+            dexterity: 1,
+            charisma: 1,
+            wisdom: 1,
+            strength: 1,
+            moves: [
+                {
+                    type: MoveTypes.FAIL,
+                    name: "EXIST",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "SIT",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "STAND",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "STARE",
+                },
+                {
+                    type: MoveTypes.FAIL,
+                    name: "BE A STATUE",
+                },
+            ],
+        },
+    },
 ];
 
 const QUESTS = FLAVOR_QUESTS.concat(DIRECT_QUESTS, CHOICE_QUESTS, PATH_QUESTS, ENCOUNTER_QUESTS);
