@@ -320,6 +320,54 @@ const PATH_QUESTS = [
             ],
         },
     },
+    {
+        name: "The Wizard's Riddle",
+        text: "defeat the Wizard's Curse by solving their Riddle",
+        destination: "the Wizard's Tower",
+        distanceRequired: 50,
+        expPoints: 30,
+        finaleEvent: {
+            intro: "{HERO_FIRST} arrives at the wizard's tower and begins plotting.",
+            type: EventTypes.PATHS,
+            paths: [
+                {
+                    triggers: {
+                        wisdomReq: 10,
+                    },
+                    expPoints: 100,
+                    distanceBoost: 100,
+                    text: "{HERO_FIRST} tricks the Wizard with a riddle before they can start theirs!"
+                },
+                {
+                    triggers: {
+                        wisdomReq: 7,
+                    },
+                    text: "{HERO_FIRST} has heard the Wizard's riddle before and solves it easily."
+                },
+                {
+                    triggers: {
+                        wisdomReq: 4,
+                    },
+                    damageMax: 10,
+                    damageMin: 5,
+                    text: "{HERO_FIRST} gets a headache from the riddle but manages to solve it."
+                },
+                {
+                    triggers: {
+                        wisdomReq: 2,
+                    },
+                    damageMax: 15,
+                    damageMin: 20,
+                    text: "{HERO_FIRST} gets a bad headache but finds a loophole in the riddle."
+                },
+                {
+                    damageMax: 20,
+                    damageMin: 25,
+                    text: "{HERO_FIRST} solves the riddle with brute force (and a really bad headache)."
+                }
+            ],
+        },
+    },
 ];
 const ENCOUNTER_QUESTS = [
     {

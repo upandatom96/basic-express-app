@@ -41,6 +41,7 @@ function getAdjective() {
         "Darkest",
         "Brightest",
         "Most Green",
+        "Fanciest",
     ]);
 }
 
@@ -78,6 +79,7 @@ function getNoun() {
         "Ghost",
         "Monster",
         "Pet",
+        "Jacket",
     ]);
 }
 

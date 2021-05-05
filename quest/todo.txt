@@ -1,0 +1,5 @@
+* use past hero names (for things like gravestones)
+* have "world changing" things heroes can do that are remembered
+* check suggestions
+* timer that counts how long an encounter has gone on, each 10 turns escalates
+* count how many encounters have happened (successfully) monsters dead

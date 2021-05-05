@@ -6,6 +6,7 @@ const WOODEN_SWORD = "WOODEN SWORD";
 const WOODEN_SHIELD = "WOODEN SHIELD";
 const SADDLE = "SADDLE";
 const ODD_GEM = "ODD GEM"; // not used yet
+const OLD_BOOK = "OLD BOOK"; // not used yet
 
 module.exports = {
     WOODEN_SHIELD,
@@ -16,5 +17,6 @@ module.exports = {
     TEDDY_BEAR,
     DICE,
     ODD_GEM,
+    OLD_BOOK,
     STARTER_ITEMS: [WOODEN_SWORD, WOODEN_SHIELD, SADDLE],
 };

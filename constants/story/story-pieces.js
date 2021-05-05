@@ -1,4 +1,8 @@
 const STORY_FOR_SYNONYMS = [
+    "Army of the {Dead}",
+    "{Army} of the Dead",
+    "A {Series} of Unfortunate Events",
+    "A Series of {Unfortunate} Events",
     "The {Little} Things",
     "The Little {Things}",
     "{Kill} Bill",

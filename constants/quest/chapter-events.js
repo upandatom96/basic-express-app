@@ -643,6 +643,30 @@ const PATH_EVENTS = [
             },
         ],
     },
+    {
+        name: "The Old Library",
+        intro: "{HERO_FIRST} notices an Old Library and enters.",
+        type: EventTypes.PATHS,
+        paths: [
+            {
+                triggers: {
+                    wisdomReq: 6,
+                },
+                item: Items.OLD_BOOK,
+                text: "{HERO_FIRST} finds an OLD BOOK on an OLD SHELF."
+            },
+            {
+                triggers: {
+                    charismaReq: 6,
+                },
+                ally: Allies.LIBRARIAN,
+                text: "{HERO_FIRST} meets a LIBRARIAN and gains their trust."
+            },
+            {
+                text: "{HERO_FIRST} makes too much noise and is escorted out by the LIBRARIAN."
+            },
+        ],
+    },
 ];
 const ENCOUNTER_EVENTS = [
     {
